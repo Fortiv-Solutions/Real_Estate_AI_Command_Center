@@ -1,0 +1,85 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { AppShell, Card, Pill } from "../components/AppShell";
+import { MapPin, BedDouble, Square, IndianRupee, Plus, LayoutGrid, List } from "lucide-react";
+
+export const Route = createFileRoute("/properties")({
+  head: () => ({ meta: [{ title: "Properties · Fortiv" }] }),
+  component: Properties,
+});
+
+const props = [
+  { n: "Skyline Heights", area: "Vesu, Surat", price: "₹68L – ₹1.2Cr", units: 84, available: 11, bhk: "2/3/4 BHK", area_sqft: "1,250–2,400", rera: "GJ/RAJ/SRT/2024/0042", tag: "Ready possession", tone: "accent" },
+  { n: "Riverfront Residences", area: "Adajan, Surat", price: "₹42L – ₹85L", units: 156, available: 38, bhk: "2/3 BHK", area_sqft: "980–1,650", rera: "GJ/RAJ/SRT/2024/0118", tag: "Under construction", tone: "warm" },
+  { n: "Marina Verde", area: "Pal, Surat", price: "₹55L – ₹1.5Cr", units: 96, available: 23, bhk: "3/4 BHK + Penthouse", area_sqft: "1,400–3,200", rera: "GJ/RAJ/SRT/2023/0089", tag: "Limited inventory", tone: "hot" },
+  { n: "Greenfield Park", area: "Katargam", price: "₹32L – ₹48L", units: 220, available: 142, bhk: "1/2 BHK", area_sqft: "620–1,050", rera: "GJ/RAJ/SRT/2024/0201", tag: "New launch", tone: "accent" },
+  { n: "Athwa Square", area: "Athwa", price: "₹78L – ₹1.8Cr", units: 64, available: 8, bhk: "3/4 BHK", area_sqft: "1,800–3,400", rera: "GJ/RAJ/SRT/2023/0055", tag: "Premium", tone: "neutral" },
+  { n: "Citrus Walk", area: "Piplod", price: "₹38L – ₹62L", units: 140, available: 71, bhk: "2/3 BHK", area_sqft: "850–1,420", rera: "GJ/RAJ/SRT/2024/0177", tag: "Family", tone: "neutral" },
+];
+
+function Properties() {
+  return (
+    <AppShell
+      title="Properties"
+      subtitle="14 projects · 1,284 units · 293 available · 6 RERA approvals expiring"
+      actions={
+        <>
+          <div className="flex rounded-lg border border-border bg-card p-0.5">
+            <button className="h-9 w-9 grid place-items-center rounded-md bg-ink text-cream"><LayoutGrid className="h-3.5 w-3.5"/></button>
+            <button className="h-9 w-9 grid place-items-center rounded-md text-muted-foreground"><List className="h-3.5 w-3.5"/></button>
+          </div>
+          <button className="h-10 px-4 rounded-lg bg-ink text-cream text-[13px] flex items-center gap-2"><Plus className="h-4 w-4" />Add project</button>
+        </>
+      }
+    >
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+        {props.map((p) => {
+          const sold = Math.round(((p.units - p.available) / p.units) * 100);
+          return (
+            <Card key={p.n} className="overflow-hidden group">
+              <div className="h-40 relative overflow-hidden" style={{
+                background: `linear-gradient(135deg, oklch(0.88 0.16 92) 0%, oklch(0.8 0.04 80) 100%)`,
+              }}>
+                <div className="absolute inset-0 hatch opacity-40" />
+                <div className="absolute top-3 left-3 flex gap-2">
+                  <Pill tone={p.tone as any}>{p.tag}</Pill>
+                </div>
+                <div className="absolute bottom-3 right-3 bg-ink/80 backdrop-blur text-cream text-[10px] px-2 py-1 rounded-md font-mono">
+                  {p.rera}
+                </div>
+              </div>
+              <div className="p-5">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <h3 className="font-display text-2xl tracking-tight">{p.n}</h3>
+                    <div className="text-[12px] text-muted-foreground flex items-center gap-1 mt-0.5">
+                      <MapPin className="h-3 w-3" /> {p.area}
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-[11px] text-muted-foreground">starting</div>
+                    <div className="font-display text-lg">{p.price.split(" – ")[0]}</div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 mt-4 text-[12px]">
+                  <div className="flex items-center gap-1.5 text-muted-foreground"><BedDouble className="h-3.5 w-3.5"/> {p.bhk}</div>
+                  <div className="flex items-center gap-1.5 text-muted-foreground"><Square className="h-3.5 w-3.5"/> {p.area_sqft} sq.ft</div>
+                </div>
+
+                <div className="mt-4">
+                  <div className="flex justify-between text-[11px] mb-1.5">
+                    <span className="text-muted-foreground">{p.units - p.available} of {p.units} units sold</span>
+                    <span className="font-medium">{sold}%</span>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-muted overflow-hidden">
+                    <div className="h-full bg-ink rounded-full" style={{ width: `${sold}%` }} />
+                  </div>
+                </div>
+              </div>
+            </Card>
+          );
+        })}
+      </div>
+    </AppShell>
+  );
+}
