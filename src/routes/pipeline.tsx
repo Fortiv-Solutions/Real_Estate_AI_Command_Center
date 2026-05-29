@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AppShell, Card, Pill } from "../components/AppShell";
-import { Plus, Flame, IndianRupee } from "lucide-react";
+import { Plus, Flame } from "lucide-react";
 
 export const Route = createFileRoute("/pipeline")({
   head: () => ({ meta: [{ title: "Pipeline · Fortiv" }] }),
@@ -34,12 +34,8 @@ const deals: Record<string, { n: string; p: string; v: string; hot?: boolean; da
     { n: "Kunal Jain", p: "Marina Penthouse", v: "₹1.35Cr", hot: true, days: 7 },
     { n: "Tanvi Bhatt", p: "Riverfront 3BHK", v: "₹78L", days: 5 },
   ],
-  Negotiation: [
-    { n: "Suresh Patel", p: "Skyline 4BHK", v: "₹1.05Cr", hot: true, days: 12 },
-  ],
-  Closed: [
-    { n: "Meena Shah", p: "Marina 2BHK", v: "₹45L", days: 18 },
-  ],
+  Negotiation: [{ n: "Suresh Patel", p: "Skyline 4BHK", v: "₹1.05Cr", hot: true, days: 12 }],
+  Closed: [{ n: "Meena Shah", p: "Marina 2BHK", v: "₹45L", days: 18 }],
 };
 
 function Pipeline() {
@@ -54,39 +50,50 @@ function Pipeline() {
             <button className="h-9 px-3 text-[12px] text-muted-foreground">Table</button>
             <button className="h-9 px-3 text-[12px] text-muted-foreground">Forecast</button>
           </div>
-          <button className="h-10 px-4 rounded-lg bg-ink text-cream text-[13px] flex items-center gap-2"><Plus className="h-4 w-4" />Deal</button>
+          <button className="h-10 px-4 rounded-lg bg-ink text-cream text-[13px] flex items-center gap-2">
+            <Plus className="h-4 w-4" />
+            Deal
+          </button>
         </>
       }
     >
-      <div className="grid grid-cols-6 gap-3 min-w-[1100px]">
-        {stages.map((s) => (
-          <div key={s.name} className="flex flex-col">
-            <div className="flex items-center justify-between px-1 mb-2">
-              <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full" style={{ background: s.color }} />
-                <span className="text-[12px] font-medium">{s.name}</span>
-                <span className="text-[11px] text-muted-foreground">{s.count}</span>
+      <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+        <div className="grid grid-cols-6 gap-3 min-w-[1100px]">
+          {stages.map((s) => (
+            <div key={s.name} className="flex flex-col">
+              <div className="flex items-center justify-between px-1 mb-2">
+                <div className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full" style={{ background: s.color }} />
+                  <span className="text-xs font-semibold">{s.name}</span>
+                  <span className="text-[11px] text-muted-foreground">{s.count}</span>
+                </div>
+                <span className="text-[11px] font-semibold">{s.value}</span>
               </div>
-              <span className="text-[11px] font-medium">{s.value}</span>
+              <div className="space-y-2">
+                {(deals[s.name] ?? []).map((d) => (
+                  <Card key={d.n} className="p-3 cursor-grab hover:shadow-sm transition-shadow">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="text-sm font-medium leading-tight">{d.n}</div>
+                      {d.hot && (
+                        <Pill tone="hot">
+                          <Flame className="h-2.5 w-2.5" />
+                        </Pill>
+                      )}
+                    </div>
+                    <div className="text-xs text-muted-foreground mt-0.5">{d.p}</div>
+                    <div className="flex items-center justify-between mt-3 pt-2 border-t border-border/50">
+                      <div className="text-xs font-semibold tabular-nums">{d.v}</div>
+                      <div className="text-[10px] text-muted-foreground">{d.days}d in stage</div>
+                    </div>
+                  </Card>
+                ))}
+                <button className="w-full h-9 rounded-md border border-dashed border-border text-xs text-muted-foreground hover:bg-muted/40 hover:text-foreground">
+                  + Add deal
+                </button>
+              </div>
             </div>
-            <div className="space-y-2">
-              {(deals[s.name] ?? []).map((d) => (
-                <Card key={d.n} className="p-3 cursor-grab hover:shadow-sm transition-shadow">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="text-[13px] font-medium leading-tight">{d.n}</div>
-                    {d.hot && <Pill tone="hot"><Flame className="h-2.5 w-2.5"/></Pill>}
-                  </div>
-                  <div className="text-[11px] text-muted-foreground mt-0.5">{d.p}</div>
-                  <div className="flex items-center justify-between mt-3 pt-2 border-t border-border/50">
-                    <div className="text-[12px] font-display">{d.v}</div>
-                    <div className="text-[10px] text-muted-foreground">{d.days}d in stage</div>
-                  </div>
-                </Card>
-              ))}
-              <button className="w-full h-9 rounded-xl border border-dashed border-border text-[11px] text-muted-foreground hover:bg-muted/40 hover:text-foreground">+ Add deal</button>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </AppShell>
   );
