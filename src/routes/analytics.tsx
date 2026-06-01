@@ -27,7 +27,7 @@ function Analytics() {
           {["7D", "30D", "90D", "6M", "YTD"].map((t, i) => (
             <button
               key={t}
-              className={`h-9 px-3 rounded-md text-[12px] ${i === 3 ? "bg-ink text-cream" : "text-muted-foreground"}`}
+              className={`h-8 px-2.5 rounded-md text-[10px] font-bold uppercase tracking-widest font-display ${i === 3 ? "bg-ink text-cream" : "text-muted-foreground"}`}
             >
               {t}
             </button>
@@ -43,46 +43,46 @@ function Analytics() {
       </div>
 
       <div className="grid grid-cols-12 gap-4 mt-4">
-        <Card className="col-span-12 lg:col-span-8 p-5">
-          <div className="flex items-start justify-between mb-4">
+        <Card className="col-span-12 lg:col-span-8 p-4">
+          <div className="flex items-start justify-between mb-3">
             <div>
-              <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+              <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-muted-foreground font-display">
                 Revenue trend
               </div>
-              <h3 className="font-display text-2xl mt-0.5">Bookings vs forecast</h3>
+              <h3 className="font-display text-lg font-bold mt-0.5">Bookings vs forecast</h3>
             </div>
-            <div className="flex items-center gap-3 text-[11px]">
+            <div className="flex items-center gap-3 text-[10px] uppercase tracking-widest font-bold text-muted-foreground font-display">
               <span className="flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-ink" />
+                <span className="h-1.5 w-1.5 rounded-full bg-ink" />
                 Actual
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-accent" />
+                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                 Forecast
               </span>
             </div>
           </div>
-          <div className="h-64 flex items-end gap-4 px-2">
+          <div className="h-56 flex items-end gap-4 px-2">
             {revenue.map((v, i) => (
-              <div key={i} className="flex-1 flex flex-col items-center gap-2">
+              <div key={i} className="flex-1 flex flex-col items-center gap-1.5">
                 <div className="w-full flex items-end gap-1 h-full">
-                  <div className="flex-1 rounded-t-lg bg-ink" style={{ height: `${v * 2.4}%` }} />
+                  <div className="flex-1 rounded-t bg-ink" style={{ height: `${v * 2.4}%` }} />
                   <div
-                    className="flex-1 rounded-t-lg bg-accent"
+                    className="flex-1 rounded-t bg-accent"
                     style={{ height: `${(v + 4) * 2.4}%`, opacity: 0.85 }}
                   />
                 </div>
-                <div className="text-[10px] text-muted-foreground">{months[i]}</div>
+                <div className="text-[9px] font-bold uppercase text-muted-foreground">{months[i]}</div>
               </div>
             ))}
           </div>
         </Card>
 
-        <Card className="col-span-12 lg:col-span-4 p-5">
-          <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+        <Card className="col-span-12 lg:col-span-4 p-4">
+          <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-muted-foreground font-display">
             Source attribution
           </div>
-          <h3 className="font-display text-2xl mt-0.5">Where leads come from</h3>
+          <h3 className="font-display text-lg font-bold mt-0.5">Where leads come from</h3>
           <div className="mt-4 h-2 rounded-full overflow-hidden flex">
             {sources.map((s) => (
               <div key={s.l} style={{ width: `${s.v}%`, background: s.c }} />
@@ -90,30 +90,30 @@ function Analytics() {
           </div>
           <ul className="mt-4 space-y-2.5">
             {sources.map((s) => (
-              <li key={s.l} className="flex items-center justify-between text-[12px]">
+              <li key={s.l} className="flex items-center justify-between text-[11px]">
                 <span className="flex items-center gap-2">
                   <span className="h-2 w-2 rounded-sm" style={{ background: s.c }} />
                   {s.l}
                 </span>
-                <span className="font-medium tabular-nums">{s.v}%</span>
+                <span className="font-bold tabular-nums">{s.v}%</span>
               </li>
             ))}
           </ul>
         </Card>
 
-        <Card className="col-span-12 lg:col-span-7 p-5 overflow-x-auto">
-          <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+        <Card className="col-span-12 lg:col-span-7 p-4 overflow-x-auto">
+          <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-muted-foreground font-display">
             Agent leaderboard
           </div>
-          <h3 className="font-display text-2xl mt-0.5 mb-4">Top performers · May</h3>
-          <table className="w-full min-w-[640px] text-sm">
+          <h3 className="font-display text-lg font-bold mt-0.5 mb-3">Top performers · May</h3>
+          <table className="w-full min-w-[640px] text-xs">
             <thead>
-              <tr className="text-[11px] text-muted-foreground uppercase tracking-wider border-b border-border/60">
-                <th className="text-left font-medium py-2">Agent</th>
-                <th className="text-right font-medium">Leads</th>
-                <th className="text-right font-medium">Visits</th>
-                <th className="text-right font-medium">Closed</th>
-                <th className="text-right font-medium">Revenue</th>
+              <tr className="text-[10px] text-muted-foreground uppercase tracking-widest border-b border-border/60 font-display font-bold">
+                <th className="text-left py-2">Agent</th>
+                <th className="text-right">Leads</th>
+                <th className="text-right">Visits</th>
+                <th className="text-right">Closed</th>
+                <th className="text-right">Revenue</th>
               </tr>
             </thead>
             <tbody>
@@ -124,23 +124,23 @@ function Analytics() {
                 { n: "Anita Joshi", l: 58, v: 14, c: 4, r: "₹2.8Cr" },
                 { n: "AI Assistant", l: 412, v: 23, c: 3, r: "₹1.9Cr" },
               ].map((a) => (
-                <tr key={a.n} className="border-b border-border/40 last:border-0">
-                  <td className="py-3">{a.n}</td>
+                <tr key={a.n} className="border-b border-border/40 last:border-0 hover:bg-muted/40">
+                  <td className="py-2.5 font-bold">{a.n}</td>
                   <td className="text-right tabular-nums">{a.l}</td>
                   <td className="text-right tabular-nums">{a.v}</td>
                   <td className="text-right tabular-nums">{a.c}</td>
-                  <td className="text-right font-medium tabular-nums">{a.r}</td>
+                  <td className="text-right font-bold tabular-nums">{a.r}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </Card>
 
-        <Card className="col-span-12 lg:col-span-5 p-5">
-          <div className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+        <Card className="col-span-12 lg:col-span-5 p-4">
+          <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-muted-foreground font-display">
             Conversion funnel
           </div>
-          <h3 className="font-display text-2xl mt-0.5 mb-4">Lead → Booking</h3>
+          <h3 className="font-display text-lg font-bold mt-0.5 mb-3">Lead → Booking</h3>
           <div className="space-y-2">
             {[
               { l: "Leads captured", v: 1240, w: 100 },
@@ -151,15 +151,15 @@ function Analytics() {
               { l: "Booked", v: 28, w: 2.3 },
             ].map((s, i) => (
               <div key={s.l}>
-                <div className="flex justify-between text-[12px] mb-1">
-                  <span>{s.l}</span>
+                <div className="flex justify-between text-[11px] mb-1 font-medium">
+                  <span className="text-foreground">{s.l}</span>
                   <span className="text-muted-foreground tabular-nums">
-                    {s.v} · {s.w}%
+                    {s.v} · <span className="font-bold">{s.w}%</span>
                   </span>
                 </div>
-                <div className="h-7 rounded-md overflow-hidden bg-muted">
+                <div className="h-6 rounded bg-muted">
                   <div
-                    className="h-full rounded-md"
+                    className="h-full rounded"
                     style={{
                       width: `${s.w}%`,
                       background: i === 5 ? "var(--accent)" : "var(--ink)",

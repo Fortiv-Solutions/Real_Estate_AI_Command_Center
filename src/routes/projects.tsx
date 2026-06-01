@@ -19,7 +19,7 @@ function Projects() {
         <Stat label="Budget variance" value="+3.2%" />
       </div>
 
-      <div className="mt-4 space-y-3">
+      <div className="mt-3 space-y-2">
         {(
           [
             {
@@ -56,20 +56,20 @@ function Projects() {
             },
           ] as const
         ).map((p) => (
-          <Card key={p.n} className="p-5">
+          <Card key={p.n} className="p-4">
             <div className="grid grid-cols-12 gap-4 items-center">
               <div className="col-span-12 md:col-span-4">
-                <div className="font-display text-xl">{p.n}</div>
-                <div className="text-[12px] text-muted-foreground mt-0.5">
+                <div className="font-display text-lg font-bold">{p.n}</div>
+                <div className="text-[11px] font-medium text-muted-foreground mt-0.5">
                   {p.phase} · due {p.due}
                 </div>
               </div>
               <div className="col-span-8 md:col-span-6">
-                <div className="flex justify-between text-[11px] mb-1.5">
+                <div className="flex justify-between text-[10px] font-bold tracking-widest uppercase font-display mb-1.5">
                   <span className="text-muted-foreground">Progress</span>
-                  <span className="font-medium">{p.progress}%</span>
+                  <span className="text-foreground">{p.progress}%</span>
                 </div>
-                <div className="h-2 rounded-full bg-muted overflow-hidden">
+                <div className="h-1.5 rounded-full bg-muted overflow-hidden">
                   <div className="h-full bg-ink" style={{ width: `${p.progress}%` }} />
                 </div>
               </div>

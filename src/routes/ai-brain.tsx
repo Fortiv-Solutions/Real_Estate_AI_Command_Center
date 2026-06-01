@@ -91,7 +91,7 @@ function AIBrain() {
         </div>
       </header>
 
-      <main className="p-6 max-w-[1600px] mx-auto space-y-6">
+      <main className="p-5 max-w-[1600px] mx-auto space-y-5">
         
         {/* Top Stats Row */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -101,23 +101,23 @@ function AIBrain() {
             { label: "Data Points Processed", val: 450912, icon: <Database className="h-4 w-4 text-emerald-400" /> },
             { label: "AI Models Active", val: 14, icon: <Brain className="h-4 w-4 text-purple-400" /> }
           ].map(stat => (
-            <div key={stat.label} className="bg-[#1B263B] border border-white/5 rounded-xl p-4 relative overflow-hidden group">
+            <div key={stat.label} className="bg-[#1B263B] border border-white/5 rounded-xl p-3 relative overflow-hidden group">
               <div className="absolute -right-4 -top-4 w-24 h-24 bg-[#2E86AB]/10 rounded-full blur-2xl group-hover:bg-[#2E86AB]/20 transition-all" />
               <div className="flex justify-between items-start mb-2 relative">
-                <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{stat.label}</span>
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-display">{stat.label}</span>
                 {stat.icon}
               </div>
-              <div className="text-3xl font-bold text-white relative font-mono">
+              <div className="text-2xl font-bold text-white relative font-mono">
                 <AnimatedCounter value={stat.val} />
               </div>
             </div>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
           
           {/* Main Visual: Semantic Knowledge Graph */}
-          <div className="col-span-1 lg:col-span-2 bg-[#1B263B] border border-white/5 rounded-xl p-6 relative overflow-hidden flex flex-col min-h-[400px]">
+          <div className="col-span-1 lg:col-span-2 bg-[#1B263B] border border-white/5 rounded-xl p-5 relative overflow-hidden flex flex-col min-h-[400px]">
             <div className="flex justify-between items-center z-10 mb-6">
               <h2 className="text-sm font-semibold text-white uppercase tracking-wider flex items-center gap-2">
                 <Activity className="h-4 w-4 text-[#2E86AB]" />
@@ -189,10 +189,10 @@ function AIBrain() {
           </div>
 
           {/* Right Column: AI Feed & System Health */}
-          <div className="col-span-1 flex flex-col gap-6">
+          <div className="col-span-1 flex flex-col gap-5">
             
             {/* Live AI Insights Feed */}
-            <div className="bg-[#1B263B] border border-[#2E86AB]/30 rounded-xl p-5 shadow-[0_0_15px_rgba(46,134,171,0.1)] relative overflow-hidden">
+            <div className="bg-[#1B263B] border border-[#2E86AB]/30 rounded-xl p-4 shadow-[0_0_15px_rgba(46,134,171,0.1)] relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#2E86AB] to-transparent opacity-50" />
               <h2 className="text-sm font-semibold text-white uppercase tracking-wider flex items-center gap-2 mb-4">
                 <Sparkles className="h-4 w-4 text-[#2E86AB]" />
@@ -205,10 +205,10 @@ function AIBrain() {
                   <div className="inline-block px-2 py-0.5 rounded text-[10px] font-mono uppercase font-bold bg-white/10 text-white mb-3">
                     {insight.type}
                   </div>
-                  <p className="text-sm text-slate-200 leading-relaxed mb-4">
+                  <p className="text-xs text-slate-200 leading-relaxed mb-4">
                     {insight.text}
                   </p>
-                  <button className="text-xs font-semibold bg-[#2E86AB] text-white px-4 py-2 rounded shadow-[0_0_10px_rgba(46,134,171,0.4)] hover:bg-[#2E86AB]/80 transition-colors">
+                  <button className="text-xs font-semibold bg-[#2E86AB] text-white px-3 py-1.5 rounded shadow-[0_0_10px_rgba(46,134,171,0.4)] hover:bg-[#2E86AB]/80 transition-colors">
                     {insight.action}
                   </button>
                 </div>
@@ -223,12 +223,12 @@ function AIBrain() {
             </div>
 
             {/* System Health Grid */}
-            <div className="bg-[#1B263B] border border-white/5 rounded-xl p-5 flex-1">
+            <div className="bg-[#1B263B] border border-white/5 rounded-xl p-4 flex-1">
               <h2 className="text-sm font-semibold text-white uppercase tracking-wider flex items-center gap-2 mb-4">
                 <Shield className="h-4 w-4 text-emerald-400" />
                 Module Health
               </h2>
-              <div className="grid grid-cols-2 gap-y-3 gap-x-4">
+              <div className="grid grid-cols-2 gap-y-2 gap-x-4">
                 {MODULES.map(m => (
                   <div key={m.name} className="flex justify-between items-center text-xs">
                     <div className="flex items-center gap-2">
@@ -245,8 +245,8 @@ function AIBrain() {
         </div>
 
         {/* Predictive Deal Risk Table */}
-        <div className="bg-[#1B263B] border border-white/5 rounded-xl p-6">
-           <h2 className="text-sm font-semibold text-white uppercase tracking-wider flex items-center gap-2 mb-6">
+        <div className="bg-[#1B263B] border border-white/5 rounded-xl p-5">
+           <h2 className="text-sm font-semibold text-white uppercase tracking-wider flex items-center gap-2 mb-5">
             <TrendingUp className="h-4 w-4 text-[#2E86AB]" />
             Predictive Deal Risk Analysis
           </h2>
@@ -254,14 +254,14 @@ function AIBrain() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-[800px]">
               <thead>
-                <tr className="border-b border-white/10 text-xs uppercase tracking-wider text-slate-500 font-semibold">
+                <tr className="border-b border-white/10 text-[10px] uppercase tracking-widest text-slate-500 font-bold font-display">
                   <th className="pb-3 px-2">Client / Deal</th>
                   <th className="pb-3 px-2">Value</th>
                   <th className="pb-3 px-2">AI Score (0-100)</th>
                   <th className="pb-3 px-2">Primary Risk Factor / Driver</th>
                 </tr>
               </thead>
-              <tbody className="text-sm">
+              <tbody className="text-xs">
                 {RISK_DEALS.map((deal, i) => {
                   let scoreColor = "text-emerald-400";
                   let bgBar = "bg-emerald-400";
@@ -270,12 +270,12 @@ function AIBrain() {
 
                   return (
                     <tr key={i} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
-                      <td className="py-4 px-2">
+                      <td className="py-3 px-2">
                         <div className="font-semibold text-white">{deal.client}</div>
-                        <div className="text-[11px] text-slate-400 mt-0.5">{deal.project}</div>
+                        <div className="text-[10px] font-medium text-slate-400 mt-0.5">{deal.project}</div>
                       </td>
-                      <td className="py-4 px-2 font-mono text-slate-300">{deal.value}</td>
-                      <td className="py-4 px-2">
+                      <td className="py-3 px-2 font-mono text-slate-300 font-bold">{deal.value}</td>
+                      <td className="py-3 px-2">
                         <div className="flex items-center gap-3">
                           <span className={`font-bold w-6 ${scoreColor}`}>{deal.score}</span>
                           <div className="w-24 h-1.5 bg-white/10 rounded-full overflow-hidden">
@@ -283,10 +283,10 @@ function AIBrain() {
                           </div>
                         </div>
                       </td>
-                      <td className="py-4 px-2">
+                      <td className="py-3 px-2">
                         <div className="flex items-center gap-2 text-slate-300">
                           {deal.score < 50 ? <AlertCircle className="h-3.5 w-3.5 text-rose-400" /> : <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />}
-                          <span className="text-xs">{deal.factor}</span>
+                          <span className="font-medium">{deal.factor}</span>
                         </div>
                       </td>
                     </tr>

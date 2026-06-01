@@ -96,15 +96,15 @@ function Properties() {
       actions={
         <>
           <div className="flex rounded-lg border border-border bg-card p-0.5">
-            <button className="h-9 w-9 grid place-items-center rounded-md bg-primary text-primary-foreground shadow-sm">
+            <button className="h-8 w-8 grid place-items-center rounded-md bg-primary text-primary-foreground shadow-sm">
               <LayoutGrid className="h-3.5 w-3.5" />
             </button>
-            <button className="h-9 w-9 grid place-items-center rounded-md text-muted-foreground hover:bg-secondary transition-colors">
+            <button className="h-8 w-8 grid place-items-center rounded-md text-muted-foreground hover:bg-secondary transition-colors">
               <List className="h-3.5 w-3.5" />
             </button>
           </div>
-          <button className="h-10 px-4 rounded-lg bg-primary text-primary-foreground text-[13px] font-medium flex items-center gap-2 hover:bg-primary/90 transition-colors active:scale-95 shadow-sm">
-            <Plus className="h-4 w-4" />
+          <button className="h-8 px-3 rounded-md bg-primary text-primary-foreground text-xs font-semibold flex items-center gap-1.5 hover:bg-primary/90 transition-colors active:scale-95 shadow-sm">
+            <Plus className="h-3.5 w-3.5" />
             Add project
           </button>
         </>
@@ -115,45 +115,45 @@ function Properties() {
           const sold = Math.round(((p.units - p.available) / p.units) * 100);
           return (
             <Card key={p.n} className="overflow-hidden group">
-              <div className="h-44 relative overflow-hidden bg-muted">
+              <div className="h-36 relative overflow-hidden bg-muted">
                 <img src={p.img} alt={p.n} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-80" />
-                <div className="absolute top-3 left-3 flex gap-2">
+                <div className="absolute top-2.5 left-2.5 flex gap-1.5">
                   <Pill tone={p.tone}>{p.tag}</Pill>
                 </div>
-                <div className="absolute bottom-3 left-3 flex gap-2 items-center text-white text-[10px] bg-black/40 backdrop-blur-sm px-2 py-1 rounded-md font-mono border border-white/10">
+                <div className="absolute bottom-2.5 left-2.5 flex gap-1.5 items-center text-white text-[9px] bg-black/40 backdrop-blur-sm px-1.5 py-0.5 rounded font-mono border border-white/10 uppercase">
                   {p.rera}
                 </div>
               </div>
-              <div className="p-5">
-                <div className="flex items-start justify-between gap-3">
+              <div className="p-4">
+                <div className="flex items-start justify-between gap-2.5">
                   <div>
-                    <h3 className="font-display text-2xl">{p.n}</h3>
-                    <div className="text-[12px] text-muted-foreground flex items-center gap-1 mt-0.5">
+                    <h3 className="font-display text-lg font-bold">{p.n}</h3>
+                    <div className="text-[11px] font-medium text-muted-foreground flex items-center gap-1 mt-0.5">
                       <MapPin className="h-3 w-3" /> {p.area}
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-[11px] text-muted-foreground">starting</div>
-                    <div className="font-display text-lg">{p.price.split(" – ")[0]}</div>
+                    <div className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground font-display">starting</div>
+                    <div className="font-display text-base font-bold">{p.price.split(" – ")[0]}</div>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 mt-4 text-[12px]">
+                <div className="grid grid-cols-2 gap-2.5 mt-3.5 text-[11px] font-medium">
                   <div className="flex items-center gap-1.5 text-muted-foreground">
-                    <BedDouble className="h-3.5 w-3.5" /> {p.bhk}
+                    <BedDouble className="h-3 w-3" /> {p.bhk}
                   </div>
                   <div className="flex items-center gap-1.5 text-muted-foreground">
-                    <Square className="h-3.5 w-3.5" /> {p.area_sqft} sq.ft
+                    <Square className="h-3 w-3" /> {p.area_sqft} sq.ft
                   </div>
                 </div>
 
-                <div className="mt-4">
-                  <div className="flex justify-between text-[11px] mb-1.5">
-                    <span className="text-muted-foreground">
-                      {p.units - p.available} of {p.units} units sold
+                <div className="mt-3.5">
+                  <div className="flex justify-between text-[10px] font-bold mb-1.5 font-display uppercase tracking-widest text-muted-foreground">
+                    <span>
+                      {p.units - p.available} of {p.units} sold
                     </span>
-                    <span className="font-medium">{sold}%</span>
+                    <span className="text-foreground">{sold}%</span>
                   </div>
                   <div className="h-1.5 rounded-full bg-muted overflow-hidden">
                     <div className="h-full bg-primary rounded-full transition-all duration-1000 ease-out" style={{ width: `${sold}%` }} />

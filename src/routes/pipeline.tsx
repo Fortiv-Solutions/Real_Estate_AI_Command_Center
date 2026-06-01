@@ -36,11 +36,11 @@ function Pipeline() {
       actions={
         <>
           <div className="flex rounded-lg border border-border bg-card p-0.5">
-            <button className="h-9 px-3 rounded-md bg-ink text-cream text-[12px] font-medium shadow-sm">Kanban</button>
-            <button className="h-9 px-3 text-[12px] text-muted-foreground font-medium hover:text-foreground transition-colors">List View</button>
+            <button className="h-8 px-2.5 rounded-md bg-ink text-cream text-[11px] font-bold uppercase tracking-widest shadow-sm font-display">Kanban</button>
+            <button className="h-8 px-2.5 text-[11px] font-bold uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors font-display">List View</button>
           </div>
-          <button className="h-10 px-4 rounded-lg bg-ink text-cream text-[13px] flex items-center gap-2 hover:bg-ink/90 transition-colors shadow-sm">
-            <Plus className="h-4 w-4" />
+          <button className="h-8 px-3 rounded-lg bg-ink text-cream text-xs font-semibold flex items-center gap-1.5 hover:bg-ink/90 transition-colors shadow-sm">
+            <Plus className="h-3.5 w-3.5" />
             New Deal
           </button>
         </>
@@ -48,64 +48,64 @@ function Pipeline() {
     >
       <div className="flex flex-col h-[calc(100vh-140px)]">
         {/* AI Banner */}
-        <div className="mx-6 mb-6 mt-2">
-          <div className="flex items-center gap-3 bg-amber-500/10 text-amber-700 dark:text-amber-400 px-4 py-3 rounded-lg border border-amber-500/20">
-            <Sparkles className="h-5 w-5" />
-            <div className="flex-1 text-sm font-medium">
+        <div className="mx-5 mb-4 mt-1">
+          <div className="flex items-center gap-2.5 bg-amber-500/10 text-amber-700 dark:text-amber-400 px-3 py-2 rounded-lg border border-amber-500/20">
+            <Sparkles className="h-4 w-4" />
+            <div className="flex-1 text-xs font-semibold">
               AI Insight: 3 deals idle 8+ days in Negotiation stage.
             </div>
-            <button className="text-xs font-semibold bg-amber-500 text-white px-3 py-1.5 rounded-md hover:bg-amber-600 transition-colors active:scale-95">
+            <button className="text-[11px] font-bold bg-amber-500 text-white px-2.5 py-1 rounded-md hover:bg-amber-600 transition-colors active:scale-95">
               Review Deals
             </button>
           </div>
         </div>
 
         {/* Kanban Board */}
-        <div className="flex-1 overflow-x-auto overflow-y-hidden px-6 pb-6 scrollbar-hide">
-          <div className="flex gap-4 h-full min-w-max">
+        <div className="flex-1 overflow-x-auto overflow-y-hidden px-5 pb-5 scrollbar-hide">
+          <div className="flex gap-3 h-full min-w-max">
             {stages.map((s) => {
               const stageDeals = getDealsByStage(s.id);
               return (
-                <div key={s.id} className="flex flex-col w-[300px] h-full flex-shrink-0 bg-muted/20 rounded-xl border border-border/50">
+                <div key={s.id} className="flex flex-col w-[260px] h-full flex-shrink-0 bg-muted/20 rounded-xl border border-border/50">
                   {/* Column Header */}
-                  <div className="p-3 border-b border-border/50 bg-card rounded-t-xl">
-                    <div className="flex items-center justify-between mb-1.5">
-                      <div className="flex items-center gap-2">
-                        <span className={`h-2 w-2 rounded-full ${s.colorClass}`} />
-                        <span className="text-xs font-semibold text-foreground uppercase tracking-wider">{s.name}</span>
+                  <div className="p-2.5 border-b border-border/50 bg-card rounded-t-xl">
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-center gap-1.5">
+                        <span className={`h-1.5 w-1.5 rounded-full ${s.colorClass}`} />
+                        <span className="text-[10px] font-bold text-foreground uppercase tracking-widest font-display">{s.name}</span>
                       </div>
-                      <span className="text-[11px] font-medium text-muted-foreground bg-muted px-1.5 py-0.5 rounded-full">{s.count}</span>
+                      <span className="text-[10px] font-bold text-muted-foreground bg-muted px-1.5 py-0.5 rounded-full">{s.count}</span>
                     </div>
-                    <div className="text-[13px] font-semibold text-foreground">{s.value}</div>
+                    <div className="text-xs font-bold text-foreground">{s.value}</div>
                   </div>
 
                   {/* Column Body */}
-                  <div className="flex-1 overflow-y-auto p-3 space-y-3 scrollbar-hide">
+                  <div className="flex-1 overflow-y-auto p-2 space-y-2 scrollbar-hide">
                     {stageDeals.map((d) => (
                       <Card 
                         key={d.id} 
-                        className={`p-3 cursor-grab active:cursor-grabbing transition-all duration-200 border shadow-sm hover:shadow-md hover:-translate-y-0.5 ${selectedDeal?.id === d.id ? 'ring-2 ring-primary border-transparent' : 'border-border/60 hover:border-border'}`}
+                        className={`p-2.5 cursor-grab active:cursor-grabbing transition-all duration-200 border shadow-sm hover:shadow-md hover:-translate-y-0.5 ${selectedDeal?.id === d.id ? 'ring-2 ring-primary border-transparent' : 'border-border/60 hover:border-border'}`}
                         onClick={() => setSelectedDeal(d)}
                       >
-                        <div className="flex items-start justify-between gap-2 mb-2">
-                          <div className="text-[14px] font-semibold text-foreground leading-tight">{d.client}</div>
+                        <div className="flex items-start justify-between gap-2 mb-1.5">
+                          <div className="text-xs font-bold text-foreground leading-tight">{d.client}</div>
                           <UrgencyDot urgency={d.urgency} />
                         </div>
                         
-                        <div className="space-y-1.5 mb-3">
-                          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <div className="space-y-1 mb-2.5">
+                          <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground font-medium">
                             <Building className="h-3 w-3" />
                             <span className="truncate">{d.project}</span>
                           </div>
-                          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                          <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground font-medium">
                             <User className="h-3 w-3" />
                             <span>{d.agent}</span>
                           </div>
                         </div>
 
-                        <div className="flex items-center justify-between pt-2.5 border-t border-border/60">
-                          <div className="text-[13px] font-bold text-foreground tabular-nums">{d.value}</div>
-                          <div className="flex items-center gap-1 text-[11px] font-medium text-muted-foreground bg-muted/50 px-1.5 py-0.5 rounded-md">
+                        <div className="flex items-center justify-between pt-2 border-t border-border/60">
+                          <div className="text-xs font-bold text-foreground tabular-nums">{d.value}</div>
+                          <div className="flex items-center gap-1 text-[10px] font-bold text-muted-foreground bg-muted/50 px-1.5 py-0.5 rounded-md">
                             <Clock className="h-3 w-3" />
                             {d.daysInStage}d
                           </div>
@@ -113,7 +113,7 @@ function Pipeline() {
                       </Card>
                     ))}
                     
-                    <button className="w-full h-10 flex items-center justify-center gap-2 rounded-lg border border-dashed border-border text-[13px] font-medium text-muted-foreground hover:bg-muted/50 hover:text-foreground transition-colors">
+                    <button className="w-full h-8 flex items-center justify-center gap-1.5 rounded-lg border border-dashed border-border text-xs font-bold text-muted-foreground hover:bg-muted/50 hover:text-foreground transition-colors">
                       <Plus className="h-3.5 w-3.5" />
                       Add deal
                     </button>
@@ -132,73 +132,73 @@ function Pipeline() {
             className="fixed inset-0 bg-background/60 backdrop-blur-sm z-40 transition-opacity animate-in fade-in duration-300"
             onClick={() => setSelectedDeal(null)}
           />
-          <div className="fixed top-0 right-0 h-full w-[400px] bg-card border-l border-border shadow-2xl z-50 flex flex-col animate-in slide-in-from-right duration-300 ease-out">
-            <div className="p-6 border-b border-border">
-              <div className="flex items-start justify-between mb-4">
+          <div className="fixed top-0 right-0 h-full w-[360px] bg-card border-l border-border shadow-2xl z-50 flex flex-col animate-in slide-in-from-right duration-300 ease-out">
+            <div className="p-5 border-b border-border">
+              <div className="flex items-start justify-between mb-3">
                 <div>
-                  <h2 className="text-xl font-semibold text-foreground tracking-tight">{selectedDeal.client}</h2>
-                  <p className="text-sm text-muted-foreground mt-1 font-medium">{selectedDeal.project}</p>
+                  <h2 className="text-lg font-bold text-foreground tracking-tight">{selectedDeal.client}</h2>
+                  <p className="text-xs text-muted-foreground mt-0.5 font-medium">{selectedDeal.project}</p>
                 </div>
                 <button 
                   aria-label="Close panel"
                   onClick={() => setSelectedDeal(null)}
                   className="touch-target rounded-full hover:bg-secondary text-muted-foreground transition-colors"
                 >
-                  <Plus className="h-5 w-5 rotate-45" />
+                  <Plus className="h-4 w-4 rotate-45" />
                 </button>
               </div>
               <div className="flex items-center gap-4">
                 <div className="flex flex-col">
-                  <span className="text-xs text-muted-foreground">Deal Value</span>
-                  <span className="text-lg font-bold">{selectedDeal.value}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground font-display">Deal Value</span>
+                  <span className="text-base font-bold mt-0.5">{selectedDeal.value}</span>
                 </div>
-                <div className="w-px h-8 bg-border" />
+                <div className="w-px h-6 bg-border" />
                 <div className="flex flex-col">
-                  <span className="text-xs text-muted-foreground">Assigned To</span>
-                  <span className="text-sm font-medium">{selectedDeal.agent}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground font-display">Assigned To</span>
+                  <span className="text-xs font-semibold mt-0.5">{selectedDeal.agent}</span>
                 </div>
               </div>
             </div>
             
-            <div className="flex-1 overflow-y-auto p-6 space-y-6">
+            <div className="flex-1 overflow-y-auto p-5 space-y-5">
               <div>
-                <h3 className="text-sm font-semibold mb-3 flex items-center gap-2">
-                  <AlertCircle className="h-4 w-4 text-amber-500" />
+                <h3 className="text-xs font-bold mb-2.5 flex items-center gap-1.5 uppercase tracking-widest font-display text-muted-foreground">
+                  <AlertCircle className="h-3.5 w-3.5 text-amber-500" />
                   AI Next Action
                 </h3>
-                <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl shadow-sm">
-                  <p className="text-sm text-foreground mb-4 leading-relaxed">
-                    Deal has been idle in <span className="font-semibold">{selectedDeal.stage}</span> for {selectedDeal.daysInStage} days. Recommend sending a customized floor plan variant via WhatsApp to re-engage.
+                <div className="bg-amber-500/10 border border-amber-500/20 p-3 rounded-xl shadow-sm">
+                  <p className="text-xs text-foreground mb-3 leading-relaxed font-medium">
+                    Deal has been idle in <span className="font-bold">{selectedDeal.stage}</span> for {selectedDeal.daysInStage} days. Recommend sending a customized floor plan variant via WhatsApp to re-engage.
                   </p>
-                  <button className="w-full bg-primary text-primary-foreground text-sm font-medium py-2.5 rounded-lg hover:bg-primary/90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-sm">
-                    <Sparkles className="h-4 w-4" />
+                  <button className="w-full bg-primary text-primary-foreground text-xs font-bold py-2 rounded-lg hover:bg-primary/90 active:scale-[0.98] transition-all flex items-center justify-center gap-1.5 shadow-sm">
+                    <Sparkles className="h-3.5 w-3.5" />
                     Draft Message
                   </button>
                 </div>
               </div>
 
               <div>
-                <h3 className="text-sm font-semibold mb-3">Deal History</h3>
-                <div className="space-y-4">
-                  <div className="flex gap-3">
-                    <div className="mt-0.5 h-2 w-2 rounded-full bg-ink flex-shrink-0" />
+                <h3 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground font-display mb-3">Deal History</h3>
+                <div className="space-y-3">
+                  <div className="flex gap-2.5">
+                    <div className="mt-0.5 h-1.5 w-1.5 rounded-full bg-ink flex-shrink-0" />
                     <div>
-                      <p className="text-sm font-medium">Moved to {selectedDeal.stage}</p>
-                      <p className="text-xs text-muted-foreground mt-0.5">{selectedDeal.daysInStage} days ago by {selectedDeal.agent}</p>
+                      <p className="text-xs font-bold">Moved to {selectedDeal.stage}</p>
+                      <p className="text-[10px] font-semibold text-muted-foreground mt-0.5">{selectedDeal.daysInStage} days ago by {selectedDeal.agent}</p>
                     </div>
                   </div>
-                  <div className="flex gap-3">
-                    <div className="mt-0.5 h-2 w-2 rounded-full bg-border flex-shrink-0" />
+                  <div className="flex gap-2.5">
+                    <div className="mt-0.5 h-1.5 w-1.5 rounded-full bg-border flex-shrink-0" />
                     <div>
-                      <p className="text-sm font-medium">Site Visit Completed</p>
-                      <p className="text-xs text-muted-foreground mt-0.5">14 days ago</p>
+                      <p className="text-xs font-bold">Site Visit Completed</p>
+                      <p className="text-[10px] font-semibold text-muted-foreground mt-0.5">14 days ago</p>
                     </div>
                   </div>
-                  <div className="flex gap-3">
-                    <div className="mt-0.5 h-2 w-2 rounded-full bg-border flex-shrink-0" />
+                  <div className="flex gap-2.5">
+                    <div className="mt-0.5 h-1.5 w-1.5 rounded-full bg-border flex-shrink-0" />
                     <div>
-                      <p className="text-sm font-medium">Initial Inquiry (Facebook Ads)</p>
-                      <p className="text-xs text-muted-foreground mt-0.5">21 days ago</p>
+                      <p className="text-xs font-bold">Initial Inquiry (Facebook Ads)</p>
+                      <p className="text-[10px] font-semibold text-muted-foreground mt-0.5">21 days ago</p>
                     </div>
                   </div>
                 </div>

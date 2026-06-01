@@ -21,14 +21,14 @@ function Tenants() {
 
       <div className="grid grid-cols-12 gap-4 mt-4">
         <Card className="col-span-12 lg:col-span-7 overflow-hidden overflow-x-auto">
-          <div className="p-5 border-b border-border/60 flex justify-between">
-            <h3 className="font-display text-2xl">Active leases</h3>
+          <div className="p-4 border-b border-border/60 flex justify-between">
+            <h3 className="font-display text-lg font-bold">Active leases</h3>
           </div>
-          <table className="w-full min-w-[680px] text-sm">
+          <table className="w-full min-w-[680px] text-xs">
             <thead>
-              <tr className="text-[11px] uppercase tracking-wider text-muted-foreground border-b border-border/60">
+              <tr className="text-[10px] uppercase tracking-widest text-muted-foreground border-b border-border/60 font-display font-bold">
                 {["Tenant", "Property", "Rent", "Renewal", "Status"].map((h) => (
-                  <th key={h} className="text-left font-medium px-5 py-3">
+                  <th key={h} className="text-left px-4 py-2">
                     {h}
                   </th>
                 ))}
@@ -80,10 +80,10 @@ function Tenants() {
                 ] as const
               ).map((t) => (
                 <tr key={t.n} className="border-b border-border/40 last:border-0 hover:bg-muted/40">
-                  <td className="px-5 py-3 font-medium">{t.n}</td>
-                  <td>{t.p}</td>
-                  <td className="tabular-nums">{t.r}</td>
-                  <td className="text-muted-foreground">{t.d}</td>
+                  <td className="px-4 py-2 font-bold">{t.n}</td>
+                  <td className="font-medium text-muted-foreground">{t.p}</td>
+                  <td className="tabular-nums font-bold">{t.r}</td>
+                  <td className="text-muted-foreground font-medium">{t.d}</td>
                   <td>
                     <Pill tone={t.tone}>{t.s}</Pill>
                   </td>
@@ -93,9 +93,9 @@ function Tenants() {
           </table>
         </Card>
 
-        <Card className="col-span-12 lg:col-span-5 p-5">
-          <h3 className="font-display text-2xl">Maintenance queue</h3>
-          <ul className="mt-4 space-y-3">
+        <Card className="col-span-12 lg:col-span-5 p-4">
+          <h3 className="font-display text-lg font-bold">Maintenance queue</h3>
+          <ul className="mt-3 space-y-2">
             {(
               [
                 {
@@ -122,11 +122,11 @@ function Tenants() {
                 { t: "Repaint walls", p: "Citrus 506", s: "Queued", tone: "neutral", a: "—" },
               ] as const
             ).map((m) => (
-              <li key={m.t} className="p-3 rounded-lg bg-muted/40">
+              <li key={m.t} className="p-2.5 rounded-lg bg-muted/40">
                 <div className="flex justify-between items-start gap-2">
                   <div>
-                    <div className="text-[13px] font-medium">{m.t}</div>
-                    <div className="text-[11px] text-muted-foreground">
+                    <div className="text-xs font-bold">{m.t}</div>
+                    <div className="text-[10px] font-semibold text-muted-foreground mt-0.5">
                       {m.p} · {m.a}
                     </div>
                   </div>
