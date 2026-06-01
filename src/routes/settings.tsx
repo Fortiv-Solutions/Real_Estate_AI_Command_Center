@@ -64,8 +64,8 @@ function Settings() {
               Brand
             </div>
             <div className="flex items-center gap-4">
-              <div className="h-16 bg-white rounded-md p-2 flex items-center shadow-sm">
-                <img src="/logo.png" alt="Fortiv Solutions" className="h-full object-contain" />
+              <div className="h-16 bg-slate-50 border border-border/80 rounded-md p-2 flex items-center shadow-sm">
+                <img src="/logo.webp" alt="Fortiv Solutions" className="h-full object-contain" />
               </div>
               <div className="flex gap-2">
                 <button className="h-8 px-2.5 rounded-md border border-border text-xs font-semibold shadow-sm hover:bg-muted/50 transition-colors">

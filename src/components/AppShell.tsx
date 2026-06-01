@@ -1,4 +1,4 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
 import {
   LayoutDashboard,
   Users2,
@@ -17,8 +17,18 @@ import {
   Plus,
   UserCog,
   UserCheck,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
-import { type ReactNode } from "react";
+import { type ReactNode, useState, useEffect } from "react";
+import {
+  CommandDialog,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+} from "./ui/command";
 
 const navGroups = [
   {
@@ -51,6 +61,119 @@ const navGroups = [
   }
 ];
 
+
+const searchableSubModules = [
+  { parent: "AI Brain", parentTo: "/ai-brain", label: "AI Command Dashboard", tab: "overview" },
+  { parent: "AI Brain", parentTo: "/ai-brain", label: "Unified Customer Intelligence Graph", tab: "graph" },
+  { parent: "AI Brain", parentTo: "/ai-brain", label: "Cross-Module AI Insights Engine", tab: "insights" },
+  { parent: "AI Brain", parentTo: "/ai-brain", label: "Predictive Deal Risk Scorer", tab: "risk" },
+  { parent: "AI Brain", parentTo: "/ai-brain", label: "Channel Partner Portal & Tracker", tab: "cp-portal" },
+  { parent: "AI Brain", parentTo: "/ai-brain", label: "Role-Based Access Control", tab: "rbac" },
+  { parent: "AI Brain", parentTo: "/ai-brain", label: "DPDP Act Compliance Layer", tab: "dpdp" },
+  { parent: "AI Brain", parentTo: "/ai-brain", label: "System Health & Uptime Dashboard", tab: "health" },
+  { parent: "Analytics", parentTo: "/analytics", label: "Dashboard Overview", tab: "overview" },
+  { parent: "Analytics", parentTo: "/analytics", label: "Daily Performance Report", tab: "daily-report" },
+  { parent: "Analytics", parentTo: "/analytics", label: "Sales Forecast Dashboard", tab: "forecast" },
+  { parent: "Analytics", parentTo: "/analytics", label: "Inventory Velocity Tracker", tab: "inventory" },
+  { parent: "Analytics", parentTo: "/analytics", label: "Investor & LP Report Generator", tab: "investor-report" },
+  { parent: "Analytics", parentTo: "/analytics", label: "Marketing ROI Dashboard", tab: "marketing-roi" },
+  { parent: "Analytics", parentTo: "/analytics", label: "Executive Weekly Briefing", tab: "executive-brief" },
+  { parent: "Buyer Portal", parentTo: "/buyers", label: "Dashboard Overview", tab: "overview" },
+  { parent: "Buyer Portal", parentTo: "/buyers", label: "Buyer Self-Service Portal", tab: "self-service" },
+  { parent: "Buyer Portal", parentTo: "/buyers", label: "Payment Schedule & Receipt Manager", tab: "payments" },
+  { parent: "Buyer Portal", parentTo: "/buyers", label: "Construction Progress Feed", tab: "progress" },
+  { parent: "Buyer Portal", parentTo: "/buyers", label: "Snag / Punch List Agent", tab: "snag" },
+  { parent: "Buyer Portal", parentTo: "/buyers", label: "Resale & Rental Assistance Agent", tab: "resale" },
+  { parent: "Buyer Portal", parentTo: "/buyers", label: "Society Onboarding Agent", tab: "society" },
+  { parent: "Buyer Portal", parentTo: "/buyers", label: "Post-Possession NPS & Loyalty Bot", tab: "nps" },
+  { parent: "Compliance", parentTo: "/compliance", label: "Dashboard Overview", tab: "overview" },
+  { parent: "Compliance", parentTo: "/compliance", label: "Agreement Draft Generator", tab: "agreement-gen" },
+  { parent: "Compliance", parentTo: "/compliance", label: "OCR Document Extractor", tab: "ocr-extractor" },
+  { parent: "Compliance", parentTo: "/compliance", label: "RERA Compliance Monitor", tab: "rera-monitor" },
+  { parent: "Compliance", parentTo: "/compliance", label: "Stamp Duty & Cost Calculator", tab: "stamp-duty" },
+  { parent: "Compliance", parentTo: "/compliance", label: "E-Signature Workflow", tab: "esign" },
+  { parent: "Compliance", parentTo: "/compliance", label: "KYC Verification Dashboard", tab: "kyc-verify" },
+  { parent: "Finance", parentTo: "/finance", label: "Dashboard Overview", tab: "overview" },
+  { parent: "Finance", parentTo: "/finance", label: "Collections & Receivables Dashboard", tab: "collections" },
+  { parent: "Finance", parentTo: "/finance", label: "Demand Note Automation", tab: "demand-notes" },
+  { parent: "Finance", parentTo: "/finance", label: "Broker Commission Tracker", tab: "commission" },
+  { parent: "Finance", parentTo: "/finance", label: "Project P&L Monitor", tab: "pl-monitor" },
+  { parent: "Finance", parentTo: "/finance", label: "Cash Flow Forecaster", tab: "forecaster" },
+  { parent: "Finance", parentTo: "/finance", label: "Tally / Accounting Sync Agent", tab: "tally-sync" },
+  { parent: "Finance", parentTo: "/finance", label: "Financial Report Generator", tab: "reports" },
+  { parent: "HR Pipeline", parentTo: "/hr", label: "HR Dashboard Overview", tab: "overview" },
+  { parent: "HR Pipeline", parentTo: "/hr", label: "Resume Screening", tab: "resume-screening" },
+  { parent: "HR Pipeline", parentTo: "/hr", label: "Interview Scheduler", tab: "interview-scheduler" },
+  { parent: "HR Pipeline", parentTo: "/hr", label: "Onboarding Agent", tab: "onboarding" },
+  { parent: "HR Pipeline", parentTo: "/hr", label: "Attendance & Payroll", tab: "payroll" },
+  { parent: "HR Pipeline", parentTo: "/hr", label: "Performance Tracking", tab: "performance" },
+  { parent: "HR Pipeline", parentTo: "/hr", label: "Talent Sourcing", tab: "talent-sourcing" },
+  { parent: "HR Pipeline", parentTo: "/hr", label: "HR Policy Chatbot", tab: "hr-chatbot" },
+  { parent: "Pipeline", parentTo: "/pipeline", label: "Dashboard Overview", tab: "overview" },
+  { parent: "Pipeline", parentTo: "/pipeline", label: "CRM Sync & Deduplication", tab: "crm-sync" },
+  { parent: "Pipeline", parentTo: "/pipeline", label: "Site Visit Scheduler", tab: "scheduler" },
+  { parent: "Pipeline", parentTo: "/pipeline", label: "Post-Visit Follow-Up", tab: "follow-up" },
+  { parent: "Pipeline", parentTo: "/pipeline", label: "Nurture Drip Engine", tab: "drip" },
+  { parent: "Pipeline", parentTo: "/pipeline", label: "Deal Pipeline Tracker", tab: "pipeline" },
+  { parent: "Pipeline", parentTo: "/pipeline", label: "AI Listing Writer", tab: "listing-writer" },
+  { parent: "Projects", parentTo: "/projects", label: "Dashboard Overview", tab: "overview" },
+  { parent: "Projects", parentTo: "/projects", label: "Project Milestone Tracker", tab: "timeline" },
+  { parent: "Projects", parentTo: "/projects", label: "Subcontractor Management Agent", tab: "subcontractor" },
+  { parent: "Projects", parentTo: "/projects", label: "Material Procurement Tracker", tab: "procurement" },
+  { parent: "Projects", parentTo: "/projects", label: "Statutory Approvals Monitor", tab: "approvals" },
+  { parent: "Projects", parentTo: "/projects", label: "Construction Photo Site Log", tab: "sitelog" },
+  { parent: "Projects", parentTo: "/projects", label: "Cost-to-Complete Forecaster", tab: "cost" },
+  { parent: "Projects", parentTo: "/projects", label: "Possession Readiness Dashboard", tab: "possession" },
+  { parent: "Properties", parentTo: "/properties", label: "Dashboard Overview", tab: "overview" },
+  { parent: "Properties", parentTo: "/properties", label: "Automated Valuation Model", tab: "avm" },
+  { parent: "Properties", parentTo: "/properties", label: "Comparative Market Analysis", tab: "cma" },
+  { parent: "Properties", parentTo: "/properties", label: "Property Matching Engine", tab: "matching" },
+  { parent: "Properties", parentTo: "/properties", label: "Price Alert Bot", tab: "price-alert" },
+  { parent: "Properties", parentTo: "/properties", label: "Market Intelligence Dashboard", tab: "market-intel" },
+  { parent: "Properties", parentTo: "/properties", label: "Competitor Price Tracker", tab: "competitor-tracker" },
+  { parent: "Tenants", parentTo: "/tenants", label: "Dashboard Overview", tab: "overview" },
+  { parent: "Tenants", parentTo: "/tenants", label: "Tenant Screening Pipeline", tab: "screening" },
+  { parent: "Tenants", parentTo: "/tenants", label: "Maintenance Request Router", tab: "maintenance" },
+  { parent: "Tenants", parentTo: "/tenants", label: "Rent Collection Agent", tab: "rent" },
+  { parent: "Tenants", parentTo: "/tenants", label: "Home Loan Copilot", tab: "loan" },
+  { parent: "Tenants", parentTo: "/tenants", label: "Tenant NPS & Feedback Bot", tab: "nps" },
+  { parent: "Tenants", parentTo: "/tenants", label: "Lease Renewal Agent", tab: "renewal" },
+  { parent: "Conversations", parentTo: "/conversations", label: "Engagement Overview", tab: "overview" },
+  { parent: "Conversations", parentTo: "/conversations", label: "WhatsApp AI Chatbot", tab: "whatsapp" },
+  { parent: "Conversations", parentTo: "/conversations", label: "Missed Call Auto-Responder", tab: "missed-call" },
+  { parent: "Conversations", parentTo: "/conversations", label: "Website AI Chat Widget", tab: "website-widget" },
+  { parent: "Conversations", parentTo: "/conversations", label: "Telegram Agent for Field Staff", tab: "telegram" },
+  { parent: "Conversations", parentTo: "/conversations", label: "Voice IVR Bot", tab: "voice-ivr" },
+  { parent: "Conversations", parentTo: "/conversations", label: "Email AI Responder", tab: "email" },
+  { parent: "Leads", parentTo: "/leads", label: "Lead Center Overview", tab: "overview" },
+  { parent: "Leads", parentTo: "/leads", label: "FSBO & Owner Listing Hunter", tab: "1.1" },
+  { parent: "Leads", parentTo: "/leads", label: "Google Maps Builder & Scraper", tab: "1.2" },
+  { parent: "Leads", parentTo: "/leads", label: "Facebook & Google Ads Lead Sync", tab: "1.3" },
+  { parent: "Leads", parentTo: "/leads", label: "Portal Lead Aggregator", tab: "1.4" },
+  { parent: "Leads", parentTo: "/leads", label: "Lead Enrichment Agent", tab: "1.5" },
+  { parent: "Leads", parentTo: "/leads", label: "AI Lead Scoring Engine", tab: "1.6" },
+];
+
+
+const getParentIcon = (parentTo: string) => {
+  const map: Record<string, any> = {
+    "/": LayoutDashboard,
+    "/leads": Users2,
+    "/pipeline": GitBranch,
+    "/properties": Building2,
+    "/conversations": MessagesSquare,
+    "/projects": Hammer,
+    "/tenants": Briefcase,
+    "/buyers": UserCheck,
+    "/finance": Wallet,
+    "/compliance": ShieldCheck,
+    "/hr": UserCog,
+    "/analytics": BarChart3,
+    "/ai-brain": Sparkles,
+  };
+  return map[parentTo] || Search;
+};
+
 export function AppShell({
   children,
   title,
@@ -63,39 +186,59 @@ export function AppShell({
   actions?: ReactNode;
 }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const navigate = useNavigate();
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setIsSearchOpen((open) => !open);
+      }
+    };
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, []);
+
+  const runCommand = (action: () => void) => {
+    setIsSearchOpen(false);
+    action();
+  };
+
   return (
     <div className="min-h-screen flex bg-background font-sans text-foreground">
       {/* Sidebar */}
-      <aside className="hidden lg:flex w-[220px] shrink-0 flex-col border-r border-[#1e293b] bg-[#030712] text-white h-screen sticky top-0">
-        <div className="p-4 flex flex-col gap-3">
-          <div className="bg-white rounded-lg p-3 w-full flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.05)] border border-white/10">
-            <img src="/logo.png" alt="Fortiv Solutions" className="w-full h-auto max-h-10 object-contain" />
-          </div>
-          <div className="text-[10px] text-[#89C4F8] font-bold tracking-widest uppercase font-display text-center opacity-80">
-            Command Center
-          </div>
-        </div>
-
-        <div className="px-3 pb-2">
-          <div className="relative">
-            <Search className="h-3.5 w-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-            <input
-              aria-label="Quick search"
-              placeholder="Search anything..."
-              className="w-full h-8 pl-8 pr-12 rounded-md bg-secondary/50 border border-transparent text-xs placeholder:text-muted-foreground focus:border-ring focus:bg-background transition-colors outline-none"
+      <aside className={`hidden lg:flex shrink-0 flex-col border-r border-[#1e293b] bg-[#030712] text-white h-screen sticky top-0 transition-all duration-300 no-scrollbar hover-scrollbar ${isCollapsed ? "w-[68px]" : "w-[220px]"}`}>
+        <div className={`p-4 flex flex-col gap-3 transition-all duration-300 ${isCollapsed ? "items-center" : ""}`}>
+          <div className={`w-full flex items-center justify-center transition-all duration-300 ${
+            isCollapsed 
+              ? "h-10 w-10 p-1.5 bg-slate-900/40 rounded-lg border border-white/5 shadow-inner" 
+              : "bg-slate-900/30 rounded-xl p-3 border border-white/5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
+          }`}>
+            <img 
+              src="/logo.webp" 
+              alt="Fortiv Solutions" 
+              className={`object-contain transition-all duration-300 ${isCollapsed ? "h-5 w-5" : "w-full h-auto max-h-10"}`} 
             />
-            <kbd className="absolute right-2 top-1/2 -translate-y-1/2 text-[9px] text-muted-foreground font-medium bg-background border border-border rounded px-1.5 py-0.5 shadow-sm">
-              ⌘K
-            </kbd>
           </div>
+          {!isCollapsed && (
+            <div className="text-[10px] text-[#89C4F8] font-bold tracking-widest uppercase font-display text-center opacity-80 animate-fade-in">
+              Command Center
+            </div>
+          )}
         </div>
 
-        <nav className="px-2 py-3 flex-1 overflow-y-auto space-y-5">
+        <nav className="px-2 py-3 flex-1 overflow-y-auto space-y-5 no-scrollbar hover-scrollbar">
           {navGroups.map((group) => (
             <div key={group.label}>
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 px-3 mb-2 font-display">
-                {group.label}
-              </div>
+              {isCollapsed ? (
+                <div className="h-px bg-slate-800/60 my-4 mx-2" />
+              ) : (
+                <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-500/80 px-3 mb-2 font-display">
+                  {group.label}
+                </div>
+              )}
               <ul className="space-y-0.5">
                 {group.items.map((item) => {
                   const active = pathname === item.to || (item.to !== "/" && pathname.startsWith(item.to));
@@ -104,25 +247,26 @@ export function AppShell({
                     <li key={item.to}>
                       <Link
                         to={item.to}
-                        className={`group relative flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-300 ${
+                        title={isCollapsed ? item.label : undefined}
+                        className={`group relative flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-300 border ${
                           active
-                            ? "bg-[#0E86E9]/10 text-[#0E86E9]"
-                            : "text-slate-400 hover:bg-slate-800/50 hover:text-white"
-                        }`}
+                            ? "bg-[#0E86E9]/10 text-[#0E86E9] border-[#0E86E9]/20 shadow-[inset_0_1px_0_rgba(14,134,233,0.05),0_2px_8px_-2px_rgba(14,134,233,0.15)]"
+                            : "text-slate-400 border-transparent hover:bg-slate-800/40 hover:text-white"
+                        } ${isCollapsed ? "justify-center px-0 w-9 h-9 mx-auto" : ""}`}
                       >
-                        {active && (
-                          <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-[#0E86E9] rounded-r-md" />
-                        )}
-                        <Icon className={`h-3.5 w-3.5 transition-transform duration-300 ${active ? "opacity-100 scale-110 glow-pulse rounded-full" : "opacity-70 group-hover:opacity-100"}`} />
-                        <span className="flex-1">{item.label}</span>
-                        {"badge" in item && item.badge && (
+                        <Icon className={`h-3.5 w-3.5 transition-transform duration-300 ${isCollapsed ? "group-hover:scale-110" : "group-hover:translate-x-0.5"} ${active ? "opacity-100 scale-110 glow-pulse rounded-full" : "opacity-70 group-hover:opacity-100"}`} />
+                        {!isCollapsed && <span className="flex-1">{item.label}</span>}
+                        {!isCollapsed && "badge" in item && item.badge && (
                           <span
-                            className={`text-[9px] px-1.5 py-0.5 rounded-md font-bold transition-colors duration-300 ${
+                            className={`text-[9px] px-1.5 py-0.5 rounded-md font-bold transition-all duration-300 ${
                               active ? "bg-[#0E86E9] text-white" : "bg-slate-800 text-slate-300"
-                            }`}
+                            } ${!active ? "animate-pulse" : ""}`}
                           >
                             {item.badge}
                           </span>
+                        )}
+                        {isCollapsed && "badge" in item && item.badge && (
+                          <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-[#0E86E9] rounded-full animate-pulse shadow-[0_0_6px_#0E86E9]" />
                         )}
                       </Link>
                     </li>
@@ -133,19 +277,33 @@ export function AppShell({
           ))}
         </nav>
         
-        <div className="p-3 border-t border-[#1e293b] mt-auto">
+        <div className="p-3 border-t border-[#1e293b] mt-auto space-y-1">
           <Link
             to="/settings"
+            title={isCollapsed ? "Settings" : undefined}
             aria-label="Settings"
-            className={`group flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-300 ${
+            className={`group flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-300 border border-transparent ${
               pathname.startsWith("/settings")
-                ? "bg-[#0E86E9]/10 text-[#0E86E9]"
-                : "text-slate-400 hover:bg-slate-800/50 hover:text-white"
-            }`}
+                ? "bg-[#0E86E9]/10 text-[#0E86E9] border-[#0E86E9]/20"
+                : "text-slate-400 hover:bg-slate-800/40 hover:text-white"
+            } ${isCollapsed ? "justify-center px-0 w-9 h-9 mx-auto" : ""}`}
           >
-            <Settings className="h-3.5 w-3.5 opacity-70 transition-transform duration-300 group-hover:opacity-100 group-hover:rotate-45" />
-            <span className="flex-1">Settings</span>
+            <Settings className={`h-3.5 w-3.5 opacity-70 transition-transform duration-300 group-hover:opacity-100 group-hover:rotate-45 ${isCollapsed ? "group-hover:scale-110" : ""}`} />
+            {!isCollapsed && <span className="flex-1">Settings</span>}
           </Link>
+          <button
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+            aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+            className={`w-full group flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:bg-slate-800/40 hover:text-white transition-all duration-300 border border-transparent ${isCollapsed ? "justify-center px-0 w-9 h-9 mx-auto" : ""}`}
+          >
+            {isCollapsed ? (
+              <ChevronRight className="h-3.5 w-3.5 opacity-70 transition-transform duration-300 group-hover:scale-110" />
+            ) : (
+              <ChevronLeft className="h-3.5 w-3.5 opacity-70 transition-transform duration-300 group-hover:scale-110" />
+            )}
+            {!isCollapsed && <span className="flex-1 text-left">Collapse</span>}
+          </button>
         </div>
       </aside>
 
@@ -159,6 +317,22 @@ export function AppShell({
               <span className="font-medium">Surat Branch</span>
             </div>
             <div className="flex items-center gap-2 sm:gap-3">
+              {/* Header Search Bar */}
+              <div 
+                onClick={() => setIsSearchOpen(true)}
+                className="relative hidden sm:block w-40 md:w-56 cursor-pointer group animate-fade-in"
+              >
+                <Search className="h-3.5 w-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors" />
+                <input
+                  readOnly
+                  placeholder="Search Anything... (⌘K)"
+                  className="w-full h-8 pl-8 pr-12 rounded-lg bg-slate-200/40 dark:bg-slate-950/40 border border-slate-200/80 dark:border-slate-800 text-xs placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-all cursor-pointer text-foreground hover:bg-slate-200/60 dark:hover:bg-slate-900/40 hover:border-slate-300/80 dark:hover:border-slate-700/80 shadow-sm"
+                />
+                <kbd className="absolute right-2 top-1/2 -translate-y-1/2 text-[9px] text-slate-400 dark:text-slate-500 font-medium bg-card border border-border rounded px-1.5 py-0.5 shadow-sm pointer-events-none">
+                  ⌘K
+                </kbd>
+              </div>
+
               <button aria-label="Create new" className="h-8 px-3 rounded-md bg-primary text-primary-foreground text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-all hover:bg-primary/90 active:scale-95">
                 <Plus className="h-3.5 w-3.5" /> <span className="hidden sm:inline">New</span>
               </button>
@@ -203,6 +377,101 @@ export function AppShell({
       <nav className="lg:hidden fixed inset-x-0 bottom-0 z-30 border-t border-border bg-background/95 backdrop-blur pb-safe">
         {/* Mobile nav content omitted for brevity but standard implementation goes here */}
       </nav>
+
+      {/* Command Palette Search Dialog */}
+      <CommandDialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
+        <CommandInput placeholder="Type a command or search pages..." />
+        <CommandList>
+          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandGroup heading="Navigation">
+            <CommandItem onSelect={() => runCommand(() => navigate({ to: "/" }))}>
+              <LayoutDashboard className="mr-2 h-4 w-4 text-muted-foreground" />
+              <span>Dashboard</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => navigate({ to: "/leads" }))}>
+              <Users2 className="mr-2 h-4 w-4 text-muted-foreground" />
+              <span>Leads</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => navigate({ to: "/pipeline" }))}>
+              <GitBranch className="mr-2 h-4 w-4 text-muted-foreground" />
+              <span>Pipeline</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => navigate({ to: "/properties" }))}>
+              <Building2 className="mr-2 h-4 w-4 text-muted-foreground" />
+              <span>Properties</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => navigate({ to: "/conversations" }))}>
+              <MessagesSquare className="mr-2 h-4 w-4 text-muted-foreground" />
+              <span>Conversations</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => navigate({ to: "/projects" }))}>
+              <Hammer className="mr-2 h-4 w-4 text-muted-foreground" />
+              <span>Projects</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => navigate({ to: "/tenants" }))}>
+              <Briefcase className="mr-2 h-4 w-4 text-muted-foreground" />
+              <span>Tenants</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => navigate({ to: "/buyers" }))}>
+              <UserCheck className="mr-2 h-4 w-4 text-muted-foreground" />
+              <span>Buyer Portal</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => navigate({ to: "/finance" }))}>
+              <Wallet className="mr-2 h-4 w-4 text-muted-foreground" />
+              <span>Finance</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => navigate({ to: "/compliance" }))}>
+              <ShieldCheck className="mr-2 h-4 w-4 text-muted-foreground" />
+              <span>Compliance</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => navigate({ to: "/hr" }))}>
+              <UserCog className="mr-2 h-4 w-4 text-muted-foreground" />
+              <span>HR Pipeline</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => navigate({ to: "/analytics" }))}>
+              <BarChart3 className="mr-2 h-4 w-4 text-muted-foreground" />
+              <span>Analytics</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => navigate({ to: "/ai-brain" }))}>
+              <Sparkles className="mr-2 h-4 w-4 text-muted-foreground" />
+              <span>AI Brain</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => navigate({ to: "/settings" }))}>
+              <Settings className="mr-2 h-4 w-4 text-muted-foreground" />
+              <span>Settings</span>
+            </CommandItem>
+          </CommandGroup>
+          <CommandGroup heading="Sub-modules">
+            {searchableSubModules.map((sub) => {
+              const Icon = getParentIcon(sub.parentTo);
+              return (
+                <CommandItem
+                  key={`${sub.parentTo}-${sub.tab}`}
+                  onSelect={() =>
+                    runCommand(() =>
+                      navigate({
+                        to: sub.parentTo,
+                        search: { tab: sub.tab },
+                      })
+                    )
+                  }
+                  className="flex flex-col items-start py-2.5 px-3 cursor-pointer"
+                >
+                  <div className="flex items-center w-full">
+                    <Icon className="mr-2.5 h-4 w-4 text-muted-foreground shrink-0" />
+                    <div className="flex flex-col min-w-0">
+                      <span className="font-semibold text-xs text-foreground truncate">{sub.label}</span>
+                      <span className="text-[10px] text-slate-500 font-medium tracking-wide truncate">
+                        {sub.parent} &bull; {sub.label}
+                      </span>
+                    </div>
+                  </div>
+                </CommandItem>
+              );
+            })}
+          </CommandGroup>
+        </CommandList>
+      </CommandDialog>
     </div>
   );
 }

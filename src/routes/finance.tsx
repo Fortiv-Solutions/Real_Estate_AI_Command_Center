@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AppShell, Card } from "../components/AppShell";
 import { useState, useMemo, useEffect } from "react";
 import {
@@ -44,6 +44,11 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/finance")({
+  validateSearch: (search: Record<string, unknown>) => {
+    return {
+      tab: (search.tab as string) || undefined,
+    };
+  },
   head: () => ({ meta: [{ title: "Finance & Accounts · Fortiv" }] }),
   component: FinanceManager,
 });
@@ -155,7 +160,15 @@ const statusBadgeStyle = (status: string) => {
 };
 
 function FinanceManager() {
-  const [activeTab, setActiveTab] = useState<TabType>("menu");
+  const { tab } = Route.useSearch();
+  const navigate = useNavigate({ from: Route.fullPath });
+  const activeTab = (tab as TabType) || "menu";
+  const setActiveTab = (newTab: TabType | ((prev: TabType) => TabType)) => {
+    const nextTab = typeof newTab === "function" ? newTab(activeTab) : newTab;
+    navigate({
+      search: (prev: any) => ({ ...prev, tab: nextTab === "menu" ? undefined : nextTab }),
+    });
+  };
 
   const submodulesList = [
     { id: "overview", name: "Dashboard Overview", desc: "Overall active billed receivables KPIs, monthly collections target trend, project margins summary, and pending actions alerts.", stats: "Total Collected: ₹18.2Cr", status: "Active" },

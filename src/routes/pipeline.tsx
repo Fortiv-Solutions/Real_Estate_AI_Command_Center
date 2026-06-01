@@ -1,4 +1,4 @@
-﻿import { createFileRoute } from "@tanstack/react-router";
+﻿import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AppShell, Card, Pill } from "../components/AppShell";
 import { useState, useMemo, useEffect, useRef } from "react";
 import {
@@ -40,6 +40,11 @@ import {
 
 // Route declaration
 export const Route = createFileRoute("/pipeline")({
+  validateSearch: (search: Record<string, unknown>) => {
+    return {
+      tab: (search.tab as string) || undefined,
+    };
+  },
   head: () => ({ meta: [{ title: "Sales Pipeline & CRM Automation · Fortiv" }] }),
   component: SalesPipelineManager,
 });
@@ -239,7 +244,15 @@ const stageVelocityBenchmarks = [
 ];
 
 function SalesPipelineManager() {
-  const [activeTab, setActiveTab] = useState<TabType>("menu");
+  const { tab } = Route.useSearch();
+  const navigate = useNavigate({ from: Route.fullPath });
+  const activeTab = (tab as TabType) || "menu";
+  const setActiveTab = (newTab: TabType | ((prev: TabType) => TabType)) => {
+    const nextTab = typeof newTab === "function" ? newTab(activeTab) : newTab;
+    navigate({
+      search: (prev: any) => ({ ...prev, tab: nextTab === "menu" ? undefined : nextTab }),
+    });
+  };
 
   const submodulesList = [
     {

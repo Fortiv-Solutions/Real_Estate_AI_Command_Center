@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AppShell, Card } from "../components/AppShell";
 import { useState, useMemo, useEffect } from "react";
 import {
@@ -44,6 +44,11 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/buyers")({
+  validateSearch: (search: Record<string, unknown>) => {
+    return {
+      tab: (search.tab as string) || undefined,
+    };
+  },
   head: () => ({ meta: [{ title: "Buyer Portal & Post-Sale · Fortiv" }] }),
   component: BuyerManager,
 });
@@ -134,7 +139,15 @@ const statusBadge = (status: string) => {
 };
 
 function BuyerManager() {
-  const [activeTab, setActiveTab] = useState<TabType>("menu");
+  const { tab } = Route.useSearch();
+  const navigate = useNavigate({ from: Route.fullPath });
+  const activeTab = (tab as TabType) || "menu";
+  const setActiveTab = (newTab: TabType | ((prev: TabType) => TabType)) => {
+    const nextTab = typeof newTab === "function" ? newTab(activeTab) : newTab;
+    navigate({
+      search: (prev: any) => ({ ...prev, tab: nextTab === "menu" ? undefined : nextTab }),
+    });
+  };
 
   const submodulesList = [
     { id: "overview", name: "Dashboard Overview", desc: "Overall active buyers portfolio, payment health summary, rolling NPS indices, and visual portal logins trend charts.", stats: "NPS rolling score: +62", status: "Active" },

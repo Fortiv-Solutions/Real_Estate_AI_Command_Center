@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AppShell, Card } from "../components/AppShell";
 import { useState, useEffect, useMemo } from "react";
 import {
@@ -30,6 +30,11 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/hr")({
+  validateSearch: (search: Record<string, unknown>) => {
+    return {
+      tab: (search.tab as string) || undefined,
+    };
+  },
   head: () => ({ meta: [{ title: "HR Pipeline · Fortiv" }] }),
   component: HrManager,
 });
@@ -150,7 +155,15 @@ const performanceLabel = (label: string) => {
 // ─── MAIN COMPONENT ──────────────────────────────────────────────────────────
 
 function HrManager() {
-  const [activeTab, setActiveTab] = useState<TabType>("menu");
+  const { tab } = Route.useSearch();
+  const navigate = useNavigate({ from: Route.fullPath });
+  const activeTab = (tab as TabType) || "menu";
+  const setActiveTab = (newTab: TabType | ((prev: TabType) => TabType)) => {
+    const nextTab = typeof newTab === "function" ? newTab(activeTab) : newTab;
+    navigate({
+      search: (prev: any) => ({ ...prev, tab: nextTab === "menu" ? undefined : nextTab }),
+    });
+  };
 
   const submodulesList = [
     { id: "overview", name: "HR Dashboard Overview", desc: "Hiring funnel, team performance snapshot, payroll status, and all open HR actions in one view.", stats: "7 actions pending", status: "Active" },

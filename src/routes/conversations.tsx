@@ -1,4 +1,4 @@
-﻿import { createFileRoute } from "@tanstack/react-router";
+﻿import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AppShell, Card, Pill } from "../components/AppShell";
 import { 
   Search, 
@@ -35,6 +35,11 @@ import { useState, useMemo, useEffect, useRef } from "react";
 
 // Route declaration
 export const Route = createFileRoute("/conversations")({
+  validateSearch: (search: Record<string, unknown>) => {
+    return {
+      tab: (search.tab as string) || undefined,
+    };
+  },
   head: () => ({ meta: [{ title: "Conversational AI & Engagement · Fortiv" }] }),
   component: ConversationsManager,
 });
@@ -213,7 +218,15 @@ const whatsappThreads = {
 
 // Main Component
 function ConversationsManager() {
-  const [activeTab, setActiveTab] = useState<TabType>("menu");
+  const { tab } = Route.useSearch();
+  const navigate = useNavigate({ from: Route.fullPath });
+  const activeTab = (tab as TabType) || "menu";
+  const setActiveTab = (newTab: TabType | ((prev: TabType) => TabType)) => {
+    const nextTab = typeof newTab === "function" ? newTab(activeTab) : newTab;
+    navigate({
+      search: (prev: any) => ({ ...prev, tab: nextTab === "menu" ? undefined : nextTab }),
+    });
+  };
 
   // Helper for rendering platform badges in the live stream
   const renderPlatformBadge = (channel: string) => {

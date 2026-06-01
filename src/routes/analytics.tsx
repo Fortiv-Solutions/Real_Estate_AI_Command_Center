@@ -1,4 +1,4 @@
-﻿import { createFileRoute } from "@tanstack/react-router";
+﻿import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AppShell, Card, Stat } from "../components/AppShell";
 import { useState, useMemo, useEffect, useRef } from "react";
 import {
@@ -38,6 +38,11 @@ import {
 
 // Route declaration
 export const Route = createFileRoute("/analytics")({
+  validateSearch: (search: Record<string, unknown>) => {
+    return {
+      tab: (search.tab as string) || undefined,
+    };
+  },
   head: () => ({ meta: [{ title: "Analytics & Forecasting · Fortiv" }] }),
   component: AnalyticsManager,
 });
@@ -165,7 +170,15 @@ const formatInr = (value: number, type: "L" | "Cr" | "Rs" = "Rs") => {
 };
 
 function AnalyticsManager() {
-  const [activeTab, setActiveTab] = useState<TabType>("menu");
+  const { tab } = Route.useSearch();
+  const navigate = useNavigate({ from: Route.fullPath });
+  const activeTab = (tab as TabType) || "menu";
+  const setActiveTab = (newTab: TabType | ((prev: TabType) => TabType)) => {
+    const nextTab = typeof newTab === "function" ? newTab(activeTab) : newTab;
+    navigate({
+      search: (prev: any) => ({ ...prev, tab: nextTab === "menu" ? undefined : nextTab }),
+    });
+  };
 
   const submodulesList = [
     {

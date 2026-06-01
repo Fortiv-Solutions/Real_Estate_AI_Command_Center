@@ -1,4 +1,4 @@
-﻿import { createFileRoute } from "@tanstack/react-router";
+﻿import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AppShell, Card, Pill } from "../components/AppShell";
 import { 
   Filter, 
@@ -32,6 +32,11 @@ import { useState, useMemo, useEffect } from "react";
 
 // Route declaration
 export const Route = createFileRoute("/leads")({
+  validateSearch: (search: Record<string, unknown>) => {
+    return {
+      tab: (search.tab as string) || undefined,
+    };
+  },
   head: () => ({ meta: [{ title: "Leads · Fortiv Command Center" }] }),
   component: LeadsManager,
 });
@@ -166,7 +171,15 @@ const mockPortalPerformance = [
 ];
 
 function LeadsManager() {
-  const [activeTab, setActiveTab] = useState<TabType>("menu");
+  const { tab } = Route.useSearch();
+  const navigate = useNavigate({ from: Route.fullPath });
+  const activeTab = (tab as TabType) || "menu";
+  const setActiveTab = (newTab: TabType | ((prev: TabType) => TabType)) => {
+    const nextTab = typeof newTab === "function" ? newTab(activeTab) : newTab;
+    navigate({
+      search: (prev: any) => ({ ...prev, tab: nextTab === "menu" ? undefined : nextTab }),
+    });
+  };
 
   // Sub-modules state
   const [fsboLeads, setFsboLeads] = useState<FSBOListing[]>([

@@ -1,4 +1,4 @@
-﻿import { createFileRoute } from "@tanstack/react-router";
+﻿import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AppShell, Card } from "../components/AppShell";
 import { useState, useMemo, useEffect } from "react";
 import {
@@ -28,6 +28,11 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/compliance")({
+  validateSearch: (search: Record<string, unknown>) => {
+    return {
+      tab: (search.tab as string) || undefined,
+    };
+  },
   head: () => ({ meta: [{ title: "Document AI & Compliance · Fortiv" }] }),
   component: ComplianceManager,
 });
@@ -151,7 +156,15 @@ const statusBadge = (status: string) => {
 };
 
 function ComplianceManager() {
-  const [activeTab, setActiveTab] = useState<TabType>("menu");
+  const { tab } = Route.useSearch();
+  const navigate = useNavigate({ from: Route.fullPath });
+  const activeTab = (tab as TabType) || "menu";
+  const setActiveTab = (newTab: TabType | ((prev: TabType) => TabType)) => {
+    const nextTab = typeof newTab === "function" ? newTab(activeTab) : newTab;
+    navigate({
+      search: (prev: any) => ({ ...prev, tab: nextTab === "menu" ? undefined : nextTab }),
+    });
+  };
 
   const submodulesList = [
     { id: "overview", name: "Dashboard Overview", desc: "Document health KPIs, RERA deadline calendar, and real-time compliance activity feed.", stats: "3 pending review", status: "Active" },
