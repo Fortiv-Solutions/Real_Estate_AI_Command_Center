@@ -234,7 +234,7 @@ function RenderMenu({ list, onSelect }: { list: typeof submodulesList extends ne
         <Card
           key={mod.id}
           onClick={() => onSelect(mod.id)}
-          className="p-5 border border-border/70 hover:border-ink hover:shadow-[0_4px_20px_rgba(11,31,51,0.04)] transition-all duration-300 cursor-pointer flex flex-col justify-between group h-44 bg-card"
+          className="submodule-card p-5 cursor-pointer flex flex-col justify-between group h-44"
         >
           <div>
             <div className="flex items-center justify-between mb-2">

@@ -147,6 +147,33 @@
     background: rgba(11, 31, 51, 0.6);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
   }
+  .submodule-card {
+    background: rgba(255, 255, 255, 0.38);
+    border: 1px solid rgba(14, 134, 233, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(14, 134, 233, 0.05), inset 0 1px 2px 0 rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .submodule-card:hover {
+    background: rgba(255, 255, 255, 0.62);
+    border-color: rgba(14, 134, 233, 0.55);
+    box-shadow: 0 10px 25px -5px rgba(14, 134, 233, 0.15), 0 8px 16px -6px rgba(14, 134, 233, 0.1), inset 0 1px 2px 0 rgba(255, 255, 255, 0.7);
+    transform: translateY(-2px);
+  }
+  .dark .submodule-card {
+    background: rgba(11, 31, 51, 0.38);
+    border: 1px solid rgba(14, 134, 233, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+  .dark .submodule-card:hover {
+    background: rgba(11, 31, 51, 0.58);
+    border-color: rgba(14, 134, 233, 0.7);
+    box-shadow: 0 0 20px rgba(14, 134, 233, 0.35), 0 10px 25px -5px rgba(0, 0, 0, 0.45), inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
   .touch-target {
     min-height: 44px;
     min-width: 44px;

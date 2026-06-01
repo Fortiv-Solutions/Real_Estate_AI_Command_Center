@@ -29,6 +29,12 @@ import {
   CommandGroup,
   CommandItem,
 } from "./ui/command";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipProvider,
+} from "./ui/tooltip";
 
 const navGroups = [
   {
@@ -187,7 +193,20 @@ export function AppShell({
 }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const navigate = useNavigate();
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("sidebar-collapsed") === "true";
+    }
+    return false;
+  });
+
+  const toggleCollapse = () => {
+    setIsCollapsed((prev) => {
+      const next = !prev;
+      localStorage.setItem("sidebar-collapsed", String(next));
+      return next;
+    });
+  };
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useEffect(() => {
@@ -207,24 +226,29 @@ export function AppShell({
   };
 
   return (
-    <div className="min-h-screen flex bg-background font-sans text-foreground">
+    <TooltipProvider>
+      <div className="min-h-screen flex bg-background font-sans text-foreground">
       {/* Sidebar */}
       <aside className={`hidden lg:flex shrink-0 flex-col border-r border-[#1e293b] bg-[#030712] text-white h-screen sticky top-0 transition-all duration-300 no-scrollbar hover-scrollbar ${isCollapsed ? "w-[68px]" : "w-[220px]"}`}>
-        <div className={`p-4 flex flex-col gap-3 transition-all duration-300 ${isCollapsed ? "items-center" : ""}`}>
+        <div className={`transition-all duration-300 ${
+          isCollapsed 
+            ? "p-4 flex flex-col gap-3 items-center" 
+            : "pt-4 px-4 pb-1 flex flex-col gap-2"
+        }`}>
           <div className={`w-full flex items-center justify-center transition-all duration-300 ${
             isCollapsed 
-              ? "h-10 w-10 p-1.5 bg-slate-900/40 rounded-lg border border-white/5 shadow-inner" 
+              ? "h-11 w-11 p-1 bg-slate-900/40 rounded-lg border border-white/5 shadow-inner" 
               : "bg-slate-900/30 rounded-xl p-3 border border-white/5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
           }`}>
             <img 
               src="/logo.webp" 
               alt="Fortiv Solutions" 
-              className={`object-contain transition-all duration-300 ${isCollapsed ? "h-5 w-5" : "w-full h-auto max-h-10"}`} 
+              className={`object-contain transition-all duration-300 ${isCollapsed ? "h-8 w-8" : "w-full h-auto max-h-10"}`} 
             />
           </div>
           {!isCollapsed && (
             <div className="text-[10px] text-[#89C4F8] font-bold tracking-widest uppercase font-display text-center opacity-80 animate-fade-in">
-              Command Center
+              Real Estate AI Command Center
             </div>
           )}
         </div>
@@ -243,32 +267,45 @@ export function AppShell({
                 {group.items.map((item) => {
                   const active = pathname === item.to || (item.to !== "/" && pathname.startsWith(item.to));
                   const Icon = item.icon;
+                  const linkElement = (
+                    <Link
+                      to={item.to}
+                      className={`group relative flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-300 border ${
+                        active
+                          ? "bg-[#0E86E9]/10 text-[#0E86E9] border-[#0E86E9]/20 shadow-[inset_0_1px_0_rgba(14,134,233,0.05),0_2px_8px_-2px_rgba(14,134,233,0.15)]"
+                          : "text-slate-400 border-transparent hover:bg-slate-800/40 hover:text-white"
+                      } ${isCollapsed ? "justify-center px-0 w-10 h-10 mx-auto" : ""}`}
+                    >
+                      <Icon className={`transition-all duration-300 ${isCollapsed ? "h-[22px] w-[22px] group-hover:scale-110" : "h-3.5 w-3.5 group-hover:translate-x-0.5"} ${active ? "opacity-100 scale-110 glow-pulse rounded-full" : "opacity-70 group-hover:opacity-100"}`} />
+                      {!isCollapsed && <span className="flex-1">{item.label}</span>}
+                      {!isCollapsed && "badge" in item && item.badge && (
+                        <span
+                          className={`text-[9px] px-1.5 py-0.5 rounded-md font-bold transition-all duration-300 ${
+                            active ? "bg-[#0E86E9] text-white" : "bg-slate-800 text-slate-300"
+                          } ${!active ? "animate-pulse" : ""}`}
+                        >
+                          {item.badge}
+                        </span>
+                      )}
+                      {isCollapsed && "badge" in item && item.badge && (
+                        <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-[#0E86E9] rounded-full animate-pulse shadow-[0_0_6px_#0E86E9]" />
+                      )}
+                    </Link>
+                  );
                   return (
                     <li key={item.to}>
-                      <Link
-                        to={item.to}
-                        title={isCollapsed ? item.label : undefined}
-                        className={`group relative flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-300 border ${
-                          active
-                            ? "bg-[#0E86E9]/10 text-[#0E86E9] border-[#0E86E9]/20 shadow-[inset_0_1px_0_rgba(14,134,233,0.05),0_2px_8px_-2px_rgba(14,134,233,0.15)]"
-                            : "text-slate-400 border-transparent hover:bg-slate-800/40 hover:text-white"
-                        } ${isCollapsed ? "justify-center px-0 w-9 h-9 mx-auto" : ""}`}
-                      >
-                        <Icon className={`h-3.5 w-3.5 transition-transform duration-300 ${isCollapsed ? "group-hover:scale-110" : "group-hover:translate-x-0.5"} ${active ? "opacity-100 scale-110 glow-pulse rounded-full" : "opacity-70 group-hover:opacity-100"}`} />
-                        {!isCollapsed && <span className="flex-1">{item.label}</span>}
-                        {!isCollapsed && "badge" in item && item.badge && (
-                          <span
-                            className={`text-[9px] px-1.5 py-0.5 rounded-md font-bold transition-all duration-300 ${
-                              active ? "bg-[#0E86E9] text-white" : "bg-slate-800 text-slate-300"
-                            } ${!active ? "animate-pulse" : ""}`}
-                          >
-                            {item.badge}
-                          </span>
-                        )}
-                        {isCollapsed && "badge" in item && item.badge && (
-                          <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-[#0E86E9] rounded-full animate-pulse shadow-[0_0_6px_#0E86E9]" />
-                        )}
-                      </Link>
+                      {isCollapsed ? (
+                        <Tooltip delayDuration={50}>
+                          <TooltipTrigger asChild>
+                            {linkElement}
+                          </TooltipTrigger>
+                          <TooltipContent side="right" className="bg-[#030712] border border-[#1e293b] text-white px-2.5 py-1.5 rounded-lg text-xs font-semibold shadow-xl backdrop-blur-md z-50">
+                            {item.label}
+                          </TooltipContent>
+                        </Tooltip>
+                      ) : (
+                        linkElement
+                      )}
                     </li>
                   );
                 })}
@@ -278,32 +315,61 @@ export function AppShell({
         </nav>
         
         <div className="p-3 border-t border-[#1e293b] mt-auto space-y-1">
-          <Link
-            to="/settings"
-            title={isCollapsed ? "Settings" : undefined}
-            aria-label="Settings"
-            className={`group flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-300 border border-transparent ${
-              pathname.startsWith("/settings")
-                ? "bg-[#0E86E9]/10 text-[#0E86E9] border-[#0E86E9]/20"
-                : "text-slate-400 hover:bg-slate-800/40 hover:text-white"
-            } ${isCollapsed ? "justify-center px-0 w-9 h-9 mx-auto" : ""}`}
-          >
-            <Settings className={`h-3.5 w-3.5 opacity-70 transition-transform duration-300 group-hover:opacity-100 group-hover:rotate-45 ${isCollapsed ? "group-hover:scale-110" : ""}`} />
-            {!isCollapsed && <span className="flex-1">Settings</span>}
-          </Link>
-          <button
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-            aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-            className={`w-full group flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:bg-slate-800/40 hover:text-white transition-all duration-300 border border-transparent ${isCollapsed ? "justify-center px-0 w-9 h-9 mx-auto" : ""}`}
-          >
-            {isCollapsed ? (
-              <ChevronRight className="h-3.5 w-3.5 opacity-70 transition-transform duration-300 group-hover:scale-110" />
-            ) : (
+          {isCollapsed ? (
+            <Tooltip delayDuration={50}>
+              <TooltipTrigger asChild>
+                <Link
+                  to="/settings"
+                  aria-label="Settings"
+                  className="group flex items-center justify-center w-10 h-10 mx-auto rounded-lg border border-transparent text-slate-400 hover:bg-slate-800/40 hover:text-white transition-all duration-300"
+                >
+                  <Settings className="opacity-70 transition-all duration-300 group-hover:opacity-100 group-hover:rotate-45 h-[22px] w-[22px] group-hover:scale-110" />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right" className="bg-[#030712] border border-[#1e293b] text-white px-2.5 py-1.5 rounded-lg text-xs font-semibold shadow-xl backdrop-blur-md z-50">
+                Settings
+              </TooltipContent>
+            </Tooltip>
+          ) : (
+            <Link
+              to="/settings"
+              aria-label="Settings"
+              className={`group flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-300 border border-transparent ${
+                pathname.startsWith("/settings")
+                  ? "bg-[#0E86E9]/10 text-[#0E86E9] border-[#0E86E9]/20"
+                  : "text-slate-400 hover:bg-slate-800/40 hover:text-white"
+              }`}
+            >
+              <Settings className="h-3.5 w-3.5 opacity-70 transition-transform duration-300 group-hover:opacity-100 group-hover:rotate-45" />
+              <span className="flex-1">Settings</span>
+            </Link>
+          )}
+
+          {isCollapsed ? (
+            <Tooltip delayDuration={50}>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={toggleCollapse}
+                  aria-label="Expand sidebar"
+                  className="group flex items-center justify-center w-10 h-10 mx-auto rounded-lg border border-transparent text-slate-400 hover:bg-slate-800/40 hover:text-white transition-all duration-300"
+                >
+                  <ChevronRight className="opacity-70 transition-all duration-300 group-hover:scale-110 h-[22px] w-[22px]" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="right" className="bg-[#030712] border border-[#1e293b] text-white px-2.5 py-1.5 rounded-lg text-xs font-semibold shadow-xl backdrop-blur-md z-50">
+                Expand sidebar
+              </TooltipContent>
+            </Tooltip>
+          ) : (
+            <button
+              onClick={toggleCollapse}
+              aria-label="Collapse sidebar"
+              className="w-full group flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:bg-slate-800/40 hover:text-white transition-all duration-300 border border-transparent"
+            >
               <ChevronLeft className="h-3.5 w-3.5 opacity-70 transition-transform duration-300 group-hover:scale-110" />
-            )}
-            {!isCollapsed && <span className="flex-1 text-left">Collapse</span>}
-          </button>
+              <span className="flex-1 text-left">Collapse</span>
+            </button>
+          )}
         </div>
       </aside>
 
@@ -355,9 +421,9 @@ export function AppShell({
           </div>
         </header>
 
-        <main className="flex-1 flex flex-col">
+        <main className="flex-1 flex flex-col relative overflow-hidden">
           {(title || subtitle || actions) && (
-            <div className="px-5 py-4 border-b border-border/50 bg-background flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+            <div className="px-5 py-4 border-b border-border/50 bg-background flex flex-col sm:flex-row sm:items-end justify-between gap-3 relative z-10">
               <div>
                 <h1 className="text-xl font-display font-semibold tracking-tight text-foreground">
                   {title}
@@ -369,7 +435,12 @@ export function AppShell({
               {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}
             </div>
           )}
-          <div className="flex-1 p-5 max-w-[1920px] w-full mx-auto">{children}</div>
+          
+          {/* Ambient glassmorphism blobs behind content */}
+          <div className="absolute top-[20%] left-[20%] w-[380px] h-[380px] rounded-full bg-[#0E86E9]/6 dark:bg-[#0E86E9]/9 blur-[100px] pointer-events-none" />
+          <div className="absolute bottom-[20%] right-[20%] w-[420px] h-[420px] rounded-full bg-[#89C4F8]/5 dark:bg-[#89C4F8]/8 blur-[110px] pointer-events-none" />
+
+          <div className="flex-1 p-5 max-w-[1920px] w-full mx-auto relative z-10">{children}</div>
         </main>
       </div>
 
@@ -473,6 +544,7 @@ export function AppShell({
         </CommandList>
       </CommandDialog>
     </div>
+  </TooltipProvider>
   );
 }
 
