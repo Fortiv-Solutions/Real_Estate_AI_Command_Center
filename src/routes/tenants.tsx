@@ -1,142 +1,1492 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AppShell, Card, Stat, Pill } from "../components/AppShell";
+import { AppShell, Card } from "../components/AppShell";
+import { useState, useMemo, useEffect } from "react";
+import {
+  ChevronLeft,
+  ArrowRight,
+  ShieldCheck,
+  AlertTriangle,
+  CheckCircle,
+  Clock,
+  Send,
+  Eye,
+  Download,
+  Activity,
+  Calendar,
+  Building,
+  User,
+  Users,
+  Search,
+  Check,
+  X,
+  TrendingUp,
+  CreditCard,
+  FileText,
+  DollarSign,
+  Heart,
+  MessageCircle,
+  RefreshCw,
+  Plus,
+  ArrowUpRight,
+  Sparkles,
+  Phone
+} from "lucide-react";
 
 export const Route = createFileRoute("/tenants")({
-  head: () => ({ meta: [{ title: "Tenants · Fortiv" }] }),
-  component: Tenants,
+  head: () => ({ meta: [{ title: "Tenant & Property Management · Fortiv" }] }),
+  component: TenantPropertyManager,
 });
 
-function Tenants() {
-  return (
-    <AppShell
-      title="Tenant & Property Management"
-      subtitle="Active leases, rent cycles and maintenance tickets"
-    >
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <Stat label="Active tenants" value="312" />
-        <Stat label="Rent collected · May" value="₹84.2L" delta="98% on-time" tone="up" />
-        <Stat label="Open tickets" value="14" delta="−6 wk" tone="up" />
-        <Stat label="Vacant units" value="22" />
+type TabType =
+  | "menu"
+  | "overview"
+  | "screening"
+  | "maintenance"
+  | "rent"
+  | "loan"
+  | "nps"
+  | "renewal";
+
+// --- MOCK DATA ---
+
+const portfolioUnits = [
+  { id: "GH-4B", project: "Fortiv Greenview Heights", unit: "Flat 4B", tenant: "Ramesh Iyer", rent: 18500, start: "15/04/2024", end: "14/03/2025", nps: 9, status: "Paid", history: "Clean" },
+  { id: "GH-5C", project: "Fortiv Greenview Heights", unit: "Flat 5C", tenant: "Priya Sharma", rent: 21000, start: "01/02/2024", end: "31/01/2025", nps: 9, status: "Paid", history: "Clean" },
+  { id: "GH-8C", project: "Fortiv Greenview Heights", unit: "Flat 8C", tenant: "Kavita Agarwal", rent: 18500, start: "01/06/2024", end: "31/05/2025", nps: 8, status: "Paid", history: "Clean" },
+  { id: "GH-12A", project: "Fortiv Greenview Heights", unit: "Flat 12A", tenant: "Rajesh Patel", rent: 22500, start: "16/02/2024", end: "15/02/2025", nps: 4, status: "Overdue", overdueDays: 3, history: "Clean" },
+  { id: "SR-3A", project: "Fortiv Skyline Residences", unit: "Flat 3A", tenant: "Vikram Joshi", rent: 28000, start: "01/05/2024", end: "30/04/2025", nps: 6, status: "Paid", history: "Minor issue" },
+  { id: "SR-9A", project: "Fortiv Skyline Residences", unit: "Flat 9A", tenant: "Suresh Nair", rent: 32000, start: "01/03/2024", end: "28/02/2025", nps: 8, status: "Paid", history: "Clean" },
+  { id: "BP-2A", project: "Fortiv Business Park", unit: "Office 2A", tenant: "Apex Corp", rent: 55000, start: "01/01/2024", end: "31/12/2024", nps: 7, status: "Overdue", overdueDays: 7, history: "Clean" },
+  { id: "BP-3B", project: "Fortiv Business Park", unit: "Office 3B", tenant: "Sunrise Traders", rent: 48000, start: "15/02/2024", end: "14/02/2025", nps: 8, status: "Paid", history: "Clean" }
+];
+
+const initialApplicants = [
+  { id: 1, name: "Ramesh Iyer", employment: "HDFC Bank — Manager", income: 68000, cibil: 762, score: 81, recommendation: "Recommended", status: "Verified", phone: "+91 98765 43210", email: "ramesh.iyer@gmail.com", emi: 12000, ratio: 27, ref: "Positive", pmla: "Clear", police: "Submitted", term: "11 months", moveIn: "01/02/2025" },
+  { id: 2, name: "Sunita Bhatt", employment: "Infosys — Sr Engineer", income: 72000, cibil: 748, score: 78, recommendation: "Recommended", status: "Verified", phone: "+91 99234 56789", email: "sunita.b@gmail.com", emi: 15000, ratio: 26, ref: "Positive", pmla: "Clear", police: "Received", term: "11 months", moveIn: "15/02/2025" },
+  { id: 3, name: "Ajay Soni", employment: "Self-employed — Shop Owner", income: 45000, cibil: 641, score: 54, recommendation: "Conditional", status: "Pending Checks", phone: "+91 98123 45678", email: "ajay.soni@outlook.com", emi: 8000, ratio: 41, ref: "Neutral", pmla: "Clear", police: "Form generated", term: "11 months", moveIn: "01/02/2025" },
+  { id: 4, name: "Manish Tiwari", employment: "Freelancer — Designer", income: 28000, cibil: 580, score: 31, recommendation: "Not Recommended", status: "Review Required", phone: "+91 97654 32109", email: "manish.t@gmail.com", emi: 5000, ratio: 66, ref: "Negative", pmla: "Clear", police: "Not submitted", term: "11 months", moveIn: "01/02/2025" }
+];
+
+const initialRequests = [
+  { id: "MR-247", unit: "Flat 8C", project: "Greenview Heights", category: "Plumbing", severity: "Emergency", tenant: "Kavita Agarwal", status: "In Progress", age: "1.5 hrs", desc: "Water leakage from ceiling in master bathroom. Started 2 hours ago. Spreading to wiring.", vendor: "Ravi Plumbing", arrival: "Today 3–5 PM", cost: 18500, target: "2 hours", elapsed: 1.5, satisfied: true, date: "15/01/2025 14:23", photos: ["photo1.jpg [Bathroom Ceiling Leak]", "photo2.jpg [Water Damage]"] },
+  { id: "MR-246", unit: "Office 2A", project: "Business Park", category: "Electrical", severity: "Urgent", tenant: "Apex Corp", status: "Vendor Assigned", age: "3 hrs", desc: "Server room AC power socket sparking. Tripping local circuit breaker.", vendor: "Sharma Electricals", arrival: "Today 4–6 PM", cost: 0, target: "Same day", elapsed: 3.0, satisfied: null, date: "15/01/2025 12:45", photos: ["sparking_plug.jpg"] },
+  { id: "MR-244", unit: "Flat 5B", project: "Greenview Heights", category: "AC / Appliances", severity: "Urgent", tenant: "Deepak Trivedi", status: "Pending Dispatch", age: "6 hrs", desc: "AC unit blowing warm air. Compressor makes a heavy grinding noise.", vendor: "Cool Air Services", arrival: "Pending scheduling", cost: 0, target: "Same day", elapsed: 6.0, satisfied: null, date: "15/01/2025 09:30", photos: [] },
+  { id: "MR-241", unit: "Flat 12A", project: "Greenview Heights", category: "Carpentry", severity: "Normal", tenant: "Rajesh Patel", status: "Scheduled", age: "2 days", desc: "Balcony wooden door lock jammed. Requires latch replacement.", vendor: "Mohan Carpentry", arrival: "17 Jan 10 AM", cost: 0, target: "3 days", elapsed: 48, satisfied: null, date: "13/01/2025 11:00", photos: [] },
+  { id: "MR-239", unit: "Flat 3D", project: "Skyline Residences", category: "Pest Control", severity: "Normal", tenant: "Anita Shah", status: "Scheduled", age: "3 days", desc: "Termite marks seen on kitchen cabinets. Requesting immediate inspection.", vendor: "Clean India Pest Control", arrival: "18 Jan 11 AM", cost: 0, target: "3 days", elapsed: 72, satisfied: null, date: "12/01/2025 15:00", photos: ["termite_cabinet.jpg"] },
+  { id: "MR-238", unit: "Flat 7B", project: "Greenview Heights", category: "Painting", severity: "Normal", tenant: "Suresh Kumar", status: "Closed", age: "5 days ago", desc: "Water seepage touch-up paint required in guest room.", vendor: "Colour Master", arrival: "Completed 14 Jan", cost: 3500, target: "3 days", elapsed: 54, satisfied: true, date: "10/01/2025 10:00", photos: [] }
+];
+
+const vendorPanel = [
+  { name: "Ravi Plumbing", cat: "Plumbing", phone: "+91 94234 56789", jobs: 6, rating: 4.7, resolution: "2.8 hrs" },
+  { name: "Sharma Electricals", cat: "Electrical", phone: "+91 96123 45678", jobs: 4, rating: 4.4, resolution: "3.5 hrs" },
+  { name: "Cool Air Services", cat: "AC / Appliances", phone: "+91 93765 43210", jobs: 5, rating: 4.2, resolution: "4.0 hrs" },
+  { name: "Mohan Carpentry", cat: "Carpentry", phone: "+91 98654 32109", jobs: 3, rating: 4.5, resolution: "Next day" },
+  { name: "Clean India Pest Control", cat: "Pest Control", phone: "+91 95123 45678", jobs: 2, rating: 4.6, resolution: "Next day" }
+];
+
+const initialSurveys = [
+  { id: "SUR-2025-084", tenant: "Ramesh Iyer", unit: "GH-4B", type: "6-Month Check-In", nps: 9, classification: "Promoter", comment: "Outstanding property maintenance. Any issues are resolved in hours via WhatsApp.", date: "12/01/2025" },
+  { id: "SUR-2025-083", tenant: "Kavita Agarwal", unit: "GH-8C", type: "3-Month Check-In", nps: 7, classification: "Passive", comment: "The flat condition is excellent, but society parking is slightly congested in the evening.", date: "11/01/2025" },
+  { id: "SUR-2025-082", tenant: "Priya Sharma", unit: "GH-5C", type: "Move-In Check-In", nps: 10, classification: "Promoter", comment: "Seamless handover process. Extremely professional staff and clean flat.", date: "10/01/2025" },
+  { id: "SUR-2025-081", tenant: "Rajesh Patel", unit: "GH-12A", type: "6-Month Check-In", nps: 4, classification: "Detractor", comment: "Maintenance took 5 days for urgent AC issue. Neighbors are noisy in Tower A. Parking is too congested.", date: "09/01/2025" },
+  { id: "SUR-2025-080", tenant: "Suresh Nair", unit: "SR-9A", type: "3-Month Check-In", nps: 8, classification: "Passive", comment: "Overall satisfied, no major complaints. Water pressure could be slightly higher.", date: "05/01/2025" },
+  { id: "SUR-2025-079", tenant: "Vikram Joshi", unit: "SR-3A", type: "Move-In Check-In", nps: 6, classification: "Detractor", comment: "Pest control wasn't done properly before moving in. Found wood dust in wardrobes.", date: "02/01/2025" }
+];
+
+const initialRenewals = [
+  { id: "LS-2024-038", unit: "GH-12A", tenant: "Rajesh Patel", currentRent: 22500, proposedRent: 24000, marketRange: "₹24,000–25,000", expiry: "15 Feb 2025", daysAway: 14, nps: 4, stage: "60-Day Outreach", outreach1: "16/12/2024", outreach2: "23/12/2024", response: "Pending", eSign: "Not started" },
+  { id: "LS-2024-035", unit: "SR-9A", tenant: "Suresh Nair", currentRent: 32000, proposedRent: 33500, marketRange: "₹33,000–35,000", expiry: "28 Feb 2025", daysAway: 27, nps: 8, stage: "90-Day Alert", outreach1: "—", outreach2: "—", response: "Negotiating", eSign: "Not started" },
+  { id: "LS-2024-040", unit: "GH-5C", tenant: "Priya Sharma", currentRent: 21000, proposedRent: 21500, marketRange: "₹20,500–22,000", expiry: "10 Mar 2025", daysAway: 38, nps: 9, stage: "Outreach Sent", outreach1: "10/01/2025", outreach2: "—", response: "Pending", eSign: "Not started" },
+  { id: "LS-2024-041", unit: "SR-3A", tenant: "Vikram Joshi", currentRent: 28000, proposedRent: 29500, marketRange: "₹29,000–31,000", expiry: "15 Mar 2025", daysAway: 43, nps: 6, stage: "Outreach Sent", outreach1: "15/01/2025", outreach2: "—", response: "Accepted", eSign: "Draft Sent" },
+  { id: "LS-2024-031", unit: "BP-3B", tenant: "Apex Corp", currentRent: 55000, proposedRent: 58000, marketRange: "₹57,000–60,000", expiry: "31 Mar 2025", daysAway: 59, nps: 7, stage: "Negotiating", outreach1: "01/01/2025", outreach2: "08/01/2025", response: "Counter offer (₹56,500)", eSign: "Not started" }
+];
+
+const bankRates = [
+  { bank: "SBI Home Loan", rate: 8.50, fee: "0.35% + GST", time: "15–20 days", maxTenure: 30 },
+  { bank: "LIC Housing Finance", rate: 8.50, fee: "0.25% + GST", time: "20–25 days", maxTenure: 30 },
+  { bank: "HDFC Bank", rate: 8.65, fee: "0.50% + GST", time: "10–12 days", maxTenure: 30 },
+  { bank: "ICICI Bank", rate: 8.75, fee: "0.50% + GST", time: "7–10 days", maxTenure: 30 },
+  { bank: "Axis Bank", rate: 8.75, fee: "1.00% + GST", time: "10–12 days", maxTenure: 30 },
+  { bank: "Kotak Mahindra", rate: 8.85, fee: "0.50% + GST", time: "7–10 days", maxTenure: 20 }
+];
+
+// Helper
+const statusDot = (status: string) => {
+  if (["Verified", "Received", "Linked", "Clear", "Paid", "Completed", "Proceed", "Closed", "Promoter", "Concluded", "Renewed"].some(s => status.includes(s)))
+    return <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 inline-block shrink-0" />;
+  if (["Opened", "Pending", "Incomplete", "In Progress", "Vendor Assigned", "Negotiating", "Passive", "Awaiting Buyer"].some(s => status.includes(s)))
+    return <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse inline-block shrink-0" />;
+  if (["Mismatch", "Action needed", "Review", "Reject", "Overdue", "Detractor", "Emergency", "Urgent", "Vacating"].some(s => status.includes(s)))
+    return <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse inline-block shrink-0" />;
+  if (["Sent", "Outreach Sent", "Scheduled"].some(s => status.includes(s)))
+    return <span className="h-1.5 w-1.5 rounded-full bg-blue-400 inline-block shrink-0" />;
+  return <span className="h-1.5 w-1.5 rounded-full bg-slate-300 inline-block shrink-0" />;
+};
+
+const statusBadge = (status: string) => {
+  if (["Verified", "Received", "Linked", "Clear", "Paid", "Completed", "Proceed", "Closed", "Promoter", "Concluded", "Renewed"].some(s => status.includes(s)))
+    return "bg-emerald-50 text-emerald-700 border border-emerald-100";
+  if (["Opened", "Pending", "Incomplete", "In Progress", "Vendor Assigned", "Negotiating", "Passive", "Awaiting Buyer"].some(s => status.includes(s)))
+    return "bg-amber-50 text-amber-700 border border-amber-100";
+  if (["Mismatch", "Action needed", "Review", "Reject", "Overdue", "Detractor", "Emergency", "Urgent", "Vacating"].some(s => status.includes(s)))
+    return "bg-red-50 text-[#D85A30] border border-red-100";
+  if (["Sent", "Outreach Sent", "Scheduled"].some(s => status.includes(s)))
+    return "bg-blue-50 text-blue-700 border border-blue-100";
+  return "bg-slate-50 text-slate-600 border border-slate-200";
+};
+
+function TenantPropertyManager() {
+  const [activeTab, setActiveTab] = useState<TabType>("menu");
+
+  const submodulesList = [
+    { id: "overview", name: "Dashboard Overview", desc: "Portfolio metrics, rent collection status, maintenance ticketing, renewals calendar, and home loan pipelines.", stats: "42 units active", status: "Active" },
+    { id: "screening", name: "Tenant Screening Pipeline", desc: "Automated background checks covering identity, income, references, credit, and composite owner recommendations.", stats: "4 applicants active", status: "Active" },
+    { id: "maintenance", name: "Maintenance Request Router", desc: "Live tenant maintenance queue, AI severity classification, vendor dispatch logs, and SLA tracker.", stats: "8 open requests", status: "Active" },
+    { id: "rent", name: "Rent Collection Agent", desc: "Portfolio rent ledger, payment tracking, automated reminders, and digital receipt generation.", stats: "84.7% collected", status: "Active" },
+    { id: "loan", name: "Home Loan Copilot", desc: "Buyer loan eligibility calculator, bank comparable rate grid, and custom document checklists.", stats: "Live rates integrated", status: "Active" },
+    { id: "nps", name: "Tenant NPS & Feedback Bot", desc: "Tenant satisfaction metrics at move-in, 3m, 6m, and renewals with real-time detractor alerts.", stats: "NPS +21 this quarter", status: "Active" },
+    { id: "renewal", name: "Lease Renewal Agent", desc: "Lease expiry tracker, rent revisions compared with market comparables, outreach log, and e-signatures.", stats: "6 expiring soon", status: "Active" }
+  ];
+
+  const getPageHeader = () => {
+    const map: Record<TabType, { title: string; subtitle: string }> = {
+      menu: { title: "Tenant & Property Management", subtitle: "Automates the complete lifecycle of tenant management and property maintenance — from finding the right tenant to renewal — so property owners and managers can operate at scale." },
+      overview: { title: "Portfolio Dashboard Overview", subtitle: "Real-time tenant portfolio metrics, rent collection status, open maintenance tickets, and upcoming lease renewals." },
+      screening: { title: "Tenant Screening Pipeline", subtitle: "Comprehensive background checks including Aadhaar, PAN, bank statements, CIBIL credit, and landlord references." },
+      maintenance: { title: "Maintenance Request Router", subtitle: "Tenant maintenance tickets triaged by AI, with automated vendor dispatching and real-time SLA monitoring." },
+      rent: { title: "Rent Collection Agent", subtitle: "Portfolio rent ledger, payment status notifications, automated reminder sequences, and digital receipt logs." },
+      loan: { title: "Home Loan Copilot", subtitle: "Determine home loan eligibility, compare interest rates across major Indian banks, and generate required document checklists." },
+      nps: { title: "Tenant NPS & Feedback Bot", subtitle: "Automated feedback bot collecting tenant satisfaction scores at key lifecycle milestones and triggering manager alerts." },
+      renewal: { title: "Lease Renewal Agent", subtitle: "Track lease anniversaries, calculate rent revisions against market data, and manage outreach timelines." }
+    };
+    return map[activeTab] || map.menu;
+  };
+
+  const headerInfo = getPageHeader();
+
+  const dynamicTitle = activeTab === "menu" ? headerInfo.title : (
+    <div className="flex items-center gap-3">
+      <button
+        onClick={() => setActiveTab("menu")}
+        className="group h-8 w-8 rounded-full border border-border/80 bg-card hover:bg-ink hover:border-ink text-foreground hover:text-cream flex items-center justify-center transition-all duration-300 hover:shadow-[0_2px_8px_rgba(11,31,51,0.12)] hover:-translate-x-0.5 active:scale-95 mr-0.5"
+        aria-label="Back to tenant menu"
+      >
+        <ChevronLeft className="h-4 w-4 stroke-[2.5] transition-transform duration-300 group-hover:-translate-x-0.5" />
+      </button>
+      <span className="font-display font-semibold tracking-tight text-foreground select-none cursor-pointer hover:text-ink/85 transition-colors" onClick={() => setActiveTab("menu")}>
+        {headerInfo.title}
+      </span>
+    </div>
+  );
+
+  // --- 1. Portfolio Dashboard (M8 Overview) ---
+  const renderOverview = () => (
+    <div className="space-y-6 animate-in fade-in duration-300">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+        <StatBox label="Total Units Managed" value="42" desc="Active properties" color="text-[#1A3C5E]" />
+        <StatBox label="Rent Collected (May)" value="₹7.8L of ₹9.2L" desc="84.7% received" color="text-[#1D9E75]" />
+        <StatBox label="Open Maintenance" value="8" desc="Pending resolution" color="text-[#E8A838]" />
+        <StatBox label="Leases Expiring (60 Days)" value="6" desc="Requiring action" color="text-[#D85A30] animate-pulse" />
+        <StatBox label="Portfolio NPS" value="74" desc="Out of 100" color="text-[#2E86AB]" />
       </div>
 
-      <div className="grid grid-cols-12 gap-4 mt-4">
-        <Card className="col-span-12 lg:col-span-7 overflow-hidden overflow-x-auto">
-          <div className="p-4 border-b border-border/60 flex justify-between">
-            <h3 className="font-display text-lg font-bold">Active leases</h3>
+      <div className="grid grid-cols-12 gap-5">
+        {/* Left Panel: Rent Collection Status */}
+        <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card">
+          <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
+            <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+              <DollarSign className="h-3.5 w-3.5 text-emerald-600" /> Rent Collection Status
+            </div>
+            <button onClick={() => setActiveTab("rent")} className="text-[9px] font-bold text-primary hover:underline font-mono">Ledger Details →</button>
           </div>
-          <table className="w-full min-w-[680px] text-xs">
-            <thead>
-              <tr className="text-[10px] uppercase tracking-widest text-muted-foreground border-b border-border/60 font-display font-bold">
-                {["Tenant", "Property", "Rent", "Renewal", "Status"].map((h) => (
-                  <th key={h} className="text-left px-4 py-2">
-                    {h}
-                  </th>
+          <div className="space-y-4">
+            {[
+              { project: "Fortiv Greenview Heights", units: "10/12 paid", amount: "₹2.2L / ₹2.6L", pct: 83, status: "Normal" },
+              { project: "Fortiv Skyline Residences", units: "8/8 paid", amount: "₹2.4L / ₹2.4L", pct: 100, status: "Completed" },
+              { project: "Fortiv Business Park", units: "4/6 paid", amount: "₹1.8L / ₹2.8L", pct: 64, status: "Alert" },
+              { project: "Other Managed Properties", units: "14/16 paid", amount: "₹1.4L / ₹1.4L", pct: 87, status: "Normal" }
+            ].map((p, i) => (
+              <div key={i} className="space-y-1.5">
+                <div className="flex justify-between text-xs font-semibold">
+                  <span className="text-foreground">{p.project} <span className="text-slate-400 font-normal">({p.units})</span></span>
+                  <span className="font-mono text-slate-500">{p.amount} {p.status === "Completed" && "✅"} {p.status === "Alert" && "⚠️"}</span>
+                </div>
+                <div className="h-2.5 bg-secondary/50 rounded-full overflow-hidden flex">
+                  <div className={`h-full rounded-full ${p.pct === 100 ? "bg-emerald-500" : p.pct >= 80 ? "bg-primary" : "bg-amber-500"}`} style={{ width: `${p.pct}%` }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+
+        {/* Right Panel: Maintenance & Renewals */}
+        <div className="col-span-12 lg:col-span-5 space-y-5">
+          {/* Maintenance Summary */}
+          <Card className="p-4 border border-border bg-card">
+            <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
+              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+                <Activity className="h-3.5 w-3.5 text-amber-500" /> Maintenance Queue Summary
+              </div>
+              <button onClick={() => setActiveTab("maintenance")} className="text-[9px] font-bold text-primary hover:underline font-mono">Open Queue →</button>
+            </div>
+            <div className="space-y-2 text-xs font-semibold">
+              <div className="flex items-center justify-between p-2 rounded bg-red-50/50 border border-red-100 text-red-700">
+                <div className="flex items-center gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-red-500 animate-ping" />
+                  <span>🔴 Emergency (1)</span>
+                </div>
+                <span className="text-[10px] font-mono">Water leakage — GH Flat 8C</span>
+              </div>
+              <div className="flex items-center justify-between p-2 rounded bg-amber-50/50 border border-amber-100 text-amber-700">
+                <span>🟡 Urgent (3)</span>
+                <span className="text-[10px] font-mono">AC malfunction · jammed door lock · termites</span>
+              </div>
+              <div className="flex items-center justify-between p-2 rounded bg-slate-50 border border-slate-200 text-slate-600">
+                <span>🟢 Normal (4)</span>
+                <span className="text-[10px] font-mono">Touch-up paint · fan replace · tap drip</span>
+              </div>
+            </div>
+          </Card>
+
+          {/* Renewal Countdown */}
+          <Card className="p-4 border border-border bg-card">
+            <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
+              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+                <Calendar className="h-3.5 w-3.5 text-[#D85A30]" /> Leases Expiring (60 Days)
+              </div>
+              <button onClick={() => setActiveTab("renewal")} className="text-[9px] font-bold text-primary hover:underline font-mono">Renewal Agent →</button>
+            </div>
+            <div className="space-y-2 text-[11px] font-semibold text-slate-600">
+              {[
+                { unit: "Flat 12A, Greenview", tenant: "Rajesh Patel", exp: "15 Feb 2025", days: 14, alert: true },
+                { unit: "Office 3B, Business Park", tenant: "Apex Corp", exp: "28 Feb 2025", days: 27, alert: false },
+                { unit: "Flat 5C, Greenview", tenant: "Priya Sharma", exp: "10 Mar 2025", days: 38, alert: false },
+                { unit: "Flat 9A, Skyline", tenant: "Suresh Nair", exp: "20 Mar 2025", days: 48, alert: false }
+              ].map((r, i) => (
+                <div key={i} className="flex justify-between items-center border-b border-border/30 pb-1.5 last:border-0 last:pb-0">
+                  <div className="min-w-0">
+                    <div className="font-bold text-foreground truncate">{r.unit}</div>
+                    <div className="text-slate-400 font-normal">{r.tenant} · Expiry: {r.exp}</div>
+                  </div>
+                  <span className={`px-2 py-0.5 rounded text-[9.5px] font-mono font-bold shrink-0 ${r.alert ? "bg-red-50 text-red-600 border border-red-100 animate-pulse" : "bg-slate-100 text-slate-500"}`}>
+                    ⏳ {r.days} days
+                  </span>
+                </div>
+              ))}
+            </div>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+
+  // --- 2. Tenant Screening Pipeline ---
+  const [selectedApplicant, setSelectedApplicant] = useState<typeof initialApplicants[0]>(initialApplicants[0]);
+  const [compareMode, setCompareMode] = useState(false);
+  const [screeningFilter, setScreeningFilter] = useState("All");
+
+  const filteredApplicants = useMemo(() => {
+    if (screeningFilter === "All") return initialApplicants;
+    return initialApplicants.filter(a => a.recommendation.toLowerCase().includes(screeningFilter.toLowerCase()) || a.status.toLowerCase().includes(screeningFilter.toLowerCase()));
+  }, [screeningFilter]);
+
+  const renderScreening = () => (
+    <div className="space-y-4 animate-in fade-in duration-300">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <StatBox label="Total Applicants" value="12" desc="This month" color="text-[#1A3C5E]" />
+        <StatBox label="Awaiting Checks" value="3" desc="Verification pending" color="text-[#E8A838]" />
+        <StatBox label="Approved / Recommended" value="7" desc="Passed identity + credit" color="text-[#1D9E75]" />
+        <StatBox label="Average CIBIL Score" value="738" desc="Salaried applicants" color="text-[#2E86AB]" />
+      </div>
+
+      <div className="flex flex-wrap gap-2 items-center">
+        <div className="flex gap-1.5">
+          {["All", "Recommended", "Conditional", "Not Recommended"].map((f) => (
+            <button
+              key={f}
+              onClick={() => setScreeningFilter(f)}
+              className={`h-7 px-3 rounded-lg text-[10px] font-bold uppercase tracking-widest border transition-all ${screeningFilter === f ? "bg-ink text-cream border-ink" : "border-border text-slate-500 hover:bg-secondary"}`}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+        <button
+          onClick={() => setCompareMode(!compareMode)}
+          className={`h-7 px-3 rounded-lg text-[10px] font-bold uppercase tracking-widest border transition-all ml-auto ${compareMode ? "bg-primary text-white border-primary" : "border-border text-slate-500 hover:bg-secondary"}`}
+        >
+          {compareMode ? "Show Details View" : "Compare Shortlisted Applicants"}
+        </button>
+      </div>
+
+      <div className="grid grid-cols-12 gap-5">
+        {/* Table / Compare View */}
+        <Card className={`p-0 overflow-hidden border border-border bg-card ${compareMode ? "col-span-12" : "col-span-12 lg:col-span-7"}`}>
+          <div className="p-3 bg-secondary/35 border-b border-border flex items-center justify-between">
+            <h3 className="font-bold text-xs text-foreground font-display uppercase tracking-wider">Prospective Tenants — Flat 4B, Greenview Heights</h3>
+            <span className="text-[9.5px] font-mono text-slate-400">Target Rent: ₹18,500/month</span>
+          </div>
+          {compareMode ? (
+            <div className="p-4 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold">
+              <div className="border-r border-border/40 pr-4 space-y-4 text-slate-500 font-display text-[11px] uppercase tracking-wider py-2">
+                <div className="h-6" />
+                <div>Composite Score</div>
+                <div>CIBIL Credit Score</div>
+                <div>Monthly Income</div>
+                <div>Rent-to-Income Ratio</div>
+                <div>Employment stability</div>
+                <div>Identity Verification</div>
+                <div>References</div>
+                <div>PMLA Watchlist</div>
+                <div>Police verification</div>
+              </div>
+              {[initialApplicants[0], initialApplicants[1]].map((app, i) => (
+                <div key={i} className={`p-4 rounded-xl border border-border space-y-4 text-slate-700 ${i === 0 ? "bg-emerald-50/10 border-emerald-200" : ""}`}>
+                  <div className="font-bold text-sm text-foreground flex items-center justify-between border-b border-border/40 pb-2">
+                    {app.name}
+                    <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(app.recommendation)}`}>{app.recommendation}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="text-lg font-mono font-bold text-primary">{app.score}</span> / 100
+                  </div>
+                  <div className="font-mono">{app.cibil} (Good)</div>
+                  <div className="font-mono">₹{app.income.toLocaleString("en-IN")}</div>
+                  <div className="font-mono">{app.ratio}%</div>
+                  <div>{app.employment}</div>
+                  <div className="text-emerald-600">✓ Aadhaar + PAN Verified</div>
+                  <div>{app.ref} Reference</div>
+                  <div className="text-emerald-600 font-mono">Clear</div>
+                  <div className="font-mono text-slate-500">{app.police}</div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="overflow-x-auto scrollbar-none">
+              <table className="w-full text-left text-xs divide-y divide-border/60">
+                <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                  <tr>
+                    <th className="px-3.5 py-2.5">Applicant</th>
+                    <th className="px-3.5 py-2.5">Employment</th>
+                    <th className="px-3.5 py-2.5 font-mono">Income</th>
+                    <th className="px-3.5 py-2.5 font-mono">CIBIL</th>
+                    <th className="px-3.5 py-2.5 font-mono">Score</th>
+                    <th className="px-3.5 py-2.5">Recommendation</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border/40 bg-background font-medium text-foreground">
+                  {filteredApplicants.map(app => (
+                    <tr
+                      key={app.id}
+                      onClick={() => setSelectedApplicant(app)}
+                      className={`hover:bg-secondary/15 cursor-pointer transition-colors ${selectedApplicant.id === app.id ? "bg-secondary/20 font-bold" : ""}`}
+                    >
+                      <td className="px-3.5 py-3">
+                        <div className="font-bold text-foreground">{app.name}</div>
+                        <div className="text-[9.5px] text-slate-400 font-mono">{app.phone}</div>
+                      </td>
+                      <td className="px-3.5 py-3 text-slate-500 text-[11px] max-w-[120px] truncate">{app.employment}</td>
+                      <td className="px-3.5 py-3 font-mono">₹{app.income.toLocaleString("en-IN")}</td>
+                      <td className="px-3.5 py-3 font-mono text-slate-500">{app.cibil}</td>
+                      <td className="px-3.5 py-3">
+                        <div className="flex items-center gap-2">
+                          <div className="h-1.5 w-12 bg-secondary rounded-full overflow-hidden">
+                            <div
+                              className={`h-full rounded-full ${app.score >= 75 ? "bg-emerald-500" : app.score >= 50 ? "bg-amber-500" : "bg-red-500"}`}
+                              style={{ width: `${app.score}%` }}
+                            />
+                          </div>
+                          <span className={`font-mono font-bold ${app.score >= 75 ? "text-emerald-600" : app.score >= 50 ? "text-amber-600" : "text-red-600"}`}>{app.score}</span>
+                        </div>
+                      </td>
+                      <td className="px-3.5 py-3">
+                        <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(app.recommendation)}`}>
+                          {app.recommendation === "Recommended" ? "✅ " : app.recommendation === "Conditional" ? "⚠️ " : "❌ "}
+                          {app.recommendation}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </Card>
+
+        {/* Right Panel: Score Breakdown */}
+        {!compareMode && (
+          <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
+            <div className="flex items-center justify-between border-b border-border/40 pb-2">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Applicant Score Breakdown</span>
+              <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(selectedApplicant.recommendation)}`}>{selectedApplicant.recommendation}</span>
+            </div>
+            <div className="space-y-3">
+              <div>
+                <h4 className="font-display font-bold text-sm text-foreground">{selectedApplicant.name}</h4>
+                <p className="text-[10px] text-slate-400 font-semibold">{selectedApplicant.employment}</p>
+              </div>
+
+              <div className="flex items-center gap-3 bg-secondary/10 p-2.5 rounded-xl border border-border/40">
+                <div className="relative h-12 w-12 shrink-0">
+                  <svg viewBox="0 0 36 36" className="h-12 w-12 -rotate-90">
+                    <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#e5e7eb" strokeWidth="3" />
+                    <circle cx="18" cy="18" r="15.9155" fill="none" strokeWidth="3"
+                      stroke={selectedApplicant.score >= 75 ? "#1D9E75" : selectedApplicant.score >= 50 ? "#E8A838" : "#D85A30"}
+                      strokeDasharray={`${selectedApplicant.score} ${100 - selectedApplicant.score}`} strokeLinecap="round" />
+                  </svg>
+                  <span className={`absolute inset-0 flex items-center justify-center text-[11px] font-extrabold font-mono ${selectedApplicant.score >= 75 ? "text-emerald-600" : selectedApplicant.score >= 50 ? "text-amber-600" : "text-red-600"}`}>{selectedApplicant.score}</span>
+                </div>
+                <div className="text-[10px] space-y-0.5 font-semibold text-slate-500">
+                  <div>CIBIL Bureau Score: <span className="font-mono text-foreground font-bold">{selectedApplicant.cibil}</span></div>
+                  <div>Rent-to-Income Ratio: <span className="font-mono text-foreground font-bold">{selectedApplicant.ratio}%</span></div>
+                  <div>PMLA Status: <span className="text-emerald-600">Clear</span></div>
+                  <div>Police verification: <span className="font-mono text-foreground font-bold">{selectedApplicant.police}</span></div>
+                </div>
+              </div>
+
+              <div className="bg-secondary/35 rounded-xl p-3 font-mono text-[9.5px] leading-relaxed text-slate-600 space-y-1">
+                <div className="font-bold text-[8.5px] uppercase tracking-wider text-slate-400 mb-1.5">Score Breakdown:</div>
+                <div className="text-emerald-600">✓ Aadhaar + PAN verification passed (+18)</div>
+                <div className="text-emerald-600">✓ CIBIL score: {selectedApplicant.cibil} (+{selectedApplicant.cibil >= 750 ? "16" : "12"})</div>
+                <div className="text-emerald-600">✓ Rent-to-income: {selectedApplicant.ratio}% ({selectedApplicant.ratio <= 30 ? "Healthy +15" : "High +5"})</div>
+                <div className="text-emerald-600">✓ Stable employer reference (+12)</div>
+                <div className="text-emerald-600">✓ Landlord reference: {selectedApplicant.ref} (+10)</div>
+                <div className={selectedApplicant.police === "Received" ? "text-emerald-600" : "text-slate-400"}>
+                  {selectedApplicant.police === "Received" ? "✓ Police verification received (+10)" : "⏳ Police verification result pending (0)"}
+                </div>
+              </div>
+
+              <div className="flex gap-2">
+                <button
+                  onClick={() => alert(`Lease Agreement draft generated for ${selectedApplicant.name} and sent via WhatsApp/email for e-signing.`)}
+                  disabled={selectedApplicant.score < 50}
+                  className="flex-1 h-8 bg-ink hover:bg-ink/90 text-cream rounded-lg text-xs font-bold uppercase tracking-widest transition-all disabled:opacity-50"
+                >
+                  Approve & Send Lease
+                </button>
+                <button
+                  onClick={() => alert(`Applicant ${selectedApplicant.name} has been marked as Rejected.`)}
+                  className="h-8 px-3 border border-red-200 hover:bg-red-50 text-red-500 rounded-lg text-xs font-bold uppercase"
+                >
+                  Reject
+                </button>
+              </div>
+            </div>
+          </Card>
+        )}
+      </div>
+    </div>
+  );
+
+  // --- 3. Maintenance Request Router ---
+  const [selectedRequest, setSelectedRequest] = useState<typeof initialRequests[0]>(initialRequests[0]);
+  const [mRequests, setMRequests] = useState(initialRequests);
+  const [severityFilter, setSeverityFilter] = useState("All");
+
+  const filteredRequests = useMemo(() => {
+    if (severityFilter === "All") return mRequests;
+    return mRequests.filter(r => r.severity === severityFilter || r.status === severityFilter);
+  }, [mRequests, severityFilter]);
+
+  const triggerVendorDispatch = (reqId: string, vendorName: string) => {
+    setMRequests(prev => prev.map(r => {
+      if (r.id === reqId) {
+        return {
+          ...r,
+          status: "Vendor Assigned",
+          vendor: vendorName,
+          arrival: "Today between 3–5 PM"
+        };
+      }
+      return r;
+    }));
+    // update current selected view
+    setSelectedRequest(prev => {
+      if (prev.id === reqId) {
+        return { ...prev, status: "Vendor Assigned", vendor: vendorName, arrival: "Today between 3–5 PM" };
+      }
+      return prev;
+    });
+    alert(`Vendor ${vendorName} dispatched. WhatsApp confirmation sent to tenant.`);
+  };
+
+  const resolveTicket = (reqId: string) => {
+    setMRequests(prev => prev.map(r => {
+      if (r.id === reqId) {
+        return { ...r, status: "Closed", elapsed: r.elapsed || 2.5 };
+      }
+      return r;
+    }));
+    setSelectedRequest(prev => {
+      if (prev.id === reqId) {
+        return { ...prev, status: "Closed" };
+      }
+      return prev;
+    });
+    alert(`Ticket ${reqId} marked as Resolved. Confirmation ping sent to tenant.`);
+  };
+
+  const renderMaintenance = () => (
+    <div className="space-y-4 animate-in fade-in duration-300">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <StatBox label="Total Tickets Logged" value="184" desc="Year to date" color="text-[#1A3C5E]" />
+        <StatBox label="Emergency Tickets" value="1" desc="SLA: < 2 hours" color="text-[#D85A30]" />
+        <StatBox label="Urgent Tickets" value="3" desc="SLA: Same day" color="text-[#E8A838]" />
+        <StatBox label="Avg Resolution Time" value="3.8 hrs" desc="Emergency SLA met" color="text-[#1D9E75]" />
+      </div>
+
+      <div className="flex flex-wrap gap-1.5 items-center">
+        {["All", "Emergency", "Urgent", "Normal", "In Progress", "Closed"].map((s) => (
+          <button
+            key={s}
+            onClick={() => setSeverityFilter(s)}
+            className={`h-7 px-3 rounded-lg text-[10px] font-bold uppercase tracking-widest border transition-all ${severityFilter === s ? "bg-ink text-cream border-ink" : "border-border text-slate-500 hover:bg-secondary"}`}
+          >
+            {s}
+          </button>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-12 gap-5">
+        {/* Live queue */}
+        <Card className="col-span-12 lg:col-span-7 p-0 overflow-hidden border border-border bg-card">
+          <div className="p-3 bg-secondary/35 border-b border-border flex items-center justify-between">
+            <h3 className="font-bold text-xs text-foreground font-display uppercase tracking-wider">Live Request Queue</h3>
+            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+          </div>
+          <div className="overflow-x-auto scrollbar-none">
+            <table className="w-full text-left text-xs divide-y divide-border/60">
+              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                <tr>
+                  <th className="px-3.5 py-2.5">Ticket</th>
+                  <th className="px-3.5 py-2.5">Unit</th>
+                  <th className="px-3.5 py-2.5">Category</th>
+                  <th className="px-3.5 py-2.5">Severity</th>
+                  <th className="px-3.5 py-2.5">Tenant</th>
+                  <th className="px-3.5 py-2.5">Status</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border/40 bg-background font-medium text-foreground">
+                {filteredRequests.map(req => (
+                  <tr
+                    key={req.id}
+                    onClick={() => setSelectedRequest(req)}
+                    className={`hover:bg-secondary/15 cursor-pointer transition-colors ${selectedRequest.id === req.id ? "bg-secondary/20 font-bold" : ""} ${req.severity === "Emergency" && req.status !== "Closed" ? "border-l-2 border-l-red-500 animate-pulse" : ""}`}
+                  >
+                    <td className="px-3.5 py-3 font-mono font-bold text-slate-400">{req.id}</td>
+                    <td className="px-3.5 py-3">{req.unit}</td>
+                    <td className="px-3.5 py-3 text-slate-500">{req.category}</td>
+                    <td className="px-3.5 py-3">
+                      <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(req.severity)}`}>{req.severity}</span>
+                    </td>
+                    <td className="px-3.5 py-3">{req.tenant}</td>
+                    <td className="px-3.5 py-3">
+                      <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(req.status)}`}>
+                        {req.status === "Closed" ? "✅ Resolved" : `🔧 ${req.status}`}
+                      </span>
+                    </td>
+                  </tr>
                 ))}
+              </tbody>
+            </table>
+          </div>
+        </Card>
+
+        {/* Detail Panel */}
+        <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
+          <div className="flex items-center justify-between border-b border-border/40 pb-2">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Ticket Details — {selectedRequest.id}</span>
+            <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(selectedRequest.severity)}`}>{selectedRequest.severity}</span>
+          </div>
+
+          <div className="space-y-3 text-xs">
+            <div>
+              <div className="font-bold text-foreground">Unit: {selectedRequest.unit} ({selectedRequest.project})</div>
+              <div className="text-[10px] text-slate-400 font-semibold font-mono">Created: {selectedRequest.date} · Age: {selectedRequest.age}</div>
+            </div>
+
+            <div className="p-3 bg-secondary/30 rounded-xl border border-border/40 font-mono text-[10px] leading-relaxed text-slate-700">
+              <strong className="text-foreground">Description:</strong>
+              <p className="mt-1">{selectedRequest.desc}</p>
+            </div>
+
+            {selectedRequest.photos.length > 0 && (
+              <div className="space-y-1">
+                <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Attached Media</span>
+                <div className="flex gap-2">
+                  {selectedRequest.photos.map((p, i) => (
+                    <div key={i} className="px-2 py-1.5 bg-slate-100 border border-slate-200 rounded-lg font-mono text-[9px] text-slate-500 flex items-center gap-1 cursor-pointer hover:bg-slate-200">
+                      <FileText className="h-3.5 w-3.5" /> {p}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className="border-t border-border/40 pt-3 space-y-2">
+              <div className="flex justify-between font-semibold">
+                <span className="text-slate-500">Assigned Vendor:</span>
+                <span className="text-foreground font-bold">{selectedRequest.vendor || "Not assigned"}</span>
+              </div>
+              <div className="flex justify-between font-semibold">
+                <span className="text-slate-500">Arrival Target:</span>
+                <span className="text-foreground font-bold">{selectedRequest.arrival}</span>
+              </div>
+            </div>
+
+            <div className="pt-2 flex gap-2">
+              {selectedRequest.status === "Pending Dispatch" && (
+                <div className="w-full space-y-2">
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400 block">Pre-Approved Vendors</span>
+                  <div className="grid grid-cols-2 gap-1.5">
+                    {vendorPanel.filter(v => v.cat === selectedRequest.category).map((v, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => triggerVendorDispatch(selectedRequest.id, v.name)}
+                        className="h-8 border border-border bg-background hover:bg-secondary rounded text-[10px] font-bold text-slate-700 flex flex-col justify-center items-center py-1.5"
+                      >
+                        <span className="truncate max-w-[120px]">{v.name}</span>
+                        <span className="text-[8px] font-normal text-slate-400 font-mono">★ {v.rating} · {v.resolution}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {selectedRequest.status !== "Pending Dispatch" && selectedRequest.status !== "Closed" && (
+                <button
+                  onClick={() => resolveTicket(selectedRequest.id)}
+                  className="w-full h-8 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold uppercase tracking-widest transition-all"
+                >
+                  Resolve Ticket
+                </button>
+              )}
+            </div>
+
+            <div className="border-t border-border/40 pt-3">
+              <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400 block mb-1">WhatsApp Communications</span>
+              <div className="bg-emerald-50/50 rounded-xl p-2.5 text-[9.5px] leading-relaxed text-slate-600 font-medium border border-emerald-100/50">
+                <strong className="text-slate-700 block">System Acknowledgment (Tenant):</strong>
+                {`Hi ${selectedRequest.tenant}, we've received your request (${selectedRequest.category}). Classified as ${selectedRequest.severity}. Ticket #${selectedRequest.id}. Assigning vendor...`}
+              </div>
+            </div>
+          </div>
+        </Card>
+      </div>
+
+      {/* Vendor Stats */}
+      <Card className="p-4 border border-border bg-card">
+        <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border/40 pb-2 mb-3">Pre-Approved Vendor Network</h4>
+        <div className="overflow-x-auto scrollbar-none">
+          <table className="w-full text-left text-xs divide-y divide-border/60">
+            <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <tr>
+                <th className="px-3.5 py-2">Vendor Name</th>
+                <th className="px-3.5 py-2">Category</th>
+                <th className="px-3.5 py-2">Phone</th>
+                <th className="px-3.5 py-2 font-mono">Rating</th>
+                <th className="px-3.5 py-2 font-mono">Jobs (Month)</th>
+                <th className="px-3.5 py-2 font-mono">Avg Resolution</th>
               </tr>
             </thead>
-            <tbody>
-              {(
-                [
-                  {
-                    n: "Arjun Mehta",
-                    p: "Skyline 304",
-                    r: "₹38,000",
-                    d: "Aug 2026",
-                    s: "Paid",
-                    tone: "accent",
-                  },
-                  {
-                    n: "Family Patel",
-                    p: "Marina A-1102",
-                    r: "₹62,500",
-                    d: "Mar 2026",
-                    s: "Paid",
-                    tone: "accent",
-                  },
-                  {
-                    n: "Sara Khan",
-                    p: "Riverfront 805",
-                    r: "₹28,000",
-                    d: "Jun 2026",
-                    s: "Overdue 3d",
-                    tone: "hot",
-                  },
-                  {
-                    n: "Vikas Rao",
-                    p: "Athwa 202",
-                    r: "₹48,000",
-                    d: "Oct 2026",
-                    s: "Paid",
-                    tone: "accent",
-                  },
-                  {
-                    n: "Neha Joshi",
-                    p: "Citrus 506",
-                    r: "₹22,000",
-                    d: "Jul 2026",
-                    s: "Notice given",
-                    tone: "warm",
-                  },
-                ] as const
-              ).map((t) => (
-                <tr key={t.n} className="border-b border-border/40 last:border-0 hover:bg-muted/40">
-                  <td className="px-4 py-2 font-bold">{t.n}</td>
-                  <td className="font-medium text-muted-foreground">{t.p}</td>
-                  <td className="tabular-nums font-bold">{t.r}</td>
-                  <td className="text-muted-foreground font-medium">{t.d}</td>
-                  <td>
-                    <Pill tone={t.tone}>{t.s}</Pill>
+            <tbody className="divide-y divide-border/30 bg-background font-medium">
+              {vendorPanel.map((v, i) => (
+                <tr key={i} className="hover:bg-secondary/15">
+                  <td className="px-3.5 py-2.5 font-bold">{v.name}</td>
+                  <td className="px-3.5 py-2.5 text-slate-500">{v.cat}</td>
+                  <td className="px-3.5 py-2.5 font-mono text-slate-400">{v.phone}</td>
+                  <td className="px-3.5 py-2.5 text-amber-500 font-bold">★ {v.rating}</td>
+                  <td className="px-3.5 py-2.5 font-mono">{v.jobs}</td>
+                  <td className="px-3.5 py-2.5 font-mono font-bold text-primary">{v.resolution}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
+    </div>
+  );
+
+  // --- 4. Rent Collection Agent ---
+  const [rentLedger, setRentLedger] = useState(portfolioUnits);
+  const [rentFilter, setRentFilter] = useState("All");
+
+  const filteredLedger = useMemo(() => {
+    if (rentFilter === "All") return rentLedger;
+    return rentLedger.filter(r => r.status.toLowerCase() === rentFilter.toLowerCase());
+  }, [rentLedger, rentFilter]);
+
+  const sendRentReminder = (tenantName: string) => {
+    alert(`WhatsApp reminder with UPI payment link dispatched to ${tenantName}.`);
+  };
+
+  const generateUpiLink = (tenantName: string, rentAmt: number) => {
+    alert(`UPI Link generated:\nupi://pay?pa=fortivrent@upi&pn=Fortiv%20Solutions&am=${rentAmt}&cu=INR\nSMS/WhatsApp preview copied to clipboard.`);
+  };
+
+  const renderRent = () => (
+    <div className="space-y-4 animate-in fade-in duration-300">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <StatBox label="Total Monthly Rent Receivable" value="₹9.24L" desc="42 units total" color="text-[#1A3C5E]" />
+        <StatBox label="Collected Rent" value="₹7.82L" desc="84.7% received" color="text-[#1D9E75]" />
+        <StatBox label="Outstanding Rent" value="₹1.41L" desc="5 units outstanding" color="text-[#D85A30]" />
+        <StatBox label="Late Fees Levied" value="₹4,230" desc="2% penalty rule" color="text-[#E8A838]" />
+      </div>
+
+      <div className="flex gap-1.5 items-center">
+        {["All", "Paid", "Overdue"].map((f) => (
+          <button
+            key={f}
+            onClick={() => setRentFilter(f)}
+            className={`h-7 px-3 rounded-lg text-[10px] font-bold uppercase tracking-widest border transition-all ${rentFilter === f ? "bg-ink text-cream border-ink" : "border-border text-slate-500 hover:bg-secondary"}`}
+          >
+            {f}
+          </button>
+        ))}
+      </div>
+
+      <Card className="p-0 overflow-hidden border border-border bg-card">
+        <div className="p-3 bg-secondary/35 border-b border-border flex items-center justify-between">
+          <h3 className="font-bold text-xs text-foreground font-display uppercase tracking-wider">Portfolio Rent Ledger</h3>
+          <span className="text-[9.5px] font-mono text-slate-400">Due Date: 1st of every month</span>
+        </div>
+        <div className="overflow-x-auto scrollbar-none">
+          <table className="w-full text-left text-xs divide-y divide-border/60">
+            <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <tr>
+                <th className="px-3.5 py-2.5">Unit</th>
+                <th className="px-3.5 py-2.5">Tenant</th>
+                <th className="px-3.5 py-2.5 font-mono">Monthly Rent</th>
+                <th className="px-3.5 py-2.5">Status</th>
+                <th className="px-3.5 py-2.5 font-mono">Expiry / Revision</th>
+                <th className="px-3.5 py-2.5">Reminders</th>
+                <th className="px-3.5 py-2.5">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border/40 bg-background font-medium text-foreground">
+              {filteredLedger.map(row => (
+                <tr key={row.id} className="hover:bg-secondary/15">
+                  <td className="px-3.5 py-3">
+                    <div className="font-bold text-foreground">{row.unit}</div>
+                    <div className="text-[9.5px] text-slate-400 font-mono truncate max-w-[120px]">{row.project}</div>
+                  </td>
+                  <td className="px-3.5 py-3 font-bold text-slate-700">{row.tenant}</td>
+                  <td className="px-3.5 py-3 font-mono font-bold">₹{row.rent.toLocaleString("en-IN")}</td>
+                  <td className="px-3.5 py-3">
+                    <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(row.status)}`}>
+                      {row.status === "Paid" ? "✅ Paid" : `⚠️ Overdue ${row.overdueDays}d`}
+                    </span>
+                  </td>
+                  <td className="px-3.5 py-3 font-mono text-slate-500">
+                    {row.end}
+                  </td>
+                  <td className="px-3.5 py-3 font-mono">
+                    {row.status === "Paid" ? "N/A" : row.overdueDays && row.overdueDays >= 7 ? "3 sent (Escalated)" : "2 sent"}
+                  </td>
+                  <td className="px-3.5 py-3">
+                    <div className="flex gap-1.5">
+                      {row.status === "Paid" ? (
+                        <button
+                          onClick={() => alert(`Downloading Digital Receipt RCP-2025-0142 for ${row.tenant}...`)}
+                          className="h-6 px-2 rounded border border-border hover:bg-secondary text-[9px] font-bold text-slate-500 uppercase flex items-center gap-1"
+                        >
+                          <Download className="h-3 w-3" /> Receipt
+                        </button>
+                      ) : (
+                        <>
+                          <button
+                            onClick={() => sendRentReminder(row.tenant)}
+                            className="h-6 px-2 rounded bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-700 text-[9px] font-bold uppercase"
+                          >
+                            Remind
+                          </button>
+                          <button
+                            onClick={() => generateUpiLink(row.tenant, row.rent)}
+                            className="h-6 px-2 rounded border border-border hover:bg-secondary text-[9px] font-bold text-slate-500 uppercase"
+                          >
+                            UPI Link
+                          </button>
+                        </>
+                      )}
+                    </div>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+      </Card>
+
+      {/* Reminder logic */}
+      <Card className="p-4 border border-border bg-card space-y-3">
+        <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border/40 pb-2">Automated Reminder Sequence Timeline</h4>
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-3 text-xs font-semibold">
+          {[
+            { day: "Day -7", title: "First Reminder", desc: "WhatsApp reminder with direct UPI payment link." },
+            { day: "Day -3", title: "Second Reminder", desc: "Direct payment button with due-date alert." },
+            { day: "Day 0", title: "Due Date", desc: "Today is rent due date notice via WhatsApp & Email." },
+            { day: "Day +3", title: "Overdue", desc: "Overdue alert + 2% late fee penalty notice." },
+            { day: "Day +7", title: "Escalation", desc: "Alert sent to Property Manager to contact tenant." }
+          ].map((step, i) => (
+            <div key={i} className="p-3 bg-secondary/15 rounded-xl border border-border/50 space-y-1">
+              <span className="text-[10px] font-bold font-mono text-primary uppercase">{step.day}</span>
+              <div className="font-bold text-foreground">{step.title}</div>
+              <p className="text-[9.5px] text-slate-500 font-normal leading-relaxed">{step.desc}</p>
+            </div>
+          ))}
+        </div>
+      </Card>
+    </div>
+  );
+
+  // --- 5. Home Loan Copilot ---
+  const [loanIncome, setLoanIncome] = useState(85000);
+  const [loanEmi, setLoanEmi] = useState(12000);
+  const [propertyVal, setPropertyVal] = useState(72);
+  const [downPayment, setDownPayment] = useState(12);
+  const [loanTenure, setLoanTenure] = useState(20);
+  const [empType, setEmpType] = useState("Salaried");
+
+  const calculatedReq = useMemo(() => {
+    return Math.max(0, propertyVal - downPayment);
+  }, [propertyVal, downPayment]);
+
+  const maxEligibility = useMemo(() => {
+    if (empType === "Salaried") {
+      const allowedEmi = (loanIncome * 0.5) - loanEmi;
+      if (allowedEmi <= 0) return 0;
+      // Approx PV logic at 8.5% for selected tenure
+      const monthlyRate = 8.5 / 12 / 100;
+      const n = loanTenure * 12;
+      const factor = (Math.pow(1 + monthlyRate, n) - 1) / (monthlyRate * Math.pow(1 + monthlyRate, n));
+      return Math.round((allowedEmi * factor) / 100000); // in Lakhs
+    } else {
+      // Self-employed formula: Avg annual profit * 4.5
+      const estAnnualProfit = loanIncome * 12;
+      return Math.round((estAnnualProfit * 4.5) / 100000); // in Lakhs
+    }
+  }, [loanIncome, loanEmi, loanTenure, empType]);
+
+  const emiBreakdown = useMemo(() => {
+    const loanAmt = calculatedReq * 100000;
+    const rate = 8.5 / 12 / 100;
+    const n = loanTenure * 12;
+    const emiVal = loanAmt * rate * Math.pow(1 + rate, n) / (Math.pow(1 + rate, n) - 1);
+    const totalPaid = emiVal * n;
+    const totalInterest = totalPaid - loanAmt;
+    return {
+      emi: Math.round(emiVal) || 0,
+      interest: Math.round(totalInterest) || 0,
+      total: Math.round(totalPaid) || 0
+    };
+  }, [calculatedReq, loanTenure]);
+
+  const renderLoanCopilot = () => (
+    <div className="space-y-4 animate-in fade-in duration-300">
+      <div className="grid grid-cols-12 gap-5">
+        {/* Input Panel */}
+        <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
+          <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border/40 pb-2">Interactive Eligibility Calculator</h4>
+
+          <div className="space-y-3.5 text-xs font-semibold">
+            <div className="space-y-1">
+              <label className="text-slate-500 block">Employment Type</label>
+              <div className="flex gap-2">
+                {["Salaried", "Self-employed"].map(t => (
+                  <button
+                    key={t}
+                    onClick={() => setEmpType(t)}
+                    className={`flex-1 h-8 rounded-lg border text-xs font-bold uppercase transition-all ${empType === t ? "bg-ink text-cream border-ink" : "border-border text-slate-500 hover:bg-secondary"}`}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <div className="flex justify-between">
+                <label className="text-slate-500">Net Monthly Income (₹)</label>
+                <span className="font-mono text-primary font-bold">₹{loanIncome.toLocaleString("en-IN")}</span>
+              </div>
+              <input
+                type="range"
+                min="20000"
+                max="300000"
+                step="5000"
+                value={loanIncome}
+                onChange={e => setLoanIncome(parseInt(e.target.value))}
+                className="w-full accent-primary"
+              />
+            </div>
+
+            {empType === "Salaried" && (
+              <div className="space-y-1">
+                <div className="flex justify-between">
+                  <label className="text-slate-500">Existing Monthly EMIs (₹)</label>
+                  <span className="font-mono text-primary font-bold">₹{loanEmi.toLocaleString("en-IN")}</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="100000"
+                  step="2000"
+                  value={loanEmi}
+                  onChange={e => setLoanEmi(parseInt(e.target.value))}
+                  className="w-full accent-primary"
+                />
+              </div>
+            )}
+
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-1">
+                <div className="flex justify-between">
+                  <label className="text-slate-500">Property Price (Lakhs)</label>
+                  <span className="font-mono text-primary font-bold">₹{propertyVal}L</span>
+                </div>
+                <input
+                  type="range"
+                  min="15"
+                  max="200"
+                  step="5"
+                  value={propertyVal}
+                  onChange={e => setPropertyVal(parseInt(e.target.value))}
+                  className="w-full accent-primary"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <div className="flex justify-between">
+                  <label className="text-slate-500">Down Payment (Lakhs)</label>
+                  <span className="font-mono text-primary font-bold">₹{downPayment}L</span>
+                </div>
+                <input
+                  type="range"
+                  min="3"
+                  max="100"
+                  step="1"
+                  value={downPayment}
+                  onChange={e => setDownPayment(parseInt(e.target.value))}
+                  className="w-full accent-primary"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <div className="flex justify-between">
+                <label className="text-slate-500">Tenure (Years)</label>
+                <span className="font-mono text-primary font-bold">{loanTenure} Years</span>
+              </div>
+              <input
+                type="range"
+                min="10"
+                max="30"
+                step="5"
+                value={loanTenure}
+                onChange={e => setLoanTenure(parseInt(e.target.value))}
+                className="w-full accent-primary"
+              />
+            </div>
+          </div>
+
+          <div className="p-3 bg-secondary/30 rounded-xl border border-border/40 font-mono text-[10px] space-y-1 text-slate-600">
+            <div>Loan Sought: <strong className="text-foreground">₹{calculatedReq} Lakhs</strong></div>
+            <div>Calculated Max Loan Eligibility: <strong className="text-emerald-600">₹{maxEligibility} Lakhs</strong></div>
+            {calculatedReq > maxEligibility ? (
+              <div className="text-red-500 font-bold mt-1">⚠️ Loan sought exceeds eligibility by ₹{Math.round(calculatedReq - maxEligibility)}L. Increase down payment or add a co-applicant.</div>
+            ) : (
+              <div className="text-emerald-600 font-bold mt-1">✓ Eligibility criteria met.</div>
+            )}
+          </div>
         </Card>
 
-        <Card className="col-span-12 lg:col-span-5 p-4">
-          <h3 className="font-display text-lg font-bold">Maintenance queue</h3>
-          <ul className="mt-3 space-y-2">
-            {(
-              [
-                {
-                  t: "Leak in master bath",
-                  p: "Skyline 304",
-                  s: "In progress",
-                  tone: "warm",
-                  a: "Plumber assigned",
-                },
-                {
-                  t: "AC service request",
-                  p: "Marina A-1102",
-                  s: "Scheduled",
-                  tone: "neutral",
-                  a: "Visit Sat 11am",
-                },
-                {
-                  t: "Lift card not working",
-                  p: "Riverfront",
-                  s: "Urgent",
-                  tone: "hot",
-                  a: "Tech dispatched",
-                },
-                { t: "Repaint walls", p: "Citrus 506", s: "Queued", tone: "neutral", a: "—" },
-              ] as const
-            ).map((m) => (
-              <li key={m.t} className="p-2.5 rounded-lg bg-muted/40">
-                <div className="flex justify-between items-start gap-2">
-                  <div>
-                    <div className="text-xs font-bold">{m.t}</div>
-                    <div className="text-[10px] font-semibold text-muted-foreground mt-0.5">
-                      {m.p} · {m.a}
-                    </div>
+        {/* Calculation / Bank Summary */}
+        <div className="col-span-12 lg:col-span-7 space-y-4">
+          <Card className="p-4 border border-border bg-card">
+            <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border/40 pb-2 mb-3">Live Rate Comparisons & EMI Calculations</h4>
+            <div className="overflow-x-auto scrollbar-none">
+              <table className="w-full text-left text-xs divide-y divide-border/60">
+                <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                  <tr>
+                    <th className="px-3 py-2">Bank</th>
+                    <th className="px-3 py-2">Interest Rate</th>
+                    <th className="px-3 py-2 font-mono">EMI (approx)</th>
+                    <th className="px-3 py-2">Processing Fee</th>
+                    <th className="px-3 py-2 font-mono">Time Frame</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border/30 bg-background font-medium">
+                  {bankRates.map((bank, i) => {
+                    const rate = bank.rate / 12 / 100;
+                    const n = loanTenure * 12;
+                    const principal = calculatedReq * 100000;
+                    const emiAmt = Math.round(principal * rate * Math.pow(1 + rate, n) / (Math.pow(1 + rate, n) - 1)) || 0;
+                    return (
+                      <tr key={i} className="hover:bg-secondary/15">
+                        <td className="px-3 py-2.5 font-bold flex items-center gap-1.5">
+                          {bank.bank}
+                          {bank.rate === 8.50 && <span className="text-[8px] font-bold bg-emerald-100 text-emerald-700 px-1 py-0.2 rounded border border-emerald-200">Best Rate</span>}
+                          {bank.time.includes("7") && <span className="text-[8px] font-bold bg-blue-100 text-blue-700 px-1 py-0.2 rounded border border-blue-200">Fastest</span>}
+                        </td>
+                        <td className="px-3 py-2.5 font-mono">{bank.rate.toFixed(2)}% p.a.</td>
+                        <td className="px-3 py-2.5 font-mono font-extrabold text-primary">₹{emiAmt.toLocaleString("en-IN")}</td>
+                        <td className="px-3 py-2.5 text-slate-500 font-mono">{bank.fee}</td>
+                        <td className="px-3 py-2.5 text-slate-400 font-mono">{bank.time}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </Card>
+
+          <Card className="p-4 border border-border bg-card space-y-2">
+            <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border/40 pb-2">EMI Tenure Analysis (SBI Home Loan, ₹{calculatedReq}L)</h4>
+            <div className="grid grid-cols-3 gap-3 text-xs font-semibold">
+              {[15, 20, 30].map(t => {
+                const rate = 8.5 / 12 / 100;
+                const n = t * 12;
+                const principal = calculatedReq * 100000;
+                const emi = Math.round(principal * rate * Math.pow(1 + rate, n) / (Math.pow(1 + rate, n) - 1)) || 0;
+                const totalPaid = emi * n;
+                const interest = totalPaid - principal;
+                return (
+                  <div key={t} className="p-3 bg-secondary/15 rounded-xl border border-border/50 text-center space-y-1">
+                    <span className="text-[10px] font-bold font-mono text-primary">{t} YEARS</span>
+                    <div className="font-display font-bold text-foreground text-sm">₹{emi.toLocaleString("en-IN")}/mo</div>
+                    <div className="text-[9px] text-slate-400 font-normal">Interest: ₹{Math.round(interest / 100000).toFixed(1)}L</div>
                   </div>
-                  <Pill tone={m.tone}>{m.s}</Pill>
+                );
+              })}
+            </div>
+            <div className="pt-2 flex gap-2">
+              <button onClick={() => alert("Connecting to bank relationship partner... SMS with contact card dispatched.")} className="w-full h-8 bg-ink hover:bg-ink/90 text-cream rounded-lg text-xs font-bold uppercase tracking-widest font-sans transition-all flex items-center justify-center gap-1">
+                <Plus className="h-3.5 w-3.5" /> Connect to Bank RM (SBI Vesu)
+              </button>
+            </div>
+          </Card>
+        </div>
+      </div>
+
+      {/* Document Checklist */}
+      <Card className="p-4 border border-border bg-card space-y-3">
+        <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border/40 pb-2">Home Loan Document Checklist ({empType})</h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-[11px] font-semibold text-slate-600 leading-relaxed">
+          {empType === "Salaried" ? (
+            <>
+              <div className="space-y-1.5">
+                <div className="font-bold text-foreground border-b border-border/40 pb-0.5">KYC & Identity:</div>
+                <div>✓ Aadhaar Card (front + back) - Self-attested</div>
+                <div>✓ PAN Card - Self-attested</div>
+                <div>✓ Passport Size Photographs (4 copies)</div>
+              </div>
+              <div className="space-y-1.5">
+                <div className="font-bold text-foreground border-b border-border/40 pb-0.5">Income Proofs:</div>
+                <div>✓ Last 3 months Salary Slips (Company seal)</div>
+                <div>✓ Last 2 years Form 16 (Part A & B)</div>
+                <div>✓ Bank statement for last 6 months (salary account)</div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="space-y-1.5">
+                <div className="font-bold text-foreground border-b border-border/40 pb-0.5">Business KYC:</div>
+                <div>✓ Business Registration Certificate (GST / Trade Licence)</div>
+                <div>✓ CA Certified Balance Sheet & P&L statements (last 2 years)</div>
+                <div>✓ PAN of Firm/Company + Proprietor</div>
+              </div>
+              <div className="space-y-1.5">
+                <div className="font-bold text-foreground border-b border-border/40 pb-0.5">Financial Documents:</div>
+                <div>✓ ITR for last 2 years (with computation of income)</div>
+                <div>✓ Bank statements for last 12 months (current account)</div>
+                <div>✓ GST Returns (last 4 quarters)</div>
+              </div>
+            </>
+          )}
+        </div>
+      </Card>
+    </div>
+  );
+
+  // --- 6. Tenant NPS & Feedback Bot ---
+  const [surveys, setSurveys] = useState(initialSurveys);
+  const [newSurveyName, setNewSurveyName] = useState("");
+  const [newSurveyNps, setNewSurveyNps] = useState(9);
+  const [newSurveyComment, setNewSurveyComment] = useState("");
+  const [newSurveyType, setNewSurveyType] = useState("Move-In Check-In");
+
+  const npsDistribution = useMemo(() => {
+    const total = surveys.length;
+    const promoters = surveys.filter(s => s.nps >= 9).length;
+    const passives = surveys.filter(s => s.nps >= 7 && s.nps <= 8).length;
+    const detractors = surveys.filter(s => s.nps <= 6).length;
+    const npsScore = Math.round(((promoters - detractors) / total) * 100);
+    return { total, promoters, passives, detractors, npsScore };
+  }, [surveys]);
+
+  const submitSurvey = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newSurveyName || !newSurveyComment) {
+      alert("Please fill out name and comment.");
+      return;
+    }
+    const classification = newSurveyNps >= 9 ? "Promoter" : newSurveyNps >= 7 ? "Passive" : "Detractor";
+    const newSurvey = {
+      id: `SUR-2025-08${surveys.length + 5}`,
+      tenant: newSurveyName,
+      unit: "GH-2B",
+      type: newSurveyType,
+      nps: newSurveyNps,
+      classification,
+      comment: newSurveyComment,
+      date: "15/01/2025"
+    };
+    setSurveys(prev => [newSurvey, ...prev]);
+    setNewSurveyName("");
+    setNewSurveyComment("");
+    alert(`Survey response logged! Overall Portfolio NPS updated.`);
+  };
+
+  const renderNps = () => (
+    <div className="space-y-4 animate-in fade-in duration-300">
+      <div className="grid grid-cols-12 gap-5">
+        {/* Left Panel: Score Snapshot */}
+        <Card className="col-span-12 lg:col-span-4 p-4 border border-border bg-card space-y-4">
+          <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">NPS Snapshot</h4></div>
+          <div className="text-center space-y-3">
+            <div className="relative h-24 w-24 mx-auto">
+              <svg viewBox="0 0 36 36" className="h-24 w-24 -rotate-90">
+                <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#e5e7eb" strokeWidth="3" />
+                <circle cx="18" cy="18" r="15.9155" fill="none" strokeWidth="3"
+                  stroke={npsDistribution.npsScore >= 50 ? "#1D9E75" : npsDistribution.npsScore >= 20 ? "#2E86AB" : "#D85A30"}
+                  strokeDasharray={`${Math.max(0, npsDistribution.npsScore)} ${100 - Math.max(0, npsDistribution.npsScore)}`} strokeLinecap="round" />
+              </svg>
+              <span className="absolute inset-0 flex flex-col items-center justify-center">
+                <span className="text-2xl font-extrabold font-mono text-primary">+{npsDistribution.npsScore}</span>
+                <span className="text-[8px] uppercase tracking-wider text-slate-400 font-bold">NPS Score</span>
+              </span>
+            </div>
+            <div className="text-[11px] font-semibold text-slate-500 font-mono">
+              Total Responses: {npsDistribution.total}
+            </div>
+          </div>
+          <div className="space-y-2 text-xs font-semibold">
+            <div className="flex justify-between p-2 rounded bg-emerald-50 text-emerald-700 border border-emerald-100">
+              <span>😊 Promoters (9–10)</span>
+              <span className="font-mono">{npsDistribution.promoters} ({Math.round(npsDistribution.promoters / npsDistribution.total * 100)}%)</span>
+            </div>
+            <div className="flex justify-between p-2 rounded bg-blue-50 text-blue-700 border border-blue-100">
+              <span>😐 Passives (7–8)</span>
+              <span className="font-mono">{npsDistribution.passives} ({Math.round(npsDistribution.passives / npsDistribution.total * 100)}%)</span>
+            </div>
+            <div className="flex justify-between p-2 rounded bg-red-50 text-red-700 border border-red-100">
+              <span>😟 Detractors (0–6)</span>
+              <span className="font-mono">{npsDistribution.detractors} ({Math.round(npsDistribution.detractors / npsDistribution.total * 100)}%)</span>
+            </div>
+          </div>
+        </Card>
+
+        {/* Right Panel: Detractor alerts */}
+        <div className="col-span-12 lg:col-span-8 space-y-4">
+          <Card className="p-4 border border-border bg-card border-red-200 bg-red-50/10">
+            <div className="flex items-center gap-2 text-xs font-bold text-red-700 border-b border-red-200 pb-2 mb-2">
+              <AlertTriangle className="h-4 w-4 animate-pulse shrink-0" />
+              <span>Active Detractor Alert — Immediate outreach required</span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+              <div className="space-y-1 font-semibold text-slate-600">
+                <div>Tenant: <strong className="text-foreground">Rajesh Patel</strong> (Flat 12A, Tower A, Vesu)</div>
+                <div>Expiry Date: <strong className="text-foreground">15 Feb 2025</strong> (14 days remaining)</div>
+                <div>NPS Score: <span className="text-red-500 font-bold font-mono">4/10 (Detractor)</span></div>
+                <div className="pt-2">
+                  <button onClick={() => alert("Property Manager has initiated contact. Action logged.")} className="h-7 px-3 bg-red-600 hover:bg-red-700 text-white rounded text-[10px] uppercase font-bold tracking-wider">
+                    Log PM Call Outreach
+                  </button>
                 </div>
-              </li>
-            ))}
-          </ul>
+              </div>
+              <div className="p-3 bg-white border border-red-100 rounded-xl font-mono text-[10px] leading-relaxed text-slate-700">
+                <strong className="text-slate-800">Feedback Transcript:</strong>
+                <p className="mt-1">"Maintenance took 5 days for urgent AC issue. Neighbors are noisy in Tower A. Parking is too congested."</p>
+              </div>
+            </div>
+          </Card>
+
+          {/* Survey inputs */}
+          <Card className="p-4 border border-border bg-card space-y-3">
+            <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border/40 pb-2">Feedback Input Simulator</h4>
+            <form onSubmit={submitSurvey} className="grid grid-cols-1 md:grid-cols-12 gap-3 text-xs font-semibold">
+              <div className="md:col-span-4 space-y-1">
+                <label className="text-slate-400">Tenant Name</label>
+                <input value={newSurveyName} onChange={e => setNewSurveyName(e.target.value)} placeholder="e.g. Ramesh Patel" className="w-full h-8 px-2 rounded-lg border border-border bg-background text-foreground outline-none font-bold" />
+              </div>
+              <div className="md:col-span-3 space-y-1">
+                <label className="text-slate-400">Survey Type</label>
+                <select value={newSurveyType} onChange={e => setNewSurveyType(e.target.value)} className="w-full h-8 px-2 rounded-lg border border-border bg-background text-foreground outline-none font-bold">
+                  {["Move-In Check-In", "3-Month Check-In", "6-Month Check-In", "Pre-Renewal Survey", "Post-Maintenance"].map(t => <option key={t}>{t}</option>)}
+                </select>
+              </div>
+              <div className="md:col-span-2 space-y-1">
+                <label className="text-slate-400">NPS (0-10)</label>
+                <input type="number" min="0" max="10" value={newSurveyNps} onChange={e => setNewSurveyNps(parseInt(e.target.value) || 0)} className="w-full h-8 px-2 rounded-lg border border-border bg-background text-foreground outline-none font-mono font-bold" />
+              </div>
+              <div className="md:col-span-3 flex items-end">
+                <button type="submit" className="w-full h-8 bg-ink hover:bg-ink/90 text-cream rounded-lg text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1">
+                  <Plus className="h-3.5 w-3.5" /> Submit Response
+                </button>
+              </div>
+              <div className="md:col-span-12 space-y-1">
+                <label className="text-slate-400">Comments</label>
+                <textarea value={newSurveyComment} onChange={e => setNewSurveyComment(e.target.value)} placeholder="Write tenant comments here..." className="w-full h-12 p-2 rounded-lg border border-border bg-background text-foreground outline-none font-normal" />
+              </div>
+            </form>
+          </Card>
+        </div>
+      </div>
+
+      {/* Responses Log */}
+      <Card className="p-0 overflow-hidden border border-border bg-card">
+        <div className="p-3 bg-secondary/35 border-b border-border flex items-center justify-between">
+          <h3 className="font-bold text-xs text-foreground font-display uppercase tracking-wider">Historical NPS Logs</h3>
+        </div>
+        <div className="overflow-x-auto scrollbar-none">
+          <table className="w-full text-left text-xs divide-y divide-border/60">
+            <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <tr>
+                <th className="px-3.5 py-2.5">ID</th>
+                <th className="px-3.5 py-2.5">Tenant</th>
+                <th className="px-3.5 py-2.5">Unit</th>
+                <th className="px-3.5 py-2.5">Type</th>
+                <th className="px-3.5 py-2.5 font-mono">Score</th>
+                <th className="px-3.5 py-2.5">Classification</th>
+                <th className="px-3.5 py-2.5">Comments</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border/40 bg-background font-medium text-foreground">
+              {surveys.map(row => (
+                <tr key={row.id} className="hover:bg-secondary/15">
+                  <td className="px-3.5 py-3 font-mono font-bold text-slate-400">{row.id}</td>
+                  <td className="px-3.5 py-3 font-bold">{row.tenant}</td>
+                  <td className="px-3.5 py-3 text-slate-500 font-mono">{row.unit}</td>
+                  <td className="px-3.5 py-3 text-slate-500">{row.type}</td>
+                  <td className="px-3.5 py-3 font-mono font-extrabold text-primary">{row.nps}/10</td>
+                  <td className="px-3.5 py-3">
+                    <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(row.classification)}`}>
+                      {row.classification}
+                    </span>
+                  </td>
+                  <td className="px-3.5 py-3 text-slate-400 font-normal max-w-[240px] truncate">{row.comment}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
+    </div>
+  );
+
+  // --- 7. Lease Renewal Agent ---
+  const [renewals, setRenewals] = useState(initialRenewals);
+  const [selectedRenewal, setSelectedRenewal] = useState<typeof initialRenewals[0]>(initialRenewals[0]);
+
+  const concludeRenewal = (id: string, revisionRent: number) => {
+    setRenewals(prev => prev.map(r => {
+      if (r.id === id) {
+        return {
+          ...r,
+          stage: "Concluded",
+          response: "Accepted",
+          currentRent: revisionRent,
+          eSign: "Completed"
+        };
+      }
+      return r;
+    }));
+    // update detail panel
+    setSelectedRenewal(prev => {
+      if (prev.id === id) {
+        return { ...prev, stage: "Concluded", response: "Accepted", currentRent: revisionRent, eSign: "Completed" };
+      }
+      return prev;
+    });
+    alert(`Renewal completed! New rent ₹${revisionRent.toLocaleString("en-IN")} logged in systems.`);
+  };
+
+  const sendProposal = (tenantName: string) => {
+    alert(`Proposal WhatsApp sent to ${tenantName} containing draft lease and revised rate.`);
+  };
+
+  const renderRenewal = () => (
+    <div className="space-y-4 animate-in fade-in duration-300">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <StatBox label="Leases Expiring (Quarter)" value="14" desc="Portfolio total" color="text-[#1A3C5E]" />
+        <StatBox label="Renewals Concluded" value="8" desc="57% completed" color="text-[#1D9E75]" />
+        <StatBox label="Negotiations Active" value="3" desc="2 in pipeline" color="text-[#E8A838]" />
+        <StatBox label="Vacancy Risks" value="2" desc="Declined renewal" color="text-[#D85A30]" />
+      </div>
+
+      <div className="grid grid-cols-12 gap-5">
+        {/* Table List */}
+        <Card className="col-span-12 lg:col-span-7 p-0 overflow-hidden border border-border bg-card">
+          <div className="p-3 bg-secondary/35 border-b border-border flex items-center justify-between">
+            <h3 className="font-bold text-xs text-foreground font-display uppercase tracking-wider">Lease Renewal Pipelines</h3>
+          </div>
+          <div className="overflow-x-auto scrollbar-none">
+            <table className="w-full text-left text-xs divide-y divide-border/60">
+              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                <tr>
+                  <th className="px-3.5 py-2.5">Unit</th>
+                  <th className="px-3.5 py-2.5">Tenant</th>
+                  <th className="px-3.5 py-2.5 font-mono">Expires In</th>
+                  <th className="px-3.5 py-2.5 font-mono">Current</th>
+                  <th className="px-3.5 py-2.5 font-mono">Proposed</th>
+                  <th className="px-3.5 py-2.5">NPS</th>
+                  <th className="px-3.5 py-2.5">Stage</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border/40 bg-background font-medium text-foreground">
+                {renewals.map(row => (
+                  <tr
+                    key={row.id}
+                    onClick={() => setSelectedRenewal(row)}
+                    className={`hover:bg-secondary/15 cursor-pointer transition-colors ${selectedRenewal.id === row.id ? "bg-secondary/20 font-bold" : ""}`}
+                  >
+                    <td className="px-3.5 py-3 font-mono font-bold text-slate-700">{row.unit}</td>
+                    <td className="px-3.5 py-3">{row.tenant}</td>
+                    <td className="px-3.5 py-3 font-mono text-slate-400">
+                      <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${row.daysAway <= 14 ? "bg-red-50 text-red-600 border border-red-100 animate-pulse" : "bg-slate-100 text-slate-500"}`}>
+                        {row.daysAway} days
+                      </span>
+                    </td>
+                    <td className="px-3.5 py-3 font-mono">₹{row.currentRent.toLocaleString("en-IN")}</td>
+                    <td className="px-3.5 py-3 font-mono text-primary font-bold">₹{row.proposedRent.toLocaleString("en-IN")}</td>
+                    <td className="px-3.5 py-3">
+                      <span className={`font-mono font-bold ${row.nps < 5 ? "text-red-500 animate-pulse" : "text-emerald-500"}`}>
+                        ★ {row.nps} {row.nps < 5 && "⚠️"}
+                      </span>
+                    </td>
+                    <td className="px-3.5 py-3">
+                      <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(row.stage)}`}>
+                        {row.stage}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Card>
+
+        {/* Action Panel */}
+        <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
+          <div className="flex items-center justify-between border-b border-border/40 pb-2">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Renewal Proposal — {selectedRenewal.unit}</span>
+            <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(selectedRenewal.stage)}`}>{selectedRenewal.stage}</span>
+          </div>
+
+          <div className="space-y-3.5 text-xs">
+            <div>
+              <div className="font-bold text-foreground">{selectedRenewal.tenant}</div>
+              <div className="text-[10px] text-slate-400 font-semibold font-mono">Lease Expiry: {selectedRenewal.expiry} ({selectedRenewal.daysAway} days away)</div>
+            </div>
+
+            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-semibold space-y-2">
+              <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Rent Revision Intelligence (Market Comp)</div>
+              <div className="flex justify-between text-slate-500">
+                <span>Current Rent:</span>
+                <span className="font-mono text-foreground font-bold">₹{selectedRenewal.currentRent.toLocaleString("en-IN")}/mo</span>
+              </div>
+              <div className="flex justify-between text-slate-500">
+                <span>Market Range Comparable:</span>
+                <span className="font-mono text-foreground font-bold">{selectedRenewal.marketRange}</span>
+              </div>
+              <div className="flex justify-between text-slate-500 border-t border-border/40 pt-1.5">
+                <span>Recommended Offer:</span>
+                <span className="font-mono text-primary font-extrabold">₹{selectedRenewal.proposedRent.toLocaleString("en-IN")}/mo</span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 font-mono text-[10px] text-slate-500 font-semibold border border-border/40 p-2.5 rounded-xl">
+              <div>Outreach 1 (60d): <strong className="text-foreground">{selectedRenewal.outreach1}</strong></div>
+              <div>Outreach 2 (30d): <strong className="text-foreground">{selectedRenewal.outreach2}</strong></div>
+              <div>Tenant response: <strong className="text-primary">{selectedRenewal.response}</strong></div>
+              <div>E-Sign envelope: <strong className="text-emerald-600">{selectedRenewal.eSign}</strong></div>
+            </div>
+
+            <div className="pt-2 flex gap-2">
+              <button
+                onClick={() => sendProposal(selectedRenewal.tenant)}
+                className="flex-1 h-8 border border-border hover:bg-secondary rounded-lg text-xs font-bold uppercase tracking-wider text-slate-700"
+              >
+                Send Proposal
+              </button>
+              {selectedRenewal.stage !== "Concluded" && (
+                <button
+                  onClick={() => concludeRenewal(selectedRenewal.id, selectedRenewal.proposedRent)}
+                  className="flex-1 h-8 bg-ink hover:bg-ink/90 text-cream rounded-lg text-xs font-bold uppercase tracking-widest transition-all"
+                >
+                  Conclude Lease
+                </button>
+              )}
+            </div>
+
+            <div className="border-t border-border/40 pt-3">
+              <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400 block mb-1">WhatsApp Proposal Template</span>
+              <div className="bg-emerald-50/50 rounded-xl p-2.5 text-[9px] leading-relaxed text-slate-600 font-semibold border border-emerald-100/50">
+                {`Hi ${selectedRenewal.tenant}, your lease for ${selectedRenewal.unit} expires on ${selectedRenewal.expiry}. Proposal: Current Rent: ₹${selectedRenewal.currentRent.toLocaleString()} -> Proposed: ₹${selectedRenewal.proposedRent.toLocaleString()}/mo. Reply YES to accept.`}
+              </div>
+            </div>
+          </div>
         </Card>
       </div>
+    </div>
+  );
+
+  return (
+    <AppShell title={dynamicTitle} subtitle={headerInfo.subtitle}>
+      <div className="transition-all duration-300">
+        {activeTab === "menu" && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 animate-in fade-in duration-300">
+            {submodulesList.map((mod) => (
+              <Card
+                key={mod.id}
+                onClick={() => setActiveTab(mod.id as TabType)}
+                className="p-5 border border-border/70 hover:border-ink hover:shadow-[0_4px_20px_rgba(11,31,51,0.04)] transition-all duration-300 cursor-pointer flex flex-col justify-between group h-44 bg-card"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full border font-mono text-emerald-700 bg-emerald-50 border-emerald-100">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> {mod.status}
+                    </span>
+                  </div>
+                  <h3 className="text-sm font-bold text-foreground group-hover:text-ink transition-colors mt-1 font-display">{mod.name}</h3>
+                  <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed line-clamp-2 font-medium">{mod.desc}</p>
+                </div>
+                <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-[11px] font-bold text-muted-foreground group-hover:text-foreground">
+                  <span className="font-mono font-bold text-foreground">{mod.stats}</span>
+                  <span className="flex items-center gap-0.5 text-ink group-hover:underline font-mono">Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
+                </div>
+              </Card>
+            ))}
+          </div>
+        )}
+        {activeTab === "overview" && renderOverview()}
+        {activeTab === "screening" && renderScreening()}
+        {activeTab === "maintenance" && renderMaintenance()}
+        {activeTab === "rent" && renderRent()}
+        {activeTab === "loan" && renderLoanCopilot()}
+        {activeTab === "nps" && renderNps()}
+        {activeTab === "renewal" && renderRenewal()}
+      </div>
     </AppShell>
+  );
+}
+
+function StatBox({ label, value, desc, color }: { label: string; value: string; desc: string; color: string }) {
+  return (
+    <Card className="p-4 flex flex-col justify-between relative min-h-24 border border-border bg-card">
+      <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-display">{label}</div>
+      <div className="mt-2 flex items-baseline justify-between">
+        <div className={`font-display text-2xl font-bold tracking-tight font-mono ${color}`}>{value}</div>
+        <span className="text-[9px] font-semibold text-muted-foreground">{desc}</span>
+      </div>
+    </Card>
   );
 }

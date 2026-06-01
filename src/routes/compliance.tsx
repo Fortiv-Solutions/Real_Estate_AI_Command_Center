@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+﻿import { createFileRoute } from "@tanstack/react-router";
 import { AppShell, Card } from "../components/AppShell";
 import { useState, useMemo, useEffect } from "react";
 import {

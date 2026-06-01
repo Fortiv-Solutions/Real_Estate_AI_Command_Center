@@ -15,6 +15,8 @@ import {
   Search,
   Bell,
   Plus,
+  UserCog,
+  UserCheck,
 } from "lucide-react";
 import { type ReactNode } from "react";
 
@@ -34,8 +36,10 @@ const navGroups = [
     items: [
       { to: "/projects", label: "Projects", icon: Hammer },
       { to: "/tenants", label: "Tenants", icon: Briefcase },
+      { to: "/buyers", label: "Buyer Portal", icon: UserCheck },
       { to: "/finance", label: "Finance", icon: Wallet },
       { to: "/compliance", label: "Compliance", icon: ShieldCheck },
+      { to: "/hr", label: "HR Pipeline", icon: UserCog },
     ]
   },
   {
