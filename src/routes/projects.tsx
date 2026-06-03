@@ -240,8 +240,8 @@ function ProjectManager() {
       <div className="grid grid-cols-12 gap-5">
         {/* Milestone Summary & Alerts */}
         <div className="col-span-12 lg:col-span-7 space-y-5">
-          <Card className="p-4 border border-border bg-card">
-            <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
+          <Card className="p-5 border border-border bg-card">
+            <div className="flex items-center justify-between mb-3 border-b border-border pb-2">
               <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                 <Layers3 className="h-3.5 w-3.5 text-primary" /> Active Milestone Progress Summary
               </div>
@@ -270,8 +270,8 @@ function ProjectManager() {
             </div>
           </Card>
 
-          <Card className="p-4 border border-border bg-card">
-            <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
+          <Card className="p-5 border border-border bg-card">
+            <div className="flex items-center justify-between mb-3 border-b border-border pb-2">
               <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                 <AlertCircle className="h-3.5 w-3.5 text-red-600" /> Critical Construction Alerts
               </div>
@@ -296,8 +296,8 @@ function ProjectManager() {
 
         {/* Cost & Approvals */}
         <div className="col-span-12 lg:col-span-5 space-y-5">
-          <Card className="p-4 border border-border bg-card">
-            <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
+          <Card className="p-5 border border-border bg-card">
+            <div className="flex items-center justify-between mb-3 border-b border-border pb-2">
               <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                 <DollarSign className="h-3.5 w-3.5 text-emerald-600" /> Cost Budget Utilization
               </div>
@@ -309,7 +309,7 @@ function ProjectManager() {
                 { cat: "MEP Services", spent: "₹1.8Cr", budget: "₹4.2Cr", pct: 43, status: "Normal" },
                 { cat: "Project Overheads", spent: "₹3.4Cr", budget: "₹2.4Cr", pct: 142, status: "Overrun" }
               ].map((c, i) => (
-                <div key={i} className="flex justify-between items-center border-b border-border/30 pb-2 last:border-0 last:pb-0">
+                <div key={i} className="flex justify-between items-center border-b border-border pb-2 last:border-0 last:pb-0">
                   <div>
                     <div className="text-foreground">{c.cat}</div>
                     <div className="text-xs text-slate-400 font-normal">Spent: {c.spent} / Budget: {c.budget}</div>
@@ -322,8 +322,8 @@ function ProjectManager() {
             </div>
           </Card>
 
-          <Card className="p-4 border border-border bg-card">
-            <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
+          <Card className="p-5 border border-border bg-card">
+            <div className="flex items-center justify-between mb-3 border-b border-border pb-2">
               <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                 <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" /> Occupation Certificate (OC) Readiness
               </div>
@@ -367,7 +367,7 @@ function ProjectManager() {
 
   const renderTimeline = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Total Construction Phases" value="15" desc="Land to Handover" color="text-slate-800" />
         <StatBox label="Phases Completed" value="7" desc="Foundation + Structural 1-8" color="text-emerald-600" />
         <StatBox label="At Risk / Delayed" value="1" desc="Structural Floors 9-14" color="text-red-600" />
@@ -377,7 +377,7 @@ function ProjectManager() {
       <div className="grid grid-cols-12 gap-5">
         {/* Gantt Timeline */}
         <Card className="col-span-12 lg:col-span-8 p-4 border border-border bg-card space-y-4">
-          <div className="flex justify-between items-center border-b border-border/40 pb-2">
+          <div className="flex justify-between items-center border-b border-border pb-2">
             <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Gantt Milestone Schedule</h4>
             <span className="text-xs font-mono text-slate-400 flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-amber-500" />Orange outline = Critical Path</span>
           </div>
@@ -416,7 +416,7 @@ function ProjectManager() {
         {/* Phase Details Card */}
         <Card className="col-span-12 lg:col-span-4 p-4 border border-border bg-card space-y-4 flex flex-col justify-between">
           <div className="space-y-3.5">
-            <div className="border-b border-border/40 pb-2 flex justify-between items-center">
+            <div className="border-b border-border pb-2 flex justify-between items-center">
               <span className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Phase Detail — {selectedPhase.id}</span>
               <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(selectedPhase.status)}`}>{selectedPhase.status}</span>
             </div>
@@ -427,12 +427,12 @@ function ProjectManager() {
                 <p className="text-xs text-slate-400 font-normal mt-0.5">Liaison lead: {selectedPhase.lead}</p>
               </div>
 
-              <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs space-y-1 text-slate-600">
+              <div className="p-3 bg-secondary/35 rounded-xl border border-border font-mono text-xs space-y-1 text-slate-600">
                 <div className="flex justify-between"><span>Baseline Start:</span><span className="text-foreground">{selectedPhase.plannedStart}</span></div>
                 <div className="flex justify-between"><span>Baseline Completion:</span><span className="text-foreground">{selectedPhase.plannedEnd}</span></div>
                 <div className="flex justify-between"><span>Revised/Actual End:</span><span className="text-foreground">{selectedPhase.actualEnd || selectedPhase.plannedEnd}</span></div>
                 {selectedPhase.cascade > 0 && (
-                  <div className="text-red-500 font-bold border-t border-border/40 pt-1 mt-1">⚠️ Cascade impact: +{selectedPhase.cascade} days to downstream tasks.</div>
+                  <div className="text-red-500 font-bold border-t border-border pt-1 mt-1">⚠️ Cascade impact: +{selectedPhase.cascade} days to downstream tasks.</div>
                 )}
               </div>
 
@@ -483,7 +483,7 @@ function ProjectManager() {
 
   const renderSubcontractor = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Empaneled Subcontractors" value="24" desc="Across 8 trades" color="text-slate-800" />
         <StatBox label="Active Work Orders" value="14" desc="Live on site" color="text-emerald-600" />
         <StatBox label="Milestone Payments Certified" value="₹44.1L" desc="This month" color="text-blue-700" />
@@ -538,7 +538,7 @@ function ProjectManager() {
 
         {/* Contractor Detail Panel */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
-          <div className="flex items-center justify-between border-b border-border/40 pb-2">
+          <div className="flex items-center justify-between border-b border-border pb-2">
             <span className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Contractor Profile</span>
             <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${selectedContractor.performance >= 80 ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"}`}>★ {selectedContractor.performance} Score</span>
           </div>
@@ -549,7 +549,7 @@ function ProjectManager() {
               <p className="text-xs text-slate-400 font-normal">Trade Scope: {selectedContractor.trade}</p>
             </div>
 
-            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs space-y-1 text-slate-600">
+            <div className="p-3 bg-secondary/35 rounded-xl border border-border font-mono text-xs space-y-1 text-slate-600">
               <div className="flex justify-between"><span>GSTIN:</span><span className="text-foreground">{selectedContractor.gst}</span></div>
               <div className="flex justify-between"><span>Registry Phone:</span><span className="text-foreground">{selectedContractor.phone}</span></div>
               <div className="flex justify-between"><span>Labour Licence Exp:</span><span className="text-foreground">{selectedContractor.expiry}</span></div>
@@ -562,7 +562,7 @@ function ProjectManager() {
             )}
 
             <div className="space-y-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block border-b border-border/40 pb-1">Work Orders & Payments</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block border-b border-border pb-1">Work Orders & Payments</span>
               {activeWos.map((wo, i) => (
                 <div key={i} className="p-2.5 rounded bg-background border border-border/50 space-y-1.5">
                   <div className="flex justify-between font-mono text-xs">
@@ -570,7 +570,7 @@ function ProjectManager() {
                     <span className={`text-xs font-extrabold px-1.5 py-0.2 rounded ${statusBadge(wo.status)}`}>{wo.status}</span>
                   </div>
                   <div className="text-xs text-slate-500">{wo.scope}</div>
-                  <div className="flex justify-between font-mono text-xs text-slate-400 font-semibold border-t border-border/30 pt-1.5">
+                  <div className="flex justify-between font-mono text-xs text-slate-400 font-semibold border-t border-border pt-1.5">
                     <span>Val: ₹{(wo.value/100000).toFixed(1)}L</span>
                     <span>Paid: ₹{(wo.paid/100000).toFixed(1)}L</span>
                   </div>
@@ -612,7 +612,7 @@ function ProjectManager() {
 
   const renderProcurement = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Indents Raised (Month)" value="42" desc="Slabs + blockwork indents" color="text-slate-800" />
         <StatBox label="POs Dispatched" value="38" desc="₹48.2L procurement value" color="text-emerald-600" />
         <StatBox label="Deliveries In Transit" value="1" desc="Plumbing CPVC pipes" color="text-blue-700" />
@@ -688,7 +688,7 @@ function ProjectManager() {
 
         {/* Vendor Comparison */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
-          <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">L1 Vendor Comparison — Concrete</h4></div>
+          <div className="border-b border-border pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">L1 Vendor Comparison — Concrete</h4></div>
           <div className="space-y-3.5 text-xs font-semibold text-slate-600">
             {[
               { vendor: "Ultratech Cement RMC", rate: "₹6,200/cu.m", lead: "2 days", rating: "★ 4.6", status: "L1 — Best Quote" },
@@ -722,7 +722,7 @@ function ProjectManager() {
 
   const renderApprovals = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Total Required Approvals" value="14" desc="RERA to Occupancy" color="text-slate-800" />
         <StatBox label="Approvals Complete" value="9" desc="NOCs / Permits complete" color="text-emerald-600" />
         <StatBox label="Liaison Reviews Pending" value="2" desc="Action needed" color="text-amber-500" />
@@ -770,11 +770,11 @@ function ProjectManager() {
 
         {/* OC Readiness and QPR panel */}
         <div className="col-span-12 lg:col-span-5 space-y-4">
-          <Card className="p-4 border border-border bg-card space-y-3.5">
-            <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border/40 pb-2">OC Pre-Condition Checklists (43%)</h4>
+          <Card className="p-5 border border-border bg-card space-y-3.5">
+            <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border pb-2">OC Pre-Condition Checklists (43%)</h4>
             <div className="space-y-2 text-xs font-semibold">
               {ocReadinessList.map((oc, i) => (
-                <div key={i} className="flex justify-between items-center border-b border-border/30 pb-2 last:border-0 last:pb-0">
+                <div key={i} className="flex justify-between items-center border-b border-border pb-2 last:border-0 last:pb-0">
                   <div>
                     <div className="text-foreground">{oc.item}</div>
                     <div className="text-xs text-slate-400 font-normal">Category: {oc.category}</div>
@@ -785,7 +785,7 @@ function ProjectManager() {
             </div>
           </Card>
 
-          <Card className="p-4 border border-amber-500 bg-amber-50/10 space-y-3">
+          <Card className="p-5 border border-amber-500 bg-amber-50/10 space-y-3">
             <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-amber-200 pb-2">RERA QPR Submission (Q1 2025)</h4>
             <p className="text-xs text-slate-600 leading-relaxed font-semibold">Submission is due in 8 days. Click compile to auto-gather construction progress percentages and cost models.</p>
             <button
@@ -843,7 +843,7 @@ function ProjectManager() {
                 onClick={() => setSelectedPhoto(photo)}
                 className={`p-3 rounded-2xl border cursor-pointer transition-all space-y-2 hover:shadow-md ${selectedPhoto.id === photo.id ? "border-primary bg-secondary/15" : "border-border bg-background"}`}
               >
-                <div className="h-28 bg-secondary/40 rounded-xl flex items-center justify-center font-mono text-xs text-slate-400 border border-border/40 relative overflow-hidden">
+                <div className="h-28 bg-secondary/40 rounded-xl flex items-center justify-center font-mono text-xs text-slate-400 border border-border relative overflow-hidden">
                   <Camera className="h-6 w-6 stroke-[1.5]" />
                   <span className="absolute bottom-2 left-2 bg-black/60 text-white px-2 py-0.5 rounded text-[10px]">{photo.id}</span>
                   {photo.issue && <span className="absolute top-2 right-2 bg-red-600 text-white px-2 py-0.5 rounded text-[10px] animate-pulse">⚠️ Issue</span>}
@@ -867,10 +867,10 @@ function ProjectManager() {
 
         {/* Selected Photo details */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
-          <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">AI Visual Log Inspector</h4></div>
+          <div className="border-b border-border pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">AI Visual Log Inspector</h4></div>
 
           <div className="space-y-3.5 text-xs font-semibold">
-            <div className="h-36 bg-secondary/30 border border-border/40 rounded-2xl flex items-center justify-center font-mono text-slate-400 text-xs">
+            <div className="h-36 bg-secondary/30 border border-border rounded-2xl flex items-center justify-center font-mono text-slate-400 text-xs">
               Visual Media Render Box — {selectedPhoto.id}
             </div>
 
@@ -880,7 +880,7 @@ function ProjectManager() {
                 <p className="text-xs text-slate-400 font-mono">Uploaded on {selectedPhoto.date} via WhatsApp</p>
               </div>
 
-              <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs leading-relaxed text-slate-600">
+              <div className="p-3 bg-secondary/35 rounded-xl border border-border font-mono text-xs leading-relaxed text-slate-600">
                 <strong className="text-slate-700 block uppercase tracking-wider text-[10px] mb-1">AI Progress Assessment:</strong>
                 {selectedPhoto.note}
               </div>
@@ -958,7 +958,7 @@ function ProjectManager() {
       </div>
 
       {/* Scenario buttons */}
-      <Card className="p-4 border border-border bg-card space-y-3">
+      <Card className="p-5 border border-border bg-card space-y-3">
         <span className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Scenario Sensitivity Analysis Modelling</span>
         <div className="flex flex-wrap gap-2">
           {[
@@ -1019,18 +1019,18 @@ function ProjectManager() {
 
         {/* Cost Analysis / Scenario Output */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
-          <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Margin Sensitivity Summary</h4></div>
+          <div className="border-b border-border pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Margin Sensitivity Summary</h4></div>
 
           <div className="space-y-3.5 text-xs font-semibold text-slate-600">
-            <div className="flex justify-between border-b border-border/30 pb-2">
+            <div className="flex justify-between border-b border-border pb-2">
               <span>Expected Sales Revenue:</span>
               <span className="font-mono text-foreground font-bold">₹{(calculatedCosts.activeRevenue/10000000).toFixed(2)}Cr</span>
             </div>
-            <div className="flex justify-between border-b border-border/30 pb-2">
+            <div className="flex justify-between border-b border-border pb-2">
               <span>Projected Total Construction Cost:</span>
               <span className="font-mono text-foreground font-bold">₹{(calculatedCosts.totalProjected/10000000).toFixed(2)}Cr</span>
             </div>
-            <div className="flex justify-between border-b border-border/30 pb-2">
+            <div className="flex justify-between border-b border-border pb-2">
               <span>Projected Net Gross Profit:</span>
               <span className="font-mono text-emerald-600 font-extrabold text-sm">₹{(calculatedCosts.profit/10000000).toFixed(2)}Cr</span>
             </div>
@@ -1039,7 +1039,7 @@ function ProjectManager() {
               <span className={`font-mono font-extrabold text-sm ${parseFloat(calculatedCosts.margin) >= 42 ? "text-emerald-600" : "text-amber-600 animate-pulse"}`}>{calculatedCosts.margin}%</span>
             </div>
 
-            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs leading-relaxed text-slate-600">
+            <div className="p-3 bg-secondary/35 rounded-xl border border-border font-mono text-xs leading-relaxed text-slate-600">
               <strong className="text-slate-800">AI Financial Forecaster Note:</strong>
               <p className="mt-1">Category "Project Overheads" is driving the primary variance (+₹1.80Cr). Bringing overheads back to baseline increases projected margin to 44.1%.</p>
             </div>
@@ -1094,7 +1094,7 @@ function ProjectManager() {
 
   const renderPossession = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Total Units Handover" value="240" desc="Dec 2026 scheduling" color="text-slate-800" />
         <StatBox label="Snag Audited Units" value="38" desc="38 pre-possessions complete" color="text-emerald-600" />
         <StatBox label="Ready for Handover" value="24" desc="Snag-free + payment clear" color="text-blue-700" />
@@ -1158,7 +1158,7 @@ function ProjectManager() {
 
         {/* Action Panel */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
-          <div className="flex items-center justify-between border-b border-border/40 pb-2">
+          <div className="flex items-center justify-between border-b border-border pb-2">
             <span className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Unit Handover Card</span>
             <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(selectedPossession.status)}`}>{selectedPossession.status}</span>
           </div>
@@ -1169,7 +1169,7 @@ function ProjectManager() {
               <p className="text-xs text-slate-400 font-normal">Buyer: {selectedPossession.buyer} · {selectedPossession.phone}</p>
             </div>
 
-            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs space-y-1.5 text-slate-600">
+            <div className="p-3 bg-secondary/35 rounded-xl border border-border font-mono text-xs space-y-1.5 text-slate-600">
               <div className="flex justify-between"><span>Agreement Value:</span><span className="text-foreground font-bold">₹{(selectedPossession.value/100000).toFixed(1)}L</span></div>
               <div className="flex justify-between"><span>Payment Clearance:</span><span className={`font-bold ${selectedPossession.payment === "Clear" ? "text-emerald-600" : "text-red-500"}`}>{selectedPossession.payment}</span></div>
               <div className="flex justify-between"><span>Snag Inspection:</span><span className={`font-bold ${selectedPossession.snagsTotal === selectedPossession.snagsResolved ? "text-emerald-600" : "text-amber-600"}`}>{selectedPossession.snagsResolved} of {selectedPossession.snagsTotal} resolved</span></div>
@@ -1178,7 +1178,7 @@ function ProjectManager() {
 
             {selectedPossession.unit === "A-403" && selectedPossession.snagsTotal > selectedPossession.snagsResolved && (
               <div className="space-y-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block border-b border-border/40 pb-0.5">Snag Checklist (1 Open item)</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block border-b border-border pb-0.5">Snag Checklist (1 Open item)</span>
                 {snagChecklist.map((sc, idx) => (
                   <div key={idx} className="p-2 rounded bg-background border border-border/50 text-xs flex justify-between font-mono">
                     <span>{sc.item}</span>
@@ -1224,7 +1224,7 @@ function ProjectManager() {
     <AppShell title={dynamicTitle} subtitle={headerInfo.subtitle}>
       <div className="transition-all duration-300">
         {activeTab === "menu" && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 animate-in fade-in duration-300">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 animate-in fade-in duration-300">
             {submodulesList.map((mod) => (
               <Card
                 key={mod.id}
@@ -1240,7 +1240,7 @@ function ProjectManager() {
                   <h3 className="text-sm font-bold text-foreground group-hover:text-ink transition-colors mt-1 font-display">{mod.name}</h3>
                   <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed line-clamp-2 font-medium">{mod.desc}</p>
                 </div>
-                <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
+                <div className="border-t border-border mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
                   <span className="font-mono font-bold text-foreground">{mod.stats}</span>
                   <span className="flex items-center gap-0.5 text-ink group-hover:underline font-mono">Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
                 </div>
@@ -1263,7 +1263,7 @@ function ProjectManager() {
 
 function StatBox({ label, value, desc, color }: { label: string; value: string; desc: string; color: string }) {
   return (
-    <Card className="p-4 flex flex-col justify-between relative min-h-24 border border-border bg-card">
+    <Card className="p-5 flex flex-col justify-between relative min-h-24 border border-border bg-card">
       <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display">{label}</div>
       <div className="mt-2 flex items-baseline justify-between">
         <div className={`font-display text-2xl font-bold tracking-tight font-mono ${color}`}>{value}</div>

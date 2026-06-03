@@ -840,7 +840,7 @@ function LeadsManager() {
                   {agent.desc}
                 </p>
               </div>
-              <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
+              <div className="border-t border-border mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
                 <span className="font-mono font-bold text-foreground">{agent.stats}</span>
                 <span className="flex items-center gap-0.5 text-ink group-hover:underline">
                   Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -868,7 +868,7 @@ function LeadsManager() {
     return (
       <div className="space-y-4">
         {/* Module Dashboard Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
           <StatBox label="Total Leads Today" value="47" desc="+18% since yesterday" color="text-primary" />
           <StatBox 
             label="Hot Leads" 
@@ -885,7 +885,7 @@ function LeadsManager() {
         <div className="grid grid-cols-12 gap-4">
           {/* Live Streaming Feed */}
           <Card className="col-span-12 lg:col-span-7 p-4 flex flex-col h-[400px] border border-border bg-card">
-            <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
+            <div className="flex items-center justify-between mb-3 border-b border-border pb-2">
               <div>
                 <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> Live Lead Feed
@@ -936,7 +936,7 @@ function LeadsManager() {
 
           {/* Sources Donut Chart */}
           <Card className="col-span-12 lg:col-span-5 p-4 flex flex-col h-[400px] border border-border bg-card">
-            <div className="mb-3 border-b border-border/40 pb-2">
+            <div className="mb-3 border-b border-border pb-2">
               <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Source distribution</div>
               <h3 className="text-sm font-bold text-foreground">Traffic Channel Breakdown</h3>
             </div>
@@ -959,7 +959,7 @@ function LeadsManager() {
               </div>
 
               {/* Horizontal Color bar list */}
-              <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 border-t border-border/40 pt-3">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 border-t border-border pt-3">
                 {categories.map((c) => (
                   <div key={c.source} className="flex items-center justify-between text-xs font-medium">
                     <span className="flex items-center gap-1.5 text-muted-foreground truncate">
@@ -1087,7 +1087,7 @@ function LeadsManager() {
 
           {/* Interactive Map Panel */}
           <Card className="col-span-12 lg:col-span-4 p-4 flex flex-col h-[550px] border border-border bg-card">
-            <div className="mb-3 border-b border-border/40 pb-2">
+            <div className="mb-3 border-b border-border pb-2">
               <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1">
                 <Globe className="h-3.5 w-3.5" /> GPS Geolocation
               </div>
@@ -1301,7 +1301,7 @@ function LeadsManager() {
 
           {/* Interactive geo map side panel */}
           <Card className="col-span-12 lg:col-span-4 p-4 flex flex-col h-[550px] border border-border bg-card">
-            <div className="mb-3 border-b border-border/40 pb-2">
+            <div className="mb-3 border-b border-border pb-2">
               <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1">
                 <MapPin className="h-3.5 w-3.5" /> Micro-market Radar
               </div>
@@ -1372,8 +1372,8 @@ function LeadsManager() {
     return (
       <div className="space-y-4">
         {/* Sync timeline webhook visualization */}
-        <Card className="p-4 relative overflow-hidden border border-border bg-card">
-          <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
+        <Card className="p-5 relative overflow-hidden border border-border bg-card">
+          <div className="flex items-center justify-between mb-4 border-b border-border pb-2">
             <div>
               <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Real-time Webhook</div>
               <h3 className="text-sm font-bold text-foreground">API Campaign Lead Sync Tunnel</h3>
@@ -1437,7 +1437,7 @@ function LeadsManager() {
         <div className="grid grid-cols-12 gap-4">
           {/* Sync Lead Logs */}
           <Card className="col-span-12 lg:col-span-7 p-4 h-[400px] flex flex-col border border-border bg-card">
-            <div className="mb-3 border-b border-border/40 pb-2 flex justify-between items-center">
+            <div className="mb-3 border-b border-border pb-2 flex justify-between items-center">
               <div>
                 <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Sync Output</div>
                 <h3 className="text-sm font-bold text-foreground">Webhook Synced Inbound Feed</h3>
@@ -1480,13 +1480,13 @@ function LeadsManager() {
 
           {/* Campaign stats */}
           <Card className="col-span-12 lg:col-span-5 p-4 h-[400px] flex flex-col border border-border bg-card">
-            <div className="mb-3 border-b border-border/40 pb-2">
+            <div className="mb-3 border-b border-border pb-2">
               <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display font-bold">MTD Analytics</div>
               <h3 className="text-sm font-bold text-foreground">Campaign Performance & Spend ROI</h3>
             </div>
             
             <div className="flex-1 overflow-y-auto space-y-3 scrollbar-none text-xs">
-              <div className="grid grid-cols-12 font-bold text-xs uppercase tracking-widest text-muted-foreground border-b border-border/30 pb-1">
+              <div className="grid grid-cols-12 font-bold text-xs uppercase tracking-widest text-muted-foreground border-b border-border pb-1">
                 <div className="col-span-5">Campaign</div>
                 <div className="col-span-2 text-right">Leads</div>
                 <div className="col-span-2 text-right">CPL</div>
@@ -1572,7 +1572,7 @@ function LeadsManager() {
 
           {/* Response rate tracker */}
           <Card className="col-span-12 lg:col-span-4 p-4 h-[500px] flex flex-col border border-border bg-card">
-            <div className="mb-3 border-b border-border/40 pb-2">
+            <div className="mb-3 border-b border-border pb-2">
               <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display font-bold">Algorithms Metric</div>
               <h3 className="text-sm font-bold text-foreground">Portal Response Rate Tracker</h3>
               <p className="text-xs text-muted-foreground mt-1">If response rates drop below targets, listings get demoted in search results.</p>
@@ -1678,7 +1678,7 @@ function LeadsManager() {
 
           {/* Before/After panel */}
           <Card className="col-span-12 lg:col-span-8 p-4 h-[500px] flex flex-col border border-border bg-card">
-            <div className="mb-3 border-b border-border/40 pb-2">
+            <div className="mb-3 border-b border-border pb-2">
               <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Expansion View</div>
               <h3 className="text-sm font-bold text-foreground">{selectedEnrichmentLead.name} Profile Profiling</h3>
             </div>
@@ -1839,7 +1839,7 @@ function LeadsManager() {
                         <td className="px-4 py-2.5">
                           <div className="flex items-center gap-2">
                             <span className="font-bold font-mono text-xs w-5 text-right text-foreground">{l.score}</span>
-                            <div className="w-12 h-1 bg-secondary rounded-full overflow-hidden border border-border/40">
+                            <div className="w-12 h-1 bg-secondary rounded-full overflow-hidden border border-border">
                               <div 
                                 className={`h-full rounded-full transition-all ${
                                   l.score >= 75 ? "bg-red-500" : l.score >= 40 ? "bg-amber-500" : "bg-ink"
@@ -1873,7 +1873,7 @@ function LeadsManager() {
           {/* Score breakdown side panel */}
           <Card className="col-span-12 lg:col-span-4 p-4 h-[450px] flex flex-col justify-between border border-border bg-card">
             <div>
-              <div className="mb-3 border-b border-border/40 pb-2">
+              <div className="mb-3 border-b border-border pb-2">
                 <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Score Breakdown</div>
                 <h3 className="text-sm font-bold text-foreground">{selectedScoringLead?.name} Model</h3>
               </div>
@@ -1912,8 +1912,8 @@ function LeadsManager() {
         </div>
 
         {/* Source quality bar chart */}
-        <Card className="p-4 flex flex-col h-[280px] border border-border bg-card">
-          <div className="mb-3 border-b border-border/40 pb-2">
+        <Card className="p-5 flex flex-col h-[280px] border border-border bg-card">
+          <div className="mb-3 border-b border-border pb-2">
             <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Model Calibration</div>
             <h3 className="text-sm font-bold text-foreground">Average Lead Quality Score by Channel</h3>
           </div>
@@ -2053,7 +2053,7 @@ function StatBox({
   customElement?: React.ReactNode 
 }) {
   return (
-    <Card className="p-4 flex flex-col justify-between relative min-h-24 border border-border bg-card">
+    <Card className="p-5 flex flex-col justify-between relative min-h-24 border border-border bg-card">
       {customElement}
       <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display">
         {label}

@@ -228,7 +228,7 @@ function FinanceManager() {
       <div className="grid grid-cols-12 gap-5">
         {/* Left: Collections Bar Chart */}
         <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card">
-          <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
+          <div className="flex items-center justify-between mb-4 border-b border-border pb-2">
             <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
               <TrendingUp className="h-3.5 w-3.5 text-primary" /> Monthly Collections (Oct 2024 – Mar 2025)
             </div>
@@ -251,12 +251,12 @@ function FinanceManager() {
         {/* Right: Project-wise P&L Snapshot */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card flex flex-col justify-between">
           <div>
-            <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5 border-b border-border/40 pb-2 mb-3">
+            <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5 border-b border-border pb-2 mb-3">
               <Building className="h-3.5 w-3.5 text-primary" /> Project P&L Summary Snapshot
             </div>
             <div className="space-y-3.5 text-xs font-semibold">
               {projectPlsData.map((p, i) => (
-                <div key={i} className="flex justify-between items-center border-b border-border/30 pb-2 last:border-0 last:pb-0">
+                <div key={i} className="flex justify-between items-center border-b border-border pb-2 last:border-0 last:pb-0">
                   <div>
                     <div className="text-foreground">{p.name}</div>
                     <div className="text-xs text-slate-400 font-normal">Cost: ₹{(p.cost/10000000).toFixed(1)}Cr · Revenue: ₹{(p.recognized/10000000).toFixed(1)}Cr</div>
@@ -273,8 +273,8 @@ function FinanceManager() {
       </div>
 
       {/* Bottom section: Pending Actions */}
-      <Card className="p-4 border border-border bg-card">
-        <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5 border-b border-border/40 pb-2 mb-3">
+      <Card className="p-5 border border-border bg-card">
+        <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5 border-b border-border pb-2 mb-3">
           <AlertCircle className="h-3.5 w-3.5 text-red-500 animate-pulse" /> Pending Finance Actionable Queue
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3.5 text-xs font-semibold">
@@ -312,7 +312,7 @@ function FinanceManager() {
 
   const renderCollections = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Total Outstanding" value="₹6.4 Cr" desc="Billed but unpaid" color="text-slate-800" />
         <StatBox label="Current (Not Yet Due)" value="₹1.6 Cr" desc="Due within 30 days" color="text-blue-700" />
         <StatBox label="Overdue (1–60 Days)" value="₹4.9 Cr" desc="Active aging tracking" color="text-amber-500" />
@@ -330,7 +330,7 @@ function FinanceManager() {
       <div className="grid grid-cols-12 gap-5">
         {/* Aging table summary */}
         <Card className="col-span-12 lg:col-span-4 p-4 border border-border bg-card space-y-3.5">
-          <div className="border-b border-border/40 pb-2 flex justify-between items-center">
+          <div className="border-b border-border pb-2 flex justify-between items-center">
             <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Aging Analysis Buckets</h4>
             <span className="text-xs font-mono bg-red-100 text-red-700 px-2 py-0.5 rounded border border-red-200">Alert Threshold Exceeded</span>
           </div>
@@ -342,7 +342,7 @@ function FinanceManager() {
               { b: "61–90 Days Overdue", val: "₹0.4 Cr", buyers: "3 buyers", pct: 6 },
               { b: "90+ Days Overdue", val: "₹1.5 Cr", buyers: "4 buyers", pct: 23 }
             ].map((row, i) => (
-              <div key={i} className="flex justify-between items-center border-b border-border/30 pb-2 last:border-0 last:pb-0">
+              <div key={i} className="flex justify-between items-center border-b border-border pb-2 last:border-0 last:pb-0">
                 <div>
                   <div className="text-foreground">{row.b}</div>
                   <div className="text-xs text-slate-400 font-normal">{row.buyers}</div>
@@ -431,7 +431,7 @@ function FinanceManager() {
       <div className="grid grid-cols-12 gap-5">
         {/* Milestone logs */}
         <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card space-y-4">
-          <div className="border-b border-border/40 pb-2"><h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Milestone Trigger Log</h3></div>
+          <div className="border-b border-border pb-2"><h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Milestone Trigger Log</h3></div>
 
           <div className="space-y-3 font-semibold text-xs text-slate-600">
             {milestones.map((m, idx) => (
@@ -459,19 +459,19 @@ function FinanceManager() {
 
         {/* PDF template preview */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
-          <div className="border-b border-border/40 pb-2 flex justify-between items-center">
+          <div className="border-b border-border pb-2 flex justify-between items-center">
             <span className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Demand Document Preview</span>
             <button onClick={() => alert("Downloading PDF template...")} className="text-xs font-bold text-primary underline font-mono">Download Sample PDF</button>
           </div>
           <div className="p-4 bg-background border border-border/50 rounded-2xl font-mono text-xs leading-relaxed text-slate-600 space-y-3">
-            <div className="text-center font-bold text-foreground text-xs uppercase border-b border-border/40 pb-2">Fortiv Solutions Pvt Ltd · Demand Letter</div>
+            <div className="text-center font-bold text-foreground text-xs uppercase border-b border-border pb-2">Fortiv Solutions Pvt Ltd · Demand Letter</div>
             <div className="grid grid-cols-2 gap-2 text-xs">
               <div><strong>Buyer:</strong> Rajesh Patel</div>
               <div className="text-right"><strong>Voucher ID:</strong> DN-GH-2025-0847</div>
               <div><strong>Unit:</strong> Tower A, Unit 804</div>
               <div className="text-right"><strong>RERA:</strong> GJ/RES/SURAT/2023/00847</div>
             </div>
-            <div className="border-t border-b border-border/40 py-2 my-2 text-foreground font-semibold">
+            <div className="border-t border-b border-border py-2 my-2 text-foreground font-semibold">
               <div className="flex justify-between"><span>Tranche Stage:</span><span>Floor Slab — 8th Floor</span></div>
               <div className="flex justify-between mt-1 text-xs"><span>Amount Demanded:</span><span className="font-bold text-primary">₹4,60,000</span></div>
             </div>
@@ -480,7 +480,7 @@ function FinanceManager() {
               <div className="flex justify-between"><span>Outstanding Balance:</span><span>₹39,10,000</span></div>
               <div className="flex justify-between"><span>Payment Due Date:</span><span className="font-bold text-red-500">15/02/2025</span></div>
             </div>
-            <div className="bg-secondary/40 p-2.5 rounded-xl text-[10px] border border-border/30">
+            <div className="bg-secondary/40 p-2.5 rounded-xl text-[10px] border border-border">
               <strong>Escrow Accounts:</strong> HDFC Bank · A/c No: 50200847214 · IFSC: HDFC0001234
             </div>
           </div>
@@ -504,7 +504,7 @@ function FinanceManager() {
 
   const renderCommissions = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Total CP Commission (Q1)" value="₹28.4L" desc="Cumulative liability" color="text-slate-800" />
         <StatBox label="Commissions Settled" value="₹19.6L" desc="Transferred to brokers" color="text-emerald-600" />
         <StatBox label="Awaiting Approval" value="₹6.2L" desc="Accounts queue pending" color="text-amber-500" />
@@ -558,15 +558,15 @@ function FinanceManager() {
 
         {/* CP portal synchronization */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
-          <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Channel Partner Integration Sync</h4></div>
+          <div className="border-b border-border pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Channel Partner Integration Sync</h4></div>
           <div className="space-y-3.5 text-xs font-semibold text-slate-600 leading-relaxed">
             <p>Commission calculations synchronize automatically with the broker portal (M12.4). Net commissions are generated subtracting TDS @10% and adding GST @18%.</p>
-            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs space-y-1.5 text-slate-700">
+            <div className="p-3 bg-secondary/35 rounded-xl border border-border font-mono text-xs space-y-1.5 text-slate-700">
               <div className="flex justify-between"><span>Commission Rate:</span><span className="text-foreground">2.0% on booking tranche</span></div>
               <div className="flex justify-between"><span>Gross commission:</span><span className="text-foreground">₹1,15,000</span></div>
               <div className="flex justify-between"><span>GST @18% added:</span><span className="text-foreground">+₹20,700</span></div>
               <div className="flex justify-between"><span>TDS @10% deducted:</span><span className="text-foreground">-₹11,500</span></div>
-              <div className="flex justify-between border-t border-border/40 pt-1 mt-1 text-foreground font-bold"><span>Net CP Payable:</span><span className="text-primary text-sm">₹1,23,200</span></div>
+              <div className="flex justify-between border-t border-border pt-1 mt-1 text-foreground font-bold"><span>Net CP Payable:</span><span className="text-primary text-sm">₹1,23,200</span></div>
             </div>
             <button
               onClick={() => alert("Broker payouts bulk sync pushed to CP portal.")}
@@ -588,7 +588,7 @@ function FinanceManager() {
 
   const renderPlMonitor = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="flex items-center gap-1.5 border-b border-border/30 pb-3">
+      <div className="flex items-center gap-1.5 border-b border-border pb-3">
         {projectPlsData.map(p => (
           <button
             key={p.id}
@@ -603,29 +603,29 @@ function FinanceManager() {
       <div className="grid grid-cols-12 gap-5">
         {/* Waterfall costs panel */}
         <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card space-y-4">
-          <div className="border-b border-border/40 pb-2 flex justify-between items-center">
+          <div className="border-b border-border pb-2 flex justify-between items-center">
             <h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Revenue Recognition & Cost Waterfall</h3>
             <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${statusBadgeStyle(currentPl.status)}`}>{currentPl.status}</span>
           </div>
 
           <div className="space-y-3.5 text-xs font-semibold text-slate-600">
-            <div className="flex justify-between border-b border-border/30 pb-2">
+            <div className="flex justify-between border-b border-border pb-2">
               <span>Overall Completion Status:</span>
               <span className="font-mono text-foreground font-bold">{currentPl.pct}% Complete</span>
             </div>
-            <div className="flex justify-between border-b border-border/30 pb-2">
+            <div className="flex justify-between border-b border-border pb-2">
               <span>Recognised Revenue (IndAS 115):</span>
               <span className="font-mono text-foreground font-bold">₹{(currentPl.recognized/10000000).toFixed(2)}Cr</span>
             </div>
-            <div className="flex justify-between border-b border-border/30 pb-2">
+            <div className="flex justify-between border-b border-border pb-2">
               <span>Land Cost Allocation:</span>
               <span className="font-mono text-foreground font-bold">₹{(currentPl.land/10000000).toFixed(2)}Cr</span>
             </div>
-            <div className="flex justify-between border-b border-border/30 pb-2">
+            <div className="flex justify-between border-b border-border pb-2">
               <span>Construction Cost Incurred:</span>
               <span className="font-mono text-foreground font-bold">₹{(currentPl.construct/10000000).toFixed(2)}Cr</span>
             </div>
-            <div className="flex justify-between border-b border-border/30 pb-2">
+            <div className="flex justify-between border-b border-border pb-2">
               <span>Sales Marketing & Overhead:</span>
               <span className="font-mono text-foreground font-bold">₹{((currentPl.sales + currentPl.overheads)/10000000).toFixed(2)}Cr</span>
             </div>
@@ -639,12 +639,12 @@ function FinanceManager() {
         {/* Margin comparison */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4 flex flex-col justify-between">
           <div className="space-y-3.5">
-            <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Baseline target variances</h4></div>
+            <div className="border-b border-border pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Baseline target variances</h4></div>
             <div className="text-xs font-semibold space-y-3">
-              <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs space-y-1.5 text-slate-700">
+              <div className="p-3 bg-secondary/35 rounded-xl border border-border font-mono text-xs space-y-1.5 text-slate-700">
                 <div className="flex justify-between"><span>Current Margin %:</span><span className="text-foreground font-bold">{currentPl.pctMargin}%</span></div>
                 <div className="flex justify-between"><span>Budgeted Pro-forma:</span><span className="text-foreground">{currentPl.proforma}%</span></div>
-                <div className="flex justify-between border-t border-border/40 pt-1.5 mt-1.5">
+                <div className="flex justify-between border-t border-border pt-1.5 mt-1.5">
                   <span>Variance Delta:</span>
                   <span className={`font-bold ${(currentPl.pctMargin - currentPl.proforma) >= 0 ? "text-emerald-600" : "text-red-500 animate-pulse"}`}>
                     {(currentPl.pctMargin - currentPl.proforma).toFixed(1)}%
@@ -683,7 +683,7 @@ function FinanceManager() {
 
   const renderForecaster = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Opening Balance" value="₹2.84 Cr" desc="Remittance accounts" color="text-slate-800" />
         <StatBox label="Projected Inflows (90d)" value={`₹ ${(inflowsProjected/10000000).toFixed(2)} Cr`} desc="Milestone billing tranches" color="text-emerald-600" />
         <StatBox label="Projected Outflows" value="₹6.87 Cr" desc="Subcontractor + procurement" color="text-blue-700" />
@@ -691,7 +691,7 @@ function FinanceManager() {
       </div>
 
       {/* Scenario buttons */}
-      <Card className="p-4 border border-border bg-card space-y-3">
+      <Card className="p-5 border border-border bg-card space-y-3">
         <span className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Scenario Sensitivity Cash modeller</span>
         <div className="flex flex-wrap gap-2">
           {[
@@ -714,10 +714,10 @@ function FinanceManager() {
       {/* Outflows list */}
       <div className="grid grid-cols-12 gap-5">
         <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card space-y-4">
-          <div className="border-b border-border/40 pb-2"><h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Projected Outflows Breakdown</h3></div>
+          <div className="border-b border-border pb-2"><h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Projected Outflows Breakdown</h3></div>
           <div className="space-y-3 font-semibold text-xs text-slate-600">
             {cashflowOutflows90d.map((o, i) => (
-              <div key={i} className="flex justify-between items-center border-b border-border/30 pb-2 last:border-0 last:pb-0">
+              <div key={i} className="flex justify-between items-center border-b border-border pb-2 last:border-0 last:pb-0">
                 <div>
                   <div className="text-foreground">{o.cat}</div>
                   <div className="text-xs text-slate-400 font-normal">Source: {o.source}</div>
@@ -760,7 +760,7 @@ function FinanceManager() {
 
   const renderTallySync = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Sync Success Rate" value="99.1%" desc="Last 30 days" color="text-emerald-600" />
         <StatBox label="Transactions Pushed" value="1,842" desc="Cumulative invoices" color="text-slate-800" />
         <StatBox label="Exceptions in Queue" value={`${syncQueue.length}`} desc="Awaiting correction" color="text-amber-500" />
@@ -807,7 +807,7 @@ function FinanceManager() {
 
         {/* Failed Voucher Queue */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
-          <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Sync Error Reconciliation Panel</h4></div>
+          <div className="border-b border-border pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Sync Error Reconciliation Panel</h4></div>
           <div className="space-y-3 font-semibold text-xs text-slate-600">
             {syncQueue.length === 0 ? (
               <div className="p-4 text-center text-slate-400 font-mono">All transactions synced successfully. Error queue empty.</div>
@@ -843,7 +843,7 @@ function FinanceManager() {
       <div className="grid grid-cols-12 gap-5">
         {/* Reports Schedule lists */}
         <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card space-y-4">
-          <div className="border-b border-border/40 pb-2"><h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">MIS & Compliance Schedules</h3></div>
+          <div className="border-b border-border pb-2"><h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">MIS & Compliance Schedules</h3></div>
           <div className="space-y-3 font-semibold text-xs text-slate-600">
             {reportSchedules.map((r, i) => (
               <div key={i} className="p-3 bg-secondary/35 rounded-xl border border-border/50 flex justify-between items-center">
@@ -863,7 +863,7 @@ function FinanceManager() {
         {/* On-demand report generator */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4 flex flex-col justify-between">
           <div className="space-y-3.5">
-            <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">One-Click PDF Report Generator</h4></div>
+            <div className="border-b border-border pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">One-Click PDF Report Generator</h4></div>
             <div className="text-xs font-semibold space-y-3">
               <div className="space-y-1">
                 <label className="text-slate-400">Select Financial Document Type</label>
@@ -895,7 +895,7 @@ function FinanceManager() {
     <AppShell title={dynamicTitle} subtitle={headerInfo.subtitle}>
       <div className="transition-all duration-300">
         {activeTab === "menu" && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 animate-in fade-in duration-300">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 animate-in fade-in duration-300">
             {submodulesList.map((mod) => (
               <Card
                 key={mod.id}
@@ -911,7 +911,7 @@ function FinanceManager() {
                   <h3 className="text-sm font-bold text-foreground group-hover:text-ink transition-colors mt-1 font-display">{mod.name}</h3>
                   <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed line-clamp-2 font-medium">{mod.desc}</p>
                 </div>
-                <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
+                <div className="border-t border-border mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
                   <span className="font-mono font-bold text-foreground">{mod.stats}</span>
                   <span className="flex items-center gap-0.5 text-ink group-hover:underline font-mono">Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
                 </div>
@@ -934,7 +934,7 @@ function FinanceManager() {
 
 function StatBox({ label, value, desc, color }: { label: string; value: string; desc: string; color: string }) {
   return (
-    <Card className="p-4 flex flex-col justify-between relative min-h-24 border border-border bg-card">
+    <Card className="p-5 flex flex-col justify-between relative min-h-24 border border-border bg-card">
       <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display">{label}</div>
       <div className="mt-2 flex items-baseline justify-between">
         <div className={`font-display text-2xl font-bold tracking-tight font-mono ${color}`}>{value}</div>

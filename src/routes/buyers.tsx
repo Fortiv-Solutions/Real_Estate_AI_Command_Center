@@ -206,7 +206,7 @@ function BuyerManager() {
       <div className="grid grid-cols-12 gap-5">
         {/* Left panel: Payment health */}
         <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card">
-          <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
+          <div className="flex items-center justify-between mb-4 border-b border-border pb-2">
             <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
               <DollarSign className="h-3.5 w-3.5 text-emerald-600" /> Buyer Payment Health Summary
             </div>
@@ -235,8 +235,8 @@ function BuyerManager() {
 
         {/* Right panel: NPS dial gauge */}
         <div className="col-span-12 lg:col-span-5 space-y-5">
-          <Card className="p-4 border border-border bg-card">
-            <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
+          <Card className="p-5 border border-border bg-card">
+            <div className="flex items-center justify-between mb-3 border-b border-border pb-2">
               <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                 <Smile className="h-3.5 w-3.5 text-emerald-600" /> Rolling NPS index
               </div>
@@ -262,8 +262,8 @@ function BuyerManager() {
             </div>
           </Card>
 
-          <Card className="p-4 border border-border bg-card">
-            <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
+          <Card className="p-5 border border-border bg-card">
+            <div className="flex items-center justify-between mb-3 border-b border-border pb-2">
               <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                 <Users className="h-3.5 w-3.5 text-blue-700" /> Portal Engagement logins
               </div>
@@ -290,7 +290,7 @@ function BuyerManager() {
 
   const renderSelfService = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="flex flex-col md:flex-row gap-4 items-center justify-between border-b border-border/30 pb-3">
+      <div className="flex flex-col md:flex-row gap-4 items-center justify-between border-b border-border pb-3">
         <div className="flex items-center gap-2">
           <Search className="h-4 w-4 text-slate-400" />
           <select
@@ -311,8 +311,8 @@ function BuyerManager() {
       <div className="grid grid-cols-12 gap-5">
         {/* Left side: Overview card & summary */}
         <div className="col-span-12 lg:col-span-7 space-y-4">
-          <Card className="p-4 border border-border bg-card space-y-4">
-            <div className="border-b border-border/40 pb-2 flex justify-between items-center">
+          <Card className="p-5 border border-border bg-card space-y-4">
+            <div className="border-b border-border pb-2 flex justify-between items-center">
               <h3 className="font-bold text-sm text-foreground font-display flex items-center gap-1.5">
                 <Home className="h-4 w-4 text-primary" /> Property Overview — Unit {selectedBuyer.unit}
               </h3>
@@ -350,7 +350,7 @@ function BuyerManager() {
               </div>
             </div>
 
-            <div className="pt-2 border-t border-border/40 space-y-2">
+            <div className="pt-2 border-t border-border space-y-2">
               <div className="flex justify-between text-xs font-semibold">
                 <span>Payment Summary</span>
                 <span className="font-mono text-emerald-600">{((selectedBuyer.paid/selectedBuyer.value)*100).toFixed(1)}% paid</span>
@@ -366,8 +366,8 @@ function BuyerManager() {
           </Card>
 
           {/* Document list */}
-          <Card className="p-4 border border-border bg-card">
-            <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border/40 pb-2 mb-3">Self-Service Document Library</h4>
+          <Card className="p-5 border border-border bg-card">
+            <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border pb-2 mb-3">Self-Service Document Library</h4>
             <div className="space-y-2.5 text-xs font-semibold">
               {[
                 { name: "Booking Application Form", date: "14/03/2023", status: "Executed" },
@@ -375,7 +375,7 @@ function BuyerManager() {
                 { name: "Agreement for Sale (Registered)", date: "22/04/2023", status: "Executed" },
                 { name: "Flat Layout Plan Annexure", date: "22/04/2023", status: "Available" }
               ].map((doc, idx) => (
-                <div key={idx} className="flex justify-between items-center p-2 rounded-xl bg-background border border-border/40">
+                <div key={idx} className="flex justify-between items-center p-2 rounded-xl bg-background border border-border">
                   <div className="min-w-0">
                     <div className="font-bold truncate text-foreground">{doc.name}</div>
                     <div className="text-xs text-slate-400 font-mono mt-0.5">Date: {doc.date}</div>
@@ -394,9 +394,9 @@ function BuyerManager() {
 
         {/* Right side: RM contact & communication logs */}
         <div className="col-span-12 lg:col-span-5 space-y-4">
-          <Card className="p-4 border border-border bg-card space-y-4 flex flex-col justify-between">
+          <Card className="p-5 border border-border bg-card space-y-4 flex flex-col justify-between">
             <div>
-              <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Communication Logs</h4></div>
+              <div className="border-b border-border pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Communication Logs</h4></div>
               <div className="space-y-3 font-semibold mt-3 text-xs">
                 {[
                   { sender: "Fortiv AI Bot", msg: "Fortnightly Progress update #18 dispatched via WhatsApp", time: "14/01/2025 09:14 AM" },
@@ -404,7 +404,7 @@ function BuyerManager() {
                   { sender: "Accounts Dept", msg: "Demand note for Floor 8 Slab payment dispatched", time: "30/12/2024 10:15 AM" },
                   { sender: "System Notification", msg: "Registered Sale Agreement document copy uploaded to portal", time: "25/04/2023" }
                 ].map((log, idx) => (
-                  <div key={idx} className="border-b border-border/20 pb-2.5 last:border-0 last:pb-0">
+                  <div key={idx} className="border-b border-border pb-2.5 last:border-0 last:pb-0">
                     <div className="flex justify-between font-mono text-xs text-slate-400 mb-0.5">
                       <span>{log.sender}</span>
                       <span>{log.time}</span>
@@ -415,7 +415,7 @@ function BuyerManager() {
               </div>
             </div>
 
-            <div className="pt-4 border-t border-border/40 space-y-2">
+            <div className="pt-4 border-t border-border space-y-2">
               <button
                 onClick={() => alert(`Starting simulated WhatsApp chat with ${selectedBuyer.name}...`)}
                 className="w-full h-8 bg-ink hover:bg-ink/90 text-cream rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-1.5"
@@ -451,7 +451,7 @@ function BuyerManager() {
 
   const renderPayments = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Installments Received" value="₹16.3Cr" desc="All-time bookings collections" color="text-slate-800" />
         <StatBox label="Total Receivables" value="₹1.61Cr" desc="18 buyers overdue" color="text-red-600" />
         <StatBox label="Next Milestone Demands" value="₹6.4Cr" desc="Floor 12 Slab milestone" color="text-blue-700" />
@@ -461,7 +461,7 @@ function BuyerManager() {
       <div className="grid grid-cols-12 gap-5">
         {/* Left side: demand note creation queue */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
-          <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Milestone Demand Note Dispatcher</h4></div>
+          <div className="border-b border-border pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Milestone Demand Note Dispatcher</h4></div>
           <div className="space-y-3 font-semibold text-xs text-slate-600">
             {demandNotes.map((d, i) => (
               <div key={i} className="p-3 bg-secondary/35 rounded-xl border border-border/50 space-y-2">
@@ -565,7 +565,7 @@ function BuyerManager() {
       <div className="grid grid-cols-12 gap-5">
         {/* Left side: Composer */}
         <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card space-y-4">
-          <div className="border-b border-border/40 pb-2"><h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Customized Progress Feed Composer</h3></div>
+          <div className="border-b border-border pb-2"><h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Customized Progress Feed Composer</h3></div>
 
           <div className="space-y-3.5 text-xs font-semibold">
             <div className="space-y-1">
@@ -590,7 +590,7 @@ function BuyerManager() {
               </div>
             </div>
 
-            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs text-slate-600 space-y-1">
+            <div className="p-3 bg-secondary/35 rounded-xl border border-border font-mono text-xs text-slate-600 space-y-1">
               <strong className="text-slate-800">Dynamic Personalization Rules Active:</strong>
               <p>• Tower A buyers receive Tower A-specific photos & slab completion stats first.</p>
               <p>• Promoters (NPS 9-10) receive a Referral promotion footer badge.</p>
@@ -609,7 +609,7 @@ function BuyerManager() {
 
         {/* Right side: WhatsApp template preview */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
-          <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">WhatsApp Message Preview</h4></div>
+          <div className="border-b border-border pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">WhatsApp Message Preview</h4></div>
           <div className="p-3 bg-[#ECF3EE] rounded-2xl border border-emerald-100 font-sans text-xs leading-relaxed text-slate-700 font-medium">
             <div className="font-bold text-slate-800 mb-1">Fortiv Greenview Heights ·</div>
             <div className="h-28 bg-emerald-950/10 rounded-xl mb-2 flex items-center justify-center text-slate-400 font-mono text-xs border border-emerald-200">
@@ -653,7 +653,7 @@ function BuyerManager() {
 
   const renderSnag = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Total Snags Logged" value="49" desc="Post-possession handovers" color="text-slate-800" />
         <StatBox label="Tickets Resolved" value="40" desc="81.6% resolution rate" color="text-emerald-600" />
         <StatBox label="Active Open Tickets" value="9" desc="Awaiting fix" color="text-amber-500" />
@@ -705,7 +705,7 @@ function BuyerManager() {
 
         {/* Selected ticket details */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
-          <div className="border-b border-border/40 pb-2 flex justify-between items-center">
+          <div className="border-b border-border pb-2 flex justify-between items-center">
             <span className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">AI Triage Case File</span>
             <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(selectedSnag.status)}`}>{selectedSnag.status}</span>
           </div>
@@ -716,7 +716,7 @@ function BuyerManager() {
               <p className="text-xs text-slate-400 font-normal">Buyer: {selectedSnag.buyer} · {selectedSnag.phone}</p>
             </div>
 
-            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs space-y-1.5 text-slate-600">
+            <div className="p-3 bg-secondary/35 rounded-xl border border-border font-mono text-xs space-y-1.5 text-slate-600">
               <div className="flex justify-between"><span>Date Opened:</span><span className="text-foreground">{selectedSnag.opened}</span></div>
               <div className="flex justify-between"><span>Date Resolved:</span><span className="text-foreground">{selectedSnag.resolved}</span></div>
               <div className="flex justify-between"><span>Severity Tier:</span><span className="text-foreground font-bold">{selectedSnag.severity}</span></div>
@@ -820,7 +820,7 @@ function BuyerManager() {
 
         {/* Detailed Card */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
-          <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Secondary Deal Card</h4></div>
+          <div className="border-b border-border pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Secondary Deal Card</h4></div>
 
           <div className="space-y-3.5 text-xs font-semibold">
             <div>
@@ -828,7 +828,7 @@ function BuyerManager() {
               <p className="text-xs text-slate-400 font-normal">Assigned In-House Broker: {selectedListing.agent}</p>
             </div>
 
-            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs space-y-1 text-slate-600">
+            <div className="p-3 bg-secondary/35 rounded-xl border border-border font-mono text-xs space-y-1 text-slate-600">
               <div className="flex justify-between"><span>Owner Name:</span><span className="text-foreground">{selectedListing.owner}</span></div>
               <div className="flex justify-between"><span>Asking Quote:</span><span className="text-foreground font-bold">{selectedListing.type === "Rental" ? `₹${selectedListing.asking.toLocaleString()}/mo` : `₹${(selectedListing.asking/100000).toFixed(1)} Lakhs`}</span></div>
               <div className="flex justify-between"><span>AI valuation (AVM):</span><span className="text-emerald-600 font-bold">{selectedListing.type === "Rental" ? `₹${selectedListing.avm.toLocaleString()}/mo` : `₹${(selectedListing.avm/100000).toFixed(1)} Lakhs`}</span></div>
@@ -912,11 +912,11 @@ function BuyerManager() {
 
         {/* AMC contracts handovers */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
-          <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Operational Handover Contracts (AMC)</h4></div>
+          <div className="border-b border-border pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Operational Handover Contracts (AMC)</h4></div>
 
           <div className="space-y-3 font-semibold text-xs text-slate-600">
             {amcContracts.map((a, i) => (
-              <div key={i} className="flex justify-between items-center border-b border-border/30 pb-2 last:border-0 last:pb-0">
+              <div key={i} className="flex justify-between items-center border-b border-border pb-2 last:border-0 last:pb-0">
                 <div>
                   <div className="text-foreground">{a.name}</div>
                   <div className="text-xs text-slate-400 font-normal">Vendor: {a.vendor} · Exp: {a.expiry}</div>
@@ -944,7 +944,7 @@ function BuyerManager() {
 
   const renderNps = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="NPS Survey responses" value="68%" desc="119 of 175 surveyed" color="text-slate-800" />
         <StatBox label="Attributed Bookings" value="4" desc="From referrals" color="text-emerald-600" />
         <StatBox label="Referral Revenue" value="₹2.24Cr" desc="Active pipeline value" color="text-blue-700" />
@@ -995,7 +995,7 @@ function BuyerManager() {
 
         {/* Detractor alert cards */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
-          <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Detractor Followup Intervention Queue</h4></div>
+          <div className="border-b border-border pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Detractor Followup Intervention Queue</h4></div>
           <div className="space-y-3 font-semibold text-xs">
             {detractors.map((d, i) => (
               <div key={i} className="p-3 rounded-xl border border-red-200 bg-red-50/15 space-y-2 text-red-600">
@@ -1025,7 +1025,7 @@ function BuyerManager() {
     <AppShell title={dynamicTitle} subtitle={headerInfo.subtitle}>
       <div className="transition-all duration-300">
         {activeTab === "menu" && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 animate-in fade-in duration-300">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 animate-in fade-in duration-300">
             {submodulesList.map((mod) => (
               <Card
                 key={mod.id}
@@ -1041,7 +1041,7 @@ function BuyerManager() {
                   <h3 className="text-sm font-bold text-foreground group-hover:text-ink transition-colors mt-1 font-display">{mod.name}</h3>
                   <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed line-clamp-2 font-medium">{mod.desc}</p>
                 </div>
-                <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
+                <div className="border-t border-border mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
                   <span className="font-mono font-bold text-foreground">{mod.stats}</span>
                   <span className="flex items-center gap-0.5 text-ink group-hover:underline font-mono">Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
                 </div>
@@ -1064,7 +1064,7 @@ function BuyerManager() {
 
 function StatBox({ label, value, desc, color }: { label: string; value: string; desc: string; color: string }) {
   return (
-    <Card className="p-4 flex flex-col justify-between relative min-h-24 border border-border bg-card">
+    <Card className="p-5 flex flex-col justify-between relative min-h-24 border border-border bg-card">
       <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display">{label}</div>
       <div className="mt-2 flex items-baseline justify-between">
         <div className={`font-display text-2xl font-bold tracking-tight font-mono ${color}`}>{value}</div>

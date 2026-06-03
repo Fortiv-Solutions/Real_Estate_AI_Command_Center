@@ -111,7 +111,7 @@ function CustomTooltip({ active, payload, label }: any) {
             <span className="font-mono-jb text-blue-600 font-bold text-xs">₹{payload[0].value} Cr</span>
           </div>
           {payload[0].payload && payload[0].payload.Target !== undefined && (
-            <div className="flex items-center gap-1.5 border-t border-border/20 pt-1 mt-1">
+            <div className="flex items-center gap-1.5 border-t border-border pt-1 mt-1">
               <span className="h-1.5 w-1.5 rounded-full bg-red-600" />
               <span className="text-slate-500">Target:</span>
               <span className="font-mono-jb text-red-600 font-bold text-xs">₹{payload[0].payload.Target} Cr</span>
@@ -447,23 +447,26 @@ function Dashboard() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {consolidatedKPIs.map((kpi, i) => (
-              <div
+              <Card
                 key={i}
-                className="bg-card border shadow-sm rounded-xl p-4 rounded-xl flex flex-col justify-between min-h-[108px] transition-all duration-300 relative overflow-hidden"
-                style={{ borderTop: `3px solid ${kpi.color}` }}
+                className="p-5 flex flex-col justify-between min-h-[116px] relative hover-lift group"
               >
-                <div>
+                <div 
+                  className="absolute left-0 top-0 bottom-0 w-1 opacity-80 group-hover:opacity-100 transition-opacity rounded-l-xl" 
+                  style={{ backgroundColor: kpi.color }} 
+                />
+                <div className="pl-2">
                   <div className="text-xs font-bold uppercase tracking-wider text-slate-400 leading-snug">
                     {kpi.label}
                   </div>
-                  <div className="mt-2 text-2xl font-bold font-mono-jb text-foreground">
+                  <div className="mt-2 text-3xl font-bold font-display tracking-tight text-foreground">
                     {kpi.isNum ? <AnimatedCounter value={kpi.value as number} /> : kpi.value}
                   </div>
                 </div>
-                <div className="mt-2 pt-2 border-t border-border/20 text-xs font-extrabold text-slate-500 flex justify-between items-center font-sans-dm">
+                <div className="mt-3 pt-2 border-t border-border text-[11px] font-bold uppercase tracking-widest text-slate-500 flex justify-between items-center pl-2">
                   <span>{kpi.sub}</span>
                 </div>
-              </div>
+              </Card>
             ))}
           </div>
         </div>
@@ -473,16 +476,16 @@ function Dashboard() {
           {/* COLUMN 1: lg:col-span-5 */}
           <div className="col-span-12 lg:col-span-5 space-y-5">
             {/* 5.1 Lead Acquisition Funnel */}
-            <Card className="p-4 flex flex-col min-h-[300px]">
-              <div className="flex items-start justify-between border-b border-border/40 pb-2 mb-3">
+            <Card className="p-5 flex flex-col min-h-[300px]">
+              <div className="flex items-start justify-between border-b border-border pb-3 mb-4">
                 <div>
-                  <h3 className="text-sm font-bold text-foreground font-display">
+                  <h3 className="text-sm font-bold text-foreground font-display tracking-tight">
                     Lead Acquisition Funnel
                   </h3>
                 </div>
                 <button
                   onClick={() => navigate({ to: "/leads" })}
-                  className="text-xs font-bold text-blue-600 hover:underline"
+                  className="text-xs font-bold text-primary hover:text-primary/80 transition-colors"
                 >
                   View Details →
                 </button>
@@ -543,7 +546,7 @@ function Dashboard() {
                 </div>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-border/40 grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs text-slate-500 font-medium">
+              <div className="mt-4 pt-3 border-t border-border grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs text-slate-500 font-medium">
                 <div>
                   Enrichment Time <strong className="block text-foreground font-mono-jb">91s</strong>
                 </div>
@@ -560,23 +563,23 @@ function Dashboard() {
             </Card>
 
             {/* 5.4 AI Conversations & Engagement */}
-            <Card className="p-4 flex flex-col min-h-[280px]">
-              <div className="flex items-start justify-between border-b border-border/40 pb-2 mb-3">
+            <Card className="p-5 flex flex-col min-h-[280px]">
+              <div className="flex items-start justify-between border-b border-border pb-3 mb-4">
                 <div>
-                  <h3 className="text-sm font-bold text-foreground font-display">
+                  <h3 className="text-sm font-bold text-foreground font-display tracking-tight">
                     AI Conversations & Engagement
                   </h3>
                 </div>
                 <button
                   onClick={() => navigate({ to: "/conversations" })}
-                  className="text-xs font-bold text-blue-600 hover:underline"
+                  className="text-xs font-bold text-primary hover:text-primary/80 transition-colors"
                 >
                   Configure AI →
                 </button>
               </div>
 
               <div className="grid grid-cols-2 gap-4 text-xs font-semibold text-slate-500">
-                <div className="p-3 bg-secondary/20 rounded-xl border border-border/30">
+                <div className="p-3 bg-secondary/20 rounded-xl border border-border">
                   <div className="text-xs uppercase tracking-wider text-slate-400">
                     Active Convs Now
                   </div>
@@ -584,7 +587,7 @@ function Dashboard() {
                     6
                   </div>
                 </div>
-                <div className="p-3 bg-secondary/20 rounded-xl border border-border/30">
+                <div className="p-3 bg-secondary/20 rounded-xl border border-border">
                   <div className="text-xs uppercase tracking-wider text-slate-400">
                     Today's Conversations
                   </div>
@@ -620,7 +623,7 @@ function Dashboard() {
                 </div>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-border/40 text-xs text-slate-500 flex justify-between font-medium">
+              <div className="mt-4 pt-3 border-t border-border text-xs text-slate-500 flex justify-between font-medium">
                 <span>
                   Missed Call Recovery: <strong>18 → 14 recovered</strong>
                 </span>
@@ -640,16 +643,16 @@ function Dashboard() {
           {/* COLUMN 2: lg:col-span-4 */}
           <div className="col-span-12 lg:col-span-4 space-y-5">
             {/* 5.2 Sales Pipeline Kanban */}
-            <Card className="p-4 flex flex-col min-h-[300px]">
-              <div className="flex items-start justify-between border-b border-border/40 pb-2 mb-3">
+            <Card className="p-5 flex flex-col min-h-[300px]">
+              <div className="flex items-start justify-between border-b border-border pb-3 mb-4">
                 <div>
-                  <h3 className="text-sm font-bold text-foreground font-display">
+                  <h3 className="text-sm font-bold text-foreground font-display tracking-tight">
                     Sales Pipeline Summary
                   </h3>
                 </div>
                 <button
                   onClick={() => navigate({ to: "/pipeline" })}
-                  className="text-xs font-bold text-blue-600 hover:underline"
+                  className="text-xs font-bold text-primary hover:text-primary/80 transition-colors"
                 >
                   CRM Board →
                 </button>
@@ -670,7 +673,7 @@ function Dashboard() {
                 ))}
               </div>
 
-              <div className="mt-4 bg-secondary/10 dark:bg-slate-950/20 border border-border/30 rounded-xl p-3">
+              <div className="mt-4 bg-secondary/10 dark:bg-slate-950/20 border border-border rounded-xl p-3">
                 <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5 flex items-center justify-between">
                   <span>Today's Pipeline Activity Feed</span>
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -687,16 +690,16 @@ function Dashboard() {
             </Card>
 
             {/* 5.5 Property Intelligence & Market Pulse */}
-            <Card className="p-4 flex flex-col min-h-[280px]">
-              <div className="flex items-start justify-between border-b border-border/40 pb-2 mb-3">
+            <Card className="p-5 flex flex-col min-h-[280px]">
+              <div className="flex items-start justify-between border-b border-border pb-3 mb-4">
                 <div>
-                  <h3 className="text-sm font-bold text-foreground font-display">
+                  <h3 className="text-sm font-bold text-foreground font-display tracking-tight">
                     Property Intel & Market Pulse
                   </h3>
                 </div>
                 <button
                   onClick={() => navigate({ to: "/properties" })}
-                  className="text-xs font-bold text-blue-600 hover:underline"
+                  className="text-xs font-bold text-primary hover:text-primary/80 transition-colors"
                 >
                   Market Data →
                 </button>
@@ -721,11 +724,11 @@ function Dashboard() {
               </div>
 
               <div className="mt-4 space-y-2.5 text-xs font-semibold text-slate-500 flex-1 justify-center flex flex-col">
-                <div className="flex justify-between border-b border-border/30 pb-1.5">
+                <div className="flex justify-between border-b border-border pb-1.5">
                   <span>AVMs Run Today</span>
                   <span className="font-mono-jb text-foreground font-bold">14 runs</span>
                 </div>
-                <div className="flex justify-between border-b border-border/30 pb-1.5">
+                <div className="flex justify-between border-b border-border pb-1.5">
                   <span>Active Buyer Alerts</span>
                   <span className="font-mono-jb text-foreground font-bold">48 alert rules</span>
                 </div>
@@ -740,16 +743,16 @@ function Dashboard() {
           {/* COLUMN 3: lg:col-span-3 */}
           <div className="col-span-12 lg:col-span-3 space-y-5">
             {/* 5.3 Finance P&L stack */}
-            <Card className="p-4 flex flex-col min-h-[600px]">
-              <div className="flex items-start justify-between border-b border-border/40 pb-2 mb-3">
+            <Card className="p-5 flex flex-col min-h-[600px]">
+              <div className="flex items-start justify-between border-b border-border pb-3 mb-4">
                 <div>
-                  <h3 className="text-sm font-bold text-foreground font-display">
+                  <h3 className="text-sm font-bold text-foreground font-display tracking-tight">
                     Project P&L Snapshot
                   </h3>
                 </div>
                 <button
                   onClick={() => navigate({ to: "/finance" })}
-                  className="text-xs font-bold text-blue-600 hover:underline"
+                  className="text-xs font-bold text-primary hover:text-primary/80 transition-colors"
                 >
                   Accounts →
                 </button>
@@ -757,7 +760,7 @@ function Dashboard() {
 
               <div className="space-y-3 flex-1 justify-center flex flex-col">
                 {projectPL.map((proj, idx) => (
-                  <div key={idx} className="p-2.5 bg-secondary/15 dark:bg-slate-900/10 rounded-xl border border-border/30 text-xs">
+                  <div key={idx} className="p-2.5 bg-secondary/15 dark:bg-slate-900/10 rounded-xl border border-border text-xs">
                     <div className="flex justify-between items-center font-bold">
                       <span className="text-foreground truncate">{proj.name}</span>
                       <span className="font-mono-jb text-blue-600">{proj.margin}</span>
@@ -770,7 +773,7 @@ function Dashboard() {
                 ))}
               </div>
 
-              <div className="mt-4 pt-4 border-t border-border/40 space-y-4">
+              <div className="mt-4 pt-4 border-t border-border space-y-4">
                 <div>
                   <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
                     Collection & Cash Inflows
@@ -820,7 +823,7 @@ function Dashboard() {
         <div className="grid grid-cols-12 gap-5">
           {/* Construction Progress Panel */}
           <Card className="col-span-12 lg:col-span-5 p-4">
-            <div className="flex items-start justify-between border-b border-border/40 pb-2 mb-3">
+            <div className="flex items-start justify-between border-b border-border pb-2 mb-3">
               <div>
                 <h3 className="text-sm font-bold text-foreground font-display">
                   Construction Milestones
@@ -844,7 +847,7 @@ function Dashboard() {
             </div>
 
             <div className="space-y-3">
-              <div className="text-xs font-bold uppercase tracking-wider text-slate-400 border-b border-border/20 pb-1.5">
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-400 border-b border-border pb-1.5">
                 Phase Milestone Progress (Tower Heights)
               </div>
               <div className="space-y-2 max-h-36 overflow-y-auto scrollbar-none pr-1">
@@ -874,7 +877,7 @@ function Dashboard() {
 
           {/* Tenant, Buyer & Post-Sale Health */}
           <Card className="col-span-12 lg:col-span-4 p-4">
-            <div className="flex items-start justify-between border-b border-border/40 pb-2 mb-3">
+            <div className="flex items-start justify-between border-b border-border pb-2 mb-3">
               <div>
                 <h3 className="text-sm font-bold text-foreground font-display">
                   Tenant & Buyer Overview
@@ -889,7 +892,7 @@ function Dashboard() {
             </div>
 
             <div className="grid grid-cols-2 gap-4 text-xs font-semibold text-slate-500 mb-4">
-              <div className="p-3 bg-secondary/25 dark:bg-slate-950/20 border border-border/30 rounded-xl">
+              <div className="p-3 bg-secondary/25 dark:bg-slate-950/20 border border-border rounded-xl">
                 <div className="text-xs uppercase tracking-wider text-slate-400">
                   Portfolio NPS
                 </div>
@@ -897,7 +900,7 @@ function Dashboard() {
                   74
                 </div>
               </div>
-              <div className="p-3 bg-secondary/25 dark:bg-slate-950/20 border border-border/30 rounded-xl">
+              <div className="p-3 bg-secondary/25 dark:bg-slate-950/20 border border-border rounded-xl">
                 <div className="text-xs uppercase tracking-wider text-slate-400">
                   Buyer Portal Active
                 </div>
@@ -908,11 +911,11 @@ function Dashboard() {
             </div>
 
             <div className="space-y-2 text-xs font-semibold text-slate-500">
-              <div className="flex justify-between border-b border-border/30 pb-1.5">
+              <div className="flex justify-between border-b border-border pb-1.5">
                 <span>Leases Expiring (60 days)</span>
                 <span className="font-mono-jb text-red-600 font-bold">6 leases</span>
               </div>
-              <div className="flex justify-between border-b border-border/30 pb-1.5">
+              <div className="flex justify-between border-b border-border pb-1.5">
                 <span>Payments Overdue</span>
                 <span className="font-mono-jb text-red-600 font-bold">18 buyers</span>
               </div>
@@ -925,7 +928,7 @@ function Dashboard() {
 
           {/* HR Pipeline & Leaderboard */}
           <Card className="col-span-12 lg:col-span-3 p-4">
-            <div className="flex items-start justify-between border-b border-border/40 pb-2 mb-3">
+            <div className="flex items-start justify-between border-b border-border pb-2 mb-3">
               <div>
                 <h3 className="text-sm font-bold text-foreground font-display">
                   HR Leaderboard
@@ -943,7 +946,7 @@ function Dashboard() {
               {hrAgents.map((agent, i) => (
                 <div
                   key={i}
-                  className="flex items-center justify-between text-xs p-1.5 hover:bg-secondary/20 rounded-lg transition-colors border border-transparent hover:border-border/30"
+                  className="flex items-center justify-between text-xs p-1.5 hover:bg-secondary/20 rounded-lg transition-colors border border-transparent hover:border-border"
                 >
                   <div className="flex items-center gap-2">
                     <div className="h-6 w-6 rounded-full bg-slate-100 text-slate-700 grid place-items-center text-xs font-bold font-mono">
@@ -975,7 +978,7 @@ function Dashboard() {
 
         {/* SECTION 6: ANALYTICS & FORECASTING */}
         <Card className="p-5">
-          <div className="flex items-start justify-between border-b border-border/40 pb-3 mb-4">
+          <div className="flex items-start justify-between border-b border-border pb-3 mb-4">
             <div>
               <h3 className="text-base font-bold text-foreground font-display">
                 Analytics & ML Forecasting Dashboard
@@ -1068,7 +1071,7 @@ function Dashboard() {
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent pointer-events-none" />
             <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/10  pointer-events-none" />
 
-            <div className="flex justify-between items-center border-b border-border/20 pb-3 mb-3 relative z-10">
+            <div className="flex justify-between items-center border-b border-border pb-3 mb-3 relative z-10">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary">
                 <Sparkles className="h-4 w-4 text-primary animate-pulse" /> 
                 <span className="font-display">AI Insights Feed</span>
@@ -1096,7 +1099,7 @@ function Dashboard() {
               </p>
             </div>
 
-            <div className="flex items-center justify-between mt-4 pt-3 border-t border-border/20 relative z-10">
+            <div className="flex items-center justify-between mt-4 pt-3 border-t border-border relative z-10">
               {/* Pagination Dots */}
               <div className="flex gap-1.5 items-center">
                 {aiInsights.map((_, idx) => (
@@ -1123,7 +1126,7 @@ function Dashboard() {
 
           {/* 7.2 Risk Intelligence Summary (Centre 35%) */}
           <Card className="col-span-12 lg:col-span-5 p-4 flex flex-col justify-between min-h-[260px]">
-            <div className="flex justify-between items-center border-b border-border/40 pb-2 mb-3">
+            <div className="flex justify-between items-center border-b border-border pb-2 mb-3">
               <div className="text-xs font-extrabold uppercase tracking-widest text-red-500 flex items-center gap-1">
                 <AlertOctagon className="h-3 w-3 animate-pulse" /> Risk Intelligence Summary
               </div>
@@ -1157,26 +1160,26 @@ function Dashboard() {
           </Card>
 
           {/* 7.3 System Health & Security (Right 30%) */}
-          <Card className="col-span-12 lg:col-span-3 p-4 flex flex-col justify-between min-h-[260px]">
-            <div className="flex justify-between items-center border-b border-border/40 pb-2 mb-3">
-              <div className="text-xs font-extrabold uppercase tracking-widest text-blue-700 flex items-center gap-1">
-                <ShieldCheck className="h-3 w-3" /> Uptime & Security
+          <Card className="col-span-12 lg:col-span-3 p-5 flex flex-col justify-between min-h-[260px]">
+            <div className="flex justify-between items-center border-b border-border pb-3 mb-4">
+              <div className="text-xs font-bold uppercase tracking-widest text-primary flex items-center gap-1.5">
+                <ShieldCheck className="h-4 w-4" /> Uptime & Security
               </div>
-              <span className="text-xs font-mono-jb font-bold text-emerald-600">
+              <span className="text-xs font-mono-jb font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/30 px-2 py-0.5 rounded border border-emerald-200/50">
                 Scan Clean ✓
               </span>
             </div>
 
             <div className="space-y-2 flex-1 justify-center flex flex-col text-xs font-semibold text-slate-500">
-              <div className="flex justify-between border-b border-border/20 pb-1 font-mono-jb">
+              <div className="flex justify-between border-b border-border pb-1 font-mono-jb">
                 <span>Gemini API Uptime</span>
                 <span className="text-emerald-500 font-bold">99.71%</span>
               </div>
-              <div className="flex justify-between border-b border-border/20 pb-1 font-mono-jb">
+              <div className="flex justify-between border-b border-border pb-1 font-mono-jb">
                 <span>Supabase Database</span>
                 <span className="text-emerald-500 font-bold">99.99%</span>
               </div>
-              <div className="flex justify-between border-b border-border/20 pb-1 font-mono-jb">
+              <div className="flex justify-between border-b border-border pb-1 font-mono-jb">
                 <span>WhatsApp API</span>
                 <span className="text-emerald-500 font-bold">99.83%</span>
               </div>
@@ -1186,7 +1189,7 @@ function Dashboard() {
               </div>
             </div>
 
-            <div className="mt-3 pt-2.5 border-t border-border/40 text-xs text-slate-400 font-bold flex justify-between uppercase font-display">
+            <div className="mt-3 pt-2.5 border-t border-border text-xs text-slate-400 font-bold flex justify-between uppercase font-display">
               <span>DPDP Compliance</span>
               <span className="text-emerald-500 font-bold font-mono">Active ✅</span>
             </div>
@@ -1194,13 +1197,13 @@ function Dashboard() {
         </div>
 
         {/* SECTION 8: PENDING ACTIONS QUEUE */}
-        <Card className="p-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-border/40 pb-3 mb-3 gap-2">
+        <Card className="p-5">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-border pb-4 mb-4 gap-3">
             <div>
-              <span className="text-xs font-extrabold uppercase tracking-widest text-slate-400">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-display">
                 Unified Workflow Action Queue
               </span>
-              <h3 className="text-sm font-bold text-foreground font-display">
+              <h3 className="text-lg font-bold text-foreground font-display tracking-tight mt-0.5">
                 Pending Actions Queue ({filteredActions.length} Open)
               </h3>
             </div>
@@ -1222,27 +1225,27 @@ function Dashboard() {
             </div>
           </div>
 
-          <div className="overflow-x-auto scrollbar-none">
-            <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-slate-400 text-xs uppercase tracking-wider font-display font-semibold">
+          <div className="overflow-x-auto hover-scrollbar">
+            <table className="w-full text-left text-xs">
+              <thead className="bg-secondary text-secondary-foreground text-[10px] uppercase tracking-wider font-display font-bold">
                 <tr>
-                  <th className="px-3 py-2">Priority</th>
-                  <th className="px-3 py-2">Action Required</th>
-                  <th className="px-3 py-2">Module</th>
-                  <th className="px-3 py-2">Owner</th>
-                  <th className="px-3 py-2">Deadline</th>
-                  <th className="px-3 py-2 text-right">Operation</th>
+                  <th className="px-4 py-3 rounded-tl-lg">Priority</th>
+                  <th className="px-4 py-3">Action Required</th>
+                  <th className="px-4 py-3">Module</th>
+                  <th className="px-4 py-3">Owner</th>
+                  <th className="px-4 py-3">Deadline</th>
+                  <th className="px-4 py-3 text-right rounded-tr-lg">Operation</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border/20 text-foreground font-medium bg-background/50">
+              <tbody className="text-foreground font-medium">
                 {filteredActions.map((act) => (
-                  <tr key={act.id} className="hover:bg-secondary/10">
-                    <td className="px-3 py-2.5">
-                      <span className={`text-xs px-2 py-0.5 rounded-full font-mono font-bold uppercase border ${act.pColor}`}>
+                  <tr key={act.id} className="interactive-element border-b border-border/50 last:border-0 hover:bg-secondary/10">
+                    <td className="px-4 py-3">
+                      <span className={`text-[10px] px-2 py-0.5 rounded border font-bold uppercase tracking-wider ${act.pColor}`}>
                         {act.priority}
                       </span>
                     </td>
-                    <td className="px-3 py-2.5 font-bold text-foreground truncate max-w-sm">
+                    <td className="px-4 py-3 font-semibold text-foreground truncate max-w-sm">
                       {act.text}
                     </td>
                     <td className="px-3 py-2.5 font-mono-jb text-slate-400">{act.module}</td>

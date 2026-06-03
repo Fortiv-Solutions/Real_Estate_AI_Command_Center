@@ -497,7 +497,7 @@ function SalesPipelineManager() {
     return (
       <div className="space-y-6 animate-in fade-in duration-300">
         {/* Top KPIs */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
           <StatBox label="Active Deals" value="23" desc="Total pipeline" color="text-slate-800" />
           <StatBox label="In Negotiation" value="6" desc="2 stuck past target" color="text-amber-500 animate-pulse" />
           <StatBox label="Bookings This Month" value="4" desc="Closed token amount" color="text-emerald-600" />
@@ -508,7 +508,7 @@ function SalesPipelineManager() {
           {/* Condensed Kanban Stage Summary */}
           <Card className="col-span-12 lg:col-span-6 p-4 border border-border bg-card flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
+              <div className="flex items-center justify-between mb-4 border-b border-border pb-2">
                 <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                   <GitBranch className="h-3.5 w-3.5 text-primary" /> Condensed Stage Distribution
                 </div>
@@ -552,7 +552,7 @@ function SalesPipelineManager() {
           {/* Today's Activity Feed */}
           <Card className="col-span-12 lg:col-span-6 p-4 border border-border bg-card flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
+              <div className="flex items-center justify-between mb-4 border-b border-border pb-2">
                 <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                   <Activity className="h-3.5 w-3.5 text-emerald-600 animate-pulse" /> Today's Operations Feed
                 </div>
@@ -570,7 +570,7 @@ function SalesPipelineManager() {
                 ].map((act, idx) => {
                   const badgeColor = act.type === "alert" ? "text-red-500 font-bold animate-pulse" : act.type === "follow-up" ? "text-primary" : "text-muted-foreground";
                   return (
-                    <div key={idx} className="flex gap-3 text-xs leading-relaxed font-semibold border-b border-border/40 pb-2.5 last:border-0 last:pb-0">
+                    <div key={idx} className="flex gap-3 text-xs leading-relaxed font-semibold border-b border-border pb-2.5 last:border-0 last:pb-0">
                       <span className="font-mono text-slate-400 shrink-0 mt-0.5">{act.time}</span>
                       <span className={`${badgeColor}`}>{act.event}</span>
                     </div>
@@ -661,16 +661,16 @@ function SalesPipelineManager() {
     return (
       <div className="space-y-4 animate-in fade-in duration-300">
         {/* Sync Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 border border-border bg-card p-4 rounded-2xl">
-          <div className="text-center md:border-r border-border/40">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border border-border bg-card p-4 rounded-2xl">
+          <div className="text-center md:border-r border-border">
             <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Synced Today</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">118 leads</div>
           </div>
-          <div className="text-center md:border-r border-border/40">
+          <div className="text-center md:border-r border-border">
             <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Duplicates Merged</div>
             <div className="text-base font-bold text-emerald-600 font-mono mt-1">14 merged</div>
           </div>
-          <div className="text-center md:border-r border-border/40">
+          <div className="text-center md:border-r border-border">
             <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Sync Health</div>
             <div className="text-xs font-extrabold text-emerald-600 mt-1.5 flex items-center gap-1 justify-center">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> All API Systems Live
@@ -755,7 +755,7 @@ function SalesPipelineManager() {
                 </div>
               </div>
 
-              <div className="text-xs font-bold text-slate-400 uppercase tracking-widest text-center border-t border-border/40 pt-3">
+              <div className="text-xs font-bold text-slate-400 uppercase tracking-widest text-center border-t border-border pt-3">
                 All data transfers compliant with DPDP Act 2023
               </div>
             </div>
@@ -764,7 +764,7 @@ function SalesPipelineManager() {
 
         {/* Visual Deduplication Sandbox */}
         <Card className="col-span-12 p-5 border border-border bg-card mt-2">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-border/40 pb-3 mb-4 gap-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-border pb-3 mb-4 gap-2">
             <div>
               <div className="text-xs font-bold uppercase tracking-widest text-amber-500 flex items-center gap-1.5 font-display">
                 <Sparkles className="h-3.5 w-3.5 animate-pulse text-amber-500" /> Sandbox Conflict Resolver
@@ -774,7 +774,7 @@ function SalesPipelineManager() {
               </h3>
             </div>
             {duplicates.length > 0 && (
-              <span className="text-xs font-bold text-slate-500 font-mono bg-secondary px-2.5 py-1 rounded border border-border/40">
+              <span className="text-xs font-bold text-slate-500 font-mono bg-secondary px-2.5 py-1 rounded border border-border">
                 Rule triggered: {duplicates[0].fieldMatch}
               </span>
             )}
@@ -794,7 +794,7 @@ function SalesPipelineManager() {
                 {/* Left Card: Existing CRM */}
                 <div className="col-span-12 lg:col-span-5 p-4 rounded-xl border border-border bg-slate-50 dark:bg-slate-900/10 flex flex-col justify-between">
                   <div>
-                    <div className="flex justify-between items-center border-b border-border/40 pb-2 mb-3">
+                    <div className="flex justify-between items-center border-b border-border pb-2 mb-3">
                       <span className="text-xs font-bold text-foreground">Existing CRM Record</span>
                       <span className="text-xs bg-slate-800/10 text-slate-800 px-2 py-0.5 rounded font-mono font-bold">
                         {duplicates[0].cardA.id}
@@ -824,7 +824,7 @@ function SalesPipelineManager() {
                 {/* Right Card: Incoming Sync */}
                 <div className="col-span-12 lg:col-span-5 p-4 rounded-xl border border-border bg-slate-50 dark:bg-slate-900/10 flex flex-col justify-between lg:order-3">
                   <div>
-                    <div className="flex justify-between items-center border-b border-border/40 pb-2 mb-3">
+                    <div className="flex justify-between items-center border-b border-border pb-2 mb-3">
                       <span className="text-xs font-bold text-foreground">Incoming Sync Record</span>
                       <span className="text-xs bg-amber-500/10 text-amber-700 px-2 py-0.5 rounded font-mono font-bold">
                         {duplicates[0].cardB.id}
@@ -962,7 +962,7 @@ function SalesPipelineManager() {
               </div>
 
               {/* Final Merged Record Preview */}
-              <div className="bg-secondary/15 dark:bg-slate-900/10 border border-border/40 rounded-xl p-4 space-y-3">
+              <div className="bg-secondary/15 dark:bg-slate-900/10 border border-border rounded-xl p-4 space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-xs font-bold uppercase tracking-wider text-slate-400 font-display">Merged Record Preview</span>
                   <span className="text-xs font-bold bg-blue-600/10 text-blue-600 px-2 py-0.5 rounded font-mono">Ready to commit</span>
@@ -995,9 +995,9 @@ function SalesPipelineManager() {
                     </span>
                   </div>
                 </div>
-                <div className="text-xs border-t border-border/30 pt-2 text-slate-500 font-medium">
+                <div className="text-xs border-t border-border pt-2 text-slate-500 font-medium">
                   <span className="text-slate-400 text-xs block uppercase tracking-wide mb-1 font-bold">Combined Profile Notes</span>
-                  <p className="leading-relaxed text-foreground bg-background p-2.5 rounded-lg border border-border/40 font-semibold italic text-xs">
+                  <p className="leading-relaxed text-foreground bg-background p-2.5 rounded-lg border border-border font-semibold italic text-xs">
                     {mergedSelections.notes === "both" 
                       ? `${duplicates[0].cardA.notes} \n[Merged from ${duplicates[0].cardB.source}]: ${duplicates[0].cardB.notes}`
                       : mergedSelections.notes === "cardA" 
@@ -1008,7 +1008,7 @@ function SalesPipelineManager() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center justify-end gap-3 border-t border-border/40 pt-4">
+              <div className="flex flex-wrap items-center justify-end gap-3 border-t border-border pt-4">
                 <button
                   onClick={() => handleResolveDuplicate("skip")}
                   className="h-9 px-4 rounded-xl border border-border bg-card hover:bg-muted text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-foreground transition-all cursor-pointer"
@@ -1093,7 +1093,7 @@ function SalesPipelineManager() {
           {/* Calendar Block (Left Area) */}
           <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card flex flex-col justify-between min-h-[450px]">
             <div>
-              <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
+              <div className="flex items-center justify-between mb-4 border-b border-border pb-2">
                 <h3 className="font-bold text-xs text-foreground font-display flex items-center gap-1.5">
                   <Calendar className="h-4 w-4 text-primary" /> Visual Scheduler Board (Week view Jan 15-22)
                 </h3>
@@ -1135,7 +1135,7 @@ function SalesPipelineManager() {
               </div>
             </div>
 
-            <div className="border-t border-border/40 pt-3 flex justify-between items-center text-xs">
+            <div className="border-t border-border pt-3 flex justify-between items-center text-xs">
               <span className="text-muted-foreground font-semibold">Layers:</span>
               <div className="flex gap-3 text-xs font-bold">
                 <span className="flex items-center gap-1"><span className="h-2 w-2 rounded bg-amber-500" /> Hot lead (Score &gt; 70)</span>
@@ -1147,7 +1147,7 @@ function SalesPipelineManager() {
 
           {/* Upcoming visits (Right Area) */}
           <div className="col-span-12 lg:col-span-5 space-y-4">
-            <Card className="p-4 border border-border bg-card flex flex-col h-[260px] justify-between">
+            <Card className="p-5 border border-border bg-card flex flex-col h-[260px] justify-between">
               <div>
                 <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display mb-2.5">Confirmed visit schedule</div>
                 
@@ -1183,13 +1183,13 @@ function SalesPipelineManager() {
                 </div>
               </div>
 
-              <div className="text-xs font-bold text-slate-400 uppercase tracking-widest text-center border-t border-border/40 pt-2.5">
+              <div className="text-xs font-bold text-slate-400 uppercase tracking-widest text-center border-t border-border pt-2.5">
                 Layered reminders sent automatically via WhatsApp (T-24h, Day-of, T-1h)
               </div>
             </Card>
 
             {/* No show log list */}
-            <Card className="p-4 border border-border bg-card flex flex-col justify-between h-[175px]">
+            <Card className="p-5 border border-border bg-card flex flex-col justify-between h-[175px]">
               <div>
                 <div className="text-xs font-bold uppercase tracking-widest text-red-500 font-display mb-2 flex items-center gap-1.5">
                   <AlertCircle className="h-3.5 w-3.5 text-red-500 animate-pulse" /> No-Show registry queue
@@ -1197,7 +1197,7 @@ function SalesPipelineManager() {
                 
                 <div className="space-y-2">
                   {noShowVisits.map((v) => (
-                    <div key={v.id} className="text-xs flex items-center justify-between border-b border-border/40 pb-2 last:border-0 last:pb-0">
+                    <div key={v.id} className="text-xs flex items-center justify-between border-b border-border pb-2 last:border-0 last:pb-0">
                       <div>
                         <div className="font-bold text-foreground">{v.name}</div>
                         <div className="text-xs text-muted-foreground mt-0.5">Reason: "{v.reason}" · {v.time.split(" ")[0]}</div>
@@ -1300,7 +1300,7 @@ function SalesPipelineManager() {
           {/* Timeline and WhatsApp dynamic conversation preview (Right Area) */}
           <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card flex flex-col justify-between h-[480px]">
             <div className="flex-1 flex flex-col min-h-0">
-              <div className="mb-2.5 border-b border-border/40 pb-2.5 flex justify-between items-center shrink-0">
+              <div className="mb-2.5 border-b border-border pb-2.5 flex justify-between items-center shrink-0">
                 <div>
                   <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Active Follow-Up Timeline</div>
                   <h4 className="text-xs font-bold text-foreground">Buyer: {activeSequence.name}</h4>
@@ -1393,7 +1393,7 @@ function SalesPipelineManager() {
       <div className="space-y-4 animate-in fade-in duration-300">
         
         {/* Nurture drip tracks stats cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
           <StatBox label="Total Leads in Drip" value="142" desc="Long-term nurture" color="text-slate-800" />
           <StatBox label="Track A — Active (30d)" value="24" desc="Every 3-4 days" color="text-red-500 font-bold" />
           <StatBox label="Track B — Warm (60d)" value="48" desc="Every 7 days" color="text-amber-500" />
@@ -1453,7 +1453,7 @@ function SalesPipelineManager() {
           {/* Drip Content Calendar details (Right Area) */}
           <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card flex flex-col justify-between h-[450px]">
             <div>
-              <div className="border-b border-border/40 pb-2 mb-3">
+              <div className="border-b border-border pb-2 mb-3">
                 <h3 className="font-bold text-xs text-foreground font-display">Drip Content Calendar (14 Days)</h3>
               </div>
 
@@ -1583,7 +1583,7 @@ function SalesPipelineManager() {
                             
                             <p className="text-xs text-muted-foreground mt-0.5 font-semibold leading-relaxed truncate">{deal.project}</p>
                             
-                            <div className="flex justify-between items-center mt-3 pt-2.5 border-t border-border/40 text-xs">
+                            <div className="flex justify-between items-center mt-3 pt-2.5 border-t border-border text-xs">
                               <span className="font-bold text-foreground font-mono">₹{deal.value}L</span>
                               <span className="text-xs font-mono text-slate-500 flex items-center gap-0.5">
                                 <Clock className="h-3 w-3" /> {deal.daysInStage}d
@@ -1607,8 +1607,8 @@ function SalesPipelineManager() {
         </div>
 
         {/* Velocity actual vs benchmark chart */}
-        <Card className="p-4 border border-border bg-card">
-          <div className="border-b border-border/40 pb-2 mb-3">
+        <Card className="p-5 border border-border bg-card">
+          <div className="border-b border-border pb-2 mb-3">
             <h3 className="font-bold text-xs text-foreground font-display">Stage Velocity Benchmarks (Fortiv Actual vs Industry average)</h3>
           </div>
           {renderVelocityChart(160)}
@@ -1793,7 +1793,7 @@ function SalesPipelineManager() {
             {writerStatus === "generated" && (
               <div className="space-y-4 animate-in slide-in-from-bottom duration-500">
                 {/* Formats Tab Selectors */}
-                <div className="flex flex-wrap gap-1 border-b border-border/40 pb-2">
+                <div className="flex flex-wrap gap-1 border-b border-border pb-2">
                   {[
                     { id: "portal", label: "Portal description" },
                     { id: "whatsapp", label: "WhatsApp Broadcast" },
@@ -1835,7 +1835,7 @@ function SalesPipelineManager() {
                 </div>
 
                 {/* Publish Portal Trigger */}
-                <div className="flex gap-2 pt-2 border-t border-border/40">
+                <div className="flex gap-2 pt-2 border-t border-border">
                   <button
                     onClick={() => alert("Listing published to 99acres and MagicBricks portals successfully.")}
                     className="flex-1 h-8 bg-ink hover:bg-ink/90 text-cream rounded-lg text-xs font-bold transition-all shadow-sm"
@@ -1998,7 +1998,7 @@ function SalesPipelineManager() {
                   {mod.desc}
                 </p>
               </div>
-              <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
+              <div className="border-t border-border mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
                 <span className="font-mono font-bold text-foreground">{mod.stats}</span>
                 <span className="flex items-center gap-0.5 text-ink group-hover:underline">
                   Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -2043,7 +2043,7 @@ function StatBox({
   color: string;
 }) {
   return (
-    <Card className="p-4 flex flex-col justify-between relative min-h-24 border border-border bg-card">
+    <Card className="p-5 flex flex-col justify-between relative min-h-24 border border-border bg-card">
       <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display">
         {label}
       </div>

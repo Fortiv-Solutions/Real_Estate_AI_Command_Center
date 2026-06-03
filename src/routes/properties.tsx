@@ -490,7 +490,7 @@ function PropertiesManager() {
           {/* Market Pulse strip (Left Centre) */}
           <Card className="col-span-12 lg:col-span-6 p-4 flex flex-col justify-between border border-border bg-card">
             <div>
-              <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
+              <div className="flex items-center justify-between mb-4 border-b border-border pb-2">
                 <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                   <Activity className="h-3.5 w-3.5 text-blue-700" /> Market Pulse Signals
                 </div>
@@ -543,7 +543,7 @@ function PropertiesManager() {
           {/* Active Price Alerts (Right Centre) */}
           <Card className="col-span-12 lg:col-span-6 p-4 flex flex-col justify-between border border-border bg-card">
             <div>
-              <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
+              <div className="flex items-center justify-between mb-4 border-b border-border pb-2">
                 <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                   <Bell className="h-3.5 w-3.5 text-amber-500" /> Active Price Alerts (48 saved searches)
                 </div>
@@ -835,7 +835,7 @@ function PropertiesManager() {
             {avmStatus === "revealed" && (
               <div className="space-y-4 animate-in slide-in-from-bottom duration-500">
                 {/* Header info */}
-                <div className="border-b border-border/40 pb-2.5 flex justify-between items-start">
+                <div className="border-b border-border pb-2.5 flex justify-between items-start">
                   <div>
                     <span className="text-xs font-bold font-mono px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded border border-emerald-100">
                       Report #AVM-2025-0147
@@ -890,7 +890,7 @@ function PropertiesManager() {
                       </div>
                     </div>
 
-                    <div className="mt-4 pt-3 border-t border-border/40">
+                    <div className="mt-4 pt-3 border-t border-border">
                       {isOverpriced ? (
                         <div className="flex items-start gap-2 text-amber-700 bg-amber-50 border border-amber-200 p-2.5 rounded-xl text-xs font-semibold">
                           <AlertTriangle className="h-4 w-4 shrink-0 text-amber-500" />
@@ -913,13 +913,13 @@ function PropertiesManager() {
                 </div>
 
                 {/* Pricing Trend Graph */}
-                <div className="border-t border-border/40 pt-4">
+                <div className="border-t border-border pt-4">
                   <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display mb-3">6-Month Price Trend — Vesu, Surat</div>
                   {renderLineChart(avmVesuTrend, 130)}
                 </div>
 
                 {/* PDF and share actions */}
-                <div className="flex gap-2 mt-4 pt-2 border-t border-border/40">
+                <div className="flex gap-2 mt-4 pt-2 border-t border-border">
                   <button
                     onClick={() => alert("PDF report download initiated for Report AVM-2025-0147.")}
                     className="flex-1 h-8 rounded-lg bg-secondary hover:bg-secondary/70 border border-border text-foreground text-xs font-bold transition-all flex items-center justify-center gap-1"
@@ -1129,7 +1129,7 @@ function PropertiesManager() {
             {cmaStatus === "generated" && (
               <div className="space-y-6 animate-in slide-in-from-bottom duration-500">
                 {/* Header */}
-                <div className="border-b border-border/40 pb-3 flex justify-between items-start">
+                <div className="border-b border-border pb-3 flex justify-between items-start">
                   <div>
                     <span className="text-xs font-bold font-mono px-2 py-0.5 bg-primary text-primary-foreground rounded">
                       Report #CMA-2025-0042
@@ -1258,7 +1258,7 @@ function PropertiesManager() {
                 </div>
 
                 {/* Graph */}
-                <div className="border-t border-border/40 pt-4">
+                <div className="border-t border-border pt-4">
                   <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display mb-3">Price Comparison (Sold Comps vs Subject Recommendation)</div>
                   {renderBarChart(cmaGraphData, 140)}
                 </div>
@@ -1429,7 +1429,7 @@ function PropertiesManager() {
           {/* Left panel: Buyer vector details */}
           <Card className="col-span-12 lg:col-span-4 p-4 border border-border bg-card flex flex-col justify-between">
             <div className="space-y-4">
-              <div className="border-b border-border/40 pb-2 flex justify-between items-center">
+              <div className="border-b border-border pb-2 flex justify-between items-center">
                 <h3 className="font-bold text-xs text-foreground font-display">Buyer vector profile</h3>
                 <span className="text-xs font-bold text-slate-400 font-mono">Last synced: 2h ago</span>
               </div>
@@ -1448,7 +1448,7 @@ function PropertiesManager() {
                 </div>
               </div>
 
-              <div className="space-y-2 text-xs border-t border-b border-border/40 py-3 my-2">
+              <div className="space-y-2 text-xs border-t border-b border-border py-3 my-2">
                 <div className="flex justify-between">
                   <span className="font-semibold text-muted-foreground">Budget preference</span>
                   <span className="font-bold text-foreground font-mono">₹{currentBuyer.budgetMin}L – ₹{currentBuyer.budgetMax}L</span>
@@ -1490,7 +1490,7 @@ function PropertiesManager() {
               </div>
             </div>
 
-            <div className="border-t border-border/40 pt-3 mt-4 text-xs font-bold text-slate-500 font-sans uppercase text-center leading-relaxed">
+            <div className="border-t border-border pt-3 mt-4 text-xs font-bold text-slate-500 font-sans uppercase text-center leading-relaxed">
               Auto WhatsApp alert sent for new matched listings ✓
             </div>
           </Card>
@@ -1550,7 +1550,7 @@ function PropertiesManager() {
                       </div>
                     </div>
 
-                    <div className="border-t border-border/40 mt-3 pt-2.5 flex items-center justify-between">
+                    <div className="border-t border-border mt-3 pt-2.5 flex items-center justify-between">
                       <span className={`px-2 py-0.5 rounded text-xs font-bold border`} style={{ backgroundColor: match.color + "15", color: match.color, borderColor: match.color + "30" }}>
                         {match.label}
                       </span>
@@ -1704,7 +1704,7 @@ function PropertiesManager() {
             </Card>
 
             {/* WhatsApp notification mockup */}
-            <Card className="p-4 flex-1 border border-border bg-card">
+            <Card className="p-5 flex-1 border border-border bg-card">
               <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display mb-2.5">WhatsApp alert layout mockup</div>
               
               <div className="flex gap-4">
@@ -1745,7 +1745,7 @@ function PropertiesManager() {
                   <div>Channel route: <strong className="text-blue-600">{activeAlert?.channel}</strong></div>
                   <div>Engagement Result: <strong className="text-emerald-600">{activeAlert?.outcome}</strong></div>
                   
-                  <div className="pt-2 border-t border-border/40">
+                  <div className="pt-2 border-t border-border">
                     <button
                       onClick={() => alert("Simulation sent for Rajesh Patel WhatsApp alert test.")}
                       className="h-8 px-4 bg-ink hover:bg-ink/90 text-cream rounded-lg text-xs font-bold transition-all"
@@ -1817,7 +1817,7 @@ function PropertiesManager() {
         <div className="grid grid-cols-12 gap-5">
           {/* Locality Price trend details (Left Column) */}
           <Card className="col-span-12 lg:col-span-6 p-4 border border-border bg-card space-y-4">
-            <div className="flex items-center justify-between border-b border-border/40 pb-2">
+            <div className="flex items-center justify-between border-b border-border pb-2">
               <h3 className="font-bold text-xs text-foreground font-display">Locality Price Trend Timeline</h3>
               <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100 font-mono">
                 {activeMarketLocalityData.change} 6M Change
@@ -1862,7 +1862,7 @@ function PropertiesManager() {
 
           {/* Demand heat map and details (Right Column) */}
           <Card className="col-span-12 lg:col-span-6 p-4 border border-border bg-card space-y-4">
-            <div className="flex items-center justify-between border-b border-border/40 pb-2">
+            <div className="flex items-center justify-between border-b border-border pb-2">
               <h3 className="font-bold text-xs text-foreground font-display">Demand Inquiry Density map</h3>
               <span className="text-xs font-bold text-slate-400 font-mono">Real-time tracker</span>
             </div>
@@ -1975,7 +1975,7 @@ function PropertiesManager() {
 
           {/* New launches */}
           <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-3">
-            <div className="border-b border-border/40 pb-2">
+            <div className="border-b border-border pb-2">
               <h3 className="font-bold text-xs text-foreground font-display">New Project Launches (Q1 2025)</h3>
             </div>
             
@@ -2306,7 +2306,7 @@ function PropertiesManager() {
                   {mod.desc}
                 </p>
               </div>
-              <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
+              <div className="border-t border-border mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
                 <span className="font-mono font-bold text-foreground">{mod.stats}</span>
                 <span className="flex items-center gap-0.5 text-ink group-hover:underline">
                   Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -2351,7 +2351,7 @@ function StatBox({
   color: string;
 }) {
   return (
-    <Card className="p-4 flex flex-col justify-between relative min-h-24 border border-border bg-card">
+    <Card className="p-5 flex flex-col justify-between relative min-h-24 border border-border bg-card">
       <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display">
         {label}
       </div>

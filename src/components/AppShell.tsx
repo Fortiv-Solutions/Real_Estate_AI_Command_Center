@@ -222,16 +222,16 @@ export function AppShell({
     <TooltipProvider>
       <div className="min-h-screen flex bg-background font-sans text-foreground">
       {/* Sidebar */}
-      <aside className={`hidden lg:flex shrink-0 flex-col border-r border-[#1e293b] bg-[#030712] text-white h-screen sticky top-0 transition-all duration-300 no-scrollbar hover-scrollbar ${isCollapsed ? "w-[68px]" : "w-[220px]"}`}>
+      <aside className={`hidden lg:flex shrink-0 flex-col border-r border-border/40 bg-sidebar text-sidebar-foreground h-screen sticky top-0 transition-all duration-300 no-scrollbar hover-scrollbar shadow-sm z-30 ${isCollapsed ? "w-[68px]" : "w-[240px]"}`}>
         <div className={`transition-all duration-300 ${
           isCollapsed 
             ? "p-4 flex flex-col gap-3 items-center" 
-            : "pt-4 px-4 pb-1 flex flex-col gap-2"
+            : "pt-5 px-5 pb-3 flex flex-col gap-3"
         }`}>
           <div className={`w-full flex items-center justify-center transition-all duration-300 ${
             isCollapsed 
-              ? "h-11 w-11 p-1 bg-slate-900/40 rounded-lg border border-white/5 shadow-inner" 
-              : "bg-slate-900/30 rounded-xl p-3 border border-white/5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]"
+              ? "h-11 w-11 p-1.5 bg-primary/10 rounded-xl border border-primary/20 shadow-sm" 
+              : "bg-primary/5 rounded-2xl p-4 border border-primary/10 shadow-sm"
           }`}>
             <img 
               src="/logo.webp" 
@@ -240,19 +240,19 @@ export function AppShell({
             />
           </div>
           {!isCollapsed && (
-            <div className="text-xs text-blue-400 font-bold tracking-widest uppercase font-display text-center opacity-80 animate-fade-in">
-              Real Estate AI Command Center
+            <div className="text-[10px] text-primary/80 font-bold tracking-[0.2em] uppercase font-display text-center animate-fade-in mt-1">
+              Command Center
             </div>
           )}
         </div>
 
         <nav className="px-2 py-3 flex-1 overflow-y-auto space-y-5 no-scrollbar hover-scrollbar">
           {navGroups.map((group) => (
-            <div key={group.label}>
+            <div key={group.label} className="mb-2">
               {isCollapsed ? (
-                <div className="h-px bg-slate-800/60 my-4 mx-2" />
+                <div className="h-px bg-border/40 my-4 mx-3" />
               ) : (
-                <div className="text-xs font-bold uppercase tracking-[0.15em] text-slate-500/80 px-3 mb-2 font-display">
+                <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground/70 px-4 mb-2.5 font-display">
                   {group.label}
                 </div>
               )}
@@ -263,18 +263,18 @@ export function AppShell({
                   const linkElement = (
                     <Link
                       to={item.to}
-                      className={`group relative flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-300 border ${
+                      className={`group relative flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-300 border border-transparent ${
                         active
-                          ? "bg-primary/10 text-primary border-primary/20 shadow-sm"
-                          : "text-slate-400 border-transparent hover:bg-slate-800/40 hover:text-white"
-                      } ${isCollapsed ? "justify-center px-0 w-10 h-10 mx-auto" : ""}`}
+                          ? "bg-primary text-primary-foreground shadow-sm hover-lift"
+                          : "text-muted-foreground interactive-element"
+                      } ${isCollapsed ? "justify-center px-0 w-11 h-11 mx-auto" : ""}`}
                     >
-                      <Icon className={`transition-all duration-300 ${isCollapsed ? "h-[22px] w-[22px] group-hover:scale-110" : "h-3.5 w-3.5 group-hover:translate-x-0.5"} ${active ? "opacity-100 scale-110" : "opacity-70 group-hover:opacity-100"}`} />
+                      <Icon className={`transition-all duration-300 ${isCollapsed ? "h-[20px] w-[20px]" : "h-[18px] w-[18px]"} ${active ? "opacity-100" : "opacity-70 group-hover:scale-110 group-hover:opacity-100"}`} />
                       {!isCollapsed && <span className="flex-1">{item.label}</span>}
                       {!isCollapsed && "badge" in item && item.badge && (
                         <span
-                          className={`text-xs px-1.5 py-0.5 rounded-md font-bold transition-all duration-300 ${
-                            active ? "bg-primary text-primary-foreground" : "bg-slate-800 text-slate-300"
+                          className={`text-[10px] px-1.5 py-0.5 rounded-md font-bold transition-all duration-300 ${
+                            active ? "bg-primary-foreground/20 text-primary-foreground" : "bg-secondary text-secondary-foreground"
                           }`}
                         >
                           {item.badge}
@@ -292,7 +292,7 @@ export function AppShell({
                           <TooltipTrigger asChild>
                             {linkElement}
                           </TooltipTrigger>
-                          <TooltipContent side="right" className="bg-[#030712] border border-[#1e293b] text-white px-2.5 py-1.5 rounded-lg text-xs font-semibold shadow-xl backdrop-blur-md z-50">
+                          <TooltipContent side="right" className="bg-popover border border-border text-popover-foreground px-3 py-2 rounded-xl text-[13px] font-medium shadow-xl backdrop-blur-md z-50">
                             {item.label}
                           </TooltipContent>
                         </Tooltip>
@@ -307,19 +307,19 @@ export function AppShell({
           ))}
         </nav>
         
-        <div className="p-3 border-t border-[#1e293b] mt-auto space-y-1">
+        <div className="p-4 border-t border-border mt-auto space-y-2 bg-sidebar">
           {isCollapsed ? (
             <Tooltip delayDuration={50}>
               <TooltipTrigger asChild>
                 <Link
                   to="/settings"
                   aria-label="Settings"
-                  className="group flex items-center justify-center w-10 h-10 mx-auto rounded-lg border border-transparent text-slate-400 hover:bg-slate-800/40 hover:text-white transition-all duration-300"
+                  className="group flex items-center justify-center w-11 h-11 mx-auto rounded-xl border border-transparent text-muted-foreground interactive-element"
                 >
-                  <Settings className="opacity-70 transition-all duration-300 group-hover:opacity-100 group-hover:rotate-45 h-[22px] w-[22px] group-hover:scale-110" />
+                  <Settings className="opacity-70 transition-all duration-300 group-hover:opacity-100 group-hover:rotate-90 h-[20px] w-[20px]" />
                 </Link>
               </TooltipTrigger>
-              <TooltipContent side="right" className="bg-[#030712] border border-[#1e293b] text-white px-2.5 py-1.5 rounded-lg text-xs font-semibold shadow-xl backdrop-blur-md z-50">
+              <TooltipContent side="right" className="bg-popover border border-border text-popover-foreground px-3 py-2 rounded-xl text-[13px] font-medium shadow-xl backdrop-blur-md z-50">
                 Settings
               </TooltipContent>
             </Tooltip>
@@ -327,13 +327,13 @@ export function AppShell({
               <Link
               to="/settings"
               aria-label="Settings"
-              className={`group flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-300 border border-transparent ${
+              className={`group flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-300 border border-transparent ${
                 pathname.startsWith("/settings")
-                  ? "bg-primary/10 text-primary border-primary/20"
-                  : "text-slate-400 hover:bg-slate-800/40 hover:text-white"
+                  ? "bg-primary text-primary-foreground shadow-sm hover-lift"
+                  : "text-muted-foreground interactive-element"
               }`}
             >
-              <Settings className="h-3.5 w-3.5 opacity-70 transition-transform duration-300 group-hover:opacity-100 group-hover:rotate-45" />
+              <Settings className="h-[18px] w-[18px] opacity-70 transition-all duration-300 group-hover:opacity-100 group-hover:rotate-90" />
               <span className="flex-1">Settings</span>
             </Link>
           )}
@@ -344,12 +344,12 @@ export function AppShell({
                 <button
                   onClick={toggleCollapse}
                   aria-label="Expand sidebar"
-                  className="group flex items-center justify-center w-10 h-10 mx-auto rounded-lg border border-transparent text-slate-400 hover:bg-slate-800/40 hover:text-white transition-all duration-300"
+                  className="group flex items-center justify-center w-11 h-11 mx-auto rounded-xl border border-transparent text-muted-foreground interactive-element"
                 >
-                  <ChevronRight className="opacity-70 transition-all duration-300 group-hover:scale-110 h-[22px] w-[22px]" />
+                  <ChevronRight className="opacity-70 transition-all duration-300 group-hover:scale-110 h-[20px] w-[20px]" />
                 </button>
               </TooltipTrigger>
-              <TooltipContent side="right" className="bg-[#030712] border border-[#1e293b] text-white px-2.5 py-1.5 rounded-lg text-xs font-semibold shadow-xl backdrop-blur-md z-50">
+              <TooltipContent side="right" className="bg-popover border border-border text-popover-foreground px-3 py-2 rounded-xl text-[13px] font-medium shadow-xl backdrop-blur-md z-50">
                 Expand sidebar
               </TooltipContent>
             </Tooltip>
@@ -357,9 +357,9 @@ export function AppShell({
             <button
               onClick={toggleCollapse}
               aria-label="Collapse sidebar"
-              className="w-full group flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:bg-slate-800/40 hover:text-white transition-all duration-300 border border-transparent"
+              className="w-full group flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[13px] font-medium text-muted-foreground interactive-element border border-transparent"
             >
-              <ChevronLeft className="h-3.5 w-3.5 opacity-70 transition-transform duration-300 group-hover:scale-110" />
+              <ChevronLeft className="h-[18px] w-[18px] opacity-70 transition-all duration-300 group-hover:-translate-x-1" />
               <span className="flex-1 text-left">Collapse</span>
             </button>
           )}
@@ -368,9 +368,9 @@ export function AppShell({
 
       {/* Main */}
       <div className="flex-1 min-w-0 flex flex-col">
-        <header className="sticky top-0 z-20 border-b border-border/40 bg-background/70 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60 transition-colors">
-          <div className="px-5 h-12 flex items-center justify-between gap-4">
-            <div className="flex items-center gap-2 text-[13px] text-muted-foreground">
+        <header className="sticky top-0 z-20 glass-panel">
+          <div className="px-6 h-16 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-2 text-[14px] text-muted-foreground font-medium">
               <span className="font-semibold text-foreground tracking-tight">Fortiv Solutions</span>
               <span className="opacity-50">/</span>
               <span className="font-medium">Surat Branch</span>
@@ -379,34 +379,34 @@ export function AppShell({
               {/* Header Search Bar */}
               <div 
                 onClick={() => setIsSearchOpen(true)}
-                className="relative hidden sm:block w-40 md:w-56 cursor-pointer group animate-fade-in"
+                className="relative hidden sm:block w-48 md:w-64 cursor-pointer group animate-fade-in"
               >
-                <Search className="h-3.5 w-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors" />
+                <Search className="h-4 w-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground group-hover:text-primary transition-colors" />
                 <input
                   readOnly
                   placeholder="Search Anything... (⌘K)"
-                  className="w-full h-8 pl-8 pr-12 rounded-lg bg-slate-200/40 dark:bg-slate-950/40 border border-slate-200/80 dark:border-slate-800 text-xs placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-all cursor-pointer text-foreground hover:bg-slate-200/60 dark:hover:bg-slate-900/40 hover:border-slate-300/80 dark:hover:border-slate-700/80 shadow-sm"
+                  className="w-full h-10 pl-10 pr-12 rounded-xl bg-background border border-border shadow-inner text-[13px] font-medium placeholder:text-muted-foreground transition-all cursor-pointer text-foreground hover:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20"
                 />
-                <kbd className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-slate-400 dark:text-slate-500 font-medium bg-card border border-border rounded px-1.5 py-0.5 shadow-sm pointer-events-none">
+                <kbd className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-muted-foreground font-bold bg-secondary/80 border border-border rounded-md px-2 py-0.5 pointer-events-none uppercase tracking-wider">
                   ⌘K
                 </kbd>
               </div>
 
-              <button aria-label="Create new" className="h-8 px-3 rounded-md bg-primary text-primary-foreground text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-all hover:bg-primary/90 active:scale-95">
-                <Plus className="h-3.5 w-3.5" /> <span className="hidden sm:inline">New</span>
+              <button aria-label="Create new" className="h-10 px-4 rounded-xl bg-primary text-primary-foreground text-[13px] font-bold flex items-center gap-2 shadow-sm hover-lift active:scale-95">
+                <Plus className="h-4 w-4" /> <span className="hidden sm:inline">New</span>
               </button>
               <button
                 aria-label="Notifications"
-                className="touch-target h-8 w-8 min-w-0 min-h-0 flex items-center justify-center rounded-full text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors relative active:scale-95"
+                className="touch-target h-10 w-10 min-w-0 min-h-0 flex items-center justify-center rounded-xl bg-background border border-border text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300 relative hover-lift active:scale-95"
               >
                 <Bell className="h-4 w-4" />
-                <span className="absolute top-[6px] right-[6px] h-1.5 w-1.5 rounded-full bg-destructive border border-background animate-pulse" />
+                <span className="absolute top-[10px] right-[10px] h-2 w-2 rounded-full bg-destructive border-[1.5px] border-background" />
               </button>
               <div 
                 aria-label="User profile"
                 role="button"
                 tabIndex={0}
-                className="h-7 w-7 ml-1 rounded-full bg-secondary border border-border grid place-items-center text-xs font-semibold text-secondary-foreground cursor-pointer hover:ring-2 hover:ring-ring hover:ring-offset-2 transition-all active:scale-95"
+                className="h-10 w-10 ml-2 rounded-xl bg-gradient-to-br from-primary to-primary/80 border border-primary/20 shadow-sm grid place-items-center text-[13px] font-bold text-primary-foreground cursor-pointer hover:shadow-md transition-all hover-lift active:scale-95"
               >
                 RP
               </div>
@@ -416,22 +416,20 @@ export function AppShell({
 
         <main className="flex-1 flex flex-col relative overflow-hidden">
           {(title || subtitle || actions) && (
-            <div className="px-5 py-4 border-b border-border/50 bg-background flex flex-col sm:flex-row sm:items-end justify-between gap-3 relative z-10">
+            <div className="px-6 py-5 border-b border-border/40 bg-background/50 flex flex-col sm:flex-row sm:items-end justify-between gap-4 relative z-10">
               <div>
-                <h1 className="text-xl font-display font-semibold tracking-tight text-foreground">
+                <h1 className="text-2xl font-display font-bold tracking-tight text-foreground">
                   {title}
                 </h1>
                 {subtitle && (
-                  <p className="text-xs text-muted-foreground mt-0.5 max-w-2xl">{subtitle}</p>
+                  <p className="text-[13px] font-medium text-muted-foreground mt-1 max-w-2xl">{subtitle}</p>
                 )}
               </div>
-              {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}
+              {actions && <div className="flex flex-wrap items-center gap-3">{actions}</div>}
             </div>
           )}
           
-
-
-          <div className="flex-1 p-5 max-w-[1920px] w-full mx-auto relative z-10">{children}</div>
+          <div className="flex-1 p-6 max-w-[1920px] w-full mx-auto relative z-10">{children}</div>
         </main>
       </div>
 
@@ -540,7 +538,7 @@ export function Card({ className = "", children, onClick }: { className?: string
   return (
     <div 
       onClick={onClick}
-      className={`bg-card border shadow-sm text-card-foreground rounded-xl ${className}`}
+      className={`premium-card ${className}`}
     >
       {children}
     </div>
@@ -560,20 +558,20 @@ export function Stat({
 }) {
   const toneCls =
     tone === "up"
-      ? "text-emerald-700 bg-emerald-50 border-emerald-200"
+      ? "text-emerald-600 bg-emerald-50 border-emerald-200 dark:bg-emerald-500/10 dark:border-emerald-500/20"
       : tone === "down"
-        ? "text-red-700 bg-red-50 border-red-200"
-        : "text-slate-600 bg-slate-50 border-slate-200";
+        ? "text-destructive bg-destructive/10 border-destructive/20"
+        : "text-muted-foreground bg-secondary border-border/50";
         
   return (
-    <Card className="p-5 flex flex-col justify-between">
-      <div className="text-xs font-semibold text-muted-foreground uppercase tracking-widest font-display">
+    <Card className="p-5 flex flex-col justify-between hover-lift">
+      <div className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest font-display">
         {label}
       </div>
-      <div className="mt-2.5 flex items-baseline gap-2">
-        <div className="font-display text-2xl font-bold tracking-tight">{value}</div>
+      <div className="mt-3 flex items-baseline gap-3">
+        <div className="font-display text-3xl font-bold tracking-tight text-foreground">{value}</div>
         {delta && (
-          <span className={`text-xs font-bold px-1.5 py-0.5 rounded border ${toneCls}`}>
+          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md border uppercase tracking-wider ${toneCls}`}>
             {delta}
           </span>
         )}
@@ -586,16 +584,16 @@ export type PillTone = "hot" | "warm" | "cold" | "neutral" | "accent";
 
 export function Pill({ children, tone = "neutral" }: { children: ReactNode; tone?: PillTone }) {
   const map = {
-    hot: "bg-red-50 text-red-700 border-red-200",
-    warm: "bg-amber-50 text-amber-700 border-amber-200",
-    cold: "bg-blue-50 text-blue-700 border-blue-200",
-    neutral: "bg-slate-100 text-slate-700 border-slate-200",
-    accent: "bg-primary text-primary-foreground border-transparent",
+    hot: "bg-red-50 text-red-600 border-red-200 dark:bg-red-950/30 dark:border-red-900/50",
+    warm: "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/30 dark:border-amber-900/50 dark:text-amber-500",
+    cold: "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950/30 dark:border-blue-900/50 dark:text-blue-400",
+    neutral: "bg-secondary text-secondary-foreground border-border",
+    accent: "bg-primary/10 text-primary border-primary/20",
   } as const;
   
   return (
     <span
-      className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2 py-0.5 rounded-md border ${map[tone]}`}
+      className={`inline-flex items-center gap-1.5 text-[10px] uppercase tracking-widest font-bold px-2 py-0.5 rounded-md border ${map[tone]}`}
     >
       {children}
     </span>

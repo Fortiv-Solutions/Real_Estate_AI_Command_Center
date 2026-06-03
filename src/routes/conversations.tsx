@@ -848,7 +848,7 @@ function ConversationsManager() {
                   {agent.desc}
                 </p>
               </div>
-              <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
+              <div className="border-t border-border mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
                 <span className="font-mono font-bold text-foreground">{agent.stats}</span>
                 <span className="flex items-center gap-0.5 text-ink group-hover:underline">
                   Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -876,7 +876,7 @@ function ConversationsManager() {
         <div className="grid grid-cols-12 gap-4">
           {/* Live conversation stream */}
           <Card className="col-span-12 lg:col-span-7 p-4 flex flex-col h-[400px] border border-border bg-card">
-            <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
+            <div className="flex items-center justify-between mb-3 border-b border-border pb-2">
               <div>
                 <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> Live Conversation Feed
@@ -916,7 +916,7 @@ function ConversationsManager() {
 
           {/* SVG Donut Chart */}
           <Card className="col-span-12 lg:col-span-5 p-4 flex flex-col h-[400px] border border-border bg-card">
-            <div className="mb-3 border-b border-border/40 pb-2">
+            <div className="mb-3 border-b border-border pb-2">
               <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Channel Split</div>
               <h3 className="text-sm font-bold text-foreground">Channel Engagement Share</h3>
             </div>
@@ -940,7 +940,7 @@ function ConversationsManager() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 border-t border-border/40 pt-3">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 border-t border-border pt-3">
                 {[
                   { channel: "WhatsApp Chatbot", val: "42%", color: "bg-emerald-500" },
                   { channel: "Website Widget", val: "21%", color: "bg-blue-700" },
@@ -1077,7 +1077,7 @@ function ConversationsManager() {
             </div>
 
             {/* Input Footer */}
-            <div className="px-3 py-2.5 bg-[#f0f2f5] dark:bg-[#1f2c34] flex items-center gap-2.5 border-t border-border/40 shrink-0">
+            <div className="px-3 py-2.5 bg-[#f0f2f5] dark:bg-[#1f2c34] flex items-center gap-2.5 border-t border-border shrink-0">
               <button aria-label="Attachment" className="text-slate-500 hover:text-slate-700"><Paperclip className="h-5 w-5" /></button>
               <div className="flex-1 bg-white dark:bg-[#2a3942] rounded-lg px-3 py-2 text-xs text-slate-400 font-medium select-none shadow-inner">
                 {waPlaying ? "AI Chatbot is handling inquiry autonomously..." : "Press Replay Demo to play conversation simulator"}
@@ -1111,7 +1111,7 @@ function ConversationsManager() {
                     { label: "Site Visit Schedule", value: activeWaThreadData.getProfileVal(waIndex, "visit"), success: true },
                     { label: "Assigned Agent", value: activeWaThreadData.getProfileVal(waIndex, "agent") }
                   ].map((field) => (
-                    <div key={field.label} className="flex justify-between items-center text-xs pb-1.5 border-b border-border/40 last:border-0">
+                    <div key={field.label} className="flex justify-between items-center text-xs pb-1.5 border-b border-border last:border-0">
                       <span className="font-semibold text-muted-foreground">{field.label}</span>
                       <span className={`font-bold transition-all duration-300 ${
                         field.success && field.value !== "Pending" 
@@ -1144,16 +1144,16 @@ function ConversationsManager() {
         </div>
 
         {/* WhatsApp Metrics */}
-        <Card className="p-4 grid grid-cols-2 md:grid-cols-4 gap-4 border border-border bg-card">
-          <div className="text-center md:border-r border-border/40">
+        <Card className="p-5 grid grid-cols-1 md:grid-cols-3 gap-4 border border-border bg-card">
+          <div className="text-center md:border-r border-border">
             <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Conversations Today</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">42</div>
           </div>
-          <div className="text-center md:border-r border-border/40">
+          <div className="text-center md:border-r border-border">
             <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Visits Booked MTD</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">14</div>
           </div>
-          <div className="text-center md:border-r border-border/40">
+          <div className="text-center md:border-r border-border">
             <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Escalation Handoffs</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">4</div>
           </div>
@@ -1263,7 +1263,7 @@ function ConversationsManager() {
           {/* Recovery Timeline */}
           <Card className="col-span-12 lg:col-span-4 p-4 flex flex-col justify-between h-[450px] border border-border bg-card">
             <div>
-              <div className="mb-3 border-b border-border/40 pb-2">
+              <div className="mb-3 border-b border-border pb-2">
                 <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Timeline Tracker</div>
                 <h3 className="text-sm font-bold text-foreground">Recovery Audit: {activeCall?.text}</h3>
               </div>
@@ -1289,7 +1289,7 @@ function ConversationsManager() {
               </div>
             </div>
 
-            <div className="border-t border-border/40 pt-3 flex justify-between items-center text-xs">
+            <div className="border-t border-border pt-3 flex justify-between items-center text-xs">
               <span className="text-muted-foreground font-semibold">Average delivery time:</span>
               <span className="font-mono font-bold text-foreground">{recoveryRateStats.avgWaSendTime}</span>
             </div>
@@ -1673,16 +1673,16 @@ function ConversationsManager() {
       <div className="space-y-4 animate-in fade-in duration-300">
         
         {/* Calls stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 border border-border bg-card p-4 rounded-2xl">
-          <div className="text-center md:border-r border-border/40">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border border-border bg-card p-4 rounded-2xl">
+          <div className="text-center md:border-r border-border">
             <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Voice Calls Today</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">24</div>
           </div>
-          <div className="text-center md:border-r border-border/40">
+          <div className="text-center md:border-r border-border">
             <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">AI Fully Qualified</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">18</div>
           </div>
-          <div className="text-center md:border-r border-border/40">
+          <div className="text-center md:border-r border-border">
             <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Transferred to Human</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">6</div>
           </div>
@@ -1740,9 +1740,9 @@ function ConversationsManager() {
           <div className="col-span-12 lg:col-span-4 flex flex-col gap-4 h-[450px]">
             
             {/* Live IVR Chat Player */}
-            <Card className="p-4 flex-1 flex flex-col justify-between border border-border bg-card overflow-hidden">
+            <Card className="p-5 flex-1 flex flex-col justify-between border border-border bg-card overflow-hidden">
               <div className="flex-1 flex flex-col min-h-0">
-                <div className="mb-2.5 border-b border-border/40 pb-2 flex justify-between items-center shrink-0">
+                <div className="mb-2.5 border-b border-border pb-2 flex justify-between items-center shrink-0">
                   <div>
                     <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Live Audio Transcript</div>
                     <h4 className="text-xs font-bold text-foreground">AI Voice IVR Call Simulator</h4>
@@ -1768,7 +1768,7 @@ function ConversationsManager() {
                 </div>
 
                 {/* Speech transcript bubbles */}
-                <div className="flex-1 overflow-y-auto space-y-2.5 pr-1 p-2 bg-[#f8fafc] border border-border/40 rounded-xl">
+                <div className="flex-1 overflow-y-auto space-y-2.5 pr-1 p-2 bg-[#f8fafc] border border-border rounded-xl">
                   {ivrTranscriptMessages.map((m, idx) => {
                     const isAi = m.speaker === "ai";
                     return (
@@ -1785,7 +1785,7 @@ function ConversationsManager() {
                   })}
                   {ivrPlaying && (
                     <div className="flex justify-start">
-                      <div className="bg-slate-100 border border-border/40 rounded-xl rounded-tl-none px-3 py-1.5 shadow-sm flex gap-1 items-center h-[24px]">
+                      <div className="bg-slate-100 border border-border rounded-xl rounded-tl-none px-3 py-1.5 shadow-sm flex gap-1 items-center h-[24px]">
                         <span className="h-1.5 w-1.5 rounded-full bg-slate-400 animate-bounce" style={{ animationDelay: "0ms" }} />
                         <span className="h-1.5 w-1.5 rounded-full bg-slate-400 animate-bounce" style={{ animationDelay: "150ms" }} />
                         <span className="h-1.5 w-1.5 rounded-full bg-slate-400 animate-bounce" style={{ animationDelay: "300ms" }} />
@@ -1795,7 +1795,7 @@ function ConversationsManager() {
                 </div>
               </div>
 
-              <div className="border-t border-border/40 pt-3 mt-3 flex justify-between items-center shrink-0">
+              <div className="border-t border-border pt-3 mt-3 flex justify-between items-center shrink-0">
                 <span className="text-xs text-emerald-600 font-bold flex items-center gap-1">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> Qualified
                 </span>
@@ -1813,9 +1813,9 @@ function ConversationsManager() {
             </Card>
 
             {/* Language Breakdown Card */}
-            <Card className="p-4 h-[180px] flex flex-col justify-between border border-border bg-card">
+            <Card className="p-5 h-[180px] flex flex-col justify-between border border-border bg-card">
               <div>
-                <div className="mb-2 border-b border-border/40 pb-1">
+                <div className="mb-2 border-b border-border pb-1">
                   <h4 className="text-xs font-bold text-foreground">Language Distribution MTD</h4>
                 </div>
                 <div className="space-y-2 pt-1.5">
@@ -1850,16 +1850,16 @@ function ConversationsManager() {
       <div className="space-y-4 animate-in fade-in duration-300">
         
         {/* Email top stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 border border-border bg-card p-4 rounded-2xl">
-          <div className="text-center md:border-r border-border/40">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border border-border bg-card p-4 rounded-2xl">
+          <div className="text-center md:border-r border-border">
             <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Inbound Emails Today</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">34</div>
           </div>
-          <div className="text-center md:border-r border-border/40">
+          <div className="text-center md:border-r border-border">
             <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">AI Automated Responses</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">28</div>
           </div>
-          <div className="text-center md:border-r border-border/40">
+          <div className="text-center md:border-r border-border">
             <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Mean Delivery Speed</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">2m 48s</div>
           </div>
@@ -1916,7 +1916,7 @@ function ConversationsManager() {
           {/* Auto-response draft preview */}
           <Card className="col-span-12 lg:col-span-5 p-4 h-[450px] flex flex-col justify-between border border-border bg-card">
             <div className="flex-1 flex flex-col min-h-0">
-              <div className="mb-3 border-b border-border/40 pb-2 flex justify-between items-center shrink-0">
+              <div className="mb-3 border-b border-border pb-2 flex justify-between items-center shrink-0">
                 <div>
                   <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Auto-Responder Output</div>
                   <h3 className="text-xs font-bold text-foreground">AI Draft Response Preview</h3>
@@ -1943,8 +1943,8 @@ function ConversationsManager() {
         </div>
 
         {/* Hourly stats bar chart */}
-        <Card className="p-4 flex flex-col h-[260px] border border-border bg-card">
-          <div className="mb-3 border-b border-border/40 pb-2">
+        <Card className="p-5 flex flex-col h-[260px] border border-border bg-card">
+          <div className="mb-3 border-b border-border pb-2">
             <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Hourly Analytics</div>
             <h3 className="text-sm font-bold text-foreground">Average Inbound Response Time by Hour</h3>
           </div>
@@ -2073,7 +2073,7 @@ function StatBox({
   color: string; 
 }) {
   return (
-    <Card className="p-4 flex flex-col justify-between relative min-h-24 border border-border bg-card">
+    <Card className="p-5 flex flex-col justify-between relative min-h-24 border border-border bg-card">
       <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display">
         {label}
       </div>

@@ -120,7 +120,7 @@ const queryLog = [
 
 function StatBox({ label, value, desc, color }: { label: string; value: string; desc: string; color: string }) {
   return (
-    <Card className="p-4 flex flex-col justify-between min-h-24 border border-border bg-card">
+    <Card className="p-5 flex flex-col justify-between min-h-24 border border-border bg-card">
       <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display">{label}</div>
       <div className="mt-2 flex items-baseline justify-between">
         <div className={`font-display text-2xl font-bold tracking-tight font-mono ${color}`}>{value}</div>
@@ -229,7 +229,7 @@ function HrManager() {
 
 function RenderMenu({ list, onSelect }: { list: typeof submodulesList extends never ? never : any[]; onSelect: (id: string) => void }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 animate-in fade-in duration-300">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 animate-in fade-in duration-300">
       {list.map((mod: any) => (
         <Card
           key={mod.id}
@@ -245,7 +245,7 @@ function RenderMenu({ list, onSelect }: { list: typeof submodulesList extends ne
             <h3 className="text-sm font-bold text-foreground group-hover:text-ink transition-colors mt-1 font-display">{mod.name}</h3>
             <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed line-clamp-2 font-medium">{mod.desc}</p>
           </div>
-          <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
+          <div className="border-t border-border mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
             <span className="font-mono font-bold text-foreground">{mod.stats}</span>
             <span className="flex items-center gap-0.5 text-ink group-hover:underline font-mono">Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
           </div>
@@ -281,7 +281,7 @@ function RenderOverview({ onNavigate }: { onNavigate: (id: string) => void }) {
       <div className="grid grid-cols-12 gap-5">
         {/* Hiring Funnel */}
         <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card">
-          <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
+          <div className="flex items-center justify-between mb-3 border-b border-border pb-2">
             <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
               <Activity className="h-3.5 w-3.5 text-blue-700" /> Hiring Funnel
             </div>
@@ -301,14 +301,14 @@ function RenderOverview({ onNavigate }: { onNavigate: (id: string) => void }) {
               </div>
             ))}
           </div>
-          <div className="mt-3 pt-2 border-t border-border/30 text-xs font-mono text-slate-400">
+          <div className="mt-3 pt-2 border-t border-border text-xs font-mono text-slate-400">
             142 resumes screened · 12 shortlisted · 130 rejected — processed in 13 minutes
           </div>
         </Card>
 
         {/* Team Performance Snapshot */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card">
-          <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
+          <div className="flex items-center justify-between mb-3 border-b border-border pb-2">
             <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
               <TrendingUp className="h-3.5 w-3.5 text-emerald-600" /> Team Performance Snapshot
             </div>
@@ -355,7 +355,7 @@ function RenderResumeScreening() {
 
   return (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Total Applications" value="142" desc="All sources" color="text-slate-800" />
         <StatBox label="Shortlisted (AI)" value="12" desc="Score ≥ 65" color="text-emerald-600" />
         <StatBox label="Rejected" value="130" desc="Below threshold" color="text-red-600" />
@@ -440,7 +440,7 @@ function RenderResumeScreening() {
 
         {/* Score Breakdown */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card">
-          <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
+          <div className="flex items-center justify-between mb-3 border-b border-border pb-2">
             <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Score Breakdown</div>
             <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${candidateStatusBadge(selectedCandidate.status)}`}>{selectedCandidate.status}</span>
           </div>
@@ -466,7 +466,7 @@ function RenderResumeScreening() {
                 <div>Source: <span className="font-bold text-foreground">{selectedCandidate.source}</span></div>
               </div>
             </div>
-            <div className="bg-secondary/30 rounded-xl p-3 font-mono text-xs leading-relaxed text-foreground space-y-1 border border-border/40">
+            <div className="bg-secondary/30 rounded-xl p-3 font-mono text-xs leading-relaxed text-foreground space-y-1 border border-border">
               <div className="font-bold uppercase tracking-wider text-slate-400 text-xs mb-2">WHY THIS SCORE:</div>
               {selectedCandidate.expYrs >= 3 && <div className="text-emerald-600">✓ {selectedCandidate.expYrs} years real estate experience        +{Math.round(selectedCandidate.expYrs * 4)}</div>}
               <div className="text-emerald-600">✓ CRM / sales skills matched                         +10</div>
@@ -530,7 +530,7 @@ function RenderInterviewScheduler() {
 
   return (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Invites Sent This Week" value="6" desc="All rounds" color="text-blue-700" />
         <StatBox label="Confirmed" value="2" desc="Candidates confirmed" color="text-emerald-600" />
         <StatBox label="No Shows" value="0" desc="This week" color="text-slate-800" />
@@ -549,7 +549,7 @@ function RenderInterviewScheduler() {
         <div className="col-span-12 lg:col-span-7 grid grid-cols-4 gap-3">
           {kanbanStages.map(stage => (
             <div key={stage} className="space-y-2">
-              <div className="text-xs font-extrabold uppercase tracking-widest text-slate-400 font-display border-b border-border/40 pb-1.5">
+              <div className="text-xs font-extrabold uppercase tracking-widest text-slate-400 font-display border-b border-border pb-1.5">
                 {stage} <span className="text-slate-300">({kanbanData[stage].length})</span>
               </div>
               {kanbanData[stage].map((c, i) => (
@@ -565,7 +565,7 @@ function RenderInterviewScheduler() {
 
         {/* Schedule + WhatsApp preview */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card flex flex-col gap-3">
-          <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display border-b border-border/40 pb-2">Week Schedule — 13–17 Jan 2025</div>
+          <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display border-b border-border pb-2">Week Schedule — 13–17 Jan 2025</div>
           <div className="space-y-2 overflow-y-auto max-h-[260px] scrollbar-none pr-1">
             {interviews.map((iv, i) => (
               <div key={i} className={`p-2.5 rounded-xl border text-xs flex items-start gap-2.5 ${iv.status === "Completed" ? "border-emerald-200 bg-emerald-50/30" : iv.status === "Confirmed" ? "border-blue-200 bg-blue-50/20" : iv.status.includes("Pending") ? "border-slate-200 bg-slate-50/20" : "border-border bg-background"}`}>
@@ -581,7 +581,7 @@ function RenderInterviewScheduler() {
               </div>
             ))}
           </div>
-          <div className="border-t border-border/40 pt-3">
+          <div className="border-t border-border pt-3">
             <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">WhatsApp Slot Offer Preview</div>
             <div className="bg-[#ECF3EE] rounded-xl p-3 text-xs leading-relaxed text-slate-700 font-medium border border-emerald-100">
               <div className="font-bold text-slate-800 mb-1">Fortiv Solutions HR ·</div>
@@ -607,7 +607,7 @@ function RenderOnboarding() {
 
   return (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Active Onboardings" value="3" desc="Joining in Jan 2025" color="text-blue-700" />
         <StatBox label="Avg Doc Completion" value="87%" desc="Across active joiners" color="text-emerald-600" />
         <StatBox label="IT Setup Pending" value="1" desc="Nikhil Mehta" color="text-amber-500" />
@@ -656,7 +656,7 @@ function RenderOnboarding() {
                 </div>
               </div>
               {isOpen && (
-                <div className="p-4 pt-0 border-t border-border/40 animate-in fade-in duration-200 grid grid-cols-2 gap-5">
+                <div className="p-4 pt-0 border-t border-border animate-in fade-in duration-200 grid grid-cols-2 gap-5">
                   {/* Documents */}
                   <div>
                     <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Document Collection</div>
@@ -712,7 +712,7 @@ function RenderOnboarding() {
       </div>
 
       {/* "Your First Day" WhatsApp */}
-      <Card className="p-4 border border-border bg-card">
+      <Card className="p-5 border border-border bg-card">
         <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Automated "Your First Day" WhatsApp — Nikhil Mehta</div>
         <div className="bg-[#ECF3EE] rounded-xl p-4 text-xs leading-relaxed text-slate-700 font-medium border border-emerald-100 max-w-sm">
           <div className="font-bold text-slate-800 mb-1">Fortiv Solutions HR ·</div>
@@ -768,7 +768,7 @@ function RenderPayroll() {
 
   return (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Total Employees" value="28" desc="January 2025" color="text-slate-800" />
         <StatBox label="Total Gross Payroll" value="₹14.2L" desc="All employees" color="text-blue-700" />
         <StatBox label="Net Disbursement" value="₹12.07L" desc="After deductions" color="text-emerald-600" />
@@ -832,8 +832,8 @@ function RenderPayroll() {
 
         {/* Payroll Summary + Challan */}
         <div className="col-span-12 lg:col-span-4 space-y-3">
-          <Card className="p-4 border border-border bg-card font-mono text-xs">
-            <div className="text-center font-display font-bold text-sm uppercase tracking-widest text-foreground mb-3 border-b border-border/40 pb-2">January 2025 Payroll Summary</div>
+          <Card className="p-5 border border-border bg-card font-mono text-xs">
+            <div className="text-center font-display font-bold text-sm uppercase tracking-widest text-foreground mb-3 border-b border-border pb-2">January 2025 Payroll Summary</div>
             {[
               { l: "Total Employees", v: "28" },
               { l: "Total Gross Payroll", v: "₹14,20,000" },
@@ -845,7 +845,7 @@ function RenderPayroll() {
                 <span className="font-bold text-foreground">{r.v}</span>
               </div>
             ))}
-            <div className="text-xs uppercase tracking-wider text-slate-400 font-sans font-bold mt-2 pt-2 border-t border-border/40 mb-1">Employer Liabilities</div>
+            <div className="text-xs uppercase tracking-wider text-slate-400 font-sans font-bold mt-2 pt-2 border-t border-border mb-1">Employer Liabilities</div>
             {[
               { l: "Employer PF (12%)", v: "₹1,02,600" },
               { l: "Employer ESI (3.25%)", v: "₹18,400" },
@@ -860,7 +860,7 @@ function RenderPayroll() {
               <span className="font-display text-sm">TOTAL PAYROLL COST</span>
               <span className="font-display text-sm text-primary">₹15,46,600</span>
             </div>
-            <div className="mt-2 pt-2 border-t border-border/40 space-y-1">
+            <div className="mt-2 pt-2 border-t border-border space-y-1">
               <div className="flex justify-between text-emerald-600 font-bold text-xs"><span>Run Status</span><span>✅ Processed</span></div>
               <div className="flex justify-between text-emerald-600 font-bold text-xs"><span>Payslips Sent</span><span>28 / 28</span></div>
               <div className="flex justify-between text-emerald-600 font-bold text-xs"><span>Tally Entries</span><span>✅ Pushed</span></div>
@@ -877,7 +877,7 @@ function RenderPayroll() {
       </div>
 
       {/* Sample Payslip */}
-      <Card className="p-4 border border-border bg-card">
+      <Card className="p-5 border border-border bg-card">
         <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Sample Payslip — Priya Rana (Jan 2025)</div>
         <div className="font-mono text-xs text-foreground bg-secondary/30 rounded-xl p-4 border border-border/60 whitespace-pre max-w-xl">
 {`╔══════════════════════════════════════════════════╗
@@ -948,7 +948,7 @@ function RenderPerformance() {
       {/* Detail Drill-Down */}
       <div className="grid grid-cols-12 gap-5">
         <Card className="col-span-12 lg:col-span-8 p-4 border border-border bg-card">
-          <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
+          <div className="flex items-center justify-between mb-3 border-b border-border pb-2">
             <div className="font-bold text-sm text-foreground font-display">{selectedEmp.name} — Performance Breakdown</div>
             <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono border ${performanceLabel(selectedEmp.label)}`}>{selectedEmp.label}</span>
           </div>
@@ -1053,7 +1053,7 @@ function RenderTalentSourcing() {
 
   return (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Profiles Sourced (All)" value="103" desc="Across 4 open roles" color="text-slate-800" />
         <StatBox label="Shortlisted (AI)" value="23" desc="Score ≥ 65" color="text-blue-700" />
         <StatBox label="Outreach Sent" value="18" desc="LinkedIn + WhatsApp" color="text-amber-500" />
@@ -1127,7 +1127,7 @@ function RenderTalentSourcing() {
 
         {/* Role Sourcing Status */}
         <div className="col-span-12 lg:col-span-4 space-y-3">
-          <Card className="p-4 border border-border bg-card">
+          <Card className="p-5 border border-border bg-card">
             <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Open Roles Sourcing Status</div>
             <div className="space-y-3.5">
               {openRoles.map((r, i) => (
@@ -1195,7 +1195,7 @@ function RenderHrChatbot() {
 
   return (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Queries This Month" value="100" desc="All channels" color="text-slate-800" />
         <StatBox label="Bot Resolved" value="80%" desc="Without HR intervention" color="text-emerald-600" />
         <StatBox label="Escalated to HR" value="20" desc="Complex / sensitive" color="text-amber-500" />
@@ -1280,7 +1280,7 @@ function RenderHrChatbot() {
             </div>
           </Card>
 
-          <Card className="p-4 border border-border bg-card">
+          <Card className="p-5 border border-border bg-card">
             <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Policy Knowledge Base</div>
             <div className="space-y-1.5">
               {[
@@ -1292,7 +1292,7 @@ function RenderHrChatbot() {
                 { doc: "Salary Advance Policy", updated: "Jun 2024" },
                 { doc: "Grievance Redressal Policy", updated: "Jan 2024" },
               ].map((kb, i) => (
-                <div key={i} className="flex items-center justify-between text-xs font-semibold py-1 border-b border-border/30 last:border-0">
+                <div key={i} className="flex items-center justify-between text-xs font-semibold py-1 border-b border-border last:border-0">
                   <span className="text-foreground">{kb.doc}</span>
                   <span className="font-mono text-slate-400 text-xs shrink-0 ml-3">{kb.updated}</span>
                 </div>

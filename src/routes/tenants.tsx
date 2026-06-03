@@ -206,7 +206,7 @@ function TenantPropertyManager() {
       <div className="grid grid-cols-12 gap-5">
         {/* Left Panel: Rent Collection Status */}
         <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card">
-          <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
+          <div className="flex items-center justify-between mb-4 border-b border-border pb-2">
             <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
               <DollarSign className="h-3.5 w-3.5 text-emerald-600" /> Rent Collection Status
             </div>
@@ -235,8 +235,8 @@ function TenantPropertyManager() {
         {/* Right Panel: Maintenance & Renewals */}
         <div className="col-span-12 lg:col-span-5 space-y-5">
           {/* Maintenance Summary */}
-          <Card className="p-4 border border-border bg-card">
-            <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
+          <Card className="p-5 border border-border bg-card">
+            <div className="flex items-center justify-between mb-3 border-b border-border pb-2">
               <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                 <Activity className="h-3.5 w-3.5 text-amber-500" /> Maintenance Queue Summary
               </div>
@@ -262,8 +262,8 @@ function TenantPropertyManager() {
           </Card>
 
           {/* Renewal Countdown */}
-          <Card className="p-4 border border-border bg-card">
-            <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
+          <Card className="p-5 border border-border bg-card">
+            <div className="flex items-center justify-between mb-3 border-b border-border pb-2">
               <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                 <Calendar className="h-3.5 w-3.5 text-red-600" /> Leases Expiring (60 Days)
               </div>
@@ -276,7 +276,7 @@ function TenantPropertyManager() {
                 { unit: "Flat 5C, Greenview", tenant: "Priya Sharma", exp: "10 Mar 2025", days: 38, alert: false },
                 { unit: "Flat 9A, Skyline", tenant: "Suresh Nair", exp: "20 Mar 2025", days: 48, alert: false }
               ].map((r, i) => (
-                <div key={i} className="flex justify-between items-center border-b border-border/30 pb-1.5 last:border-0 last:pb-0">
+                <div key={i} className="flex justify-between items-center border-b border-border pb-1.5 last:border-0 last:pb-0">
                   <div className="min-w-0">
                     <div className="font-bold text-foreground truncate">{r.unit}</div>
                     <div className="text-slate-400 font-normal">{r.tenant} · Expiry: {r.exp}</div>
@@ -305,7 +305,7 @@ function TenantPropertyManager() {
 
   const renderScreening = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Total Applicants" value="12" desc="This month" color="text-slate-800" />
         <StatBox label="Awaiting Checks" value="3" desc="Verification pending" color="text-amber-500" />
         <StatBox label="Approved / Recommended" value="7" desc="Passed identity + credit" color="text-emerald-600" />
@@ -341,7 +341,7 @@ function TenantPropertyManager() {
           </div>
           {compareMode ? (
             <div className="p-4 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-semibold">
-              <div className="border-r border-border/40 pr-4 space-y-4 text-slate-500 font-display text-xs uppercase tracking-wider py-2">
+              <div className="border-r border-border pr-4 space-y-4 text-slate-500 font-display text-xs uppercase tracking-wider py-2">
                 <div className="h-6" />
                 <div>Composite Score</div>
                 <div>CIBIL Credit Score</div>
@@ -355,7 +355,7 @@ function TenantPropertyManager() {
               </div>
               {[initialApplicants[0], initialApplicants[1]].map((app, i) => (
                 <div key={i} className={`p-4 rounded-xl border border-border space-y-4 text-slate-700 ${i === 0 ? "bg-emerald-50/10 border-emerald-200" : ""}`}>
-                  <div className="font-bold text-sm text-foreground flex items-center justify-between border-b border-border/40 pb-2">
+                  <div className="font-bold text-sm text-foreground flex items-center justify-between border-b border-border pb-2">
                     {app.name}
                     <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(app.recommendation)}`}>{app.recommendation}</span>
                   </div>
@@ -428,7 +428,7 @@ function TenantPropertyManager() {
         {/* Right Panel: Score Breakdown */}
         {!compareMode && (
           <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
-            <div className="flex items-center justify-between border-b border-border/40 pb-2">
+            <div className="flex items-center justify-between border-b border-border pb-2">
               <span className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Applicant Score Breakdown</span>
               <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(selectedApplicant.recommendation)}`}>{selectedApplicant.recommendation}</span>
             </div>
@@ -438,7 +438,7 @@ function TenantPropertyManager() {
                 <p className="text-xs text-slate-400 font-semibold">{selectedApplicant.employment}</p>
               </div>
 
-              <div className="flex items-center gap-3 bg-secondary/10 p-2.5 rounded-xl border border-border/40">
+              <div className="flex items-center gap-3 bg-secondary/10 p-2.5 rounded-xl border border-border">
                 <div className="relative h-12 w-12 shrink-0">
                   <svg viewBox="0 0 36 36" className="h-12 w-12 -rotate-90">
                     <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#e5e7eb" strokeWidth="3" />
@@ -540,7 +540,7 @@ function TenantPropertyManager() {
 
   const renderMaintenance = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Total Tickets Logged" value="184" desc="Year to date" color="text-slate-800" />
         <StatBox label="Emergency Tickets" value="1" desc="SLA: < 2 hours" color="text-red-600" />
         <StatBox label="Urgent Tickets" value="3" desc="SLA: Same day" color="text-amber-500" />
@@ -606,7 +606,7 @@ function TenantPropertyManager() {
 
         {/* Detail Panel */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
-          <div className="flex items-center justify-between border-b border-border/40 pb-2">
+          <div className="flex items-center justify-between border-b border-border pb-2">
             <span className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Ticket Details — {selectedRequest.id}</span>
             <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(selectedRequest.severity)}`}>{selectedRequest.severity}</span>
           </div>
@@ -617,7 +617,7 @@ function TenantPropertyManager() {
               <div className="text-xs text-slate-400 font-semibold font-mono">Created: {selectedRequest.date} · Age: {selectedRequest.age}</div>
             </div>
 
-            <div className="p-3 bg-secondary/30 rounded-xl border border-border/40 font-mono text-xs leading-relaxed text-slate-700">
+            <div className="p-3 bg-secondary/30 rounded-xl border border-border font-mono text-xs leading-relaxed text-slate-700">
               <strong className="text-foreground">Description:</strong>
               <p className="mt-1">{selectedRequest.desc}</p>
             </div>
@@ -635,7 +635,7 @@ function TenantPropertyManager() {
               </div>
             )}
 
-            <div className="border-t border-border/40 pt-3 space-y-2">
+            <div className="border-t border-border pt-3 space-y-2">
               <div className="flex justify-between font-semibold">
                 <span className="text-slate-500">Assigned Vendor:</span>
                 <span className="text-foreground font-bold">{selectedRequest.vendor || "Not assigned"}</span>
@@ -674,7 +674,7 @@ function TenantPropertyManager() {
               )}
             </div>
 
-            <div className="border-t border-border/40 pt-3">
+            <div className="border-t border-border pt-3">
               <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">WhatsApp Communications</span>
               <div className="bg-emerald-50/50 rounded-xl p-2.5 text-xs leading-relaxed text-slate-600 font-medium border border-emerald-100/50">
                 <strong className="text-slate-700 block">System Acknowledgment (Tenant):</strong>
@@ -686,8 +686,8 @@ function TenantPropertyManager() {
       </div>
 
       {/* Vendor Stats */}
-      <Card className="p-4 border border-border bg-card">
-        <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border/40 pb-2 mb-3">Pre-Approved Vendor Network</h4>
+      <Card className="p-5 border border-border bg-card">
+        <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border pb-2 mb-3">Pre-Approved Vendor Network</h4>
         <div className="overflow-x-auto scrollbar-none">
           <table className="w-full text-left text-xs divide-y divide-border/60">
             <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
@@ -737,7 +737,7 @@ function TenantPropertyManager() {
 
   const renderRent = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Total Monthly Rent Receivable" value="₹9.24L" desc="42 units total" color="text-slate-800" />
         <StatBox label="Collected Rent" value="₹7.82L" desc="84.7% received" color="text-emerald-600" />
         <StatBox label="Outstanding Rent" value="₹1.41L" desc="5 units outstanding" color="text-red-600" />
@@ -829,8 +829,8 @@ function TenantPropertyManager() {
       </Card>
 
       {/* Reminder logic */}
-      <Card className="p-4 border border-border bg-card space-y-3">
-        <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border/40 pb-2">Automated Reminder Sequence Timeline</h4>
+      <Card className="p-5 border border-border bg-card space-y-3">
+        <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border pb-2">Automated Reminder Sequence Timeline</h4>
         <div className="grid grid-cols-1 md:grid-cols-5 gap-3 text-xs font-semibold">
           {[
             { day: "Day -7", title: "First Reminder", desc: "WhatsApp reminder with direct UPI payment link." },
@@ -897,7 +897,7 @@ function TenantPropertyManager() {
       <div className="grid grid-cols-12 gap-5">
         {/* Input Panel */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
-          <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border/40 pb-2">Interactive Eligibility Calculator</h4>
+          <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border pb-2">Interactive Eligibility Calculator</h4>
 
           <div className="space-y-3.5 text-xs font-semibold">
             <div className="space-y-1">
@@ -1000,7 +1000,7 @@ function TenantPropertyManager() {
             </div>
           </div>
 
-          <div className="p-3 bg-secondary/30 rounded-xl border border-border/40 font-mono text-xs space-y-1 text-slate-600">
+          <div className="p-3 bg-secondary/30 rounded-xl border border-border font-mono text-xs space-y-1 text-slate-600">
             <div>Loan Sought: <strong className="text-foreground">₹{calculatedReq} Lakhs</strong></div>
             <div>Calculated Max Loan Eligibility: <strong className="text-emerald-600">₹{maxEligibility} Lakhs</strong></div>
             {calculatedReq > maxEligibility ? (
@@ -1013,8 +1013,8 @@ function TenantPropertyManager() {
 
         {/* Calculation / Bank Summary */}
         <div className="col-span-12 lg:col-span-7 space-y-4">
-          <Card className="p-4 border border-border bg-card">
-            <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border/40 pb-2 mb-3">Live Rate Comparisons & EMI Calculations</h4>
+          <Card className="p-5 border border-border bg-card">
+            <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border pb-2 mb-3">Live Rate Comparisons & EMI Calculations</h4>
             <div className="overflow-x-auto scrollbar-none">
               <table className="w-full text-left text-xs divide-y divide-border/60">
                 <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
@@ -1051,8 +1051,8 @@ function TenantPropertyManager() {
             </div>
           </Card>
 
-          <Card className="p-4 border border-border bg-card space-y-2">
-            <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border/40 pb-2">EMI Tenure Analysis (SBI Home Loan, ₹{calculatedReq}L)</h4>
+          <Card className="p-5 border border-border bg-card space-y-2">
+            <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border pb-2">EMI Tenure Analysis (SBI Home Loan, ₹{calculatedReq}L)</h4>
             <div className="grid grid-cols-3 gap-3 text-xs font-semibold">
               {[15, 20, 30].map(t => {
                 const rate = 8.5 / 12 / 100;
@@ -1080,19 +1080,19 @@ function TenantPropertyManager() {
       </div>
 
       {/* Document Checklist */}
-      <Card className="p-4 border border-border bg-card space-y-3">
-        <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border/40 pb-2">Home Loan Document Checklist ({empType})</h4>
+      <Card className="p-5 border border-border bg-card space-y-3">
+        <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border pb-2">Home Loan Document Checklist ({empType})</h4>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-semibold text-slate-600 leading-relaxed">
           {empType === "Salaried" ? (
             <>
               <div className="space-y-1.5">
-                <div className="font-bold text-foreground border-b border-border/40 pb-0.5">KYC & Identity:</div>
+                <div className="font-bold text-foreground border-b border-border pb-0.5">KYC & Identity:</div>
                 <div>✓ Aadhaar Card (front + back) - Self-attested</div>
                 <div>✓ PAN Card - Self-attested</div>
                 <div>✓ Passport Size Photographs (4 copies)</div>
               </div>
               <div className="space-y-1.5">
-                <div className="font-bold text-foreground border-b border-border/40 pb-0.5">Income Proofs:</div>
+                <div className="font-bold text-foreground border-b border-border pb-0.5">Income Proofs:</div>
                 <div>✓ Last 3 months Salary Slips (Company seal)</div>
                 <div>✓ Last 2 years Form 16 (Part A & B)</div>
                 <div>✓ Bank statement for last 6 months (salary account)</div>
@@ -1101,13 +1101,13 @@ function TenantPropertyManager() {
           ) : (
             <>
               <div className="space-y-1.5">
-                <div className="font-bold text-foreground border-b border-border/40 pb-0.5">Business KYC:</div>
+                <div className="font-bold text-foreground border-b border-border pb-0.5">Business KYC:</div>
                 <div>✓ Business Registration Certificate (GST / Trade Licence)</div>
                 <div>✓ CA Certified Balance Sheet & P&L statements (last 2 years)</div>
                 <div>✓ PAN of Firm/Company + Proprietor</div>
               </div>
               <div className="space-y-1.5">
-                <div className="font-bold text-foreground border-b border-border/40 pb-0.5">Financial Documents:</div>
+                <div className="font-bold text-foreground border-b border-border pb-0.5">Financial Documents:</div>
                 <div>✓ ITR for last 2 years (with computation of income)</div>
                 <div>✓ Bank statements for last 12 months (current account)</div>
                 <div>✓ GST Returns (last 4 quarters)</div>
@@ -1163,7 +1163,7 @@ function TenantPropertyManager() {
       <div className="grid grid-cols-12 gap-5">
         {/* Left Panel: Score Snapshot */}
         <Card className="col-span-12 lg:col-span-4 p-4 border border-border bg-card space-y-4">
-          <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">NPS Snapshot</h4></div>
+          <div className="border-b border-border pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">NPS Snapshot</h4></div>
           <div className="text-center space-y-3">
             <div className="relative h-24 w-24 mx-auto">
               <svg viewBox="0 0 36 36" className="h-24 w-24 -rotate-90">
@@ -1199,7 +1199,7 @@ function TenantPropertyManager() {
 
         {/* Right Panel: Detractor alerts */}
         <div className="col-span-12 lg:col-span-8 space-y-4">
-          <Card className="p-4 border border-border bg-card border-red-200 bg-red-50/10">
+          <Card className="p-5 border border-border bg-card border-red-200 bg-red-50/10">
             <div className="flex items-center gap-2 text-xs font-bold text-red-700 border-b border-red-200 pb-2 mb-2">
               <AlertTriangle className="h-4 w-4 animate-pulse shrink-0" />
               <span>Active Detractor Alert — Immediate outreach required</span>
@@ -1223,8 +1223,8 @@ function TenantPropertyManager() {
           </Card>
 
           {/* Survey inputs */}
-          <Card className="p-4 border border-border bg-card space-y-3">
-            <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border/40 pb-2">Feedback Input Simulator</h4>
+          <Card className="p-5 border border-border bg-card space-y-3">
+            <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border pb-2">Feedback Input Simulator</h4>
             <form onSubmit={submitSurvey} className="grid grid-cols-1 md:grid-cols-12 gap-3 text-xs font-semibold">
               <div className="md:col-span-4 space-y-1">
                 <label className="text-slate-400">Tenant Name</label>
@@ -1328,7 +1328,7 @@ function TenantPropertyManager() {
 
   const renderRenewal = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
         <StatBox label="Leases Expiring (Quarter)" value="14" desc="Portfolio total" color="text-slate-800" />
         <StatBox label="Renewals Concluded" value="8" desc="57% completed" color="text-emerald-600" />
         <StatBox label="Negotiations Active" value="3" desc="2 in pipeline" color="text-amber-500" />
@@ -1389,7 +1389,7 @@ function TenantPropertyManager() {
 
         {/* Action Panel */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
-          <div className="flex items-center justify-between border-b border-border/40 pb-2">
+          <div className="flex items-center justify-between border-b border-border pb-2">
             <span className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Renewal Proposal — {selectedRenewal.unit}</span>
             <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(selectedRenewal.stage)}`}>{selectedRenewal.stage}</span>
           </div>
@@ -1400,7 +1400,7 @@ function TenantPropertyManager() {
               <div className="text-xs text-slate-400 font-semibold font-mono">Lease Expiry: {selectedRenewal.expiry} ({selectedRenewal.daysAway} days away)</div>
             </div>
 
-            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-semibold space-y-2">
+            <div className="p-3 bg-secondary/35 rounded-xl border border-border font-semibold space-y-2">
               <div className="text-xs font-bold uppercase tracking-wider text-slate-400">Rent Revision Intelligence (Market Comp)</div>
               <div className="flex justify-between text-slate-500">
                 <span>Current Rent:</span>
@@ -1410,13 +1410,13 @@ function TenantPropertyManager() {
                 <span>Market Range Comparable:</span>
                 <span className="font-mono text-foreground font-bold">{selectedRenewal.marketRange}</span>
               </div>
-              <div className="flex justify-between text-slate-500 border-t border-border/40 pt-1.5">
+              <div className="flex justify-between text-slate-500 border-t border-border pt-1.5">
                 <span>Recommended Offer:</span>
                 <span className="font-mono text-primary font-extrabold">₹{selectedRenewal.proposedRent.toLocaleString("en-IN")}/mo</span>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 font-mono text-xs text-slate-500 font-semibold border border-border/40 p-2.5 rounded-xl">
+            <div className="grid grid-cols-2 gap-2 font-mono text-xs text-slate-500 font-semibold border border-border p-2.5 rounded-xl">
               <div>Outreach 1 (60d): <strong className="text-foreground">{selectedRenewal.outreach1}</strong></div>
               <div>Outreach 2 (30d): <strong className="text-foreground">{selectedRenewal.outreach2}</strong></div>
               <div>Tenant response: <strong className="text-primary">{selectedRenewal.response}</strong></div>
@@ -1440,7 +1440,7 @@ function TenantPropertyManager() {
               )}
             </div>
 
-            <div className="border-t border-border/40 pt-3">
+            <div className="border-t border-border pt-3">
               <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">WhatsApp Proposal Template</span>
               <div className="bg-emerald-50/50 rounded-xl p-2.5 text-xs leading-relaxed text-slate-600 font-semibold border border-emerald-100/50">
                 {`Hi ${selectedRenewal.tenant}, your lease for ${selectedRenewal.unit} expires on ${selectedRenewal.expiry}. Proposal: Current Rent: ₹${selectedRenewal.currentRent.toLocaleString()} -> Proposed: ₹${selectedRenewal.proposedRent.toLocaleString()}/mo. Reply YES to accept.`}
@@ -1456,7 +1456,7 @@ function TenantPropertyManager() {
     <AppShell title={dynamicTitle} subtitle={headerInfo.subtitle}>
       <div className="transition-all duration-300">
         {activeTab === "menu" && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 animate-in fade-in duration-300">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 animate-in fade-in duration-300">
             {submodulesList.map((mod) => (
               <Card
                 key={mod.id}
@@ -1472,7 +1472,7 @@ function TenantPropertyManager() {
                   <h3 className="text-sm font-bold text-foreground group-hover:text-ink transition-colors mt-1 font-display">{mod.name}</h3>
                   <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed line-clamp-2 font-medium">{mod.desc}</p>
                 </div>
-                <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
+                <div className="border-t border-border mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
                   <span className="font-mono font-bold text-foreground">{mod.stats}</span>
                   <span className="flex items-center gap-0.5 text-ink group-hover:underline font-mono">Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
                 </div>
@@ -1494,7 +1494,7 @@ function TenantPropertyManager() {
 
 function StatBox({ label, value, desc, color }: { label: string; value: string; desc: string; color: string }) {
   return (
-    <Card className="p-4 flex flex-col justify-between relative min-h-24 border border-border bg-card">
+    <Card className="p-5 flex flex-col justify-between relative min-h-24 border border-border bg-card">
       <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display">{label}</div>
       <div className="mt-2 flex items-baseline justify-between">
         <div className={`font-display text-2xl font-bold tracking-tight font-mono ${color}`}>{value}</div>

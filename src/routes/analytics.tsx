@@ -309,7 +309,7 @@ function AnalyticsManager() {
     return (
       <div className="space-y-6 animate-in fade-in duration-300">
         {/* Top KPIs */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
           <StatBox label="Reports Delivered (Month)" value="47" desc="Total dispatches" color="text-blue-700" />
           <StatBox label="Forecast Accuracy" value="84%" desc="Trailing 30-day actuals" color="text-emerald-600" />
           <StatBox label="Channels Tracked" value="10" desc="Ad platforms + portals" color="text-slate-800" />
@@ -319,7 +319,7 @@ function AnalyticsManager() {
         <div className="grid grid-cols-12 gap-5">
           {/* Report Delivery Log */}
           <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card">
-            <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
+            <div className="flex items-center justify-between mb-4 border-b border-border pb-2">
               <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                 <Clock className="h-3.5 w-3.5 text-primary" /> Automated Report Delivery Log (7 Days)
               </div>
@@ -356,7 +356,7 @@ function AnalyticsManager() {
 
           {/* Source Data Health panel */}
           <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card">
-            <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
+            <div className="flex items-center justify-between mb-4 border-b border-border pb-2">
               <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                 <Activity className="h-3.5 w-3.5 text-emerald-600 animate-pulse" /> Data Source Health Panel
               </div>
@@ -407,19 +407,19 @@ function AnalyticsManager() {
       <div className="space-y-4 animate-in fade-in duration-300">
         {/* Team Funnel Strip */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4 border border-border bg-card p-4 rounded-2xl">
-          <div className="text-center border-r border-border/40 last:border-0">
+          <div className="text-center border-r border-border last:border-0">
             <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Leads Received</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">{teamSummary.leads} <span className="text-emerald-500 text-xs">{teamSummary.leadsDelta}</span></div>
           </div>
-          <div className="text-center md:border-r border-border/40 last:border-0">
+          <div className="text-center md:border-r border-border last:border-0">
             <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Leads Contacted</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">{teamSummary.contacts}</div>
           </div>
-          <div className="text-center md:border-r border-border/40 last:border-0">
+          <div className="text-center md:border-r border-border last:border-0">
             <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Contact Rate</div>
             <div className="text-base font-bold text-emerald-600 font-mono mt-1">{teamSummary.contactRate}</div>
           </div>
-          <div className="text-center md:border-r border-border/40 last:border-0">
+          <div className="text-center md:border-r border-border last:border-0">
             <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Site Visits Done</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">{teamSummary.visits} <span className="text-emerald-500 text-xs">{teamSummary.visitsDelta}</span></div>
           </div>
@@ -461,7 +461,7 @@ function AnalyticsManager() {
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-2 text-xs font-mono py-1 border-y border-border/40">
+                    <div className="grid grid-cols-3 gap-2 text-xs font-mono py-1 border-y border-border">
                       <div>
                         <div className="text-[10px] text-muted-foreground uppercase font-sans font-bold">Leads</div>
                         <div className="font-bold text-foreground mt-0.5">{item.leads}</div>
@@ -509,8 +509,8 @@ function AnalyticsManager() {
 
           {/* Sparklines & Conf Panel */}
           <div className="col-span-12 lg:col-span-4 space-y-4">
-            <Card className="p-4 border border-border bg-card">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-display mb-3 border-b border-border/40 pb-2">
+            <Card className="p-5 border border-border bg-card">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-display mb-3 border-b border-border pb-2">
                 Team Funnel Conversion Trend (7 Days)
               </h4>
               <div className="space-y-3.5">
@@ -549,18 +549,18 @@ function AnalyticsManager() {
               </div>
             </Card>
 
-            <Card className="p-4 border border-border bg-card space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-display border-b border-border/40 pb-2">
+            <Card className="p-5 border border-border bg-card space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-display border-b border-border pb-2">
                 Report Transmission Logs
               </h4>
               <div className="space-y-2 text-xs font-semibold">
-                <div className="flex items-center justify-between text-slate-500 border-b border-border/30 pb-2">
+                <div className="flex items-center justify-between text-slate-500 border-b border-border pb-2">
                   <span>WhatsApp Broadcast Group</span>
                   <span className="text-emerald-600 font-mono text-xs font-extrabold flex items-center gap-1">
                     ✅ Sent 7:00 PM
                   </span>
                 </div>
-                <div className="flex items-center justify-between text-slate-500 border-b border-border/30 pb-2">
+                <div className="flex items-center justify-between text-slate-500 border-b border-border pb-2">
                   <span>Management Email Queue</span>
                   <span className="text-emerald-600 font-mono text-xs font-extrabold flex items-center gap-1">
                     ✅ Sent 7:01 PM
@@ -581,7 +581,7 @@ function AnalyticsManager() {
         {selectedAgentMsg && (
           <div className="fixed inset-0 z-50 bg-ink/40 backdrop-blur-sm flex items-center justify-center p-4">
             <Card className="w-full max-w-md p-5 border border-border bg-card shadow-2xl space-y-4">
-              <div className="flex justify-between items-center border-b border-border/40 pb-2">
+              <div className="flex justify-between items-center border-b border-border pb-2">
                 <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">
                   WhatsApp Report Preview · {selectedAgentMsg}
                 </h4>
@@ -736,7 +736,7 @@ Recommend: Check in before tomorrow morning.`}
         )}
 
         {/* Forecast KPIs */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
           <StatBox label="30-day Revenue Forecast" value={formatInr(forecastMetrics.r30, "Cr")} desc={`${forecastMetrics.b30} bookings`} color="text-slate-800" />
           <StatBox label="60-day Revenue Forecast" value={formatInr(forecastMetrics.r60, "Cr")} desc={`${forecastMetrics.b60} bookings`} color="text-slate-800" />
           <StatBox label="90-day Revenue Forecast" value={formatInr(forecastMetrics.r90, "Cr")} desc={`${forecastMetrics.b90} bookings`} color="text-slate-800" />
@@ -746,7 +746,7 @@ Recommend: Check in before tomorrow morning.`}
         <div className="grid grid-cols-12 gap-5">
           {/* Projections Chart (SVG Bars) */}
           <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card">
-            <div className="flex justify-between items-center mb-4 border-b border-border/40 pb-2">
+            <div className="flex justify-between items-center mb-4 border-b border-border pb-2">
               <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">
                 Forecasted Projections with Confidence Bands
               </h4>
@@ -836,7 +836,7 @@ Recommend: Check in before tomorrow morning.`}
           {/* Scenario Modelling sliders */}
           <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
             <div>
-              <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border/40 pb-2">
+              <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border pb-2">
                 Scenario Modelling Simulation
               </h4>
               <p className="text-xs text-slate-400 font-semibold leading-relaxed mt-2">
@@ -879,7 +879,7 @@ Recommend: Check in before tomorrow morning.`}
               </div>
 
               {/* Toggle 1: Diwali Scheme */}
-              <div className="flex items-center justify-between py-1 border-t border-border/40 mt-2">
+              <div className="flex items-center justify-between py-1 border-t border-border mt-2">
                 <div className="text-xs font-semibold">
                   <div className="text-slate-600 font-bold">Diwali 3% Discount Scheme</div>
                   <div className="text-xs text-slate-400 font-semibold">Uplifts volume +28%, margin drops -3%</div>
@@ -893,7 +893,7 @@ Recommend: Check in before tomorrow morning.`}
               </div>
 
               {/* Toggle 2: RERA Delay */}
-              <div className="flex items-center justify-between py-1 border-t border-border/40">
+              <div className="flex items-center justify-between py-1 border-t border-border">
                 <div className="text-xs font-semibold">
                   <div className="text-slate-600 font-bold">Project RERA Extension Delay</div>
                   <div className="text-xs text-slate-400 font-semibold">Deflates quarterly bookings by -22%</div>
@@ -907,7 +907,7 @@ Recommend: Check in before tomorrow morning.`}
               </div>
 
               {/* Toggle 3: Loan Rate up */}
-              <div className="flex items-center justify-between py-1 border-t border-border/40">
+              <div className="flex items-center justify-between py-1 border-t border-border">
                 <div className="text-xs font-semibold">
                   <div className="text-slate-600 font-bold">SBI Home Loan Interest Rate +50bps</div>
                   <div className="text-xs text-slate-400 font-semibold">Contracts price-sensitive buyers (-8% impact)</div>
@@ -921,7 +921,7 @@ Recommend: Check in before tomorrow morning.`}
               </div>
             </div>
 
-            <div className="pt-2 border-t border-border/40 text-center">
+            <div className="pt-2 border-t border-border text-center">
               <span className="text-xs font-mono font-extrabold text-slate-400 uppercase tracking-widest">
                 Net Forecast Adjustment: {forecastMetrics.modifierPercent >= 0 ? `+${forecastMetrics.modifierPercent}` : forecastMetrics.modifierPercent}%
               </span>
@@ -933,7 +933,7 @@ Recommend: Check in before tomorrow morning.`}
         <div className="grid grid-cols-12 gap-5">
           {/* Pipeline Stage probability contribution */}
           <Card className="col-span-12 lg:col-span-6 p-4 border border-border bg-card">
-            <h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display mb-3 border-b border-border/40 pb-2">
+            <h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display mb-3 border-b border-border pb-2">
               Pipeline Stage Weightings & Forecast Contributions
             </h3>
             <div className="overflow-x-auto scrollbar-none max-h-[220px]">
@@ -960,7 +960,7 @@ Recommend: Check in before tomorrow morning.`}
 
           {/* Model Accuracy Log */}
           <Card className="col-span-12 lg:col-span-6 p-4 border border-border bg-card">
-            <h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display mb-3 border-b border-border/40 pb-2">
+            <h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display mb-3 border-b border-border pb-2">
               Model Historical Accuracy Log
             </h3>
             <div className="overflow-x-auto scrollbar-none max-h-[220px]">
@@ -1094,7 +1094,7 @@ Recommend: Check in before tomorrow morning.`}
           {/* Visual Heatmap Grid (Tower view) */}
           <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card min-h-[460px] flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between border-b border-border/40 pb-2 mb-3">
+              <div className="flex items-center justify-between border-b border-border pb-2 mb-3">
                 <h3 className="font-bold text-xs text-foreground font-display flex items-center gap-1.5">
                   <Building className="h-4 w-4 text-primary" /> Tower Absorption Heatmap (Click unit cells)
                 </h3>
@@ -1135,16 +1135,16 @@ Recommend: Check in before tomorrow morning.`}
               </div>
             </div>
 
-            <div className="text-[10px] font-mono text-slate-400 text-center border-t border-border/40 pt-3">
+            <div className="text-[10px] font-mono text-slate-400 text-center border-t border-border pt-3">
               *Tower grid represents G+14 structural layout snapshot. Delayed updates sync every 24 hours.
             </div>
           </Card>
 
           {/* Unit Detail / Pricing Recommendation */}
           <div className="col-span-12 lg:col-span-5 space-y-4">
-            <Card className="p-4 border border-border bg-card min-h-[220px] flex flex-col justify-between">
+            <Card className="p-5 border border-border bg-card min-h-[220px] flex flex-col justify-between">
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-display border-b border-border/40 pb-2 mb-3">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-display border-b border-border pb-2 mb-3">
                   Unit Properties Panel
                 </h4>
                 {activeUnitDetail ? (
@@ -1201,8 +1201,8 @@ Recommend: Check in before tomorrow morning.`}
             </Card>
 
             {/* Scheme Effectiveness */}
-            <Card className="p-4 border border-border bg-card">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-display border-b border-border/40 pb-2 mb-3">
+            <Card className="p-5 border border-border bg-card">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-display border-b border-border pb-2 mb-3">
                 Incentive Schemes Effectiveness
               </h4>
               <div className="overflow-x-auto scrollbar-none max-h-[160px]">
@@ -1233,7 +1233,7 @@ Recommend: Check in before tomorrow morning.`}
         <div className="grid grid-cols-12 gap-5">
           {/* Average Sell Time by Config (SVG bar chart) */}
           <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card">
-            <h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display mb-3 border-b border-border/40 pb-2">
+            <h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display mb-3 border-b border-border pb-2">
               Average Days on Market by Configuration
             </h3>
             
@@ -1264,7 +1264,7 @@ Recommend: Check in before tomorrow morning.`}
 
           {/* Table summary of all towers */}
           <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card">
-            <h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display mb-3 border-b border-border/40 pb-2">
+            <h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display mb-3 border-b border-border pb-2">
               Slow-Moving Inventory Warnings
             </h3>
             <div className="overflow-x-auto scrollbar-none max-h-[160px]">
@@ -1342,7 +1342,7 @@ Recommend: Check in before tomorrow morning.`}
       <div className="space-y-4 animate-in fade-in duration-300">
         
         {/* Top KPIs */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
           <StatBox label="Reports Generated (Q1)" value="4 reports" desc="Automatic dispatches" color="text-blue-700" />
           <StatBox label="Next Scheduled Run" value="01/03 09:00" desc="Monthly recurring" color="text-slate-800" />
           <StatBox label="Active Distribution Pool" value="24 LPs" desc="Syncing portals" color="text-slate-800" />
@@ -1354,7 +1354,7 @@ Recommend: Check in before tomorrow morning.`}
           <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card flex flex-col justify-between min-h-[460px]">
             <div className="space-y-4">
               <div>
-                <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border/40 pb-2">
+                <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border pb-2">
                   Dossier Compilation Settings
                 </h4>
                 <p className="text-xs text-slate-400 font-semibold leading-relaxed mt-2">
@@ -1420,7 +1420,7 @@ Recommend: Check in before tomorrow morning.`}
                 </div>
 
                 {/* Auto Release toggle */}
-                <div className="flex items-center justify-between py-2 border-t border-border/40 mt-3">
+                <div className="flex items-center justify-between py-2 border-t border-border mt-3">
                   <div>
                     <div className="text-slate-600 font-bold">Auto-Release to LP Portals</div>
                     <div className="text-xs text-slate-400 font-semibold">Distribute instantly upon compile, skipping approvals</div>
@@ -1473,7 +1473,7 @@ Recommend: Check in before tomorrow morning.`}
               <div className="space-y-4 animate-in slide-in-from-bottom duration-500 h-full flex flex-col justify-between">
                 
                 {/* PDF Tabs Header */}
-                <div className="flex flex-wrap gap-1 border-b border-border/40 pb-2">
+                <div className="flex flex-wrap gap-1 border-b border-border pb-2">
                   {[
                     { id: "cover", label: "Cover Page" },
                     { id: "exec", label: "Executive Summary" },
@@ -1514,7 +1514,7 @@ Recommend: Check in before tomorrow morning.`}
 
                   {activePdfTab === "exec" && (
                     <div className="space-y-3">
-                      <h4 className="font-bold text-foreground text-sm border-b border-border/40 pb-1 uppercase font-display">Executive Summary</h4>
+                      <h4 className="font-bold text-foreground text-sm border-b border-border pb-1 uppercase font-display">Executive Summary</h4>
                       <p className="text-xs leading-relaxed">
                         During the period of {reportPeriod}, project development has proceeded on target. Sales volumes have maintained velocity across core towers, specifically driven by promotional scheme impacts. Net construction progress has crossed the 42% threshold, with key compliance registrations lodged at Gujarat RERA.
                       </p>
@@ -1529,7 +1529,7 @@ Recommend: Check in before tomorrow morning.`}
 
                   {activePdfTab === "sales" && (
                     <div className="space-y-3">
-                      <h4 className="font-bold text-foreground text-sm border-b border-border/40 pb-1 uppercase font-display">Sales & Absorption Status</h4>
+                      <h4 className="font-bold text-foreground text-sm border-b border-border pb-1 uppercase font-display">Sales & Absorption Status</h4>
                       <p className="text-xs leading-relaxed">
                         Inventory velocity analysis highlights normal sales runs in the 2BHK family layouts, whereas 3BHK premium inventories show a minor seasonal slowdown, currently mitigated by parking promotion schemes.
                       </p>
@@ -1548,11 +1548,11 @@ Recommend: Check in before tomorrow morning.`}
 
                   {activePdfTab === "financials" && (
                     <div className="space-y-3">
-                      <h4 className="font-bold text-foreground text-sm border-b border-border/40 pb-1 uppercase font-display">Financial Metrics Overview</h4>
+                      <h4 className="font-bold text-foreground text-sm border-b border-border pb-1 uppercase font-display">Financial Metrics Overview</h4>
                       <p className="text-xs">
                         Project cash reserves are stable, with collections tracking ahead of the construction billing schedule. Escrow accounts have been audited in compliance with regulatory RERA standards.
                       </p>
-                      <div className="space-y-1.5 text-xs border-t border-border/30 pt-2 font-mono">
+                      <div className="space-y-1.5 text-xs border-t border-border pt-2 font-mono">
                         <div className="flex justify-between">
                           <span>Total Collections (Month)</span>
                           <span className="font-bold text-foreground">₹3.80 Cr</span>
@@ -1572,7 +1572,7 @@ Recommend: Check in before tomorrow morning.`}
                 </div>
 
                 {/* PDF footer controls */}
-                <div className="flex gap-2 pt-2 border-t border-border/40">
+                <div className="flex gap-2 pt-2 border-t border-border">
                   <button 
                     onClick={() => {
                       alert("PDF report successfully dispatched via Email to LP Mailing List.");
@@ -1775,7 +1775,7 @@ Recommend: Check in before tomorrow morning.`}
                           <tr 
                             key={ch.channel} 
                             onClick={() => setExpandedChannel(isExpanded ? null : ch.channel)}
-                            className="hover:bg-secondary/15 cursor-pointer border-b border-border/30 last:border-none"
+                            className="hover:bg-secondary/15 cursor-pointer border-b border-border last:border-none"
                           >
                             <td className="px-3.5 py-3 font-bold flex items-center gap-1.5">
                               <span className="text-primary hover:underline">{ch.channel}</span>
@@ -1799,7 +1799,7 @@ Recommend: Check in before tomorrow morning.`}
                           {/* Nested Campaigns row if expanded */}
                           {isExpanded && (
                             <tr>
-                              <td colSpan={8} className="px-4 py-3 bg-secondary/15 border-b border-border/40">
+                              <td colSpan={8} className="px-4 py-3 bg-secondary/15 border-b border-border">
                                 <div className="space-y-2 animate-in fade-in duration-300">
                                   <div className="text-xs font-bold uppercase tracking-wider text-slate-500">
                                     Campaign Level Drill-down
@@ -1840,15 +1840,15 @@ Recommend: Check in before tomorrow morning.`}
               </div>
             </div>
 
-            <div className="text-[10px] font-mono text-slate-400 text-center py-2.5 border-t border-border/40 bg-secondary/10">
+            <div className="text-[10px] font-mono text-slate-400 text-center py-2.5 border-t border-border bg-secondary/10">
               *Campaign tracking integrations pull spend values from Facebook Ads Manager API and Google Ads API daily.
             </div>
           </Card>
 
           {/* AI budget recommendations panel */}
           <div className="col-span-12 lg:col-span-4 space-y-4">
-            <Card className="p-4 border border-border bg-card">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-display border-b border-border/40 pb-2 mb-3">
+            <Card className="p-5 border border-border bg-card">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-display border-b border-border pb-2 mb-3">
                 AI Budget Recommendations
               </h4>
               <div className="p-3 bg-sky-50/50 border border-sky-200 rounded-xl text-xs space-y-3 leading-relaxed font-semibold">
@@ -1879,8 +1879,8 @@ Recommend: Check in before tomorrow morning.`}
             </Card>
 
             {/* Reallocation Calculator Simulator */}
-            <Card className="p-4 border border-border bg-card space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-display border-b border-border/40 pb-2">
+            <Card className="p-5 border border-border bg-card space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-display border-b border-border pb-2">
                 Spend Allocation Simulator
               </h4>
               
@@ -1947,7 +1947,7 @@ Recommend: Check in before tomorrow morning.`}
       <div className="space-y-4 animate-in fade-in duration-300">
         
         {/* Top KPIs */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
           <StatBox label="Briefings Delivered (YTD)" value="22" desc="Monday dispatches" color="text-blue-700" />
           <StatBox label="Last brief compiled" value="20 Jan 07:22" desc="Monday W03" color="text-slate-800" />
           <StatBox label="Next Compilation Run" value="5 days 16 hrs" desc="Scheduled 27 Jan" color="text-slate-800" />
@@ -1958,14 +1958,14 @@ Recommend: Check in before tomorrow morning.`}
           {/* Brief Preview Document */}
           <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card min-h-[460px] flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between border-b border-border/40 pb-2 mb-3">
+              <div className="flex items-center justify-between border-b border-border pb-2 mb-3">
                 <h3 className="font-bold text-xs text-foreground font-display flex items-center gap-1.5">
                   <FileText className="h-4 w-4 text-primary" /> AI Compiled Weekly Briefing Preview (Week W03)
                 </h3>
               </div>
 
               {/* Navigator */}
-              <div className="flex flex-wrap gap-1 border-b border-border/30 pb-2 mb-3">
+              <div className="flex flex-wrap gap-1 border-b border-border pb-2 mb-3">
                 {[
                   { id: "numbers", label: "Week in Numbers" },
                   { id: "deals", label: "Deal Highlights" },
@@ -1990,8 +1990,8 @@ Recommend: Check in before tomorrow morning.`}
                 
                 {briefSection === "numbers" && (
                   <div className="space-y-3">
-                    <h5 className="font-bold text-foreground uppercase text-xs font-display border-b border-border/20 pb-0.5">Week in Numbers (13–19 Jan 2025)</h5>
-                    <table className="w-full text-left text-xs border border-border/30 bg-background rounded overflow-hidden">
+                    <h5 className="font-bold text-foreground uppercase text-xs font-display border-b border-border pb-0.5">Week in Numbers (13–19 Jan 2025)</h5>
+                    <table className="w-full text-left text-xs border border-border bg-background rounded overflow-hidden">
                       <thead className="bg-secondary/20 text-muted-foreground text-[10px] font-mono">
                         <tr>
                           <th className="px-2 py-1">KPI</th>
@@ -2032,7 +2032,7 @@ Recommend: Check in before tomorrow morning.`}
 
                 {briefSection === "deals" && (
                   <div className="space-y-2">
-                    <h5 className="font-bold text-foreground uppercase text-xs font-display border-b border-border/20 pb-0.5">Deal Highlights</h5>
+                    <h5 className="font-bold text-foreground uppercase text-xs font-display border-b border-border pb-0.5">Deal Highlights</h5>
                     <p className="text-xs">
                       <strong>Top Booking closed:</strong> Rajesh Patel block booking at Greenview Heights (2BHK, ₹56L booking value, Priya Rana).
                     </p>
@@ -2047,7 +2047,7 @@ Recommend: Check in before tomorrow morning.`}
 
                 {briefSection === "finance" && (
                   <div className="space-y-2">
-                    <h5 className="font-bold text-foreground uppercase text-xs font-display border-b border-border/20 pb-0.5">Finance Snapshot</h5>
+                    <h5 className="font-bold text-foreground uppercase text-xs font-display border-b border-border pb-0.5">Finance Snapshot</h5>
                     <p className="text-xs">
                       <strong>Finance Performance:</strong> Blended cost-per-booking remains around ₹70,000. MagicBricks subscription renewal due next week. Escalated escrow balance meets reserve ratio targets.
                     </p>
@@ -2060,7 +2060,7 @@ Recommend: Check in before tomorrow morning.`}
               </div>
             </div>
 
-            <div className="flex gap-2 pt-3 border-t border-border/40">
+            <div className="flex gap-2 pt-3 border-t border-border">
               <button 
                 onClick={() => alert("Weekly brief summary dispatched to Directors WhatsApp group.")}
                 className="flex-1 h-8 bg-ink hover:bg-ink/90 text-cream text-xs font-bold uppercase tracking-widest rounded-lg transition-all"
@@ -2080,7 +2080,7 @@ Recommend: Check in before tomorrow morning.`}
           <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card flex flex-col justify-between min-h-[460px]">
             <div className="space-y-3">
               <div>
-                <div className="flex justify-between items-center border-b border-border/40 pb-2 mb-2">
+                <div className="flex justify-between items-center border-b border-border pb-2 mb-2">
                   <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">
                     Weekly Priority Actions
                   </h4>
@@ -2128,7 +2128,7 @@ Recommend: Check in before tomorrow morning.`}
               </div>
             </div>
 
-            <div className="border-t border-border/40 pt-3 flex justify-between items-center text-xs font-mono text-slate-400">
+            <div className="border-t border-border pt-3 flex justify-between items-center text-xs font-mono text-slate-400">
               <span>Freshness: as of 20/01 07:22 AM</span>
               <span>Compliant with GDPR / DPDP</span>
             </div>
@@ -2195,7 +2195,7 @@ Recommend: Check in before tomorrow morning.`}
                   {mod.desc}
                 </p>
               </div>
-              <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
+              <div className="border-t border-border mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
                 <span className="font-mono font-bold text-foreground">{mod.stats}</span>
                 <span className="flex items-center gap-0.5 text-ink group-hover:underline font-mono">
                   Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -2240,7 +2240,7 @@ function StatBox({
   color: string;
 }) {
   return (
-    <Card className="p-4 flex flex-col justify-between relative min-h-24 border border-border bg-card">
+    <Card className="p-5 flex flex-col justify-between relative min-h-24 border border-border bg-card">
       <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display">
         {label}
       </div>
