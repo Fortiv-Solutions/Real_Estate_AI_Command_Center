@@ -1,4 +1,4 @@
-﻿import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AppShell, Card, Stat } from "../components/AppShell";
 import { useState, useMemo, useEffect, useRef } from "react";
 import {
@@ -73,8 +73,7 @@ const dataHealthModules = [
   { id: "M4.2", name: "M4.2 — Visit Scheduler", type: "Visit completions", sync: "20/01/2025 06:55 PM", status: "Live" },
   { id: "M1.3", name: "M1.3 — Ads Sync", type: "Campaign spend + leads", sync: "20/01/2025 06:00 PM", status: "Live" },
   { id: "M9", name: "M9 — Construction", type: "Milestone updates", sync: "19/01/2025 05:00 PM", status: "Delayed" },
-  { id: "M11", name: "M11 — Finance", type: "Collections, payments", sync: "20/01/2025 03:00 PM", status: "Live" },
-  { id: "M6.3", name: "M6.3 — RERA Compliance", type: "Deadline calendar", sync: "18/01/2025 09:00 AM", status: "Live" }
+  { id: "M11", name: "M11 — Finance", type: "Collections, payments", sync: "20/01/2025 03:00 PM", status: "Live" }
 ];
 
 const agentScorecards = [
@@ -1508,7 +1507,7 @@ Recommend: Check in before tomorrow morning.`}
                       <p className="text-[10px] font-mono text-slate-400">Project: {demoProjects.find(p => p.id === reportProject)?.name.split(",")[0]}</p>
                       <p className="text-[10px] text-slate-400 mt-6">
                         Confidential · Generated at: 20/01/2025 09:00 AM<br />
-                        Data Sources: M1, M4.2, M5.3, M6.3, M11 · Compliance: DPDP Act 2023
+                        Data Sources: M1, M4.2, M5.3, M11 · Compliance: DPDP Act 2023
                       </p>
                     </div>
                   )}
@@ -1922,15 +1921,14 @@ Recommend: Check in before tomorrow morning.`}
   };
 
   // --- 7. Executive Weekly Briefing States & Renders ---
-  const [actionsChecked, setActionsChecked] = useState<boolean[]>([false, false, false, false, false]);
+  const [actionsChecked, setActionsChecked] = useState<boolean[]>([false, false, false, false]);
   const [briefSection, setBriefSection] = useState("numbers");
 
   const priorityActionsList = [
     { text: "Follow up personally on Deepak Trivedi deal — stuck 19 days in Negotiation (Priya Rana).", reason: "stuck deal objection", severity: "border-l-4 border-l-[#D85A30]" },
     { text: "Launch incentive scheme for 3BHK Tower B — 11 units slow-moving at 67 days avg.", reason: "slow inventory velocity", severity: "border-l-4 border-l-[#E8A838]" },
     { text: "Review Housing.com campaign spend (₹90K spent MTD with 0 bookings closed).", reason: "channel ROI leak", severity: "border-l-4 border-l-[#D85A30]" },
-    { text: "Recruit 1 additional field agent for Vadodara region to match forecast shortfall.", reason: "forecast capacity gap", severity: "border-l-4 border-l-slate-400" },
-    { text: "Collect construction records for Greenview Heights QPR filing due Jan 31.", reason: "RERA compliance deadline", severity: "border-l-4 border-l-[#1A3C5E]" }
+    { text: "Recruit 1 additional field agent for Vadodara region to match forecast shortfall.", reason: "forecast capacity gap", severity: "border-l-4 border-l-slate-400" }
   ];
 
   const handleActionToggle = (idx: number) => {
@@ -1942,7 +1940,7 @@ Recommend: Check in before tomorrow morning.`}
   };
 
   const actionCompletionCount = actionsChecked.filter(Boolean).length;
-  const actionCompletionRate = Math.round((actionCompletionCount / 5) * 100);
+  const actionCompletionRate = Math.round((actionCompletionCount / priorityActionsList.length) * 100);
 
   const renderExecutiveBrief = () => {
     return (
@@ -1971,7 +1969,7 @@ Recommend: Check in before tomorrow morning.`}
                 {[
                   { id: "numbers", label: "Week in Numbers" },
                   { id: "deals", label: "Deal Highlights" },
-                  { id: "compliance", label: "RERA & Finance" }
+                  { id: "finance", label: "Finance Brief" }
                 ].map((sec) => (
                   <button
                     key={sec.id}
@@ -2047,14 +2045,14 @@ Recommend: Check in before tomorrow morning.`}
                   </div>
                 )}
 
-                {briefSection === "compliance" && (
+                {briefSection === "finance" && (
                   <div className="space-y-2">
-                    <h5 className="font-bold text-foreground uppercase text-[10.5px] font-display border-b border-border/20 pb-0.5">RERA deadlines & Finance Snapshot</h5>
+                    <h5 className="font-bold text-foreground uppercase text-[10.5px] font-display border-b border-border/20 pb-0.5">Finance Snapshot</h5>
                     <p className="text-[10.5px]">
-                      <strong>Gujarat RERA compliance:</strong> The QPR filing deadline for Greenview Heights is 31 January (11 days remaining). Construction progress logs need to sync from M9.
+                      <strong>Finance Performance:</strong> Blended cost-per-booking remains around ₹70,000. MagicBricks subscription renewal due next week. Escalated escrow balance meets reserve ratio targets.
                     </p>
                     <p className="text-[10.5px]">
-                      <strong>Finance:</strong> Blended cost-per-booking remains around ₹70,000. MagicBricks subscription renewal due next week. Escalated escrow balance meets reserve ratio targets.
+                      <strong>Cash Flow:</strong> Net operational collections this week touched ₹1.12 Cr, tracking aligned with pipeline development schedules.
                     </p>
                   </div>
                 )}
@@ -2093,7 +2091,7 @@ Recommend: Check in before tomorrow morning.`}
                 <div className="space-y-1 py-1">
                   <div className="flex justify-between text-[10.5px] font-semibold text-slate-500">
                     <span>Actions Completed</span>
-                    <span className="font-mono text-foreground font-bold">{actionCompletionCount} of 5 ({actionCompletionRate}%)</span>
+                    <span className="font-mono text-foreground font-bold">{actionCompletionCount} of {priorityActionsList.length} ({actionCompletionRate}%)</span>
                   </div>
                   <div className="h-1.5 w-full bg-secondary rounded-full overflow-hidden">
                     <div className="h-full bg-emerald-600 transition-all duration-500" style={{ width: `${actionCompletionRate}%` }} />

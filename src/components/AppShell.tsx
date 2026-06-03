@@ -54,7 +54,6 @@ const navGroups = [
       { to: "/tenants", label: "Tenants", icon: Briefcase },
       { to: "/buyers", label: "Buyer Portal", icon: UserCheck },
       { to: "/finance", label: "Finance", icon: Wallet },
-      { to: "/compliance", label: "Compliance", icon: ShieldCheck },
       { to: "/hr", label: "HR Pipeline", icon: UserCog },
     ]
   },
@@ -92,13 +91,7 @@ const searchableSubModules = [
   { parent: "Buyer Portal", parentTo: "/buyers", label: "Resale & Rental Assistance Agent", tab: "resale" },
   { parent: "Buyer Portal", parentTo: "/buyers", label: "Society Onboarding Agent", tab: "society" },
   { parent: "Buyer Portal", parentTo: "/buyers", label: "Post-Possession NPS & Loyalty Bot", tab: "nps" },
-  { parent: "Compliance", parentTo: "/compliance", label: "Dashboard Overview", tab: "overview" },
-  { parent: "Compliance", parentTo: "/compliance", label: "Agreement Draft Generator", tab: "agreement-gen" },
-  { parent: "Compliance", parentTo: "/compliance", label: "OCR Document Extractor", tab: "ocr-extractor" },
-  { parent: "Compliance", parentTo: "/compliance", label: "RERA Compliance Monitor", tab: "rera-monitor" },
-  { parent: "Compliance", parentTo: "/compliance", label: "Stamp Duty & Cost Calculator", tab: "stamp-duty" },
-  { parent: "Compliance", parentTo: "/compliance", label: "E-Signature Workflow", tab: "esign" },
-  { parent: "Compliance", parentTo: "/compliance", label: "KYC Verification Dashboard", tab: "kyc-verify" },
+
   { parent: "Finance", parentTo: "/finance", label: "Dashboard Overview", tab: "overview" },
   { parent: "Finance", parentTo: "/finance", label: "Collections & Receivables Dashboard", tab: "collections" },
   { parent: "Finance", parentTo: "/finance", label: "Demand Note Automation", tab: "demand-notes" },
@@ -491,10 +484,7 @@ export function AppShell({
               <Wallet className="mr-2 h-4 w-4 text-muted-foreground" />
               <span>Finance</span>
             </CommandItem>
-            <CommandItem onSelect={() => runCommand(() => navigate({ to: "/compliance" }))}>
-              <ShieldCheck className="mr-2 h-4 w-4 text-muted-foreground" />
-              <span>Compliance</span>
-            </CommandItem>
+
             <CommandItem onSelect={() => runCommand(() => navigate({ to: "/hr" }))}>
               <UserCog className="mr-2 h-4 w-4 text-muted-foreground" />
               <span>HR Pipeline</span>

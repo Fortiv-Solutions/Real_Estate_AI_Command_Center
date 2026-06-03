@@ -1,4 +1,4 @@
-﻿import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { AppShell, Card, Pill } from "../components/AppShell";
 import { useState, useMemo, useEffect, useRef } from "react";
 import {
@@ -254,6 +254,82 @@ function SalesPipelineManager() {
     });
   };
 
+  // Deduplication sandbox states
+  const [duplicates, setDuplicates] = useState([
+    {
+      id: "DUP-101",
+      fieldMatch: "Phone Number (+91 98765 43210)",
+      cardA: {
+        id: "CRM-1042",
+        name: "Rajesh Patel",
+        phone: "+91 98765 43210",
+        email: "rajesh.patel@gmail.com",
+        source: "99acres",
+        campaign: "Greenview Heights Jan",
+        budget: "₹50 - 60 Lakhs",
+        locality: "Vesu",
+        created: "12/01/2025 10:15 AM",
+        score: 61,
+        notes: "Looking for 2BHK on higher floor, preferred ready possession."
+      },
+      cardB: {
+        id: "NEW-SYNC",
+        name: "Rajesh K. Patel",
+        phone: "+91 98765 43210",
+        email: "rajesh.p@adani.com",
+        source: "Facebook Lead Ads",
+        campaign: "Adani B2B Lead Forms",
+        budget: "₹55 - 65 Lakhs",
+        locality: "Vesu, Pal",
+        created: "15/01/2025 02:23 PM",
+        score: 74,
+        notes: "Wants a 2BHK/3BHK in Vesu, worked at Adani Group. High intent."
+      }
+    },
+    {
+      id: "DUP-102",
+      fieldMatch: "Email (priya.shah@gmail.com)",
+      cardA: {
+        id: "CRM-1063",
+        name: "Priya Shah",
+        phone: "+91 91234 56789",
+        email: "priya.shah@gmail.com",
+        source: "Housing.com",
+        campaign: "Organic Search",
+        budget: "₹70 - 80 Lakhs",
+        locality: "Adajan",
+        created: "10/01/2025 04:30 PM",
+        score: 55,
+        notes: "Inquired about 3BHK flat. Looking for loan options."
+      },
+      cardB: {
+        id: "NEW-SYNC",
+        name: "Priyanka Shah",
+        phone: "+91 90123 45678",
+        email: "priya.shah@gmail.com",
+        source: "Website Widget",
+        campaign: "Gotri 3BHK Details",
+        budget: "₹75 - 85 Lakhs",
+        locality: "Adajan, Vesu",
+        created: "15/01/2025 11:32 AM",
+        score: 68,
+        notes: "Very interested in rooftop pool amenities. Pre-approved loan from SBI."
+      }
+    }
+  ]);
+
+  const [mergedSelections, setMergedSelections] = useState({
+    name: "cardB",
+    email: "cardA",
+    budget: "cardB",
+    locality: "cardB",
+    notes: "both"
+  });
+
+  const [dedupSuccessMsg, setDedupSuccessMsg] = useState("");
+  const [syncLogs, setSyncLogs] = useState(crmSyncLog);
+  const [dedupLogs, setDedupLogs] = useState(crmDeduplicationLog);
+
   const submodulesList = [
     {
       id: "overview",
@@ -508,6 +584,78 @@ function SalesPipelineManager() {
     );
   };
 
+  // Deduplication action handler
+  const handleResolveDuplicate = (action: "merge" | "separate" | "skip") => {
+    if (duplicates.length === 0) return;
+    const currentDup = duplicates[0];
+
+    if (action === "merge") {
+      // Create new merge log entry
+      const newMergeLog = {
+        id: dedupLogs.length + 1,
+        primary: `${currentDup.cardA.name} (${currentDup.cardA.id})`,
+        merged: `${mergedSelections.name === "cardA" ? currentDup.cardA.name : currentDup.cardB.name} (${currentDup.cardB.id})`,
+        reason: currentDup.fieldMatch,
+        outcome: `Merged — ${currentDup.cardA.source} + ${currentDup.cardB.source}`
+      };
+      setDedupLogs(prev => [newMergeLog, ...prev]);
+
+      // Create new sync log entry
+      const newSyncLog = {
+        id: syncLogs.length + 1,
+        name: mergedSelections.name === "cardA" ? currentDup.cardA.name : currentDup.cardB.name,
+        source: currentDup.cardB.source,
+        time: new Date().toLocaleTimeString("en-IN", { hour: '2-digit', minute: '2-digit' }),
+        status: "Clean",
+        campaign: currentDup.cardB.campaign,
+        action: `Merged with ${currentDup.cardA.id}`
+      };
+      setSyncLogs(prev => [newSyncLog, ...prev]);
+
+      setDedupSuccessMsg(`Successfully merged ${currentDup.cardA.name}'s profiles!`);
+    } else if (action === "separate") {
+      // Create separate sync log entry
+      const newSyncLog = {
+        id: syncLogs.length + 1,
+        name: currentDup.cardB.name,
+        source: currentDup.cardB.source,
+        time: new Date().toLocaleTimeString("en-IN", { hour: '2-digit', minute: '2-digit' }),
+        status: "Clean",
+        campaign: currentDup.cardB.campaign,
+        action: `Pushed separate CRM Record`
+      };
+      setSyncLogs(prev => [newSyncLog, ...prev]);
+
+      setDedupSuccessMsg(`Created separate lead record for ${currentDup.cardB.name}.`);
+    } else if (action === "skip") {
+      // Skip: push it to the end of the queue
+      setDuplicates(prev => {
+        const next = [...prev];
+        const skipped = next.shift();
+        if (skipped) next.push(skipped);
+        return next;
+      });
+      return; // don't reset selections or show success message for skip
+    }
+
+    // Remove first duplicate from state
+    setDuplicates(prev => prev.slice(1));
+
+    // Clear message after 4s
+    setTimeout(() => {
+      setDedupSuccessMsg("");
+    }, 4000);
+
+    // Reset default selections
+    setMergedSelections({
+      name: "cardB",
+      email: "cardA",
+      budget: "cardB",
+      locality: "cardB",
+      notes: "both"
+    });
+  };
+
   // --- 2. CRM Sync & Deduplication Renders ---
   const renderCRMSync = () => {
     return (
@@ -555,7 +703,7 @@ function SalesPipelineManager() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border/30 bg-background font-medium text-foreground">
-                  {crmSyncLog.map((log) => (
+                  {syncLogs.map((log) => (
                     <tr key={log.id} className="hover:bg-secondary/15">
                       <td className="px-3.5 py-2.5 font-bold">{log.name}</td>
                       <td className="px-3.5 py-2.5">{renderPlatformBadge(log.source)}</td>
@@ -568,7 +716,7 @@ function SalesPipelineManager() {
                         </span>
                       </td>
                       <td className="px-3.5 py-2.5 font-mono text-[10.5px] font-bold text-slate-600">{log.action}</td>
-                      <td className="px-3.5 py-2.5 font-mono text-slate-400">{log.time.split(" ")[1]}</td>
+                      <td className="px-3.5 py-2.5 font-mono text-slate-400">{log.time.split(" ").slice(-1)[0]}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -589,7 +737,7 @@ function SalesPipelineManager() {
                 </p>
 
                 <div className="space-y-2">
-                  {crmDeduplicationLog.map((log) => (
+                  {dedupLogs.map((log) => (
                     <div key={log.id} className="p-3 rounded-xl border border-border bg-background space-y-2">
                       <div className="flex justify-between items-center text-xs">
                         <span className="font-bold text-foreground">{log.primary}</span>
@@ -613,6 +761,288 @@ function SalesPipelineManager() {
             </div>
           </Card>
         </div>
+
+        {/* Visual Deduplication Sandbox */}
+        <Card className="col-span-12 p-5 border border-border bg-card mt-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-border/40 pb-3 mb-4 gap-2">
+            <div>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-[#E8A838] flex items-center gap-1.5 font-display">
+                <Sparkles className="h-3.5 w-3.5 animate-pulse text-[#E8A838]" /> Sandbox Conflict Resolver
+              </div>
+              <h3 className="font-bold text-sm text-foreground font-display mt-0.5">
+                Visual Deduplication Sandbox ({duplicates.length} unresolved)
+              </h3>
+            </div>
+            {duplicates.length > 0 && (
+              <span className="text-[10px] font-bold text-slate-500 font-mono bg-secondary px-2.5 py-1 rounded border border-border/40">
+                Rule triggered: {duplicates[0].fieldMatch}
+              </span>
+            )}
+          </div>
+
+          {dedupSuccessMsg && (
+            <div className="mb-4 p-2.5 text-xs font-semibold text-emerald-700 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200/50 rounded-xl animate-fade-in flex items-center gap-1.5">
+              <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
+              <span>{dedupSuccessMsg}</span>
+            </div>
+          )}
+
+          {duplicates.length > 0 ? (
+            <div className="space-y-5 animate-in fade-in duration-300">
+              {/* Profile cards side by side */}
+              <div className="grid grid-cols-12 gap-5">
+                {/* Left Card: Existing CRM */}
+                <div className="col-span-12 lg:col-span-5 p-4 rounded-xl border border-border bg-slate-50 dark:bg-slate-900/10 flex flex-col justify-between">
+                  <div>
+                    <div className="flex justify-between items-center border-b border-border/40 pb-2 mb-3">
+                      <span className="text-[10.5px] font-bold text-foreground">Existing CRM Record</span>
+                      <span className="text-[9.5px] bg-[#1A3C5E]/10 text-[#1A3C5E] px-2 py-0.5 rounded font-mono font-bold">
+                        {duplicates[0].cardA.id}
+                      </span>
+                    </div>
+                    <div className="space-y-2.5 text-xs">
+                      <div>
+                        <span className="text-[9px] uppercase tracking-wider text-slate-400 block font-bold">Source</span>
+                        {renderPlatformBadge(duplicates[0].cardA.source)}
+                      </div>
+                      <div>
+                        <span className="text-[9px] uppercase tracking-wider text-slate-400 block font-bold">Created</span>
+                        <span className="font-mono-jb text-[11px] text-slate-600 dark:text-slate-400 font-semibold">{duplicates[0].cardA.created}</span>
+                      </div>
+                      <div>
+                        <span className="text-[9px] uppercase tracking-wider text-slate-400 block font-bold">Campaign</span>
+                        <span className="font-semibold text-slate-600 dark:text-slate-400">{duplicates[0].cardA.campaign}</span>
+                      </div>
+                      <div>
+                        <span className="text-[9px] uppercase tracking-wider text-slate-400 block font-bold">Original Notes</span>
+                        <p className="text-slate-500 italic text-[11px] leading-relaxed">"{duplicates[0].cardA.notes}"</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Card: Incoming Sync */}
+                <div className="col-span-12 lg:col-span-5 p-4 rounded-xl border border-border bg-slate-50 dark:bg-slate-900/10 flex flex-col justify-between lg:order-3">
+                  <div>
+                    <div className="flex justify-between items-center border-b border-border/40 pb-2 mb-3">
+                      <span className="text-[10.5px] font-bold text-foreground">Incoming Sync Record</span>
+                      <span className="text-[9.5px] bg-[#E8A838]/10 text-amber-700 px-2 py-0.5 rounded font-mono font-bold">
+                        {duplicates[0].cardB.id}
+                      </span>
+                    </div>
+                    <div className="space-y-2.5 text-xs">
+                      <div>
+                        <span className="text-[9px] uppercase tracking-wider text-slate-400 block font-bold">Source</span>
+                        {renderPlatformBadge(duplicates[0].cardB.source)}
+                      </div>
+                      <div>
+                        <span className="text-[9px] uppercase tracking-wider text-slate-400 block font-bold">Received</span>
+                        <span className="font-mono-jb text-[11px] text-slate-600 dark:text-slate-400 font-semibold">{duplicates[0].cardB.created}</span>
+                      </div>
+                      <div>
+                        <span className="text-[9px] uppercase tracking-wider text-slate-400 block font-bold">Campaign</span>
+                        <span className="font-semibold text-slate-600 dark:text-slate-400">{duplicates[0].cardB.campaign}</span>
+                      </div>
+                      <div>
+                        <span className="text-[9px] uppercase tracking-wider text-slate-400 block font-bold">Incoming Notes</span>
+                        <p className="text-slate-500 italic text-[11px] leading-relaxed">"{duplicates[0].cardB.notes}"</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Middle info column */}
+                <div className="col-span-12 lg:col-span-2 flex flex-col justify-center gap-1.5 p-3 rounded-xl border border-dashed border-border/60 bg-secondary/5 lg:order-2">
+                  <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400 text-center mb-1">
+                    Conflict Resolver
+                  </div>
+                  <div className="text-[10px] text-slate-500 text-center leading-relaxed font-semibold">
+                    Select values on either card row to resolve conflicting data fields.
+                  </div>
+                </div>
+              </div>
+
+              {/* Grid showing compared fields */}
+              <div className="space-y-2">
+                {[
+                  { key: "name", label: "Full Name" },
+                  { key: "phone", label: "Phone Number" },
+                  { key: "email", label: "Email Address" },
+                  { key: "budget", label: "Budget Range" },
+                  { key: "locality", label: "Locality" },
+                  { key: "notes", label: "Profile Notes" }
+                ].map((field) => {
+                  const cardA = duplicates[0].cardA;
+                  const cardB = duplicates[0].cardB;
+                  const valA = (cardA as any)[field.key] as string;
+                  const valB = (cardB as any)[field.key] as string;
+                  const isDiff = valA !== valB;
+                  const isSelectedA = (mergedSelections as any)[field.key] === "cardA";
+                  const isSelectedB = (mergedSelections as any)[field.key] === "cardB";
+                  const isBoth = (mergedSelections as any)[field.key] === "both";
+
+                  return (
+                    <div 
+                      key={field.key} 
+                      className={`grid grid-cols-12 gap-3 p-2.5 rounded-xl border transition-all ${
+                        isDiff 
+                          ? "bg-amber-500/5 dark:bg-amber-500/3 border-amber-500/25" 
+                          : "bg-transparent border-transparent"
+                      }`}
+                    >
+                      {/* Label */}
+                      <div className="col-span-12 sm:col-span-3 flex flex-col justify-center">
+                        <span className="text-[9.5px] font-bold uppercase tracking-wider text-slate-400 font-display">
+                          {field.label}
+                        </span>
+                        {isDiff && (
+                          <span className="text-[8px] font-extrabold text-[#E8A838] uppercase tracking-widest mt-0.5 animate-pulse">
+                            ⚠️ Conflict
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Card A value */}
+                      <div 
+                        onClick={() => isDiff && setMergedSelections(prev => ({ ...prev, [field.key]: "cardA" }))}
+                        className={`col-span-12 sm:col-span-4 p-2 rounded-lg border text-xs font-semibold cursor-pointer transition-all flex items-center justify-between ${
+                          isSelectedA 
+                            ? "bg-[#0E86E9]/10 border-[#0E86E9] text-[#0E86E9] shadow-sm" 
+                            : "bg-background border-border/50 hover:border-slate-400 text-slate-600 dark:text-slate-400"
+                        }`}
+                      >
+                        <span className="truncate">{valA}</span>
+                        <div className={`h-3.5 w-3.5 rounded-full border flex items-center justify-center shrink-0 ${
+                          isSelectedA ? "border-[#0E86E9] bg-[#0E86E9]" : "border-slate-300 bg-transparent"
+                        }`}>
+                          {isSelectedA && <Check className="h-2 w-2 text-white stroke-[3px]" />}
+                        </div>
+                      </div>
+
+                      {/* Direction arrow / Merge */}
+                      <div className="hidden sm:flex col-span-1 items-center justify-center">
+                        {field.key === "notes" && isDiff ? (
+                          <button 
+                            onClick={() => setMergedSelections(prev => ({ ...prev, [field.key]: isBoth ? "cardB" : "both" }))}
+                            className={`h-5 px-2 rounded-md font-bold text-[8.5px] uppercase tracking-wider transition-all border ${
+                              isBoth 
+                                ? "bg-emerald-500/20 border-emerald-500 text-emerald-600" 
+                                : "bg-background border-border text-slate-400 hover:border-slate-500 hover:text-slate-600"
+                            }`}
+                            title="Combine notes from both profiles"
+                          >
+                            {isBoth ? "Combined" : "Merge"}
+                          </button>
+                        ) : (
+                          <ArrowRight className={`h-3.5 w-3.5 ${isDiff ? "text-amber-500 animate-pulse" : "text-slate-300"}`} />
+                        )}
+                      </div>
+
+                      {/* Card B value */}
+                      <div 
+                        onClick={() => isDiff && setMergedSelections(prev => ({ ...prev, [field.key]: "cardB" }))}
+                        className={`col-span-12 sm:col-span-4 p-2 rounded-lg border text-xs font-semibold cursor-pointer transition-all flex items-center justify-between ${
+                          isSelectedB 
+                            ? "bg-[#0E86E9]/10 border-[#0E86E9] text-[#0E86E9] shadow-sm" 
+                            : isBoth && field.key === "notes"
+                              ? "bg-emerald-500/10 border-emerald-500/40 text-emerald-600"
+                              : "bg-background border-border/50 hover:border-slate-400 text-slate-600 dark:text-slate-400"
+                        }`}
+                      >
+                        <span className="truncate">{valB}</span>
+                        <div className={`h-3.5 w-3.5 rounded-full border flex items-center justify-center shrink-0 ${
+                          isSelectedB ? "border-[#0E86E9] bg-[#0E86E9]" : isBoth && field.key === "notes" ? "border-emerald-500 bg-emerald-500" : "border-slate-300 bg-transparent"
+                        }`}>
+                          {(isSelectedB || isBoth) && <Check className="h-2 w-2 text-white stroke-[3px]" />}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Final Merged Record Preview */}
+              <div className="bg-secondary/15 dark:bg-slate-900/10 border border-border/40 rounded-xl p-4 space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-display">Merged Record Preview</span>
+                  <span className="text-[9px] font-bold bg-[#0E86E9]/10 text-[#0E86E9] px-2 py-0.5 rounded font-mono">Ready to commit</span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-semibold">
+                  <div>
+                    <span className="text-slate-400 text-[9px] block uppercase tracking-wide">Name</span>
+                    <span className="text-foreground mt-0.5 block">{mergedSelections.name === "cardA" ? duplicates[0].cardA.name : duplicates[0].cardB.name}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 text-[9px] block uppercase tracking-wide">Email</span>
+                    <span className="text-foreground mt-0.5 block">{mergedSelections.email === "cardA" ? duplicates[0].cardA.email : duplicates[0].cardB.email}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 text-[9px] block uppercase tracking-wide">Phone</span>
+                    <span className="text-foreground mt-0.5 block font-mono">{duplicates[0].cardA.phone}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 text-[9px] block uppercase tracking-wide">Budget</span>
+                    <span className="text-foreground mt-0.5 block">{mergedSelections.budget === "cardA" ? duplicates[0].cardA.budget : duplicates[0].cardB.budget}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 text-[9px] block uppercase tracking-wide">Locality</span>
+                    <span className="text-foreground mt-0.5 block">{mergedSelections.locality === "cardA" ? duplicates[0].cardA.locality : duplicates[0].cardB.locality}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 text-[9px] block uppercase tracking-wide">Source Channels</span>
+                    <span className="text-foreground mt-0.5 block text-[#0E86E9]">
+                      {duplicates[0].cardA.source} + {duplicates[0].cardB.source}
+                    </span>
+                  </div>
+                </div>
+                <div className="text-xs border-t border-border/30 pt-2 text-slate-500 font-medium">
+                  <span className="text-slate-400 text-[9px] block uppercase tracking-wide mb-1 font-bold">Combined Profile Notes</span>
+                  <p className="leading-relaxed text-foreground bg-background p-2.5 rounded-lg border border-border/40 font-semibold italic text-[11px]">
+                    {mergedSelections.notes === "both" 
+                      ? `${duplicates[0].cardA.notes} \n[Merged from ${duplicates[0].cardB.source}]: ${duplicates[0].cardB.notes}`
+                      : mergedSelections.notes === "cardA" 
+                        ? duplicates[0].cardA.notes 
+                        : duplicates[0].cardB.notes}
+                  </p>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center justify-end gap-3 border-t border-border/40 pt-4">
+                <button
+                  onClick={() => handleResolveDuplicate("skip")}
+                  className="h-9 px-4 rounded-xl border border-border bg-card hover:bg-muted text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-foreground transition-all cursor-pointer"
+                >
+                  Skip Conflict
+                </button>
+                <button
+                  onClick={() => handleResolveDuplicate("separate")}
+                  className="h-9 px-4 rounded-xl border border-border bg-card hover:bg-muted text-xs font-bold uppercase tracking-wider text-slate-700 hover:text-foreground transition-all cursor-pointer"
+                >
+                  Keep Separate (2 Leads)
+                </button>
+                <button
+                  onClick={() => handleResolveDuplicate("merge")}
+                  className="h-9 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm cursor-pointer flex items-center gap-1.5"
+                >
+                  <CheckCheck className="h-4 w-4" /> Confirm & Merge Profiles
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="py-12 flex flex-col items-center justify-center text-center space-y-3 animate-in fade-in duration-300">
+              <div className="h-12 w-12 rounded-full bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-100 dark:border-emerald-900/30 flex items-center justify-center text-emerald-600">
+                <CheckCircle2 className="h-6 w-6" />
+              </div>
+              <div>
+                <h4 className="font-bold text-xs text-foreground uppercase tracking-widest font-display">All Conflicts Resolved</h4>
+                <p className="text-xs text-muted-foreground mt-1 max-w-[280px]">
+                  There are no pending duplicate records in the sync sandbox right now. Nice job!
+                </p>
+              </div>
+            </div>
+          )}
+        </Card>
       </div>
     );
   };

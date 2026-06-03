@@ -165,8 +165,7 @@ const INSIGHTS = [
   { id: "AI-4", type: "Sales", text: "Site visits conducted on Saturdays have 2.4× the booking conversion rate compared to weekday visits.", confidence: 79, action: "Increase Saturday visit slots capacity", rm: "Sales Team" },
   { id: "AI-5", type: "Finance", text: "Business Park collections are 12% below monthly target for 2 consecutive months. Margin variance tracks 3.8% below pro-forma.", confidence: 86, action: "Audit costs & accelerate demands", rm: "Finance Director" },
   { id: "AI-6", type: "Market", text: "Shreenath Builders cut 2BHK prices in Vesu by ₹1.8L this week (now ₹54.2L vs Fortiv ₹57.5L). Local inquiries dropped 14%.", confidence: 77, action: "Launch closing incentive scheme", rm: "Marketing Director + MD" },
-  { id: "AI-7", type: "Risk", text: "4 deals in Negotiation stage have been idle for 10+ days with no agent contact logged. Approaching critical abandonment risk.", confidence: 93, action: "Trigger manager-level outreach", rm: "Sales Manager (Rahul Modi)" },
-  { id: "AI-8", type: "Compliance", text: "RERA Quarterly Progress Report for Greenview Heights is due in 8 days. M9.1 data is compiled but compliance filing is not initiated.", confidence: 100, action: "Submit QPR submission drafts", rm: "Compliance Officer" }
+  { id: "AI-7", type: "Risk", text: "4 deals in Negotiation stage have been idle for 10+ days with no agent contact logged. Approaching critical abandonment risk.", confidence: 93, action: "Trigger manager-level outreach", rm: "Sales Manager (Rahul Modi)" }
 ];
 
 const statusDotStyle = (status: string) => {
@@ -650,7 +649,7 @@ function AIBrainModule() {
   const renderInsights = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="flex flex-wrap gap-1.5 border-b border-border/30 pb-3">
-        {["All", "Sales", "Pricing", "Team", "Finance", "Market", "Risk", "Compliance"].map(cat => (
+        {["All", "Sales", "Pricing", "Team", "Finance", "Market", "Risk"].map(cat => (
           <button
             key={cat}
             onClick={() => setInsightsFilter(cat)}

@@ -18,7 +18,6 @@ import { Route as LeadsRouteImport } from './routes/leads'
 import { Route as HrRouteImport } from './routes/hr'
 import { Route as FinanceRouteImport } from './routes/finance'
 import { Route as ConversationsRouteImport } from './routes/conversations'
-import { Route as ComplianceRouteImport } from './routes/compliance'
 import { Route as BuyersRouteImport } from './routes/buyers'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AiBrainRouteImport } from './routes/ai-brain'
@@ -69,11 +68,6 @@ const ConversationsRoute = ConversationsRouteImport.update({
   path: '/conversations',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ComplianceRoute = ComplianceRouteImport.update({
-  id: '/compliance',
-  path: '/compliance',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const BuyersRoute = BuyersRouteImport.update({
   id: '/buyers',
   path: '/buyers',
@@ -100,7 +94,6 @@ export interface FileRoutesByFullPath {
   '/ai-brain': typeof AiBrainRoute
   '/analytics': typeof AnalyticsRoute
   '/buyers': typeof BuyersRoute
-  '/compliance': typeof ComplianceRoute
   '/conversations': typeof ConversationsRoute
   '/finance': typeof FinanceRoute
   '/hr': typeof HrRoute
@@ -116,7 +109,6 @@ export interface FileRoutesByTo {
   '/ai-brain': typeof AiBrainRoute
   '/analytics': typeof AnalyticsRoute
   '/buyers': typeof BuyersRoute
-  '/compliance': typeof ComplianceRoute
   '/conversations': typeof ConversationsRoute
   '/finance': typeof FinanceRoute
   '/hr': typeof HrRoute
@@ -133,7 +125,6 @@ export interface FileRoutesById {
   '/ai-brain': typeof AiBrainRoute
   '/analytics': typeof AnalyticsRoute
   '/buyers': typeof BuyersRoute
-  '/compliance': typeof ComplianceRoute
   '/conversations': typeof ConversationsRoute
   '/finance': typeof FinanceRoute
   '/hr': typeof HrRoute
@@ -151,7 +142,6 @@ export interface FileRouteTypes {
     | '/ai-brain'
     | '/analytics'
     | '/buyers'
-    | '/compliance'
     | '/conversations'
     | '/finance'
     | '/hr'
@@ -167,7 +157,6 @@ export interface FileRouteTypes {
     | '/ai-brain'
     | '/analytics'
     | '/buyers'
-    | '/compliance'
     | '/conversations'
     | '/finance'
     | '/hr'
@@ -183,7 +172,6 @@ export interface FileRouteTypes {
     | '/ai-brain'
     | '/analytics'
     | '/buyers'
-    | '/compliance'
     | '/conversations'
     | '/finance'
     | '/hr'
@@ -200,7 +188,6 @@ export interface RootRouteChildren {
   AiBrainRoute: typeof AiBrainRoute
   AnalyticsRoute: typeof AnalyticsRoute
   BuyersRoute: typeof BuyersRoute
-  ComplianceRoute: typeof ComplianceRoute
   ConversationsRoute: typeof ConversationsRoute
   FinanceRoute: typeof FinanceRoute
   HrRoute: typeof HrRoute
@@ -277,13 +264,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConversationsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/compliance': {
-      id: '/compliance'
-      path: '/compliance'
-      fullPath: '/compliance'
-      preLoaderRoute: typeof ComplianceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/buyers': {
       id: '/buyers'
       path: '/buyers'
@@ -320,7 +300,6 @@ const rootRouteChildren: RootRouteChildren = {
   AiBrainRoute: AiBrainRoute,
   AnalyticsRoute: AnalyticsRoute,
   BuyersRoute: BuyersRoute,
-  ComplianceRoute: ComplianceRoute,
   ConversationsRoute: ConversationsRoute,
   FinanceRoute: FinanceRoute,
   HrRoute: HrRoute,
