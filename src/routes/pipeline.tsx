@@ -224,13 +224,13 @@ const publishedListingsLog = [
 // Pipeline board stages
 const pipelineStages = [
   { id: "Inquiry", name: "Inquiry", probability: 5, color: "bg-slate-400" },
-  { id: "Site Visit Scheduled", name: "Visit Scheduled", probability: 10, color: "bg-[#2E86AB]" },
-  { id: "Visited", name: "Visited", probability: 20, color: "bg-[#0E86E9]" },
-  { id: "Negotiation", name: "Negotiation", probability: 40, color: "bg-[#E8A838]" },
-  { id: "Booking Amount Paid", name: "Booking Token Paid", probability: 75, color: "bg-[#1D9E75]" },
-  { id: "Agreement Signed", name: "Agreement Signed", probability: 85, color: "bg-[#1A3C5E]" },
-  { id: "Loan Processing", name: "Loan Processing", probability: 90, color: "bg-[#2E86AB]" },
-  { id: "Full Payment", name: "Full Payment", probability: 95, color: "bg-[#1D9E75]" },
+  { id: "Site Visit Scheduled", name: "Visit Scheduled", probability: 10, color: "bg-blue-700" },
+  { id: "Visited", name: "Visited", probability: 20, color: "bg-blue-600" },
+  { id: "Negotiation", name: "Negotiation", probability: 40, color: "bg-amber-500" },
+  { id: "Booking Amount Paid", name: "Booking Token Paid", probability: 75, color: "bg-emerald-600" },
+  { id: "Agreement Signed", name: "Agreement Signed", probability: 85, color: "bg-slate-800" },
+  { id: "Loan Processing", name: "Loan Processing", probability: 90, color: "bg-blue-700" },
+  { id: "Full Payment", name: "Full Payment", probability: 95, color: "bg-emerald-600" },
   { id: "Registration", name: "Registration", probability: 100, color: "bg-slate-500" }
 ];
 
@@ -394,7 +394,7 @@ function SalesPipelineManager() {
     } as const;
 
     const cls = maps[source as keyof typeof maps] || "bg-slate-100 text-slate-700 border-slate-200";
-    return <span className={`text-[9px] font-bold px-2 py-0.5 rounded border font-mono ${cls}`}>{source}</span>;
+    return <span className={`text-xs font-bold px-2 py-0.5 rounded border font-mono ${cls}`}>{source}</span>;
   };
 
   // SVG Bar Chart for Velocity
@@ -432,7 +432,7 @@ function SalesPipelineManager() {
                   x={x}
                   y={chartHeight + paddingTop + 12}
                   textAnchor="middle"
-                  className="text-[8px] font-mono fill-muted-foreground font-semibold"
+                  className="text-[10px] font-mono fill-muted-foreground font-semibold"
                 >
                   {val}d
                 </text>
@@ -451,7 +451,7 @@ function SalesPipelineManager() {
                   x={paddingLeft - 8}
                   y={y + 8}
                   textAnchor="end"
-                  className="text-[8.5px] font-bold fill-foreground"
+                  className="text-[10px] font-bold fill-foreground"
                 >
                   {d.stage}
                 </text>
@@ -498,10 +498,10 @@ function SalesPipelineManager() {
       <div className="space-y-6 animate-in fade-in duration-300">
         {/* Top KPIs */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatBox label="Active Deals" value="23" desc="Total pipeline" color="text-[#1A3C5E]" />
-          <StatBox label="In Negotiation" value="6" desc="2 stuck past target" color="text-[#E8A838] animate-pulse" />
-          <StatBox label="Bookings This Month" value="4" desc="Closed token amount" color="text-[#1D9E75]" />
-          <StatBox label="Pipeline Value" value="₹4.2 Cr" desc="Weighted value ₹1.84Cr" color="text-[#2E86AB]" />
+          <StatBox label="Active Deals" value="23" desc="Total pipeline" color="text-slate-800" />
+          <StatBox label="In Negotiation" value="6" desc="2 stuck past target" color="text-amber-500 animate-pulse" />
+          <StatBox label="Bookings This Month" value="4" desc="Closed token amount" color="text-emerald-600" />
+          <StatBox label="Pipeline Value" value="₹4.2 Cr" desc="Weighted value ₹1.84Cr" color="text-blue-700" />
         </div>
 
         <div className="grid grid-cols-12 gap-5">
@@ -509,12 +509,12 @@ function SalesPipelineManager() {
           <Card className="col-span-12 lg:col-span-6 p-4 border border-border bg-card flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
-                <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+                <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                   <GitBranch className="h-3.5 w-3.5 text-primary" /> Condensed Stage Distribution
                 </div>
                 <button 
                   onClick={() => setActiveTab("pipeline")}
-                  className="text-[9px] font-bold text-primary hover:underline font-mono"
+                  className="text-xs font-bold text-primary hover:underline font-mono"
                 >
                   View Kanban →
                 </button>
@@ -523,15 +523,15 @@ function SalesPipelineManager() {
               <div className="space-y-2.5">
                 {[
                   { stage: "Inquiry", count: 8, color: "bg-slate-400", pct: "34.7%" },
-                  { stage: "Site Visit Scheduled", count: 5, color: "bg-[#2E86AB]", pct: "21.7%" },
-                  { stage: "Visited", count: 4, color: "bg-[#0E86E9]", pct: "17.4%" },
-                  { stage: "Negotiation", count: 6, color: "bg-[#E8A838] animate-pulse", pct: "26.1%" },
-                  { stage: "Booking Amount Paid", count: 3, color: "bg-[#1D9E75]", pct: "13.0%" },
-                  { stage: "Agreement Signed", count: 2, color: "bg-[#1A3C5E]", pct: "8.7%" },
-                  { stage: "Loan Processing", count: 1, color: "bg-[#2E86AB]", pct: "4.3%" }
+                  { stage: "Site Visit Scheduled", count: 5, color: "bg-blue-700", pct: "21.7%" },
+                  { stage: "Visited", count: 4, color: "bg-blue-600", pct: "17.4%" },
+                  { stage: "Negotiation", count: 6, color: "bg-amber-500 animate-pulse", pct: "26.1%" },
+                  { stage: "Booking Amount Paid", count: 3, color: "bg-emerald-600", pct: "13.0%" },
+                  { stage: "Agreement Signed", count: 2, color: "bg-slate-800", pct: "8.7%" },
+                  { stage: "Loan Processing", count: 1, color: "bg-blue-700", pct: "4.3%" }
                 ].map((s) => (
                   <div key={s.stage} className="space-y-1">
-                    <div className="flex justify-between text-[10.5px] font-semibold text-slate-500">
+                    <div className="flex justify-between text-xs font-semibold text-slate-500">
                       <span className="flex items-center gap-1.5 font-sans font-semibold">
                         <span className={`h-2 w-2 rounded-full ${s.color}`} />
                         {s.stage}
@@ -553,7 +553,7 @@ function SalesPipelineManager() {
           <Card className="col-span-12 lg:col-span-6 p-4 border border-border bg-card flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
-                <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+                <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                   <Activity className="h-3.5 w-3.5 text-emerald-600 animate-pulse" /> Today's Operations Feed
                 </div>
                 <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -663,21 +663,21 @@ function SalesPipelineManager() {
         {/* Sync Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 border border-border bg-card p-4 rounded-2xl">
           <div className="text-center md:border-r border-border/40">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">Synced Today</div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Synced Today</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">118 leads</div>
           </div>
           <div className="text-center md:border-r border-border/40">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">Duplicates Merged</div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Duplicates Merged</div>
             <div className="text-base font-bold text-emerald-600 font-mono mt-1">14 merged</div>
           </div>
           <div className="text-center md:border-r border-border/40">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">Sync Health</div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Sync Health</div>
             <div className="text-xs font-extrabold text-emerald-600 mt-1.5 flex items-center gap-1 justify-center">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> All API Systems Live
             </div>
           </div>
           <div className="text-center">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">Dedup Rate</div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Dedup Rate</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">32% merged MTD</div>
           </div>
         </div>
@@ -687,12 +687,12 @@ function SalesPipelineManager() {
           <Card className="col-span-12 lg:col-span-7 p-0 overflow-hidden h-[450px] flex flex-col border border-border bg-card">
             <div className="p-3.5 bg-secondary/30 border-b border-border flex justify-between items-center">
               <h3 className="font-bold text-xs text-foreground font-display">Unified Inbound CRM Sync webhook Log</h3>
-              <span className="text-[9px] bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded font-mono font-bold">listening...</span>
+              <span className="text-xs bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded font-mono font-bold">listening...</span>
             </div>
             
             <div className="overflow-y-auto flex-1 scrollbar-none bg-card">
               <table className="w-full text-left text-xs divide-y divide-border/60">
-                <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                   <tr>
                     <th className="px-3.5 py-2">Lead</th>
                     <th className="px-3.5 py-2 font-mono">Source</th>
@@ -709,13 +709,13 @@ function SalesPipelineManager() {
                       <td className="px-3.5 py-2.5">{renderPlatformBadge(log.source)}</td>
                       <td className="px-3.5 py-2.5 text-slate-500 font-semibold">{log.campaign}</td>
                       <td className="px-3.5 py-2.5">
-                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                        <span className={`px-2 py-0.5 rounded text-xs font-bold ${
                           log.status === "Clean" ? "bg-emerald-50 text-emerald-600 border border-emerald-100" : "bg-amber-50 text-amber-600 border border-amber-100"
                         }`}>
                           {log.status}
                         </span>
                       </td>
-                      <td className="px-3.5 py-2.5 font-mono text-[10.5px] font-bold text-slate-600">{log.action}</td>
+                      <td className="px-3.5 py-2.5 font-mono text-xs font-bold text-slate-600">{log.action}</td>
                       <td className="px-3.5 py-2.5 font-mono text-slate-400">{log.time.split(" ").slice(-1)[0]}</td>
                     </tr>
                   ))}
@@ -741,13 +741,13 @@ function SalesPipelineManager() {
                     <div key={log.id} className="p-3 rounded-xl border border-border bg-background space-y-2">
                       <div className="flex justify-between items-center text-xs">
                         <span className="font-bold text-foreground">{log.primary}</span>
-                        <span className="text-[10px] font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">Merged</span>
+                        <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded">Merged</span>
                       </div>
-                      <div className="text-[10px] font-medium text-slate-500">
+                      <div className="text-xs font-medium text-slate-500">
                         <div>Merged Duplicate: <strong>{log.merged}</strong></div>
                         <div className="mt-1 font-mono text-slate-400">Match rule: {log.reason}</div>
                       </div>
-                      <div className="text-[10.5px] font-bold text-emerald-600 flex items-center gap-1">
+                      <div className="text-xs font-bold text-emerald-600 flex items-center gap-1">
                         <Check className="h-3.5 w-3.5" /> {log.outcome}
                       </div>
                     </div>
@@ -755,7 +755,7 @@ function SalesPipelineManager() {
                 </div>
               </div>
 
-              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center border-t border-border/40 pt-3">
+              <div className="text-xs font-bold text-slate-400 uppercase tracking-widest text-center border-t border-border/40 pt-3">
                 All data transfers compliant with DPDP Act 2023
               </div>
             </div>
@@ -766,15 +766,15 @@ function SalesPipelineManager() {
         <Card className="col-span-12 p-5 border border-border bg-card mt-2">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-border/40 pb-3 mb-4 gap-2">
             <div>
-              <div className="text-[10px] font-bold uppercase tracking-widest text-[#E8A838] flex items-center gap-1.5 font-display">
-                <Sparkles className="h-3.5 w-3.5 animate-pulse text-[#E8A838]" /> Sandbox Conflict Resolver
+              <div className="text-xs font-bold uppercase tracking-widest text-amber-500 flex items-center gap-1.5 font-display">
+                <Sparkles className="h-3.5 w-3.5 animate-pulse text-amber-500" /> Sandbox Conflict Resolver
               </div>
               <h3 className="font-bold text-sm text-foreground font-display mt-0.5">
                 Visual Deduplication Sandbox ({duplicates.length} unresolved)
               </h3>
             </div>
             {duplicates.length > 0 && (
-              <span className="text-[10px] font-bold text-slate-500 font-mono bg-secondary px-2.5 py-1 rounded border border-border/40">
+              <span className="text-xs font-bold text-slate-500 font-mono bg-secondary px-2.5 py-1 rounded border border-border/40">
                 Rule triggered: {duplicates[0].fieldMatch}
               </span>
             )}
@@ -795,27 +795,27 @@ function SalesPipelineManager() {
                 <div className="col-span-12 lg:col-span-5 p-4 rounded-xl border border-border bg-slate-50 dark:bg-slate-900/10 flex flex-col justify-between">
                   <div>
                     <div className="flex justify-between items-center border-b border-border/40 pb-2 mb-3">
-                      <span className="text-[10.5px] font-bold text-foreground">Existing CRM Record</span>
-                      <span className="text-[9.5px] bg-[#1A3C5E]/10 text-[#1A3C5E] px-2 py-0.5 rounded font-mono font-bold">
+                      <span className="text-xs font-bold text-foreground">Existing CRM Record</span>
+                      <span className="text-xs bg-slate-800/10 text-slate-800 px-2 py-0.5 rounded font-mono font-bold">
                         {duplicates[0].cardA.id}
                       </span>
                     </div>
                     <div className="space-y-2.5 text-xs">
                       <div>
-                        <span className="text-[9px] uppercase tracking-wider text-slate-400 block font-bold">Source</span>
+                        <span className="text-xs uppercase tracking-wider text-slate-400 block font-bold">Source</span>
                         {renderPlatformBadge(duplicates[0].cardA.source)}
                       </div>
                       <div>
-                        <span className="text-[9px] uppercase tracking-wider text-slate-400 block font-bold">Created</span>
-                        <span className="font-mono-jb text-[11px] text-slate-600 dark:text-slate-400 font-semibold">{duplicates[0].cardA.created}</span>
+                        <span className="text-xs uppercase tracking-wider text-slate-400 block font-bold">Created</span>
+                        <span className="font-mono-jb text-xs text-slate-600 dark:text-slate-400 font-semibold">{duplicates[0].cardA.created}</span>
                       </div>
                       <div>
-                        <span className="text-[9px] uppercase tracking-wider text-slate-400 block font-bold">Campaign</span>
+                        <span className="text-xs uppercase tracking-wider text-slate-400 block font-bold">Campaign</span>
                         <span className="font-semibold text-slate-600 dark:text-slate-400">{duplicates[0].cardA.campaign}</span>
                       </div>
                       <div>
-                        <span className="text-[9px] uppercase tracking-wider text-slate-400 block font-bold">Original Notes</span>
-                        <p className="text-slate-500 italic text-[11px] leading-relaxed">"{duplicates[0].cardA.notes}"</p>
+                        <span className="text-xs uppercase tracking-wider text-slate-400 block font-bold">Original Notes</span>
+                        <p className="text-slate-500 italic text-xs leading-relaxed">"{duplicates[0].cardA.notes}"</p>
                       </div>
                     </div>
                   </div>
@@ -825,27 +825,27 @@ function SalesPipelineManager() {
                 <div className="col-span-12 lg:col-span-5 p-4 rounded-xl border border-border bg-slate-50 dark:bg-slate-900/10 flex flex-col justify-between lg:order-3">
                   <div>
                     <div className="flex justify-between items-center border-b border-border/40 pb-2 mb-3">
-                      <span className="text-[10.5px] font-bold text-foreground">Incoming Sync Record</span>
-                      <span className="text-[9.5px] bg-[#E8A838]/10 text-amber-700 px-2 py-0.5 rounded font-mono font-bold">
+                      <span className="text-xs font-bold text-foreground">Incoming Sync Record</span>
+                      <span className="text-xs bg-amber-500/10 text-amber-700 px-2 py-0.5 rounded font-mono font-bold">
                         {duplicates[0].cardB.id}
                       </span>
                     </div>
                     <div className="space-y-2.5 text-xs">
                       <div>
-                        <span className="text-[9px] uppercase tracking-wider text-slate-400 block font-bold">Source</span>
+                        <span className="text-xs uppercase tracking-wider text-slate-400 block font-bold">Source</span>
                         {renderPlatformBadge(duplicates[0].cardB.source)}
                       </div>
                       <div>
-                        <span className="text-[9px] uppercase tracking-wider text-slate-400 block font-bold">Received</span>
-                        <span className="font-mono-jb text-[11px] text-slate-600 dark:text-slate-400 font-semibold">{duplicates[0].cardB.created}</span>
+                        <span className="text-xs uppercase tracking-wider text-slate-400 block font-bold">Received</span>
+                        <span className="font-mono-jb text-xs text-slate-600 dark:text-slate-400 font-semibold">{duplicates[0].cardB.created}</span>
                       </div>
                       <div>
-                        <span className="text-[9px] uppercase tracking-wider text-slate-400 block font-bold">Campaign</span>
+                        <span className="text-xs uppercase tracking-wider text-slate-400 block font-bold">Campaign</span>
                         <span className="font-semibold text-slate-600 dark:text-slate-400">{duplicates[0].cardB.campaign}</span>
                       </div>
                       <div>
-                        <span className="text-[9px] uppercase tracking-wider text-slate-400 block font-bold">Incoming Notes</span>
-                        <p className="text-slate-500 italic text-[11px] leading-relaxed">"{duplicates[0].cardB.notes}"</p>
+                        <span className="text-xs uppercase tracking-wider text-slate-400 block font-bold">Incoming Notes</span>
+                        <p className="text-slate-500 italic text-xs leading-relaxed">"{duplicates[0].cardB.notes}"</p>
                       </div>
                     </div>
                   </div>
@@ -853,10 +853,10 @@ function SalesPipelineManager() {
 
                 {/* Middle info column */}
                 <div className="col-span-12 lg:col-span-2 flex flex-col justify-center gap-1.5 p-3 rounded-xl border border-dashed border-border/60 bg-secondary/5 lg:order-2">
-                  <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400 text-center mb-1">
+                  <div className="text-xs font-bold uppercase tracking-wider text-slate-400 text-center mb-1">
                     Conflict Resolver
                   </div>
-                  <div className="text-[10px] text-slate-500 text-center leading-relaxed font-semibold">
+                  <div className="text-xs text-slate-500 text-center leading-relaxed font-semibold">
                     Select values on either card row to resolve conflicting data fields.
                   </div>
                 </div>
@@ -892,11 +892,11 @@ function SalesPipelineManager() {
                     >
                       {/* Label */}
                       <div className="col-span-12 sm:col-span-3 flex flex-col justify-center">
-                        <span className="text-[9.5px] font-bold uppercase tracking-wider text-slate-400 font-display">
+                        <span className="text-xs font-bold uppercase tracking-wider text-slate-400 font-display">
                           {field.label}
                         </span>
                         {isDiff && (
-                          <span className="text-[8px] font-extrabold text-[#E8A838] uppercase tracking-widest mt-0.5 animate-pulse">
+                          <span className="text-[10px] font-extrabold text-amber-500 uppercase tracking-widest mt-0.5 animate-pulse">
                             ⚠️ Conflict
                           </span>
                         )}
@@ -907,13 +907,13 @@ function SalesPipelineManager() {
                         onClick={() => isDiff && setMergedSelections(prev => ({ ...prev, [field.key]: "cardA" }))}
                         className={`col-span-12 sm:col-span-4 p-2 rounded-lg border text-xs font-semibold cursor-pointer transition-all flex items-center justify-between ${
                           isSelectedA 
-                            ? "bg-[#0E86E9]/10 border-[#0E86E9] text-[#0E86E9] shadow-sm" 
+                            ? "bg-blue-600/10 border-blue-600 text-blue-600 shadow-sm" 
                             : "bg-background border-border/50 hover:border-slate-400 text-slate-600 dark:text-slate-400"
                         }`}
                       >
                         <span className="truncate">{valA}</span>
                         <div className={`h-3.5 w-3.5 rounded-full border flex items-center justify-center shrink-0 ${
-                          isSelectedA ? "border-[#0E86E9] bg-[#0E86E9]" : "border-slate-300 bg-transparent"
+                          isSelectedA ? "border-blue-600 bg-blue-600" : "border-slate-300 bg-transparent"
                         }`}>
                           {isSelectedA && <Check className="h-2 w-2 text-white stroke-[3px]" />}
                         </div>
@@ -924,7 +924,7 @@ function SalesPipelineManager() {
                         {field.key === "notes" && isDiff ? (
                           <button 
                             onClick={() => setMergedSelections(prev => ({ ...prev, [field.key]: isBoth ? "cardB" : "both" }))}
-                            className={`h-5 px-2 rounded-md font-bold text-[8.5px] uppercase tracking-wider transition-all border ${
+                            className={`h-5 px-2 rounded-md font-bold text-[10px] uppercase tracking-wider transition-all border ${
                               isBoth 
                                 ? "bg-emerald-500/20 border-emerald-500 text-emerald-600" 
                                 : "bg-background border-border text-slate-400 hover:border-slate-500 hover:text-slate-600"
@@ -943,7 +943,7 @@ function SalesPipelineManager() {
                         onClick={() => isDiff && setMergedSelections(prev => ({ ...prev, [field.key]: "cardB" }))}
                         className={`col-span-12 sm:col-span-4 p-2 rounded-lg border text-xs font-semibold cursor-pointer transition-all flex items-center justify-between ${
                           isSelectedB 
-                            ? "bg-[#0E86E9]/10 border-[#0E86E9] text-[#0E86E9] shadow-sm" 
+                            ? "bg-blue-600/10 border-blue-600 text-blue-600 shadow-sm" 
                             : isBoth && field.key === "notes"
                               ? "bg-emerald-500/10 border-emerald-500/40 text-emerald-600"
                               : "bg-background border-border/50 hover:border-slate-400 text-slate-600 dark:text-slate-400"
@@ -951,7 +951,7 @@ function SalesPipelineManager() {
                       >
                         <span className="truncate">{valB}</span>
                         <div className={`h-3.5 w-3.5 rounded-full border flex items-center justify-center shrink-0 ${
-                          isSelectedB ? "border-[#0E86E9] bg-[#0E86E9]" : isBoth && field.key === "notes" ? "border-emerald-500 bg-emerald-500" : "border-slate-300 bg-transparent"
+                          isSelectedB ? "border-blue-600 bg-blue-600" : isBoth && field.key === "notes" ? "border-emerald-500 bg-emerald-500" : "border-slate-300 bg-transparent"
                         }`}>
                           {(isSelectedB || isBoth) && <Check className="h-2 w-2 text-white stroke-[3px]" />}
                         </div>
@@ -964,40 +964,40 @@ function SalesPipelineManager() {
               {/* Final Merged Record Preview */}
               <div className="bg-secondary/15 dark:bg-slate-900/10 border border-border/40 rounded-xl p-4 space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-display">Merged Record Preview</span>
-                  <span className="text-[9px] font-bold bg-[#0E86E9]/10 text-[#0E86E9] px-2 py-0.5 rounded font-mono">Ready to commit</span>
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-400 font-display">Merged Record Preview</span>
+                  <span className="text-xs font-bold bg-blue-600/10 text-blue-600 px-2 py-0.5 rounded font-mono">Ready to commit</span>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-semibold">
                   <div>
-                    <span className="text-slate-400 text-[9px] block uppercase tracking-wide">Name</span>
+                    <span className="text-slate-400 text-xs block uppercase tracking-wide">Name</span>
                     <span className="text-foreground mt-0.5 block">{mergedSelections.name === "cardA" ? duplicates[0].cardA.name : duplicates[0].cardB.name}</span>
                   </div>
                   <div>
-                    <span className="text-slate-400 text-[9px] block uppercase tracking-wide">Email</span>
+                    <span className="text-slate-400 text-xs block uppercase tracking-wide">Email</span>
                     <span className="text-foreground mt-0.5 block">{mergedSelections.email === "cardA" ? duplicates[0].cardA.email : duplicates[0].cardB.email}</span>
                   </div>
                   <div>
-                    <span className="text-slate-400 text-[9px] block uppercase tracking-wide">Phone</span>
+                    <span className="text-slate-400 text-xs block uppercase tracking-wide">Phone</span>
                     <span className="text-foreground mt-0.5 block font-mono">{duplicates[0].cardA.phone}</span>
                   </div>
                   <div>
-                    <span className="text-slate-400 text-[9px] block uppercase tracking-wide">Budget</span>
+                    <span className="text-slate-400 text-xs block uppercase tracking-wide">Budget</span>
                     <span className="text-foreground mt-0.5 block">{mergedSelections.budget === "cardA" ? duplicates[0].cardA.budget : duplicates[0].cardB.budget}</span>
                   </div>
                   <div>
-                    <span className="text-slate-400 text-[9px] block uppercase tracking-wide">Locality</span>
+                    <span className="text-slate-400 text-xs block uppercase tracking-wide">Locality</span>
                     <span className="text-foreground mt-0.5 block">{mergedSelections.locality === "cardA" ? duplicates[0].cardA.locality : duplicates[0].cardB.locality}</span>
                   </div>
                   <div>
-                    <span className="text-slate-400 text-[9px] block uppercase tracking-wide">Source Channels</span>
-                    <span className="text-foreground mt-0.5 block text-[#0E86E9]">
+                    <span className="text-slate-400 text-xs block uppercase tracking-wide">Source Channels</span>
+                    <span className="text-foreground mt-0.5 block text-blue-600">
                       {duplicates[0].cardA.source} + {duplicates[0].cardB.source}
                     </span>
                   </div>
                 </div>
                 <div className="text-xs border-t border-border/30 pt-2 text-slate-500 font-medium">
-                  <span className="text-slate-400 text-[9px] block uppercase tracking-wide mb-1 font-bold">Combined Profile Notes</span>
-                  <p className="leading-relaxed text-foreground bg-background p-2.5 rounded-lg border border-border/40 font-semibold italic text-[11px]">
+                  <span className="text-slate-400 text-xs block uppercase tracking-wide mb-1 font-bold">Combined Profile Notes</span>
+                  <p className="leading-relaxed text-foreground bg-background p-2.5 rounded-lg border border-border/40 font-semibold italic text-xs">
                     {mergedSelections.notes === "both" 
                       ? `${duplicates[0].cardA.notes} \n[Merged from ${duplicates[0].cardB.source}]: ${duplicates[0].cardB.notes}`
                       : mergedSelections.notes === "cardA" 
@@ -1105,28 +1105,28 @@ function SalesPipelineManager() {
                   const isWeekend = day.includes("Sat") || day.includes("Sun");
                   return (
                     <div key={idx} className={`rounded-xl border border-border/60 p-2 flex flex-col justify-between ${isWeekend ? "bg-slate-500/5" : "bg-background"}`}>
-                      <span className="font-bold text-muted-foreground block text-[10px]">{day}</span>
+                      <span className="font-bold text-muted-foreground block text-xs">{day}</span>
                       
                       {/* Blocks inside calendar */}
                       <div className="flex-1 py-3 flex flex-col gap-1 justify-center">
                         {day.includes("Sat") && (
                           <>
-                            <div className="p-1 rounded bg-[#E8A838]/15 border border-[#E8A838]/20 text-[8px] font-bold text-amber-700 truncate">11:00 AM Patel</div>
-                            <div className="p-1 rounded bg-[#0E86E9]/15 border border-[#0E86E9]/20 text-[8px] font-bold text-primary truncate">03:00 PM Shah</div>
+                            <div className="p-1 rounded bg-amber-500/15 border border-amber-500/20 text-[10px] font-bold text-amber-700 truncate">11:00 AM Patel</div>
+                            <div className="p-1 rounded bg-blue-600/15 border border-blue-600/20 text-[10px] font-bold text-primary truncate">03:00 PM Shah</div>
                           </>
                         )}
                         {day.includes("Sun") && (
                           <>
-                            <div className="p-1 rounded bg-[#1D9E75]/15 border border-[#1D9E75]/20 text-[8px] font-bold text-[#1D9E75] truncate">10:00 AM Deepak</div>
-                            <div className="p-1 rounded bg-slate-100 border border-slate-200 text-[8px] font-bold text-slate-500 truncate">02:00 PM Mehta</div>
+                            <div className="p-1 rounded bg-emerald-600/15 border border-emerald-600/20 text-[10px] font-bold text-emerald-600 truncate">10:00 AM Deepak</div>
+                            <div className="p-1 rounded bg-slate-100 border border-slate-200 text-[10px] font-bold text-slate-500 truncate">02:00 PM Mehta</div>
                           </>
                         )}
                         {!day.includes("Sat") && !day.includes("Sun") && idx === 5 && (
-                          <div className="p-1 rounded bg-[#2E86AB]/15 border border-[#2E86AB]/20 text-[8px] font-bold text-cyan-700 truncate">11:30 AM Joshi</div>
+                          <div className="p-1 rounded bg-blue-700/15 border border-blue-700/20 text-[10px] font-bold text-cyan-700 truncate">11:30 AM Joshi</div>
                         )}
                       </div>
 
-                      <span className="text-[8px] font-semibold text-slate-400 font-mono">
+                      <span className="text-[10px] font-semibold text-slate-400 font-mono">
                         {day.includes("Sat") ? "2 booked" : day.includes("Sun") ? "2 booked" : idx === 5 ? "1 booked" : "0 slots"}
                       </span>
                     </div>
@@ -1137,7 +1137,7 @@ function SalesPipelineManager() {
 
             <div className="border-t border-border/40 pt-3 flex justify-between items-center text-xs">
               <span className="text-muted-foreground font-semibold">Layers:</span>
-              <div className="flex gap-3 text-[10px] font-bold">
+              <div className="flex gap-3 text-xs font-bold">
                 <span className="flex items-center gap-1"><span className="h-2 w-2 rounded bg-amber-500" /> Hot lead (Score &gt; 70)</span>
                 <span className="flex items-center gap-1"><span className="h-2 w-2 rounded bg-primary" /> Warm lead</span>
                 <span className="flex items-center gap-1"><span className="h-2 w-2 rounded bg-slate-400" /> General / Rescheduled</span>
@@ -1149,7 +1149,7 @@ function SalesPipelineManager() {
           <div className="col-span-12 lg:col-span-5 space-y-4">
             <Card className="p-4 border border-border bg-card flex flex-col h-[260px] justify-between">
               <div>
-                <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display mb-2.5">Confirmed visit schedule</div>
+                <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display mb-2.5">Confirmed visit schedule</div>
                 
                 <div className="space-y-2 max-h-[160px] overflow-y-auto pr-1 scrollbar-none">
                   {filteredVisits.map((v) => (
@@ -1157,14 +1157,14 @@ function SalesPipelineManager() {
                       <div>
                         <div className="font-bold text-foreground flex items-center gap-1.5">
                           {v.name}
-                          <span className="text-[9px] font-mono bg-secondary px-1 py-0.5 rounded text-slate-500">Score: {v.score}</span>
+                          <span className="text-xs font-mono bg-secondary px-1 py-0.5 rounded text-slate-500">Score: {v.score}</span>
                         </div>
-                        <div className="text-[10px] text-muted-foreground mt-0.5">{v.project} · Agent: {v.agent}</div>
+                        <div className="text-xs text-muted-foreground mt-0.5">{v.project} · Agent: {v.agent}</div>
                       </div>
                       <div className="text-right shrink-0 flex flex-col items-end gap-1">
-                        <span className="font-mono text-[9px] font-semibold text-slate-400">{v.time.split(" ")[0]} {v.time.split(" ")[1]}</span>
+                        <span className="font-mono text-xs font-semibold text-slate-400">{v.time.split(" ")[0]} {v.time.split(" ")[1]}</span>
                         <div className="flex gap-1.5 items-center">
-                          <span className={`px-1.5 py-0.5 rounded text-[9px] font-bold ${
+                          <span className={`px-1.5 py-0.5 rounded text-xs font-bold ${
                             v.status === "Rescheduled" ? "bg-amber-50 text-amber-600 border border-amber-100" : "bg-emerald-50 text-emerald-600 border border-emerald-100"
                           }`}>
                             {v.status}
@@ -1183,7 +1183,7 @@ function SalesPipelineManager() {
                 </div>
               </div>
 
-              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center border-t border-border/40 pt-2.5">
+              <div className="text-xs font-bold text-slate-400 uppercase tracking-widest text-center border-t border-border/40 pt-2.5">
                 Layered reminders sent automatically via WhatsApp (T-24h, Day-of, T-1h)
               </div>
             </Card>
@@ -1191,7 +1191,7 @@ function SalesPipelineManager() {
             {/* No show log list */}
             <Card className="p-4 border border-border bg-card flex flex-col justify-between h-[175px]">
               <div>
-                <div className="text-[10px] font-bold uppercase tracking-widest text-red-500 font-display mb-2 flex items-center gap-1.5">
+                <div className="text-xs font-bold uppercase tracking-widest text-red-500 font-display mb-2 flex items-center gap-1.5">
                   <AlertCircle className="h-3.5 w-3.5 text-red-500 animate-pulse" /> No-Show registry queue
                 </div>
                 
@@ -1200,11 +1200,11 @@ function SalesPipelineManager() {
                     <div key={v.id} className="text-xs flex items-center justify-between border-b border-border/40 pb-2 last:border-0 last:pb-0">
                       <div>
                         <div className="font-bold text-foreground">{v.name}</div>
-                        <div className="text-[10px] text-muted-foreground mt-0.5">Reason: "{v.reason}" · {v.time.split(" ")[0]}</div>
+                        <div className="text-xs text-muted-foreground mt-0.5">Reason: "{v.reason}" · {v.time.split(" ")[0]}</div>
                       </div>
                       <button
                         onClick={() => alert("Reschedule prompt triggered to " + v.name + " WhatsApp.")}
-                        className="h-7 px-3 bg-red-50 border border-red-200 hover:bg-red-100 text-red-600 font-bold rounded-lg text-[10px] transition-colors"
+                        className="h-7 px-3 bg-red-50 border border-red-200 hover:bg-red-100 text-red-600 font-bold rounded-lg text-xs transition-colors"
                       >
                         Reschedule WhatsApp
                       </button>
@@ -1245,7 +1245,7 @@ function SalesPipelineManager() {
             
             <div className="overflow-y-auto flex-1 scrollbar-none bg-card">
               <table className="w-full text-left text-xs divide-y divide-border/60">
-                <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                   <tr>
                     <th className="px-3.5 py-2.5">Buyer</th>
                     <th className="px-3.5 py-2.5">Visit Date</th>
@@ -1269,13 +1269,13 @@ function SalesPipelineManager() {
                       >
                         <td className="px-3.5 py-3">
                           <div className="font-bold">{seq.name}</div>
-                          <div className="text-[10px] text-slate-500 font-medium truncate max-w-xs mt-0.5">"{seq.lastMsg}"</div>
+                          <div className="text-xs text-slate-500 font-medium truncate max-w-xs mt-0.5">"{seq.lastMsg}"</div>
                         </td>
                         <td className="px-3.5 py-3 font-mono text-slate-500">{seq.visitDate}</td>
                         <td className="px-3.5 py-3 font-mono font-bold text-primary">Step {seq.currentStep} · {seq.stepName}</td>
                         <td className="px-3.5 py-3">
                           {seq.objection !== "None" ? (
-                            <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-600 border border-amber-200">
+                            <span className="px-2 py-0.5 rounded text-xs font-bold bg-amber-50 text-amber-600 border border-amber-200">
                               ⚠️ {seq.objection}
                             </span>
                           ) : (
@@ -1283,7 +1283,7 @@ function SalesPipelineManager() {
                           )}
                         </td>
                         <td className="px-3.5 py-3">
-                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                          <span className={`px-2 py-0.5 rounded text-xs font-bold ${
                             isStuck ? "bg-red-50 text-red-600 border border-red-100" : seq.status === "Slow" ? "bg-amber-50 text-amber-600 border border-amber-100" : "bg-emerald-50 text-emerald-600 border border-emerald-100"
                           }`}>
                             {seq.status}
@@ -1302,17 +1302,17 @@ function SalesPipelineManager() {
             <div className="flex-1 flex flex-col min-h-0">
               <div className="mb-2.5 border-b border-border/40 pb-2.5 flex justify-between items-center shrink-0">
                 <div>
-                  <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Active Follow-Up Timeline</div>
+                  <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Active Follow-Up Timeline</div>
                   <h4 className="text-xs font-bold text-foreground">Buyer: {activeSequence.name}</h4>
                 </div>
-                <span className="text-[9.5px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">
+                <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">
                   Step {activeSequence.currentStep} of 7 Completed
                 </span>
               </div>
 
               {/* Chat timeline visual */}
               <div className="flex-1 overflow-y-auto space-y-3 p-3 bg-secondary/15 rounded-xl border border-border/60 overflow-y-auto">
-                <div className="text-[9px] font-bold text-slate-400 uppercase tracking-widest text-center mb-1">
+                <div className="text-xs font-bold text-slate-400 uppercase tracking-widest text-center mb-1">
                   WhatsApp Conversation Thread
                 </div>
                 
@@ -1320,7 +1320,7 @@ function SalesPipelineManager() {
                   const isAi = msg.sender === "ai";
                   return (
                     <div key={idx} className={`flex ${isAi ? "justify-start" : "justify-end"} animate-in fade-in duration-300`}>
-                      <div className={`max-w-[85%] rounded-xl px-2.5 py-1.5 text-[10.5px] leading-relaxed shadow-sm font-semibold ${
+                      <div className={`max-w-[85%] rounded-xl px-2.5 py-1.5 text-xs leading-relaxed shadow-sm font-semibold ${
                         isAi 
                           ? "bg-white text-foreground border border-border rounded-tl-none" 
                           : "bg-primary text-primary-foreground rounded-br-none"
@@ -1360,7 +1360,7 @@ function SalesPipelineManager() {
           </div>
           <div className="overflow-x-auto scrollbar-none bg-card">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-4 py-2 font-bold">Objection Keyword Group</th>
                   <th className="px-4 py-2 font-bold">Automated Response Document Dispatched</th>
@@ -1373,7 +1373,7 @@ function SalesPipelineManager() {
                     <td className="px-4 py-2.5 font-bold">{rule.keyword}</td>
                     <td className="px-4 py-2.5 font-mono text-slate-500 font-bold">{rule.responseType}</td>
                     <td className="px-4 py-2.5">
-                      <span className="text-[10px] text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-100 font-extrabold uppercase font-mono">
+                      <span className="text-xs text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-100 font-extrabold uppercase font-mono">
                         Active Webhook
                       </span>
                     </td>
@@ -1394,10 +1394,10 @@ function SalesPipelineManager() {
         
         {/* Nurture drip tracks stats cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatBox label="Total Leads in Drip" value="142" desc="Long-term nurture" color="text-[#1A3C5E]" />
+          <StatBox label="Total Leads in Drip" value="142" desc="Long-term nurture" color="text-slate-800" />
           <StatBox label="Track A — Active (30d)" value="24" desc="Every 3-4 days" color="text-red-500 font-bold" />
-          <StatBox label="Track B — Warm (60d)" value="48" desc="Every 7 days" color="text-[#E8A838]" />
-          <StatBox label="Track C — Long-Horizon (90d)" value="70" desc="Every 14 days" color="text-[#2E86AB]" />
+          <StatBox label="Track B — Warm (60d)" value="48" desc="Every 7 days" color="text-amber-500" />
+          <StatBox label="Track C — Long-Horizon (90d)" value="70" desc="Every 14 days" color="text-blue-700" />
         </div>
 
         <div className="grid grid-cols-12 gap-5">
@@ -1409,7 +1409,7 @@ function SalesPipelineManager() {
             
             <div className="overflow-y-auto flex-1 scrollbar-none bg-card">
               <table className="w-full text-left text-xs divide-y divide-border/60">
-                <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                   <tr>
                     <th className="px-3.5 py-2.5">Buyer</th>
                     <th className="px-3.5 py-2.5">Drip Track</th>
@@ -1432,14 +1432,14 @@ function SalesPipelineManager() {
                         <td className="px-3.5 py-3 font-bold flex items-center gap-1.5">
                           {lead.name}
                           {isReengaged && (
-                            <span className="text-[8px] bg-emerald-500 text-white font-extrabold px-1.5 py-0.5 rounded font-mono uppercase animate-pulse">
+                            <span className="text-[10px] bg-emerald-500 text-white font-extrabold px-1.5 py-0.5 rounded font-mono uppercase animate-pulse">
                               Re-engaged
                             </span>
                           )}
                         </td>
                         <td className="px-3.5 py-3 font-bold text-slate-500">{lead.track}</td>
                         <td className="px-3.5 py-3 font-mono font-bold text-slate-600">{lead.sent} sent · {lead.opened} read</td>
-                        <td className="px-3.5 py-3 font-mono font-extrabold text-[#0E86E9]">{lead.clicks} clicks</td>
+                        <td className="px-3.5 py-3 font-mono font-extrabold text-blue-600">{lead.clicks} clicks</td>
                         <td className="px-3.5 py-3 font-mono text-slate-400">{lead.lastActive}</td>
                         <td className="px-3.5 py-3 font-mono font-bold text-primary">{lead.nextSend}</td>
                       </tr>
@@ -1461,14 +1461,14 @@ function SalesPipelineManager() {
                 {dripContentCalendar.map((item, idx) => (
                   <div key={idx} className="p-3 rounded-xl border border-border bg-background flex gap-3 hover:bg-secondary/30 transition-colors">
                     <div className="h-10 w-10 bg-secondary border border-border rounded-lg shrink-0 flex flex-col justify-center items-center text-center font-bold">
-                      <span className="text-[10px] font-mono leading-none text-slate-500 font-extrabold uppercase">{item.date.split(" ")[1]}</span>
+                      <span className="text-xs font-mono leading-none text-slate-500 font-extrabold uppercase">{item.date.split(" ")[1]}</span>
                       <span className="text-[14px] font-mono leading-none text-foreground font-black mt-0.5">{item.date.split(" ")[0]}</span>
                     </div>
 
                     <div className="min-w-0 flex-1">
                       <div className="flex justify-between items-center">
-                        <span className="text-[9px] font-bold text-[#0E86E9] uppercase tracking-wider font-mono">{item.type}</span>
-                        <span className="text-[9px] font-bold bg-secondary px-1.5 py-0.5 rounded font-mono">{item.track}</span>
+                        <span className="text-xs font-bold text-blue-600 uppercase tracking-wider font-mono">{item.type}</span>
+                        <span className="text-xs font-bold bg-secondary px-1.5 py-0.5 rounded font-mono">{item.track}</span>
                       </div>
                       <h4 className="font-bold text-xs text-foreground mt-1 truncate">{item.title}</h4>
                     </div>
@@ -1522,7 +1522,7 @@ function SalesPipelineManager() {
         {/* Stuck deals alerts banner */}
         <div className="p-3 bg-card border border-border rounded-2xl flex justify-between items-center flex-wrap gap-2 text-xs">
           <div className="flex items-center gap-1.5 text-red-500 font-bold">
-            <AlertCircle className="h-4 w-4 animate-pulse text-[#D85A30]" />
+            <AlertCircle className="h-4 w-4 animate-pulse text-red-600" />
             <span>Stuck Deal Alerts: 2 deals stuck past target duration. Escalations logged.</span>
           </div>
           <span className="font-mono text-slate-400 font-semibold">Active Pipeline: 23 deals · ₹4.2Cr value</span>
@@ -1544,16 +1544,16 @@ function SalesPipelineManager() {
                   {/* Column Header */}
                   <div className="p-3 bg-secondary/35 rounded-t-xl border-b border-border">
                     <div className="flex justify-between items-center">
-                      <span className="font-display font-bold text-[9.5px] uppercase tracking-wider text-slate-500">
+                      <span className="font-display font-bold text-xs uppercase tracking-wider text-slate-500">
                         {stg.name}
                       </span>
-                      <span className="text-[10px] font-bold bg-secondary px-1.5 py-0.5 rounded-full">
+                      <span className="text-xs font-bold bg-secondary px-1.5 py-0.5 rounded-full">
                         {stageDeals.length}
                       </span>
                     </div>
                     <div className="flex justify-between items-baseline mt-1">
                       <span className="text-xs font-bold font-mono text-foreground">{sum}</span>
-                      <span className="text-[8.5px] text-slate-400 font-mono">Prob: {stg.probability}%</span>
+                      <span className="text-[10px] text-slate-400 font-mono">Prob: {stg.probability}%</span>
                     </div>
                   </div>
 
@@ -1571,7 +1571,7 @@ function SalesPipelineManager() {
                         >
                           <Card
                             className={`p-3 border border-border hover:border-slate-300 bg-card transition-all ${
-                              isStuck ? "border-[#D85A30] ring-1 ring-[#D85A30]/20 animate-pulse" : isWatch ? "border-amber-400" : ""
+                              isStuck ? "border-red-600 ring-1 ring-[#D85A30]/20 animate-pulse" : isWatch ? "border-amber-400" : ""
                             }`}
                           >
                             <div className="flex justify-between items-start gap-1">
@@ -1581,11 +1581,11 @@ function SalesPipelineManager() {
                               }`} />
                             </div>
                             
-                            <p className="text-[10px] text-muted-foreground mt-0.5 font-semibold leading-relaxed truncate">{deal.project}</p>
+                            <p className="text-xs text-muted-foreground mt-0.5 font-semibold leading-relaxed truncate">{deal.project}</p>
                             
-                            <div className="flex justify-between items-center mt-3 pt-2.5 border-t border-border/40 text-[10px]">
+                            <div className="flex justify-between items-center mt-3 pt-2.5 border-t border-border/40 text-xs">
                               <span className="font-bold text-foreground font-mono">₹{deal.value}L</span>
-                              <span className="text-[9px] font-mono text-slate-500 flex items-center gap-0.5">
+                              <span className="text-xs font-mono text-slate-500 flex items-center gap-0.5">
                                 <Clock className="h-3 w-3" /> {deal.daysInStage}d
                               </span>
                             </div>
@@ -1596,7 +1596,7 @@ function SalesPipelineManager() {
 
                     {stageDeals.length === 0 && (
                       <div className="h-full flex items-center justify-center">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider font-mono">Drop deal here</span>
+                        <span className="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono">Drop deal here</span>
                       </div>
                     )}
                   </div>
@@ -1804,7 +1804,7 @@ function SalesPipelineManager() {
                     <button
                       key={tab.id}
                       onClick={() => setActiveOutputTab(tab.id as any)}
-                      className={`h-7 px-2.5 rounded-lg text-[10.5px] font-bold border transition-all ${
+                      className={`h-7 px-2.5 rounded-lg text-xs font-bold border transition-all ${
                         activeOutputTab === tab.id
                           ? "bg-ink border-ink text-cream"
                           : "bg-background border-border text-slate-500 hover:bg-muted"
@@ -1816,7 +1816,7 @@ function SalesPipelineManager() {
                 </div>
 
                 {/* Simulated Content Box */}
-                <div className="p-3 bg-secondary/35 rounded-xl border border-border/60 font-mono text-[10.5px] text-foreground leading-relaxed whitespace-pre-wrap max-h-[220px] overflow-y-auto scrollbar-none">
+                <div className="p-3 bg-secondary/35 rounded-xl border border-border/60 font-mono text-xs text-foreground leading-relaxed whitespace-pre-wrap max-h-[220px] overflow-y-auto scrollbar-none">
                   {activeOutputTab === "portal" && (
                     `Fortiv Greenview Heights — Premium 2 & 3 BHK Residences in Vesu, Surat\n\nDiscover elevated living at Fortiv Greenview Heights, a RERA-registered residential development [RERA: P01200023XXX] nestled in the heart of Vesu, Surat's most sought-after micro-market. Rising across G+14 floors in two elegantly designed towers, Greenview Heights offers 2BHK and 3BHK configurations ranging from 1,020 to 1,640 sq ft — meticulously crafted for families who value space, light, and community.\n\nKey Highlights:\n• Premium 2BHK starting from ₹48 Lakhs\n• Possession: December 2026\n• Swimming pool, clubhouse, children's play area, and EV charging\n• 24/7 CCTV surveillance · Maintenance ₹2/sq ft\n• 5 mins to Vesu Main Road · 10 mins to airport\n\nContact: +91 XXXXX XXXXX | www.fortivsolutions.in`
                   )}
@@ -1863,7 +1863,7 @@ function SalesPipelineManager() {
           
           <div className="overflow-x-auto scrollbar-none bg-card">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3.5 py-2.5">Project</th>
                   <th className="px-3.5 py-2.5">Portal Platform</th>
@@ -1882,11 +1882,11 @@ function SalesPipelineManager() {
                     <td className="px-3.5 py-3">{renderPlatformBadge(list.platform)}</td>
                     <td className="px-3.5 py-3 font-mono">{list.published}</td>
                     <td className="px-3.5 py-3 font-mono font-bold">{list.views} views</td>
-                    <td className="px-3.5 py-3 font-mono font-extrabold text-[#0E86E9]">+{list.leads} leads</td>
+                    <td className="px-3.5 py-3 font-mono font-extrabold text-blue-600">+{list.leads} leads</td>
                     <td className="px-3.5 py-3 font-mono text-slate-400">{list.refreshed}</td>
                     <td className="px-3.5 py-3 text-slate-600">{list.tone}</td>
                     <td className="px-3.5 py-3">
-                      <span className={`px-2 py-0.5 rounded text-[9.5px] font-bold ${
+                      <span className={`px-2 py-0.5 rounded text-xs font-bold ${
                         list.status === "Fresh" ? "bg-emerald-50 text-emerald-600 border border-emerald-100" : "bg-amber-50 text-amber-600 border border-amber-100 animate-pulse"
                       }`}>
                         {list.status}
@@ -1983,11 +1983,11 @@ function SalesPipelineManager() {
             <Card
               key={mod.id}
               onClick={() => setActiveTab(mod.id as TabType)}
-              className="submodule-card p-5 cursor-pointer flex flex-col justify-between group h-48"
+              className="bg-card border shadow-sm rounded-xl p-5 cursor-pointer flex flex-col justify-between group h-48"
             >
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
+                  <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> {mod.status}
                   </span>
                 </div>
@@ -1998,7 +1998,7 @@ function SalesPipelineManager() {
                   {mod.desc}
                 </p>
               </div>
-              <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-[11px] font-bold text-muted-foreground group-hover:text-foreground">
+              <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
                 <span className="font-mono font-bold text-foreground">{mod.stats}</span>
                 <span className="flex items-center gap-0.5 text-ink group-hover:underline">
                   Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -2044,12 +2044,12 @@ function StatBox({
 }) {
   return (
     <Card className="p-4 flex flex-col justify-between relative min-h-24 border border-border bg-card">
-      <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-display">
+      <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display">
         {label}
       </div>
       <div className="mt-2 flex items-baseline justify-between">
         <div className={`font-display text-2xl font-bold tracking-tight ${color}`}>{value}</div>
-        <span className="text-[9px] font-semibold text-muted-foreground">{desc}</span>
+        <span className="text-xs font-semibold text-muted-foreground">{desc}</span>
       </div>
     </Card>
   );

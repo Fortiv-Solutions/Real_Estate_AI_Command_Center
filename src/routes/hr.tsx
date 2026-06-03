@@ -121,17 +121,17 @@ const queryLog = [
 function StatBox({ label, value, desc, color }: { label: string; value: string; desc: string; color: string }) {
   return (
     <Card className="p-4 flex flex-col justify-between min-h-24 border border-border bg-card">
-      <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-display">{label}</div>
+      <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display">{label}</div>
       <div className="mt-2 flex items-baseline justify-between">
         <div className={`font-display text-2xl font-bold tracking-tight font-mono ${color}`}>{value}</div>
-        <span className="text-[9px] font-semibold text-muted-foreground">{desc}</span>
+        <span className="text-xs font-semibold text-muted-foreground">{desc}</span>
       </div>
     </Card>
   );
 }
 
 const scoreColor = (score: number) =>
-  score >= 80 ? "text-emerald-600" : score >= 60 ? "text-[#2E86AB]" : score >= 40 ? "text-[#E8A838]" : "text-[#D85A30]";
+  score >= 80 ? "text-emerald-600" : score >= 60 ? "text-blue-700" : score >= 40 ? "text-amber-500" : "text-red-600";
 
 const scoreBg = (score: number) =>
   score >= 80 ? "bg-emerald-50 border-emerald-200" : score >= 60 ? "bg-blue-50 border-blue-200" : score >= 40 ? "bg-amber-50 border-amber-200" : "bg-red-50 border-red-200";
@@ -139,7 +139,7 @@ const scoreBg = (score: number) =>
 const candidateStatusBadge = (status: string) => {
   if (status === "Shortlisted") return "bg-emerald-50 text-emerald-700 border border-emerald-100";
   if (status === "Borderline") return "bg-amber-50 text-amber-700 border border-amber-100";
-  if (status === "Rejected") return "bg-red-50 text-[#D85A30] border border-red-100";
+  if (status === "Rejected") return "bg-red-50 text-red-600 border border-red-100";
   if (status === "Completed") return "bg-emerald-50 text-emerald-700 border border-emerald-100";
   if (status === "Confirmed") return "bg-blue-50 text-blue-700 border border-blue-100";
   return "bg-slate-50 text-slate-500 border border-slate-200";
@@ -149,7 +149,7 @@ const performanceLabel = (label: string) => {
   if (label === "Top Performer") return "bg-emerald-50 text-emerald-700 border border-emerald-100";
   if (label === "On Track") return "bg-blue-50 text-blue-700 border border-blue-100";
   if (label === "Needs Attention") return "bg-amber-50 text-amber-700 border border-amber-100";
-  return "bg-red-50 text-[#D85A30] border border-red-100";
+  return "bg-red-50 text-red-600 border border-red-100";
 };
 
 // ─── MAIN COMPONENT ──────────────────────────────────────────────────────────
@@ -234,18 +234,18 @@ function RenderMenu({ list, onSelect }: { list: typeof submodulesList extends ne
         <Card
           key={mod.id}
           onClick={() => onSelect(mod.id)}
-          className="submodule-card p-5 cursor-pointer flex flex-col justify-between group h-44"
+          className="bg-card border shadow-sm rounded-xl p-5 cursor-pointer flex flex-col justify-between group h-44"
         >
           <div>
             <div className="flex items-center justify-between mb-2">
-              <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full border font-mono text-emerald-700 bg-emerald-50 border-emerald-100">
+              <span className="inline-flex items-center gap-1 text-xs font-bold px-2 py-0.5 rounded-full border font-mono text-emerald-700 bg-emerald-50 border-emerald-100">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> {mod.status}
               </span>
             </div>
             <h3 className="text-sm font-bold text-foreground group-hover:text-ink transition-colors mt-1 font-display">{mod.name}</h3>
             <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed line-clamp-2 font-medium">{mod.desc}</p>
           </div>
-          <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-[11px] font-bold text-muted-foreground group-hover:text-foreground">
+          <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
             <span className="font-mono font-bold text-foreground">{mod.stats}</span>
             <span className="flex items-center gap-0.5 text-ink group-hover:underline font-mono">Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
           </div>
@@ -271,37 +271,37 @@ function RenderOverview({ onNavigate }: { onNavigate: (id: string) => void }) {
   return (
     <div className="space-y-5 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-        <StatBox label="Open Positions" value="4" desc="Roles being hired" color="text-[#2E86AB]" />
-        <StatBox label="Candidates in Pipeline" value="38" desc="Active across stages" color="text-[#1A3C5E]" />
-        <StatBox label="Joining This Month" value="3" desc="Offer accepted" color="text-[#1D9E75]" />
-        <StatBox label="Payroll Processed" value="₹14.2L" desc="Jan 2025 — Done ✓" color="text-[#1D9E75]" />
-        <StatBox label="Pending HR Actions" value="7" desc="Awaiting attention" color="text-[#E8A838]" />
+        <StatBox label="Open Positions" value="4" desc="Roles being hired" color="text-blue-700" />
+        <StatBox label="Candidates in Pipeline" value="38" desc="Active across stages" color="text-slate-800" />
+        <StatBox label="Joining This Month" value="3" desc="Offer accepted" color="text-emerald-600" />
+        <StatBox label="Payroll Processed" value="₹14.2L" desc="Jan 2025 — Done ✓" color="text-emerald-600" />
+        <StatBox label="Pending HR Actions" value="7" desc="Awaiting attention" color="text-amber-500" />
       </div>
 
       <div className="grid grid-cols-12 gap-5">
         {/* Hiring Funnel */}
         <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card">
           <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
-            <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
-              <Activity className="h-3.5 w-3.5 text-[#2E86AB]" /> Hiring Funnel
+            <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+              <Activity className="h-3.5 w-3.5 text-blue-700" /> Hiring Funnel
             </div>
-            <button onClick={() => onNavigate("resume-screening")} className="text-[9px] font-bold text-primary hover:underline font-mono">View Candidates →</button>
+            <button onClick={() => onNavigate("resume-screening")} className="text-xs font-bold text-primary hover:underline font-mono">View Candidates →</button>
           </div>
           <div className="space-y-2.5">
             {funnelData.map((row, i) => (
               <div key={i} className="flex items-center gap-3 text-xs">
-                <div className="w-36 text-slate-500 font-semibold shrink-0 text-[10.5px]">{row.stage}</div>
+                <div className="w-36 text-slate-500 font-semibold shrink-0 text-xs">{row.stage}</div>
                 <div className="flex-1 h-5 bg-secondary/40 rounded-full overflow-hidden">
                   <div
                     className="h-full rounded-full transition-all duration-700"
                     style={{ width: `${row.pct}%`, background: i === 0 ? "#1A3C5E" : i <= 2 ? "#2E86AB" : i <= 4 ? "#1D9E75" : "#E8A838" }}
                   />
                 </div>
-                <div className="w-8 font-mono font-bold text-foreground text-right text-[11px]">{row.count}</div>
+                <div className="w-8 font-mono font-bold text-foreground text-right text-xs">{row.count}</div>
               </div>
             ))}
           </div>
-          <div className="mt-3 pt-2 border-t border-border/30 text-[9.5px] font-mono text-slate-400">
+          <div className="mt-3 pt-2 border-t border-border/30 text-xs font-mono text-slate-400">
             142 resumes screened · 12 shortlisted · 130 rejected — processed in 13 minutes
           </div>
         </Card>
@@ -309,10 +309,10 @@ function RenderOverview({ onNavigate }: { onNavigate: (id: string) => void }) {
         {/* Team Performance Snapshot */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card">
           <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
-            <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
-              <TrendingUp className="h-3.5 w-3.5 text-[#1D9E75]" /> Team Performance Snapshot
+            <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+              <TrendingUp className="h-3.5 w-3.5 text-emerald-600" /> Team Performance Snapshot
             </div>
-            <button onClick={() => onNavigate("performance")} className="text-[9px] font-bold text-primary hover:underline font-mono">Full View →</button>
+            <button onClick={() => onNavigate("performance")} className="text-xs font-bold text-primary hover:underline font-mono">Full View →</button>
           </div>
           <div className="space-y-2.5 max-h-[260px] overflow-y-auto scrollbar-none pr-1">
             {employees.map((emp) => (
@@ -324,16 +324,16 @@ function RenderOverview({ onNavigate }: { onNavigate: (id: string) => void }) {
                       stroke={emp.score >= 80 ? "#1D9E75" : emp.score >= 60 ? "#2E86AB" : emp.score >= 40 ? "#E8A838" : "#D85A30"}
                       strokeDasharray={`${emp.score} ${100 - emp.score}`} strokeLinecap="round" />
                   </svg>
-                  <span className={`absolute inset-0 flex items-center justify-center text-[10px] font-extrabold font-mono ${scoreColor(emp.score)}`}>{emp.score}</span>
+                  <span className={`absolute inset-0 flex items-center justify-center text-xs font-extrabold font-mono ${scoreColor(emp.score)}`}>{emp.score}</span>
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="font-bold text-foreground text-xs flex items-center gap-1.5">
                     {emp.name}
-                    {emp.score >= 80 && <span className="text-[8px] font-bold bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded-full border border-emerald-200 animate-pulse">⭐ Top</span>}
+                    {emp.score >= 80 && <span className="text-[10px] font-bold bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded-full border border-emerald-200 animate-pulse">⭐ Top</span>}
                   </div>
-                  <div className="text-[9.5px] text-slate-500 font-medium">{emp.role}</div>
+                  <div className="text-xs text-slate-500 font-medium">{emp.role}</div>
                 </div>
-                <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono border ${performanceLabel(emp.label)}`}>{emp.label}</span>
+                <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono border ${performanceLabel(emp.label)}`}>{emp.label}</span>
               </div>
             ))}
           </div>
@@ -356,10 +356,10 @@ function RenderResumeScreening() {
   return (
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatBox label="Total Applications" value="142" desc="All sources" color="text-[#1A3C5E]" />
-        <StatBox label="Shortlisted (AI)" value="12" desc="Score ≥ 65" color="text-[#1D9E75]" />
-        <StatBox label="Rejected" value="130" desc="Below threshold" color="text-[#D85A30]" />
-        <StatBox label="Processing Time" value="13 min" desc="For 142 resumes" color="text-[#2E86AB]" />
+        <StatBox label="Total Applications" value="142" desc="All sources" color="text-slate-800" />
+        <StatBox label="Shortlisted (AI)" value="12" desc="Score ≥ 65" color="text-emerald-600" />
+        <StatBox label="Rejected" value="130" desc="Below threshold" color="text-red-600" />
+        <StatBox label="Processing Time" value="13 min" desc="For 142 resumes" color="text-blue-700" />
       </div>
 
       {/* Filter bar */}
@@ -369,12 +369,12 @@ function RenderResumeScreening() {
         </select>
         <div className="flex gap-1.5">
           {["All", "Shortlisted", "Borderline", "Rejected"].map((f, i) => (
-            <button key={f} className={`h-7 px-3 rounded-lg text-[10px] font-bold uppercase tracking-widest border transition-all ${i === 0 ? "bg-ink text-cream border-ink" : "border-border text-slate-500 hover:bg-secondary"}`}>{f}</button>
+            <button key={f} className={`h-7 px-3 rounded-lg text-xs font-bold uppercase tracking-widest border transition-all ${i === 0 ? "bg-ink text-cream border-ink" : "border-border text-slate-500 hover:bg-secondary"}`}>{f}</button>
           ))}
         </div>
         {bulkSelected.length > 0 && (
           <button onClick={() => { alert(`Interview invites sent to ${bulkSelected.length} candidate(s).`); setBulkSelected([]); }}
-            className="h-7 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold uppercase tracking-widest ml-auto flex items-center gap-1.5">
+            className="h-7 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-widest ml-auto flex items-center gap-1.5">
             <Send className="h-3 w-3" /> Send {bulkSelected.length} Invite{bulkSelected.length > 1 ? "s" : ""}
           </button>
         )}
@@ -383,10 +383,10 @@ function RenderResumeScreening() {
       <div className="grid grid-cols-12 gap-5">
         {/* Candidate Table */}
         <Card className="col-span-12 lg:col-span-7 p-0 overflow-hidden border border-border bg-card">
-          <div className="p-3 bg-secondary/35 border-b border-border text-[10px] font-bold uppercase text-slate-500 font-display">Ranked Shortlist — {role}</div>
+          <div className="p-3 bg-secondary/35 border-b border-border text-xs font-bold uppercase text-slate-500 font-display">Ranked Shortlist — {role}</div>
           <div className="overflow-x-auto scrollbar-none">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3 py-2.5 w-8" />
                   <th className="px-3 py-2.5">#</th>
@@ -406,14 +406,14 @@ function RenderResumeScreening() {
                       {c.status === "Shortlisted" && (
                         <button onClick={e => { e.stopPropagation(); toggleBulk(c.rank); }}
                           className={`h-4 w-4 rounded border flex items-center justify-center transition-all ${bulkSelected.includes(c.rank) ? "bg-ink border-ink text-cream" : "border-border hover:border-ink"}`}>
-                          {bulkSelected.includes(c.rank) && <span className="text-[8px] font-bold">✓</span>}
+                          {bulkSelected.includes(c.rank) && <span className="text-[10px] font-bold">✓</span>}
                         </button>
                       )}
                     </td>
                     <td className="px-3 py-2.5 font-mono font-bold text-slate-400">{c.rank}</td>
                     <td className="px-3 py-2.5">
                       <div className="font-bold text-foreground">{c.name}</div>
-                      <div className="text-[9.5px] text-slate-400 font-mono">{c.source} · {c.location}</div>
+                      <div className="text-xs text-slate-400 font-mono">{c.source} · {c.location}</div>
                     </td>
                     <td className="px-3 py-2.5 text-slate-500">{c.current}</td>
                     <td className="px-3 py-2.5 font-mono">{c.expYrs} yrs</td>
@@ -423,11 +423,11 @@ function RenderResumeScreening() {
                         <div className="h-1.5 w-12 bg-secondary rounded-full overflow-hidden">
                           <div className="h-full rounded-full" style={{ width: `${c.score}%`, background: c.score >= 70 ? "#1D9E75" : c.score >= 50 ? "#E8A838" : "#D85A30" }} />
                         </div>
-                        <span className={`font-mono font-extrabold text-[11px] ${scoreColor(c.score)}`}>{c.score}</span>
+                        <span className={`font-mono font-extrabold text-xs ${scoreColor(c.score)}`}>{c.score}</span>
                       </div>
                     </td>
                     <td className="px-3 py-2.5">
-                      <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${candidateStatusBadge(c.status)}`}>
+                      <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${candidateStatusBadge(c.status)}`}>
                         {c.status === "Shortlisted" ? "✅ " : c.status === "Rejected" ? "❌ " : "⏳ "}{c.status}
                       </span>
                     </td>
@@ -441,13 +441,13 @@ function RenderResumeScreening() {
         {/* Score Breakdown */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card">
           <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
-            <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Score Breakdown</div>
-            <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded font-mono ${candidateStatusBadge(selectedCandidate.status)}`}>{selectedCandidate.status}</span>
+            <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Score Breakdown</div>
+            <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${candidateStatusBadge(selectedCandidate.status)}`}>{selectedCandidate.status}</span>
           </div>
           <div className="space-y-3">
             <div>
               <div className="font-display font-bold text-base text-foreground">{selectedCandidate.name}</div>
-              <div className="text-[10px] text-slate-400 font-semibold">{selectedCandidate.current}</div>
+              <div className="text-xs text-slate-400 font-semibold">{selectedCandidate.current}</div>
             </div>
             <div className="flex items-center gap-3">
               <div className="relative h-14 w-14 shrink-0">
@@ -466,27 +466,27 @@ function RenderResumeScreening() {
                 <div>Source: <span className="font-bold text-foreground">{selectedCandidate.source}</span></div>
               </div>
             </div>
-            <div className="bg-secondary/30 rounded-xl p-3 font-mono text-[10px] leading-relaxed text-foreground space-y-1 border border-border/40">
-              <div className="font-bold uppercase tracking-wider text-slate-400 text-[9px] mb-2">WHY THIS SCORE:</div>
+            <div className="bg-secondary/30 rounded-xl p-3 font-mono text-xs leading-relaxed text-foreground space-y-1 border border-border/40">
+              <div className="font-bold uppercase tracking-wider text-slate-400 text-xs mb-2">WHY THIS SCORE:</div>
               {selectedCandidate.expYrs >= 3 && <div className="text-emerald-600">✓ {selectedCandidate.expYrs} years real estate experience        +{Math.round(selectedCandidate.expYrs * 4)}</div>}
               <div className="text-emerald-600">✓ CRM / sales skills matched                         +10</div>
               {selectedCandidate.location === "Surat" && <div className="text-emerald-600">✓ Location: Surat (no relocation required)             +10</div>}
               {selectedCandidate.notice <= 30 && <div className="text-emerald-600">✓ Notice period: {selectedCandidate.notice} days (acceptable)            +8</div>}
-              {selectedCandidate.red.map((r, i) => <div key={i} className="text-[#D85A30]">✗ {r}</div>)}
+              {selectedCandidate.red.map((r, i) => <div key={i} className="text-red-600">✗ {r}</div>)}
             </div>
             {selectedCandidate.green.length > 0 && (
               <div className="space-y-1">
-                <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Green Flags</div>
+                <div className="text-xs font-bold uppercase tracking-wider text-slate-400">Green Flags</div>
                 <div className="flex flex-wrap gap-1.5">
-                  {selectedCandidate.green.map((g, i) => <span key={i} className="text-[9.5px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full">{g}</span>)}
+                  {selectedCandidate.green.map((g, i) => <span key={i} className="text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full">{g}</span>)}
                 </div>
               </div>
             )}
             {selectedCandidate.red.length > 0 && (
               <div className="space-y-1">
-                <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Red Flags</div>
+                <div className="text-xs font-bold uppercase tracking-wider text-slate-400">Red Flags</div>
                 <div className="flex flex-wrap gap-1.5">
-                  {selectedCandidate.red.map((r, i) => <span key={i} className="text-[9.5px] font-bold bg-red-50 text-[#D85A30] border border-red-200 px-2 py-0.5 rounded-full">{r}</span>)}
+                  {selectedCandidate.red.map((r, i) => <span key={i} className="text-xs font-bold bg-red-50 text-red-600 border border-red-200 px-2 py-0.5 rounded-full">{r}</span>)}
                 </div>
               </div>
             )}
@@ -531,17 +531,17 @@ function RenderInterviewScheduler() {
   return (
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatBox label="Invites Sent This Week" value="6" desc="All rounds" color="text-[#2E86AB]" />
-        <StatBox label="Confirmed" value="2" desc="Candidates confirmed" color="text-[#1D9E75]" />
-        <StatBox label="No Shows" value="0" desc="This week" color="text-[#1A3C5E]" />
-        <StatBox label="Avg Response Time" value="3.2 hrs" desc="Invite to confirmation" color="text-[#E8A838]" />
+        <StatBox label="Invites Sent This Week" value="6" desc="All rounds" color="text-blue-700" />
+        <StatBox label="Confirmed" value="2" desc="Candidates confirmed" color="text-emerald-600" />
+        <StatBox label="No Shows" value="0" desc="This week" color="text-slate-800" />
+        <StatBox label="Avg Response Time" value="3.2 hrs" desc="Invite to confirmation" color="text-amber-500" />
       </div>
 
       <div className="flex items-center gap-1.5">
         {["All", "Invite Sent", "Confirmed", "Completed", "No Show"].map((s, i) => (
-          <button key={s} onClick={() => setSelectedStage(s)} className={`h-7 px-3 rounded-lg text-[10px] font-bold uppercase tracking-widest border transition-all ${selectedStage === s ? "bg-ink text-cream border-ink" : "border-border text-slate-500 hover:bg-secondary"}`}>{s}</button>
+          <button key={s} onClick={() => setSelectedStage(s)} className={`h-7 px-3 rounded-lg text-xs font-bold uppercase tracking-widest border transition-all ${selectedStage === s ? "bg-ink text-cream border-ink" : "border-border text-slate-500 hover:bg-secondary"}`}>{s}</button>
         ))}
-        <span className="ml-auto text-[9.5px] font-mono font-bold text-emerald-600 flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />Google Calendar connected</span>
+        <span className="ml-auto text-xs font-mono font-bold text-emerald-600 flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />Google Calendar connected</span>
       </div>
 
       <div className="grid grid-cols-12 gap-5">
@@ -549,14 +549,14 @@ function RenderInterviewScheduler() {
         <div className="col-span-12 lg:col-span-7 grid grid-cols-4 gap-3">
           {kanbanStages.map(stage => (
             <div key={stage} className="space-y-2">
-              <div className="text-[9px] font-extrabold uppercase tracking-widest text-slate-400 font-display border-b border-border/40 pb-1.5">
+              <div className="text-xs font-extrabold uppercase tracking-widest text-slate-400 font-display border-b border-border/40 pb-1.5">
                 {stage} <span className="text-slate-300">({kanbanData[stage].length})</span>
               </div>
               {kanbanData[stage].map((c, i) => (
                 <Card key={i} className="p-2.5 border border-border/70 bg-card text-xs space-y-1">
                   <div className="font-bold text-foreground">{c.name}</div>
-                  <div className="text-[9.5px] text-slate-400 font-mono">{c.round}{c.date && ` · ${c.date}`}</div>
-                  {c.outcome && <div className={`text-[9.5px] font-bold ${c.outcome.includes("✅") ? "text-emerald-600" : "text-[#D85A30]"}`}>{c.outcome}</div>}
+                  <div className="text-xs text-slate-400 font-mono">{c.round}{c.date && ` · ${c.date}`}</div>
+                  {c.outcome && <div className={`text-xs font-bold ${c.outcome.includes("✅") ? "text-emerald-600" : "text-red-600"}`}>{c.outcome}</div>}
                 </Card>
               ))}
             </div>
@@ -565,30 +565,30 @@ function RenderInterviewScheduler() {
 
         {/* Schedule + WhatsApp preview */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card flex flex-col gap-3">
-          <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display border-b border-border/40 pb-2">Week Schedule — 13–17 Jan 2025</div>
+          <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display border-b border-border/40 pb-2">Week Schedule — 13–17 Jan 2025</div>
           <div className="space-y-2 overflow-y-auto max-h-[260px] scrollbar-none pr-1">
             {interviews.map((iv, i) => (
               <div key={i} className={`p-2.5 rounded-xl border text-xs flex items-start gap-2.5 ${iv.status === "Completed" ? "border-emerald-200 bg-emerald-50/30" : iv.status === "Confirmed" ? "border-blue-200 bg-blue-50/20" : iv.status.includes("Pending") ? "border-slate-200 bg-slate-50/20" : "border-border bg-background"}`}>
                 <div className="shrink-0 text-center min-w-[54px]">
-                  <div className="font-mono font-bold text-foreground text-[10px]">{iv.date}</div>
-                  <div className="font-mono text-[9px] text-slate-400">{iv.time}</div>
+                  <div className="font-mono font-bold text-foreground text-xs">{iv.date}</div>
+                  <div className="font-mono text-xs text-slate-400">{iv.time}</div>
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="font-bold text-foreground">{iv.candidate}</div>
-                  <div className="text-[9.5px] text-slate-500 font-semibold">{iv.round} · {iv.interviewer}</div>
+                  <div className="text-xs text-slate-500 font-semibold">{iv.round} · {iv.interviewer}</div>
                 </div>
-                <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono shrink-0 ${candidateStatusBadge(iv.status)}`}>{iv.status}</span>
+                <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono shrink-0 ${candidateStatusBadge(iv.status)}`}>{iv.status}</span>
               </div>
             ))}
           </div>
           <div className="border-t border-border/40 pt-3">
-            <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-2">WhatsApp Slot Offer Preview</div>
-            <div className="bg-[#ECF3EE] rounded-xl p-3 text-[10.5px] leading-relaxed text-slate-700 font-medium border border-emerald-100">
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">WhatsApp Slot Offer Preview</div>
+            <div className="bg-[#ECF3EE] rounded-xl p-3 text-xs leading-relaxed text-slate-700 font-medium border border-emerald-100">
               <div className="font-bold text-slate-800 mb-1">Fortiv Solutions HR ·</div>
               <p>Hi Nikhil, thank you for applying for the Senior Sales Agent role at Fortiv Solutions. We'd like to invite you for a 30-minute HR interview. Please select one of the following time slots:</p>
               <p className="mt-1.5"><strong>Option 1:</strong> Wednesday 15 Jan · 11:00 AM<br /><strong>Option 2:</strong> Wednesday 15 Jan · 3:00 PM<br /><strong>Option 3:</strong> Thursday 16 Jan · 10:00 AM</p>
               <p className="mt-1.5 text-slate-600">Reply with 1, 2, or 3 to confirm.</p>
-              <div className="text-right text-[9px] text-slate-400 mt-1">14:31 ✓✓</div>
+              <div className="text-right text-xs text-slate-400 mt-1">14:31 ✓✓</div>
             </div>
           </div>
         </Card>
@@ -608,10 +608,10 @@ function RenderOnboarding() {
   return (
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatBox label="Active Onboardings" value="3" desc="Joining in Jan 2025" color="text-[#2E86AB]" />
-        <StatBox label="Avg Doc Completion" value="87%" desc="Across active joiners" color="text-[#1D9E75]" />
-        <StatBox label="IT Setup Pending" value="1" desc="Nikhil Mehta" color="text-[#E8A838]" />
-        <StatBox label="Pending Reminders Sent" value="3" desc="For docs collection" color="text-[#1A3C5E]" />
+        <StatBox label="Active Onboardings" value="3" desc="Joining in Jan 2025" color="text-blue-700" />
+        <StatBox label="Avg Doc Completion" value="87%" desc="Across active joiners" color="text-emerald-600" />
+        <StatBox label="IT Setup Pending" value="1" desc="Nikhil Mehta" color="text-amber-500" />
+        <StatBox label="Pending Reminders Sent" value="3" desc="For docs collection" color="text-slate-800" />
       </div>
 
       <div className="space-y-4">
@@ -632,14 +632,14 @@ function RenderOnboarding() {
                       stroke={emp.docs === 100 ? "#1D9E75" : emp.docs >= 60 ? "#E8A838" : "#D85A30"}
                       strokeDasharray={`${emp.docs} ${100 - emp.docs}`} strokeLinecap="round" />
                   </svg>
-                  <span className="absolute inset-0 flex items-center justify-center text-[10px] font-extrabold font-mono text-foreground">{emp.docs}%</span>
+                  <span className="absolute inset-0 flex items-center justify-center text-xs font-extrabold font-mono text-foreground">{emp.docs}%</span>
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <div className="font-bold text-foreground text-sm">{emp.name}</div>
-                    <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono border ${emp.status === "Month 1" ? "bg-emerald-50 text-emerald-700 border-emerald-100" : emp.status === "Week 1" ? "bg-blue-50 text-blue-700 border-blue-100" : "bg-amber-50 text-amber-700 border-amber-100"}`}>{emp.status}</span>
+                    <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono border ${emp.status === "Month 1" ? "bg-emerald-50 text-emerald-700 border-emerald-100" : emp.status === "Week 1" ? "bg-blue-50 text-blue-700 border-blue-100" : "bg-amber-50 text-amber-700 border-amber-100"}`}>{emp.status}</span>
                   </div>
-                  <div className="text-[10px] text-slate-500 font-semibold">{emp.role} · {emp.id} · Joining: {emp.joining}</div>
+                  <div className="text-xs text-slate-500 font-semibold">{emp.role} · {emp.id} · Joining: {emp.joining}</div>
                   {/* Timeline rail */}
                   <div className="flex items-center gap-0.5 mt-2">
                     {timeline.map((t, i) => (
@@ -649,7 +649,7 @@ function RenderOnboarding() {
                       </div>
                     ))}
                   </div>
-                  <div className="text-[9px] font-mono text-slate-400 mt-0.5">Current: {timeline[stageIdx]}</div>
+                  <div className="text-xs font-mono text-slate-400 mt-0.5">Current: {timeline[stageIdx]}</div>
                 </div>
                 <div className="text-slate-400 shrink-0">
                   <ChevronLeft className={`h-4 w-4 transition-transform duration-300 ${isOpen ? "-rotate-90" : "-rotate-180"}`} />
@@ -659,7 +659,7 @@ function RenderOnboarding() {
                 <div className="p-4 pt-0 border-t border-border/40 animate-in fade-in duration-200 grid grid-cols-2 gap-5">
                   {/* Documents */}
                   <div>
-                    <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-2">Document Collection</div>
+                    <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Document Collection</div>
                     <div className="space-y-1.5">
                       {emp.docsReceived.map((d, i) => (
                         <div key={i} className="flex items-center gap-2 text-xs font-semibold text-emerald-600">
@@ -674,14 +674,14 @@ function RenderOnboarding() {
                     </div>
                     {emp.docsPending.length > 0 && (
                       <button onClick={() => alert(`WhatsApp reminder sent to ${emp.name} for ${emp.docsPending.length} pending documents.`)}
-                        className="mt-2 h-7 px-3 rounded-lg border border-amber-300 text-amber-700 bg-amber-50 hover:bg-amber-100 text-[9.5px] font-bold uppercase tracking-widest">
+                        className="mt-2 h-7 px-3 rounded-lg border border-amber-300 text-amber-700 bg-amber-50 hover:bg-amber-100 text-xs font-bold uppercase tracking-widest">
                         Send Reminder
                       </button>
                     )}
                   </div>
                   {/* Setup Checklist */}
                   <div>
-                    <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-2">Setup Checklist</div>
+                    <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Setup Checklist</div>
                     <div className="space-y-1.5 text-xs font-semibold">
                       {[
                         { label: "Reporting Manager", val: emp.manager, ok: true },
@@ -693,13 +693,13 @@ function RenderOnboarding() {
                       ].map((item, i) => (
                         <div key={i} className={`flex items-center justify-between ${item.ok ? "text-foreground" : "text-amber-600"}`}>
                           <span className="text-slate-500">{item.label}</span>
-                          <span className={`font-bold font-mono text-[10px] ${item.ok ? "text-emerald-600" : "text-amber-600 animate-pulse"}`}>{item.val}</span>
+                          <span className={`font-bold font-mono text-xs ${item.ok ? "text-emerald-600" : "text-amber-600 animate-pulse"}`}>{item.val}</span>
                         </div>
                       ))}
                     </div>
                     {emp.status === "Pre-joining" && (
                       <button onClick={() => alert(`Day 1 automations triggered for ${emp.name}!`)}
-                        className="mt-3 w-full h-7 rounded-lg bg-ink hover:bg-ink/90 text-cream text-[9.5px] font-bold uppercase tracking-widest transition-all">
+                        className="mt-3 w-full h-7 rounded-lg bg-ink hover:bg-ink/90 text-cream text-xs font-bold uppercase tracking-widest transition-all">
                         Mark Day 1 Complete
                       </button>
                     )}
@@ -713,8 +713,8 @@ function RenderOnboarding() {
 
       {/* "Your First Day" WhatsApp */}
       <Card className="p-4 border border-border bg-card">
-        <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-2">Automated "Your First Day" WhatsApp — Nikhil Mehta</div>
-        <div className="bg-[#ECF3EE] rounded-xl p-4 text-[10.5px] leading-relaxed text-slate-700 font-medium border border-emerald-100 max-w-sm">
+        <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Automated "Your First Day" WhatsApp — Nikhil Mehta</div>
+        <div className="bg-[#ECF3EE] rounded-xl p-4 text-xs leading-relaxed text-slate-700 font-medium border border-emerald-100 max-w-sm">
           <div className="font-bold text-slate-800 mb-1">Fortiv Solutions HR ·</div>
           <p>🎉 Welcome to Fortiv Solutions, Nikhil! We're excited to have you join us tomorrow.</p>
           <p className="mt-2">📍 Office: 204, Tower B, Greenview Complex, Vesu, Surat — 395007<br />
@@ -723,7 +723,7 @@ function RenderOnboarding() {
             👔 Dress code: Business casual<br />
             🙋 Ask for: Rahul Modi (Sales Manager)</p>
           <p className="mt-2 text-slate-600">See you tomorrow! Any questions? Reply here.</p>
-          <div className="text-right text-[9px] text-slate-400 mt-1">Sent automatically on 19/01/2025 ✓✓</div>
+          <div className="text-right text-xs text-slate-400 mt-1">Sent automatically on 19/01/2025 ✓✓</div>
         </div>
       </Card>
     </div>
@@ -769,10 +769,10 @@ function RenderPayroll() {
   return (
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatBox label="Total Employees" value="28" desc="January 2025" color="text-[#1A3C5E]" />
-        <StatBox label="Total Gross Payroll" value="₹14.2L" desc="All employees" color="text-[#2E86AB]" />
-        <StatBox label="Net Disbursement" value="₹12.07L" desc="After deductions" color="text-[#1D9E75]" />
-        <StatBox label="Total Payroll Cost" value="₹15.47L" desc="Incl. employer contrib." color="text-[#E8A838]" />
+        <StatBox label="Total Employees" value="28" desc="January 2025" color="text-slate-800" />
+        <StatBox label="Total Gross Payroll" value="₹14.2L" desc="All employees" color="text-blue-700" />
+        <StatBox label="Net Disbursement" value="₹12.07L" desc="After deductions" color="text-emerald-600" />
+        <StatBox label="Total Payroll Cost" value="₹15.47L" desc="Incl. employer contrib." color="text-amber-500" />
       </div>
 
       <div className="grid grid-cols-12 gap-5">
@@ -782,19 +782,19 @@ function RenderPayroll() {
             <h3 className="font-bold text-xs text-foreground font-display">January 2025 — Employee Payroll</h3>
             <div className="flex items-center gap-2">
               {!runDone && <button onClick={triggerPayroll} disabled={runProgress >= 0 && runProgress < 100}
-                className="h-7 px-3 rounded-lg bg-ink hover:bg-ink/90 text-cream text-[10px] font-bold uppercase tracking-widest disabled:opacity-50 flex items-center gap-1.5 transition-all">
+                className="h-7 px-3 rounded-lg bg-ink hover:bg-ink/90 text-cream text-xs font-bold uppercase tracking-widest disabled:opacity-50 flex items-center gap-1.5 transition-all">
                 <RefreshCw className={`h-3 w-3 ${runProgress >= 0 && runProgress < 100 ? "animate-spin" : ""}`} />
                 {runProgress >= 0 && runProgress < 100 ? `Running ${runProgress}%` : "Run Payroll"}
               </button>}
-              {runDone && <span className="text-[10px] font-bold text-emerald-600 flex items-center gap-1"><CheckCircle className="h-3.5 w-3.5" />Tally Journal Pushed</span>}
+              {runDone && <span className="text-xs font-bold text-emerald-600 flex items-center gap-1"><CheckCircle className="h-3.5 w-3.5" />Tally Journal Pushed</span>}
             </div>
           </div>
           {runProgress >= 0 && runProgress < 100 && (
-            <div className="p-2.5 bg-amber-50 border-b border-amber-200 text-[9.5px] font-mono text-amber-700 font-semibold animate-pulse">{runStep}</div>
+            <div className="p-2.5 bg-amber-50 border-b border-amber-200 text-xs font-mono text-amber-700 font-semibold animate-pulse">{runStep}</div>
           )}
           <div className="overflow-x-auto scrollbar-none">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3.5 py-2.5">Employee</th>
                   <th className="px-3.5 py-2.5">Designation</th>
@@ -811,14 +811,14 @@ function RenderPayroll() {
                     <td className="px-3.5 py-3 font-bold">{emp.name}</td>
                     <td className="px-3.5 py-3 text-slate-500">{emp.role}</td>
                     <td className="px-3.5 py-3 font-mono font-bold">₹{emp.gross.toLocaleString("en-IN")}</td>
-                    <td className="px-3.5 py-3 font-mono text-[#D85A30]">-₹{emp.deductions.toLocaleString("en-IN")}</td>
+                    <td className="px-3.5 py-3 font-mono text-red-600">-₹{emp.deductions.toLocaleString("en-IN")}</td>
                     <td className="px-3.5 py-3 font-mono font-extrabold text-emerald-600">₹{emp.net.toLocaleString("en-IN")}</td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${emp.status.includes("✅") ? "bg-emerald-50 text-emerald-700 border border-emerald-100" : "bg-amber-50 text-amber-700 border border-amber-100 animate-pulse"}`}>{emp.status}</span>
+                      <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${emp.status.includes("✅") ? "bg-emerald-50 text-emerald-700 border border-emerald-100" : "bg-amber-50 text-amber-700 border border-amber-100 animate-pulse"}`}>{emp.status}</span>
                     </td>
                     <td className="px-3.5 py-3">
                       {emp.status.includes("✅") && (
-                        <button onClick={() => alert(`Payslip for ${emp.name} — Jan 2025 downloaded.`)} className="h-6 px-2 rounded border border-border hover:bg-secondary text-[9px] font-bold text-slate-500 flex items-center gap-1">
+                        <button onClick={() => alert(`Payslip for ${emp.name} — Jan 2025 downloaded.`)} className="h-6 px-2 rounded border border-border hover:bg-secondary text-xs font-bold text-slate-500 flex items-center gap-1">
                           <Download className="h-3 w-3" /> PDF
                         </button>
                       )}
@@ -845,7 +845,7 @@ function RenderPayroll() {
                 <span className="font-bold text-foreground">{r.v}</span>
               </div>
             ))}
-            <div className="text-[9px] uppercase tracking-wider text-slate-400 font-sans font-bold mt-2 pt-2 border-t border-border/40 mb-1">Employer Liabilities</div>
+            <div className="text-xs uppercase tracking-wider text-slate-400 font-sans font-bold mt-2 pt-2 border-t border-border/40 mb-1">Employer Liabilities</div>
             {[
               { l: "Employer PF (12%)", v: "₹1,02,600" },
               { l: "Employer ESI (3.25%)", v: "₹18,400" },
@@ -861,14 +861,14 @@ function RenderPayroll() {
               <span className="font-display text-sm text-primary">₹15,46,600</span>
             </div>
             <div className="mt-2 pt-2 border-t border-border/40 space-y-1">
-              <div className="flex justify-between text-emerald-600 font-bold text-[10px]"><span>Run Status</span><span>✅ Processed</span></div>
-              <div className="flex justify-between text-emerald-600 font-bold text-[10px]"><span>Payslips Sent</span><span>28 / 28</span></div>
-              <div className="flex justify-between text-emerald-600 font-bold text-[10px]"><span>Tally Entries</span><span>✅ Pushed</span></div>
+              <div className="flex justify-between text-emerald-600 font-bold text-xs"><span>Run Status</span><span>✅ Processed</span></div>
+              <div className="flex justify-between text-emerald-600 font-bold text-xs"><span>Payslips Sent</span><span>28 / 28</span></div>
+              <div className="flex justify-between text-emerald-600 font-bold text-xs"><span>Tally Entries</span><span>✅ Pushed</span></div>
             </div>
           </Card>
           <div className="grid grid-cols-3 gap-2">
             {[{ l: "PF Challan", c: "emerald" }, { l: "ESI Challan", c: "blue" }, { l: "PT Challan", c: "amber" }].map(b => (
-              <button key={b.l} onClick={() => alert(`${b.l} downloaded.`)} className="h-8 rounded-lg border border-border hover:bg-secondary text-[9.5px] font-bold text-slate-600 uppercase tracking-widest flex items-center justify-center gap-1">
+              <button key={b.l} onClick={() => alert(`${b.l} downloaded.`)} className="h-8 rounded-lg border border-border hover:bg-secondary text-xs font-bold text-slate-600 uppercase tracking-widest flex items-center justify-center gap-1">
                 <Download className="h-3 w-3" /> {b.l}
               </button>
             ))}
@@ -878,8 +878,8 @@ function RenderPayroll() {
 
       {/* Sample Payslip */}
       <Card className="p-4 border border-border bg-card">
-        <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-3">Sample Payslip — Priya Rana (Jan 2025)</div>
-        <div className="font-mono text-[10.5px] text-foreground bg-secondary/30 rounded-xl p-4 border border-border/60 whitespace-pre max-w-xl">
+        <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Sample Payslip — Priya Rana (Jan 2025)</div>
+        <div className="font-mono text-xs text-foreground bg-secondary/30 rounded-xl p-4 border border-border/60 whitespace-pre max-w-xl">
 {`╔══════════════════════════════════════════════════╗
 ║       FORTIV SOLUTIONS — SALARY SLIP             ║
 ║       fortivsolutions.in                         ║
@@ -916,7 +916,7 @@ function RenderPerformance() {
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="flex items-center gap-3 flex-wrap">
         {["This Week", "This Month", "Q1 2025"].map(p => (
-          <button key={p} onClick={() => setPeriod(p)} className={`h-7 px-3 rounded-lg text-[10px] font-bold uppercase tracking-widest border transition-all ${period === p ? "bg-ink text-cream border-ink" : "border-border text-slate-500 hover:bg-secondary"}`}>{p}</button>
+          <button key={p} onClick={() => setPeriod(p)} className={`h-7 px-3 rounded-lg text-xs font-bold uppercase tracking-widest border transition-all ${period === p ? "bg-ink text-cream border-ink" : "border-border text-slate-500 hover:bg-secondary"}`}>{p}</button>
         ))}
         <span className="ml-auto text-xs font-bold text-slate-500 font-mono">Team Average: <span className="text-foreground text-sm">{teamAvg}/100</span></span>
       </div>
@@ -937,10 +937,10 @@ function RenderPerformance() {
             </div>
             <div className="text-center">
               <div className="font-bold text-foreground text-xs">{emp.name}</div>
-              <div className="text-[9.5px] text-slate-500 font-medium">{emp.role}</div>
+              <div className="text-xs text-slate-500 font-medium">{emp.role}</div>
             </div>
-            <span className={`text-[9px] font-extrabold px-2 py-0.5 rounded-full border font-mono ${performanceLabel(emp.label)} ${emp.score >= 80 ? "animate-pulse" : ""}`}>{emp.label}</span>
-            <div className="w-full text-[9.5px] font-mono text-slate-400 text-center">{emp.revenue}</div>
+            <span className={`text-xs font-extrabold px-2 py-0.5 rounded-full border font-mono ${performanceLabel(emp.label)} ${emp.score >= 80 ? "animate-pulse" : ""}`}>{emp.label}</span>
+            <div className="w-full text-xs font-mono text-slate-400 text-center">{emp.revenue}</div>
           </Card>
         ))}
       </div>
@@ -950,11 +950,11 @@ function RenderPerformance() {
         <Card className="col-span-12 lg:col-span-8 p-4 border border-border bg-card">
           <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
             <div className="font-bold text-sm text-foreground font-display">{selectedEmp.name} — Performance Breakdown</div>
-            <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono border ${performanceLabel(selectedEmp.label)}`}>{selectedEmp.label}</span>
+            <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono border ${performanceLabel(selectedEmp.label)}`}>{selectedEmp.label}</span>
           </div>
           <div className="overflow-x-auto scrollbar-none">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3 py-2">Metric</th>
                   <th className="px-3 py-2 font-mono">Value</th>
@@ -975,9 +975,9 @@ function RenderPerformance() {
                 ].map((row, i) => (
                   <tr key={i} className="hover:bg-secondary/15">
                     <td className="px-3 py-2.5 font-bold">{row.m}</td>
-                    <td className={`px-3 py-2.5 font-mono font-extrabold ${typeof row.v === "number" && row.v === 0 ? "text-[#D85A30]" : "text-foreground"}`}>{row.v}</td>
+                    <td className={`px-3 py-2.5 font-mono font-extrabold ${typeof row.v === "number" && row.v === 0 ? "text-red-600" : "text-foreground"}`}>{row.v}</td>
                     <td className="px-3 py-2.5 font-mono text-slate-400">{row.b}</td>
-                    <td className={`px-3 py-2.5 font-mono font-bold text-sm ${row.t === "▲" ? "text-emerald-500" : row.t === "▼" ? "text-[#D85A30]" : "text-slate-400"}`}>{row.t}</td>
+                    <td className={`px-3 py-2.5 font-mono font-bold text-sm ${row.t === "▲" ? "text-emerald-500" : row.t === "▼" ? "text-red-600" : "text-slate-400"}`}>{row.t}</td>
                   </tr>
                 ))}
               </tbody>
@@ -992,7 +992,7 @@ function RenderPerformance() {
               <div className="flex items-center gap-2 text-amber-700 font-bold text-xs border-b border-amber-200 pb-2">
                 <AlertTriangle className="h-4 w-4 animate-pulse" /> AI Coaching Flag
               </div>
-              <div className="p-3 rounded-xl border border-amber-200 bg-amber-50/40 font-mono text-[10px] text-foreground leading-relaxed whitespace-pre-wrap">
+              <div className="p-3 rounded-xl border border-amber-200 bg-amber-50/40 font-mono text-xs text-foreground leading-relaxed whitespace-pre-wrap">
 {`⚠️ COACHING FLAG — ${selectedEmp.name}
 
 ${selectedEmp.name} has conducted ${selectedEmp.visits} site visits 
@@ -1024,7 +1024,7 @@ Recommended action:
               <div className="flex items-center gap-2 text-emerald-700 font-bold text-xs border-b border-emerald-200 pb-2">
                 <Award className="h-4 w-4" /> Performance Status
               </div>
-              <div className={`p-3 rounded-xl border font-mono text-[10px] text-foreground leading-relaxed whitespace-pre-wrap ${selectedEmp.score >= 80 ? "border-emerald-200 bg-emerald-50/40" : "border-blue-200 bg-blue-50/20"}`}>
+              <div className={`p-3 rounded-xl border font-mono text-xs text-foreground leading-relaxed whitespace-pre-wrap ${selectedEmp.score >= 80 ? "border-emerald-200 bg-emerald-50/40" : "border-blue-200 bg-blue-50/20"}`}>
 {`✅ ${selectedEmp.score >= 80 ? "TOP PERFORMER" : "ON TRACK"}
 
 ${selectedEmp.name} is performing 
@@ -1054,10 +1054,10 @@ function RenderTalentSourcing() {
   return (
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatBox label="Profiles Sourced (All)" value="103" desc="Across 4 open roles" color="text-[#1A3C5E]" />
-        <StatBox label="Shortlisted (AI)" value="23" desc="Score ≥ 65" color="text-[#2E86AB]" />
-        <StatBox label="Outreach Sent" value="18" desc="LinkedIn + WhatsApp" color="text-[#E8A838]" />
-        <StatBox label="Interested / Responded" value="8" desc="Ready to interview" color="text-[#1D9E75]" />
+        <StatBox label="Profiles Sourced (All)" value="103" desc="Across 4 open roles" color="text-slate-800" />
+        <StatBox label="Shortlisted (AI)" value="23" desc="Score ≥ 65" color="text-blue-700" />
+        <StatBox label="Outreach Sent" value="18" desc="LinkedIn + WhatsApp" color="text-amber-500" />
+        <StatBox label="Interested / Responded" value="8" desc="Ready to interview" color="text-emerald-600" />
       </div>
 
       {/* Role selector + search status */}
@@ -1065,7 +1065,7 @@ function RenderTalentSourcing() {
         <select value={selectedRole} onChange={e => setSelectedRole(e.target.value)} className="h-8 px-2 rounded-lg border border-border bg-background text-foreground outline-none text-xs font-bold focus:border-ring">
           {openRoles.map(r => <option key={r.role}>{r.role}</option>)}
         </select>
-        <span className="text-[9.5px] font-bold text-emerald-600 flex items-center gap-1.5 font-mono">
+        <span className="text-xs font-bold text-emerald-600 flex items-center gap-1.5 font-mono">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> Active search running — last scan 47 min ago
         </span>
       </div>
@@ -1073,10 +1073,10 @@ function RenderTalentSourcing() {
       <div className="grid grid-cols-12 gap-5">
         {/* Sourced Candidates Table */}
         <Card className="col-span-12 lg:col-span-8 p-0 overflow-hidden border border-border bg-card">
-          <div className="p-3 bg-secondary/35 border-b border-border text-[10px] font-bold uppercase text-slate-500 font-display">Sourced Profiles — {selectedRole}</div>
+          <div className="p-3 bg-secondary/35 border-b border-border text-xs font-bold uppercase text-slate-500 font-display">Sourced Profiles — {selectedRole}</div>
           <div className="overflow-x-auto scrollbar-none">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3.5 py-2.5">Candidate</th>
                   <th className="px-3.5 py-2.5">Current</th>
@@ -1094,28 +1094,28 @@ function RenderTalentSourcing() {
                   <tr key={i} className="hover:bg-secondary/15">
                     <td className="px-3.5 py-3">
                       <div className="font-bold text-foreground">{c.name}</div>
-                      <div className="text-[9.5px] font-mono text-slate-400">{c.loc}</div>
+                      <div className="text-xs font-mono text-slate-400">{c.loc}</div>
                     </td>
                     <td className="px-3.5 py-3 text-slate-500">{c.current} · {c.employer}</td>
                     <td className="px-3.5 py-3 font-mono">{c.exp} yrs</td>
                     <td className="px-3.5 py-3 font-mono font-bold">{c.ctcEst}</td>
                     <td className="px-3.5 py-3">
-                      <span className="text-[9.5px] font-bold bg-secondary text-slate-600 border border-border px-2 py-0.5 rounded font-mono">{c.platform}</span>
+                      <span className="text-xs font-bold bg-secondary text-slate-600 border border-border px-2 py-0.5 rounded font-mono">{c.platform}</span>
                     </td>
                     <td className="px-3.5 py-3">
-                      <span className={`font-mono font-extrabold text-[11px] ${scoreColor(c.score)}`}>{c.score}</span>
+                      <span className={`font-mono font-extrabold text-xs ${scoreColor(c.score)}`}>{c.score}</span>
                     </td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[9.5px] font-bold px-2 py-0.5 rounded font-mono border ${c.outreach === "Message Sent" ? "bg-blue-50 text-blue-700 border-blue-100" : "bg-slate-50 text-slate-500 border-slate-200"}`}>{c.outreach}</span>
+                      <span className={`text-xs font-bold px-2 py-0.5 rounded font-mono border ${c.outreach === "Message Sent" ? "bg-blue-50 text-blue-700 border-blue-100" : "bg-slate-50 text-slate-500 border-slate-200"}`}>{c.outreach}</span>
                     </td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[9.5px] font-bold px-2 py-0.5 rounded font-mono border ${c.response === "Interested" ? "bg-emerald-50 text-emerald-700 border-emerald-100" : c.response === "No Response" ? "bg-amber-50 text-amber-700 border-amber-100" : "bg-slate-50 text-slate-400 border-slate-200"}`}>{c.response}</span>
+                      <span className={`text-xs font-bold px-2 py-0.5 rounded font-mono border ${c.response === "Interested" ? "bg-emerald-50 text-emerald-700 border-emerald-100" : c.response === "No Response" ? "bg-amber-50 text-amber-700 border-amber-100" : "bg-slate-50 text-slate-400 border-slate-200"}`}>{c.response}</span>
                     </td>
                     <td className="px-3.5 py-3">
                       {c.response === "Interested" ? (
-                        <button onClick={() => alert(`${c.name} added to hiring pipeline.`)} className="h-6 px-2 rounded bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-700 text-[9px] font-bold">Add to Pipeline</button>
+                        <button onClick={() => alert(`${c.name} added to hiring pipeline.`)} className="h-6 px-2 rounded bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-700 text-xs font-bold">Add to Pipeline</button>
                       ) : c.outreach === "Not Contacted" ? (
-                        <button onClick={() => alert(`LinkedIn outreach sent to ${c.name}.`)} className="h-6 px-2 rounded border border-border hover:bg-secondary text-[9px] font-bold text-slate-500">Reach Out</button>
+                        <button onClick={() => alert(`LinkedIn outreach sent to ${c.name}.`)} className="h-6 px-2 rounded border border-border hover:bg-secondary text-xs font-bold text-slate-500">Reach Out</button>
                       ) : null}
                     </td>
                   </tr>
@@ -1128,7 +1128,7 @@ function RenderTalentSourcing() {
         {/* Role Sourcing Status */}
         <div className="col-span-12 lg:col-span-4 space-y-3">
           <Card className="p-4 border border-border bg-card">
-            <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-3">Open Roles Sourcing Status</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Open Roles Sourcing Status</div>
             <div className="space-y-3.5">
               {openRoles.map((r, i) => (
                 <div key={i} className={`p-2.5 rounded-xl border text-xs transition-all cursor-pointer ${selectedRole === r.role ? "border-ink bg-secondary/10" : "border-border bg-background hover:border-slate-300"}`}
@@ -1138,7 +1138,7 @@ function RenderTalentSourcing() {
                     {[{ l: "Found", v: r.found }, { l: "Listed", v: r.shortlisted }, { l: "Contacted", v: r.contacted }, { l: "Interested", v: r.interested }].map(s => (
                       <div key={s.l}>
                         <div className="font-mono font-extrabold text-foreground text-sm">{s.v}</div>
-                        <div className="text-[8.5px] text-slate-400 font-semibold">{s.l}</div>
+                        <div className="text-[10px] text-slate-400 font-semibold">{s.l}</div>
                       </div>
                     ))}
                   </div>
@@ -1148,13 +1148,13 @@ function RenderTalentSourcing() {
           </Card>
           {/* LinkedIn outreach template */}
           <Card className="p-3 border border-border bg-card">
-            <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-2">LinkedIn Outreach Template</div>
-            <div className="bg-[#EEF3F8] rounded-xl p-3 text-[10px] leading-relaxed text-slate-700 font-medium border border-blue-100">
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">LinkedIn Outreach Template</div>
+            <div className="bg-[#EEF3F8] rounded-xl p-3 text-xs leading-relaxed text-slate-700 font-medium border border-blue-100">
               <p className="font-bold text-slate-800 mb-1">Fortiv Solutions Recruiting</p>
               <p>Hi Sneha, I came across your profile and was impressed by your real estate sales experience in Surat. We're building a high-performance sales team at Fortiv Solutions and have an exciting opening for a Senior Sales Agent.</p>
               <p className="mt-1.5">We offer competitive CTC, strong incentives, and a structured growth path.</p>
               <p className="mt-1.5 text-slate-600">Would you be open to a quick 15-minute call this week?</p>
-              <div className="text-right text-[9px] text-slate-400 mt-1">Auto-sent · 10/01/2025</div>
+              <div className="text-right text-xs text-slate-400 mt-1">Auto-sent · 10/01/2025</div>
             </div>
           </Card>
         </div>
@@ -1196,23 +1196,23 @@ function RenderHrChatbot() {
   return (
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatBox label="Queries This Month" value="100" desc="All channels" color="text-[#1A3C5E]" />
-        <StatBox label="Bot Resolved" value="80%" desc="Without HR intervention" color="text-[#1D9E75]" />
-        <StatBox label="Escalated to HR" value="20" desc="Complex / sensitive" color="text-[#E8A838]" />
-        <StatBox label="Avg Response Time" value="< 3 sec" desc="Chatbot reply" color="text-[#2E86AB]" />
+        <StatBox label="Queries This Month" value="100" desc="All channels" color="text-slate-800" />
+        <StatBox label="Bot Resolved" value="80%" desc="Without HR intervention" color="text-emerald-600" />
+        <StatBox label="Escalated to HR" value="20" desc="Complex / sensitive" color="text-amber-500" />
+        <StatBox label="Avg Response Time" value="< 3 sec" desc="Chatbot reply" color="text-blue-700" />
       </div>
 
       <div className="grid grid-cols-12 gap-5">
         {/* Chat Interface */}
         <Card className="col-span-12 lg:col-span-6 border border-border bg-card overflow-hidden flex flex-col">
           {/* WhatsApp-style header */}
-          <div className="bg-[#075E54] p-3 flex items-center gap-3">
+          <div className="bg-emerald-800 p-3 flex items-center gap-3">
             <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-xs">HR</div>
             <div>
               <div className="text-white font-bold text-xs">Fortiv Solutions HR Bot</div>
-              <div className="text-white/70 text-[9px] font-medium">Online · 24/7</div>
+              <div className="text-white/70 text-xs font-medium">Online · 24/7</div>
             </div>
-            <select value={employee} onChange={e => setEmployee(e.target.value)} className="ml-auto bg-white/10 text-white text-[9px] rounded px-1.5 py-0.5 border border-white/20 outline-none font-bold">
+            <select value={employee} onChange={e => setEmployee(e.target.value)} className="ml-auto bg-white/10 text-white text-xs rounded px-1.5 py-0.5 border border-white/20 outline-none font-bold">
               {employees.map(e => <option key={e.id} value={e.name}>{e.name}</option>)}
             </select>
           </div>
@@ -1220,10 +1220,10 @@ function RenderHrChatbot() {
           <div className="flex-1 overflow-y-auto p-3 space-y-3 bg-[#ECE5DD]">
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.from === "bot" ? "justify-start" : "justify-end"}`}>
-                <div className={`max-w-[80%] rounded-xl px-3 py-2 text-[10.5px] leading-relaxed shadow-sm whitespace-pre-wrap font-medium ${msg.from === "bot" ? "bg-white text-slate-800 rounded-tl-none" : "bg-[#DCF8C6] text-slate-800 rounded-tr-none"}`}>
-                  {msg.from === "employee" && <div className="text-[9px] font-bold text-[#075E54] mb-0.5">{(msg as any).name}</div>}
+                <div className={`max-w-[80%] rounded-xl px-3 py-2 text-xs leading-relaxed shadow-sm whitespace-pre-wrap font-medium ${msg.from === "bot" ? "bg-white text-slate-800 rounded-tl-none" : "bg-emerald-100 text-slate-800 rounded-tr-none"}`}>
+                  {msg.from === "employee" && <div className="text-xs font-bold text-emerald-800 mb-0.5">{(msg as any).name}</div>}
                   {msg.text}
-                  <div className="text-right text-[9px] text-slate-400 mt-1">{msg.time} {msg.from === "employee" ? "✓✓" : ""}</div>
+                  <div className="text-right text-xs text-slate-400 mt-1">{msg.time} {msg.from === "employee" ? "✓✓" : ""}</div>
                 </div>
               </div>
             ))}
@@ -1235,9 +1235,9 @@ function RenderHrChatbot() {
               onChange={e => setInput(e.target.value)}
               onKeyDown={e => e.key === "Enter" && sendMessage()}
               placeholder="Type a message..."
-              className="flex-1 h-9 px-3 rounded-full bg-white border border-border/60 text-xs font-medium outline-none focus:border-[#075E54]"
+              className="flex-1 h-9 px-3 rounded-full bg-white border border-border/60 text-xs font-medium outline-none focus:border-emerald-800"
             />
-            <button onClick={sendMessage} className="h-9 w-9 rounded-full bg-[#075E54] hover:bg-[#128C7E] text-white flex items-center justify-center transition-all active:scale-95">
+            <button onClick={sendMessage} className="h-9 w-9 rounded-full bg-emerald-800 hover:bg-emerald-700 text-white flex items-center justify-center transition-all active:scale-95">
               <Send className="h-4 w-4" />
             </button>
           </div>
@@ -1246,13 +1246,13 @@ function RenderHrChatbot() {
         {/* Query Log + Policy KB */}
         <div className="col-span-12 lg:col-span-6 space-y-3">
           <Card className="p-0 overflow-hidden border border-border bg-card">
-            <div className="p-3 bg-secondary/35 border-b border-border text-[10px] font-bold uppercase text-slate-500 font-display flex items-center justify-between">
+            <div className="p-3 bg-secondary/35 border-b border-border text-xs font-bold uppercase text-slate-500 font-display flex items-center justify-between">
               Today's Query Log
               <span className="text-emerald-600 font-mono font-extrabold">80% deflected by bot</span>
             </div>
             <div className="overflow-x-auto scrollbar-none">
               <table className="w-full text-left text-xs divide-y divide-border/60">
-                <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                   <tr>
                     <th className="px-3 py-2.5 font-mono">Time</th>
                     <th className="px-3 py-2.5">Employee</th>
@@ -1267,9 +1267,9 @@ function RenderHrChatbot() {
                       <td className="px-3 py-2.5 font-mono text-slate-400">{q.time}</td>
                       <td className="px-3 py-2.5 font-bold">{q.employee}</td>
                       <td className="px-3 py-2.5 text-slate-500">{q.query}</td>
-                      <td className="px-3 py-2.5 text-[9.5px]"><span className="bg-secondary border border-border px-2 py-0.5 rounded font-mono font-bold text-slate-600">{q.category}</span></td>
+                      <td className="px-3 py-2.5 text-xs"><span className="bg-secondary border border-border px-2 py-0.5 rounded font-mono font-bold text-slate-600">{q.category}</span></td>
                       <td className="px-3 py-2.5">
-                        <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono border ${q.resolved === "Bot" ? "bg-emerald-50 text-emerald-700 border-emerald-100" : "bg-amber-50 text-amber-700 border-amber-100 animate-pulse"}`}>
+                        <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono border ${q.resolved === "Bot" ? "bg-emerald-50 text-emerald-700 border-emerald-100" : "bg-amber-50 text-amber-700 border-amber-100 animate-pulse"}`}>
                           {q.resolved === "Bot" ? "✅ Bot" : "⏳ HR"}
                         </span>
                       </td>
@@ -1281,7 +1281,7 @@ function RenderHrChatbot() {
           </Card>
 
           <Card className="p-4 border border-border bg-card">
-            <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-3">Policy Knowledge Base</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Policy Knowledge Base</div>
             <div className="space-y-1.5">
               {[
                 { doc: "Fortiv Solutions HR Manual v3.0", updated: "Dec 2024" },
@@ -1294,7 +1294,7 @@ function RenderHrChatbot() {
               ].map((kb, i) => (
                 <div key={i} className="flex items-center justify-between text-xs font-semibold py-1 border-b border-border/30 last:border-0">
                   <span className="text-foreground">{kb.doc}</span>
-                  <span className="font-mono text-slate-400 text-[9.5px] shrink-0 ml-3">{kb.updated}</span>
+                  <span className="font-mono text-slate-400 text-xs shrink-0 ml-3">{kb.updated}</span>
                 </div>
               ))}
             </div>

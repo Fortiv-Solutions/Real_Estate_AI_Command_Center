@@ -184,7 +184,7 @@ const statusBadgeStyle = (status: string) => {
   if (["Degraded", "In Progress", "Under Review", "warn", "Approval pending", "Pending"].some(s => s.toLowerCase() === status.toLowerCase()))
     return "bg-amber-50 text-amber-700 border border-amber-100";
   if (["Action Required", "Critical", "Withdrawn", "Failed", "alert", "error"].some(s => s.toLowerCase() === status.toLowerCase()))
-    return "bg-red-50 text-[#D85A30] border border-red-100";
+    return "bg-red-50 text-red-600 border border-red-100";
   return "bg-slate-50 text-slate-600 border border-slate-200";
 };
 
@@ -275,21 +275,21 @@ function AIBrainModule() {
     <div className="space-y-6 animate-in fade-in duration-300">
       {/* 5 Animated Stats Counters */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-        <StatBox label="Leads Tracked" value="1,247" desc="Registered in CRM" color="text-[#1A3C5E]" />
-        <StatBox label="Automations Run Today" value="8,234" desc="Cross-module rules" color="text-[#1D9E75]" />
-        <StatBox label="WhatsApp Sent" value="3,812" desc="Chatbot + RM triggers" color="text-[#2E86AB]" />
-        <StatBox label="Active Deals" value="68" desc="Pipeline value: ₹42.8Cr" color="text-[#E8A838]" />
-        <StatBox label="Data Points Processed" value="2.4M" desc="Neural core engine" color="text-[#D85A30]" />
+        <StatBox label="Leads Tracked" value="1,247" desc="Registered in CRM" color="text-slate-800" />
+        <StatBox label="Automations Run Today" value="8,234" desc="Cross-module rules" color="text-emerald-600" />
+        <StatBox label="WhatsApp Sent" value="3,812" desc="Chatbot + RM triggers" color="text-blue-700" />
+        <StatBox label="Active Deals" value="68" desc="Pipeline value: ₹42.8Cr" color="text-amber-500" />
+        <StatBox label="Data Points Processed" value="2.4M" desc="Neural core engine" color="text-red-600" />
       </div>
 
       <div className="grid grid-cols-12 gap-5">
         {/* Center Left: Pulsing Customer Graph SVG */}
         <Card className="col-span-12 lg:col-span-8 p-4 border border-border bg-card flex flex-col justify-between">
           <div className="flex justify-between items-center mb-3 border-b border-border/40 pb-2">
-            <h4 className="font-bold text-[10px] uppercase text-slate-500 tracking-wider font-display flex items-center gap-1.5">
+            <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display flex items-center gap-1.5">
               <Activity className="h-3.5 w-3.5 text-primary" /> Interactive Customer Knowledge Graph
             </h4>
-            <span className="text-[9px] font-mono text-slate-400">Click outer nodes to inspect touchpoints</span>
+            <span className="text-xs font-mono text-slate-400">Click outer nodes to inspect touchpoints</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
@@ -316,49 +316,49 @@ function AIBrainModule() {
               {/* Outer nodes */}
               <button
                 onClick={() => setSelectedGraphNode("lead")}
-                className={`absolute top-[15%] left-[20%] w-9 h-9 rounded-full bg-[#1B263B] border grid place-items-center text-slate-300 z-10 transition-all ${selectedGraphNode === "lead" ? "border-[#2E86AB] scale-110" : "border-border"}`}
+                className={`absolute top-[15%] left-[20%] w-9 h-9 rounded-full bg-[#1B263B] border grid place-items-center text-slate-300 z-10 transition-all ${selectedGraphNode === "lead" ? "border-blue-700 scale-110" : "border-border"}`}
                 title="Lead Source"
               >
                 <Search className="h-3.5 w-3.5" />
               </button>
               <button
                 onClick={() => setSelectedGraphNode("agent")}
-                className={`absolute top-[15%] left-[70%] w-9 h-9 rounded-full bg-[#1B263B] border grid place-items-center text-slate-300 z-10 transition-all ${selectedGraphNode === "agent" ? "border-[#2E86AB] scale-110" : "border-border"}`}
+                className={`absolute top-[15%] left-[70%] w-9 h-9 rounded-full bg-[#1B263B] border grid place-items-center text-slate-300 z-10 transition-all ${selectedGraphNode === "agent" ? "border-blue-700 scale-110" : "border-border"}`}
                 title="Agent"
               >
                 <User className="h-3.5 w-3.5" />
               </button>
               <button
                 onClick={() => setSelectedGraphNode("property")}
-                className={`absolute top-[43%] left-[10%] w-9 h-9 rounded-full bg-[#1B263B] border grid place-items-center text-slate-300 z-10 transition-all ${selectedGraphNode === "property" ? "border-[#2E86AB] scale-110" : "border-border"}`}
+                className={`absolute top-[43%] left-[10%] w-9 h-9 rounded-full bg-[#1B263B] border grid place-items-center text-slate-300 z-10 transition-all ${selectedGraphNode === "property" ? "border-blue-700 scale-110" : "border-border"}`}
                 title="Property MATCH"
               >
                 <Building className="h-3.5 w-3.5" />
               </button>
               <button
                 onClick={() => setSelectedGraphNode("whatsapp")}
-                className={`absolute top-[43%] left-[80%] w-9 h-9 rounded-full bg-[#1B263B] border grid place-items-center text-slate-300 z-10 transition-all ${selectedGraphNode === "whatsapp" ? "border-[#2E86AB] scale-110" : "border-border"}`}
+                className={`absolute top-[43%] left-[80%] w-9 h-9 rounded-full bg-[#1B263B] border grid place-items-center text-slate-300 z-10 transition-all ${selectedGraphNode === "whatsapp" ? "border-blue-700 scale-110" : "border-border"}`}
                 title="WhatsApp Feed"
               >
                 <MessageCircle className="h-3.5 w-3.5 text-emerald-400" />
               </button>
               <button
                 onClick={() => setSelectedGraphNode("payments")}
-                className={`absolute top-[70%] left-[20%] w-9 h-9 rounded-full bg-[#1B263B] border grid place-items-center text-slate-300 z-10 transition-all ${selectedGraphNode === "payments" ? "border-[#2E86AB] scale-110" : "border-border"}`}
+                className={`absolute top-[70%] left-[20%] w-9 h-9 rounded-full bg-[#1B263B] border grid place-items-center text-slate-300 z-10 transition-all ${selectedGraphNode === "payments" ? "border-blue-700 scale-110" : "border-border"}`}
                 title="Payments Ledger"
               >
                 <Activity className="h-3.5 w-3.5 text-amber-500" />
               </button>
               <button
                 onClick={() => setSelectedGraphNode("documents")}
-                className={`absolute top-[70%] left-[70%] w-9 h-9 rounded-full bg-[#1B263B] border grid place-items-center text-slate-300 z-10 transition-all ${selectedGraphNode === "documents" ? "border-[#2E86AB] scale-110" : "border-border"}`}
+                className={`absolute top-[70%] left-[70%] w-9 h-9 rounded-full bg-[#1B263B] border grid place-items-center text-slate-300 z-10 transition-all ${selectedGraphNode === "documents" ? "border-blue-700 scale-110" : "border-border"}`}
                 title="Documents AI"
               >
                 <FileText className="h-3.5 w-3.5 text-blue-400" />
               </button>
               <button
                 onClick={() => setSelectedGraphNode("nps")}
-                className={`absolute top-[5%] left-[45%] w-9 h-9 rounded-full bg-[#1B263B] border grid place-items-center text-slate-300 z-10 transition-all ${selectedGraphNode === "nps" ? "border-[#2E86AB] scale-110" : "border-border"}`}
+                className={`absolute top-[5%] left-[45%] w-9 h-9 rounded-full bg-[#1B263B] border grid place-items-center text-slate-300 z-10 transition-all ${selectedGraphNode === "nps" ? "border-blue-700 scale-110" : "border-border"}`}
                 title="NPS Survey"
               >
                 <ShieldCheck className="h-3.5 w-3.5 text-purple-400" />
@@ -366,17 +366,17 @@ function AIBrainModule() {
             </div>
 
             {/* Selected Node Details */}
-            <div className="md:col-span-5 flex flex-col justify-between bg-secondary/20 p-3 rounded-2xl border border-border/40 font-mono text-[10px] leading-relaxed text-slate-400">
+            <div className="md:col-span-5 flex flex-col justify-between bg-secondary/20 p-3 rounded-2xl border border-border/40 font-mono text-xs leading-relaxed text-slate-400">
               <div className="space-y-2">
                 <div className="flex justify-between items-center border-b border-border/30 pb-2">
                   <span className="font-bold text-foreground uppercase tracking-wider">{graphNodeDetails.label}</span>
-                  <span className="text-[9px] bg-slate-100 text-slate-600 px-1.5 py-0.2 rounded font-mono">{graphNodeDetails.stat}</span>
+                  <span className="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.2 rounded font-mono">{graphNodeDetails.stat}</span>
                 </div>
-                <p className="text-[11px] font-sans font-medium text-slate-300 leading-normal">{graphNodeDetails.text}</p>
+                <p className="text-xs font-sans font-medium text-slate-300 leading-normal">{graphNodeDetails.text}</p>
               </div>
               <button
                 onClick={() => setActiveTab("graph")}
-                className="mt-4 h-7 w-full rounded bg-ink hover:bg-ink/90 text-cream text-[9px] font-mono uppercase tracking-wider flex items-center justify-center gap-1"
+                className="mt-4 h-7 w-full rounded bg-ink hover:bg-ink/90 text-cream text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-1"
               >
                 Inspect 360° Profile <ArrowRight className="h-3 w-3" />
               </button>
@@ -387,22 +387,22 @@ function AIBrainModule() {
         {/* Center Right: Live AI Insights Feed */}
         <Card className="col-span-12 lg:col-span-4 p-4 border border-border bg-card flex flex-col justify-between">
           <div className="border-b border-border/40 pb-2 flex justify-between items-center mb-3">
-            <h4 className="font-bold text-[10px] uppercase text-slate-500 tracking-wider font-display flex items-center gap-1.5">
+            <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display flex items-center gap-1.5">
               <Sparkles className="h-3.5 w-3.5 text-primary animate-pulse" /> Live Neural Core Findings
             </h4>
-            <span className="text-[9px] font-mono text-slate-400">Cycles 4 seconds</span>
+            <span className="text-xs font-mono text-slate-400">Cycles 4 seconds</span>
           </div>
 
           <div className="flex-1 flex flex-col justify-between space-y-4">
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className={`text-[8.5px] font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadgeStyle("Active")}`}>
+                <span className={`text-[10px] font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadgeStyle("Active")}`}>
                   {activeInsight.type} Insight
                 </span>
-                <span className="text-[10px] font-mono text-slate-400 font-bold">Confidence: {activeInsight.confidence}%</span>
+                <span className="text-xs font-mono text-slate-400 font-bold">Confidence: {activeInsight.confidence}%</span>
               </div>
               <p className="text-xs text-foreground font-semibold leading-relaxed font-sans">{activeInsight.text}</p>
-              <div className="text-[9.5px] text-slate-400 font-normal">Route Action: <strong className="text-slate-600 font-mono">{activeInsight.action}</strong></div>
+              <div className="text-xs text-slate-400 font-normal">Route Action: <strong className="text-slate-600 font-mono">{activeInsight.action}</strong></div>
             </div>
 
             <div className="space-y-2.5">
@@ -434,19 +434,19 @@ function AIBrainModule() {
         {/* Bottom Left: System Health Grid (12 Modules) */}
         <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card">
           <div className="border-b border-border/40 pb-2 flex justify-between items-center mb-3">
-            <h4 className="font-bold text-[10px] uppercase text-slate-500 tracking-wider font-display flex items-center gap-1.5">
+            <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display flex items-center gap-1.5">
               <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" /> Platform Modules Health Core
             </h4>
-            <button onClick={() => setActiveTab("health")} className="text-[9px] font-bold text-primary underline font-mono">Mission Control</button>
+            <button onClick={() => setActiveTab("health")} className="text-xs font-bold text-primary underline font-mono">Mission Control</button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 text-xs font-semibold">
             {moduleHealthData.map((m, idx) => (
               <div key={idx} className="flex justify-between items-center border-b border-border/20 pb-1.5 last:border-0">
                 <div className="flex items-center gap-2">
                   {statusDotStyle(m.status)}
-                  <span className="text-foreground text-[11px] truncate max-w-[200px]">{m.name}</span>
+                  <span className="text-foreground text-xs truncate max-w-[200px]">{m.name}</span>
                 </div>
-                <span className="font-mono text-[10px] text-slate-400 font-bold">{m.uptime}</span>
+                <span className="font-mono text-xs text-slate-400 font-bold">{m.uptime}</span>
               </div>
             ))}
           </div>
@@ -456,20 +456,20 @@ function AIBrainModule() {
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card flex flex-col justify-between">
           <div>
             <div className="border-b border-border/40 pb-2 flex justify-between items-center mb-3">
-              <h4 className="font-bold text-[10px] uppercase text-slate-500 tracking-wider font-display flex items-center gap-1.5">
-                <TrendingUp className="h-3.5 w-3.5 text-[#D85A30]" /> High-Risk Active Deals
+              <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display flex items-center gap-1.5">
+                <TrendingUp className="h-3.5 w-3.5 text-red-600" /> High-Risk Active Deals
               </h4>
-              <button onClick={() => setActiveTab("risk")} className="text-[9px] font-bold text-primary underline font-mono">Risk Matrix</button>
+              <button onClick={() => setActiveTab("risk")} className="text-xs font-bold text-primary underline font-mono">Risk Matrix</button>
             </div>
             <div className="space-y-2">
               {initialRiskDeals.slice(0, 3).map((deal, idx) => (
                 <div key={idx} className="flex justify-between items-center bg-secondary/35 p-2 rounded-xl border border-border/40">
                   <div>
-                    <div className="text-foreground text-[11px] font-bold">{deal.name} · Unit {deal.unit}</div>
-                    <div className="text-[9.5px] text-slate-400 font-normal">{deal.reason}</div>
+                    <div className="text-foreground text-xs font-bold">{deal.name} · Unit {deal.unit}</div>
+                    <div className="text-xs text-slate-400 font-normal">{deal.reason}</div>
                   </div>
                   <div className="text-right shrink-0">
-                    <span className="font-mono font-bold text-red-500 bg-red-50 border border-red-100 px-1.5 py-0.5 rounded text-[10px]">
+                    <span className="font-mono font-bold text-red-500 bg-red-50 border border-red-100 px-1.5 py-0.5 rounded text-xs">
                       {deal.score}
                     </span>
                   </div>
@@ -539,7 +539,7 @@ function AIBrainModule() {
               </div>
               <div>
                 <div className="text-foreground text-sm font-bold">{selectedProfile}</div>
-                <div className="text-[9.5px] font-mono text-slate-400 font-bold uppercase tracking-wide">
+                <div className="text-xs font-mono text-slate-400 font-bold uppercase tracking-wide">
                   Score: {activeProfileData.score} · {activeProfileData.level} Risk
                 </div>
               </div>
@@ -573,7 +573,7 @@ function AIBrainModule() {
             </div>
           </div>
 
-          <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 space-y-1.5 font-mono text-[9px]">
+          <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 space-y-1.5 font-mono text-xs">
             <div className="flex justify-between font-bold text-foreground">
               <span>Sentiment Analysis (M2)</span>
               <span className="text-amber-600">Neutral (0.51)</span>
@@ -591,12 +591,12 @@ function AIBrainModule() {
             {customerTimeline.map((evt, idx) => (
               <div key={idx} className="relative pl-5 border-l border-border/60 pb-3 last:pb-0">
                 <span className="absolute -left-1.5 top-1 h-3 w-3 rounded-full bg-slate-900 border-2 border-primary" />
-                <div className="flex justify-between font-mono text-[9px] text-slate-400 mb-0.5">
+                <div className="flex justify-between font-mono text-xs text-slate-400 mb-0.5">
                   <span>{evt.time}</span>
-                  <span className="font-bold text-[#2E86AB]">{evt.module}</span>
+                  <span className="font-bold text-blue-700">{evt.module}</span>
                 </div>
                 <div className="text-foreground font-bold">{evt.type}</div>
-                <p className="text-[10px] text-slate-400 font-normal mt-0.5 leading-normal">{evt.text}</p>
+                <p className="text-xs text-slate-400 font-normal mt-0.5 leading-normal">{evt.text}</p>
               </div>
             ))}
           </div>
@@ -607,20 +607,20 @@ function AIBrainModule() {
           <div className="space-y-4">
             <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">AI Recommended Action</h4></div>
             <div className="p-3 bg-red-50/20 border border-red-200 rounded-xl space-y-2">
-              <div className="text-[10px] font-mono font-bold text-[#D85A30] flex items-center gap-1">
+              <div className="text-xs font-mono font-bold text-red-600 flex items-center gap-1">
                 <AlertCircle className="h-3.5 w-3.5 animate-bounce" /> HIGH IMPACT ACTION TRIGGERED
               </div>
               <div className="text-foreground text-xs font-bold leading-normal">
                 Direct Manager Call from Sales lead (Rahul Modi) — not agent.
               </div>
-              <p className="text-[10.5px] text-slate-400 font-normal leading-normal mt-1">
+              <p className="text-xs text-slate-400 font-normal leading-normal mt-1">
                 Unresolved discount objection (₹2L) has stalled the deal. Acknowledging the competitor creates a +18% conversion probability boost.
               </p>
             </div>
           </div>
 
           <div className="space-y-3.5 mt-4">
-            <div className="p-2.5 bg-secondary/35 rounded-xl border border-border/40 font-mono text-[9px] text-slate-500 leading-normal">
+            <div className="p-2.5 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs text-slate-500 leading-normal">
               <strong>Context Script:</strong><br />
               &quot;Rajesh, I wanted to personally check in. We have approved the modular kitchen incentive scheme for Floor 8 Unit 804...&quot;
             </div>
@@ -670,19 +670,19 @@ function AIBrainModule() {
               className={`p-4 border transition-all cursor-pointer bg-card ${expandedInsight === insight.id ? "border-primary shadow-sm" : "border-border/60 hover:border-slate-400"}`}
             >
               <div className="flex justify-between items-center mb-1">
-                <span className={`text-[8.5px] font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadgeStyle("Active")}`}>
+                <span className={`text-[10px] font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadgeStyle("Active")}`}>
                   {insight.type}
                 </span>
-                <span className="text-[10px] font-mono text-slate-400 font-bold">Confidence: {insight.confidence}%</span>
+                <span className="text-xs font-mono text-slate-400 font-bold">Confidence: {insight.confidence}%</span>
               </div>
               <h4 className="text-foreground text-xs font-bold font-sans pr-4 leading-normal">{insight.text}</h4>
               {expandedInsight === insight.id && (
-                <div className="mt-4 pt-3 border-t border-border/40 text-[10.5px] leading-relaxed text-slate-400 space-y-3 font-mono animate-in fade-in duration-200">
+                <div className="mt-4 pt-3 border-t border-border/40 text-xs leading-relaxed text-slate-400 space-y-3 font-mono animate-in fade-in duration-200">
                   <div>
-                    <strong className="text-slate-500 uppercase text-[9px] tracking-wider block">Recommended Action:</strong>
+                    <strong className="text-slate-500 uppercase text-xs tracking-wider block">Recommended Action:</strong>
                     <span className="text-foreground">{insight.action}</span>
                   </div>
-                  <div className="flex justify-between items-center text-[9.5px]">
+                  <div className="flex justify-between items-center text-xs">
                     <span>Recipient Group: <strong>{insight.rm}</strong></span>
                     <span>Status: <strong className={actionedInsights[insight.id] ? "text-emerald-600" : "text-slate-600"}>{actionedInsights[insight.id] ? "Actioned ✓" : "Pending Action"}</strong></span>
                   </div>
@@ -693,7 +693,7 @@ function AIBrainModule() {
                         setActionedInsights(prev => ({ ...prev, [insight.id]: true }));
                         alert(`Action playbook initialized for insight [${insight.id}].`);
                       }}
-                      className="h-7 w-full rounded bg-ink hover:bg-ink/90 text-cream text-[9px] font-mono uppercase tracking-wider mt-1.5"
+                      className="h-7 w-full rounded bg-ink hover:bg-ink/90 text-cream text-xs font-mono uppercase tracking-wider mt-1.5"
                     >
                       Route Action Playbook
                     </button>
@@ -714,12 +714,12 @@ function AIBrainModule() {
               { insight: "Vesu price closing incentive campaign", actioned: "14/01/2025", outcome: "Inquiry volumes recovered 11% back to baseline thresholds", verified: true }
             ].map((row, i) => (
               <div key={i} className="p-3 bg-secondary/35 rounded-xl border border-border/40 space-y-1.5">
-                <div className="flex justify-between font-mono text-[9px] text-slate-400">
+                <div className="flex justify-between font-mono text-xs text-slate-400">
                   <span>Actioned: {row.actioned}</span>
                   <span className="text-emerald-600 font-bold">✓ Verified ROI</span>
                 </div>
                 <div className="text-foreground text-xs font-bold leading-normal">{row.insight}</div>
-                <p className="text-[10px] text-slate-400 font-normal leading-normal">{row.outcome}</p>
+                <p className="text-xs text-slate-400 font-normal leading-normal">{row.outcome}</p>
               </div>
             ))}
           </div>
@@ -738,10 +738,10 @@ function AIBrainModule() {
   const renderRisk = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatBox label="Total Active Deals" value="68" desc="Pipeline monitor active" color="text-[#1A3C5E]" />
-        <StatBox label="High-Risk Deals" value="6" desc="Requires urgent callback" color="text-[#E8A838]" />
-        <StatBox label="Critical Risk Deals" value="3" desc="Abandonment imminent" color="text-[#D85A30] animate-pulse" />
-        <StatBox label="Deals Saved This Month" value="12" desc="Playbook success rate: 78%" color="text-[#1D9E75]" />
+        <StatBox label="Total Active Deals" value="68" desc="Pipeline monitor active" color="text-slate-800" />
+        <StatBox label="High-Risk Deals" value="6" desc="Requires urgent callback" color="text-amber-500" />
+        <StatBox label="Critical Risk Deals" value="3" desc="Abandonment imminent" color="text-red-600 animate-pulse" />
+        <StatBox label="Deals Saved This Month" value="12" desc="Playbook success rate: 78%" color="text-emerald-600" />
       </div>
 
       <div className="grid grid-cols-12 gap-5">
@@ -752,7 +752,7 @@ function AIBrainModule() {
           </div>
           <div className="overflow-x-auto scrollbar-none h-[420px]">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display sticky top-0 z-10">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display sticky top-0 z-10">
                 <tr>
                   <th className="px-3.5 py-2.5">Buyer</th>
                   <th className="px-3.5 py-2.5 font-mono">Unit / Project</th>
@@ -772,7 +772,7 @@ function AIBrainModule() {
                     <td className="px-3.5 py-3 font-bold">{b.name}</td>
                     <td className="px-3.5 py-3">
                       <div className="font-bold text-foreground font-mono">{b.unit}</div>
-                      <div className="text-[9.5px] text-slate-400 font-normal">{b.project}</div>
+                      <div className="text-xs text-slate-400 font-normal">{b.project}</div>
                     </td>
                     <td className="px-3.5 py-3 font-mono">₹{(b.value/100000).toFixed(1)}L</td>
                     <td className="px-3.5 py-3 font-mono font-bold">
@@ -781,7 +781,7 @@ function AIBrainModule() {
                       </span>
                     </td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[9px] font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadgeStyle(b.level)}`}>{b.level}</span>
+                      <span className={`text-xs font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadgeStyle(b.level)}`}>{b.level}</span>
                     </td>
                     <td className="px-3.5 py-3">
                       <button
@@ -789,7 +789,7 @@ function AIBrainModule() {
                           e.stopPropagation();
                           alert(`Intervention sequence triggered for ${b.name}. RM notified.`);
                         }}
-                        className="h-6 px-2 rounded bg-ink text-cream hover:bg-ink/90 text-[9px] font-mono uppercase"
+                        className="h-6 px-2 rounded bg-ink text-cream hover:bg-ink/90 text-xs font-mono uppercase"
                       >
                         Intervene
                       </button>
@@ -806,12 +806,12 @@ function AIBrainModule() {
           <div className="space-y-4">
             <div className="border-b border-border/40 pb-2 flex justify-between items-center">
               <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Risk Breakdown Profile</h4>
-              <span className={`text-[9px] font-extrabold px-1.5 py-0.2 rounded font-mono ${statusBadgeStyle(riskData.level)}`}>{riskData.level}</span>
+              <span className={`text-xs font-extrabold px-1.5 py-0.2 rounded font-mono ${statusBadgeStyle(riskData.level)}`}>{riskData.level}</span>
             </div>
 
             <div className="space-y-3 font-mono text-xs text-slate-600">
               <div className="text-foreground text-sm font-bold font-sans">{riskData.name} (Unit {riskData.unit})</div>
-              <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 space-y-1.5 text-[9.5px]">
+              <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 space-y-1.5 text-xs">
                 <div className="flex justify-between"><span>Contact Recency (&gt;10d):</span><span className="text-foreground font-bold">{riskData.days} days idle</span></div>
                 <div className="flex justify-between border-t border-border/30 pt-1.5 mt-1.5">
                   <span>Risk Score:</span>
@@ -819,7 +819,7 @@ function AIBrainModule() {
                 </div>
               </div>
 
-              <div className="p-2.5 bg-red-50/20 border border-red-200 text-[#D85A30] rounded-xl text-[9px] leading-normal font-sans">
+              <div className="p-2.5 bg-red-50/20 border border-red-200 text-red-600 rounded-xl text-xs leading-normal font-sans">
                 <strong>Primary Trigger Reason:</strong><br />
                 {riskData.reason}
               </div>
@@ -827,7 +827,7 @@ function AIBrainModule() {
           </div>
 
           <div className="space-y-2 mt-4">
-            <div className="text-[8.5px] font-mono text-slate-400 bg-secondary/25 p-2 rounded-lg leading-normal">
+            <div className="text-[10px] font-mono text-slate-400 bg-secondary/25 p-2 rounded-lg leading-normal">
               <strong>Approved Close Incentive:</strong> Modular kitchen upgrade & 2 Free Car Parks on immediate slot confirmation.
             </div>
             <button
@@ -942,10 +942,10 @@ function AIBrainModule() {
 
         {/* CP Registered Deals Pipeline */}
         <Card className="col-span-12 lg:col-span-8 p-0 border border-border bg-card overflow-hidden">
-          <div className="p-3 bg-secondary/35 border-b border-border text-[10px] font-bold uppercase text-slate-500 font-display">Registered Deals Registry (Admin view)</div>
+          <div className="p-3 bg-secondary/35 border-b border-border text-xs font-bold uppercase text-slate-500 font-display">Registered Deals Registry (Admin view)</div>
           <div className="overflow-x-auto scrollbar-none h-[340px]">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3.5 py-2.5">CP Broker</th>
                   <th className="px-3.5 py-2.5">Buyer</th>
@@ -964,7 +964,7 @@ function AIBrainModule() {
                     <td className="px-3.5 py-3 font-mono">₹{(deal.commission/100000).toFixed(1)}L</td>
                     <td className="px-3.5 py-3 text-slate-500 font-bold">{deal.stage}</td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[9px] font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadgeStyle(deal.status)}`}>{deal.status}</span>
+                      <span className={`text-xs font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadgeStyle(deal.status)}`}>{deal.status}</span>
                     </td>
                   </tr>
                 ))}
@@ -977,7 +977,7 @@ function AIBrainModule() {
       <div className="grid grid-cols-12 gap-5">
         {/* CP Leaderboards */}
         <Card className="col-span-12 lg:col-span-7 p-0 border border-border bg-card overflow-hidden">
-          <div className="p-3 bg-secondary/35 border-b border-border text-[10px] font-bold uppercase text-slate-500 font-display">Broker network leaderboard</div>
+          <div className="p-3 bg-secondary/35 border-b border-border text-xs font-bold uppercase text-slate-500 font-display">Broker network leaderboard</div>
           <div className="overflow-x-auto scrollbar-none">
             <table className="w-full text-left text-xs divide-y divide-border/60">
               <tbody className="divide-y divide-border/40 bg-background font-medium text-foreground">
@@ -985,7 +985,7 @@ function AIBrainModule() {
                   <tr key={cp.rank} className="hover:bg-secondary/15">
                     <td className="px-3.5 py-2.5 font-bold font-mono">{cp.rank}</td>
                     <td className="px-3.5 py-2.5 font-bold">
-                      {cp.name} <span className="text-[10px] text-slate-400 block font-normal font-mono">RERA: {cp.rera}</span>
+                      {cp.name} <span className="text-xs text-slate-400 block font-normal font-mono">RERA: {cp.rera}</span>
                     </td>
                     <td className="px-3.5 py-2.5 font-mono text-slate-400">{cp.deals} deals registered</td>
                     <td className="px-3.5 py-2.5 font-mono text-slate-400">{cp.booked} bookings</td>
@@ -1010,7 +1010,7 @@ function AIBrainModule() {
               <div key={i} className="flex justify-between items-center border-b border-border/30 pb-2 last:border-0 last:pb-0">
                 <div>
                   <div className="text-foreground">{res.doc}</div>
-                  <div className="text-[9.5px] text-slate-400 font-normal">File size: {res.size} · downloads logged: {res.clicks}</div>
+                  <div className="text-xs text-slate-400 font-normal">File size: {res.size} · downloads logged: {res.clicks}</div>
                 </div>
                 <button
                   onClick={() => alert(`Initiating download for resource: ${res.doc}`)}
@@ -1050,7 +1050,7 @@ function AIBrainModule() {
           </div>
           <div className="overflow-x-auto scrollbar-none h-[320px]">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3.5 py-2.5">User</th>
                   <th className="px-3.5 py-2.5 font-mono">Role / Dept</th>
@@ -1064,25 +1064,25 @@ function AIBrainModule() {
                 {users.map((u) => (
                   <tr key={u.id} className="hover:bg-secondary/15">
                     <td className="px-3.5 py-3 font-bold">
-                      {u.name} <span className="text-[10px] text-slate-400 block font-normal font-mono">{u.email}</span>
+                      {u.name} <span className="text-xs text-slate-400 block font-normal font-mono">{u.email}</span>
                     </td>
                     <td className="px-3.5 py-3 font-mono">
                       <div className="font-bold text-foreground">{u.role}</div>
-                      <div className="text-[9.5px] text-slate-400 font-normal">{u.dept}</div>
+                      <div className="text-xs text-slate-400 font-normal">{u.dept}</div>
                     </td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[9px] px-1.5 py-0.2 rounded font-mono ${u.mfa ? "bg-emerald-50 text-emerald-700" : "bg-red-50 text-red-700"}`}>
+                      <span className={`text-xs px-1.5 py-0.2 rounded font-mono ${u.mfa ? "bg-emerald-50 text-emerald-700" : "bg-red-50 text-red-700"}`}>
                         {u.mfa ? "Enabled" : "Disabled"}
                       </span>
                     </td>
-                    <td className="px-3.5 py-3 font-mono text-slate-400 text-[10px]">{u.lastLogin}</td>
+                    <td className="px-3.5 py-3 font-mono text-slate-400 text-xs">{u.lastLogin}</td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[9px] font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadgeStyle(u.status)}`}>{u.status}</span>
+                      <span className={`text-xs font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadgeStyle(u.status)}`}>{u.status}</span>
                     </td>
                     <td className="px-3.5 py-3 text-right">
                       <button
                         onClick={() => toggleUserStatus(u.id, u.name, u.status)}
-                        className={`h-6 px-2.5 rounded text-[9px] font-mono uppercase ${u.status === "Active" ? "bg-red-600 hover:bg-red-700 text-white" : "bg-ink text-cream hover:bg-ink/90"}`}
+                        className={`h-6 px-2.5 rounded text-xs font-mono uppercase ${u.status === "Active" ? "bg-red-600 hover:bg-red-700 text-white" : "bg-ink text-cream hover:bg-ink/90"}`}
                       >
                         {u.status === "Active" ? "Suspend" : "Activate"}
                       </button>
@@ -1097,7 +1097,7 @@ function AIBrainModule() {
         {/* Permission matrix preview */}
         <Card className="col-span-12 lg:col-span-4 p-4 border border-border bg-card space-y-4">
           <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">RBAC Module Permission Matrix</h4></div>
-          <div className="space-y-3 font-mono text-[9px] text-slate-500">
+          <div className="space-y-3 font-mono text-xs text-slate-500">
             <div className="grid grid-cols-5 text-center font-bold text-foreground border-b border-border/40 pb-1.5">
               <span className="text-left col-span-2">Role Scope</span>
               <span>View</span>
@@ -1125,13 +1125,13 @@ function AIBrainModule() {
       <Card className="p-0 border border-border bg-card overflow-hidden">
         <div className="p-3 bg-secondary/35 border-b border-border flex justify-between items-center">
           <span className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Platform Security Logs (Audit Feed)</span>
-          <span className="text-[9px] font-mono text-red-500 animate-pulse font-bold">1 Alert Flagged Today</span>
+          <span className="text-xs font-mono text-red-500 animate-pulse font-bold">1 Alert Flagged Today</span>
         </div>
         <div className="overflow-x-auto scrollbar-none max-h-44">
           <table className="w-full text-left text-xs divide-y divide-border/60">
             <tbody className="divide-y divide-border/40 bg-background font-medium text-foreground">
               {securityAuditLogs.map((log) => (
-                <tr key={log.id} className={`hover:bg-secondary/15 font-mono text-[10px] ${log.type === "alert" ? "bg-red-50/15 text-red-600" : ""}`}>
+                <tr key={log.id} className={`hover:bg-secondary/15 font-mono text-xs ${log.type === "alert" ? "bg-red-50/15 text-red-600" : ""}`}>
                   <td className="px-3.5 py-2.5 text-slate-400">{log.time}</td>
                   <td className="px-3.5 py-2.5 font-bold">{log.user}</td>
                   <td className="px-3.5 py-2.5 text-slate-400">{log.action}</td>
@@ -1177,7 +1177,7 @@ function AIBrainModule() {
           </div>
           <div className="overflow-x-auto scrollbar-none h-[300px]">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3.5 py-2.5">Data Principal</th>
                   <th className="px-3.5 py-2.5 font-mono">Consent Purpose</th>
@@ -1191,27 +1191,27 @@ function AIBrainModule() {
                 {consents.map((c) => (
                   <tr key={c.id} className="hover:bg-secondary/15">
                     <td className="px-3.5 py-3 font-bold">
-                      {c.name} <span className="text-[10px] text-slate-400 block font-normal font-mono">{c.contact}</span>
+                      {c.name} <span className="text-xs text-slate-400 block font-normal font-mono">{c.contact}</span>
                     </td>
                     <td className="px-3.5 py-3 font-mono">
                       <div className="font-bold text-foreground truncate max-w-[200px]">{c.purpose}</div>
-                      <div className="text-[9.5px] text-slate-400 font-normal truncate max-w-[200px]">{c.text}</div>
+                      <div className="text-xs text-slate-400 font-normal truncate max-w-[200px]">{c.text}</div>
                     </td>
-                    <td className="px-3.5 py-3 font-mono text-slate-400 text-[10px]">{c.source}</td>
-                    <td className="px-3.5 py-3 font-mono text-[10px]">{c.expiry}</td>
+                    <td className="px-3.5 py-3 font-mono text-slate-400 text-xs">{c.source}</td>
+                    <td className="px-3.5 py-3 font-mono text-xs">{c.expiry}</td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[9px] font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadgeStyle(c.status)}`}>{c.status}</span>
+                      <span className={`text-xs font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadgeStyle(c.status)}`}>{c.status}</span>
                     </td>
                     <td className="px-3.5 py-3 text-right">
                       {c.status === "Active" ? (
                         <button
                           onClick={() => withdrawConsent(c.id, c.name)}
-                          className="h-6 px-2 rounded bg-red-600 hover:bg-red-700 text-white text-[9px] font-mono uppercase"
+                          className="h-6 px-2 rounded bg-red-600 hover:bg-red-700 text-white text-xs font-mono uppercase"
                         >
                           Withdraw
                         </button>
                       ) : (
-                        <span className="text-slate-500 font-mono text-[9px]">Withdrawn</span>
+                        <span className="text-slate-500 font-mono text-xs">Withdrawn</span>
                       )}
                     </td>
                   </tr>
@@ -1230,17 +1230,17 @@ function AIBrainModule() {
             ) : (
               dsrRequests.map((r) => (
                 <div key={r.id} className="p-3 bg-secondary/35 rounded-xl border border-border/50 space-y-1.5">
-                  <div className="flex justify-between font-mono text-[9px] text-slate-400">
+                  <div className="flex justify-between font-mono text-xs text-slate-400">
                     <span>{r.id} · SLA: {r.slaDays} days</span>
-                    <span className={`text-[8.5px] px-1.5 py-0.2 rounded font-mono ${statusBadgeStyle(r.status)}`}>{r.status}</span>
+                    <span className={`text-[10px] px-1.5 py-0.2 rounded font-mono ${statusBadgeStyle(r.status)}`}>{r.status}</span>
                   </div>
                   <div>
                     <div className="text-foreground text-sm font-bold">{r.name}</div>
-                    <p className="text-[9.5px] text-slate-400 font-normal mt-0.5">{r.type} Request: {r.details}</p>
+                    <p className="text-xs text-slate-400 font-normal mt-0.5">{r.type} Request: {r.details}</p>
                   </div>
                   <button
                     onClick={() => processDsr(r.id, r.name)}
-                    className="h-7 w-full rounded bg-ink hover:bg-ink/90 text-cream text-[9px] font-mono uppercase tracking-wider"
+                    className="h-7 w-full rounded bg-ink hover:bg-ink/90 text-cream text-xs font-mono uppercase tracking-wider"
                   >
                     Approve & Process Request
                   </button>
@@ -1264,9 +1264,9 @@ function AIBrainModule() {
               { type: "Financial Accounts entries", retention: "8 years", basis: "Income Tax", status: "Active" }
             ].map((pol, i) => (
               <div key={i} className="p-3 bg-secondary/35 rounded-xl border border-border/40 space-y-1">
-                <div className="text-[10px] font-bold text-foreground">{pol.type}</div>
-                <div className="font-mono text-[9.5px] text-slate-400">{pol.retention}</div>
-                <div className="flex justify-between items-center text-[8.5px] font-mono mt-2 pt-1 border-t border-border/30">
+                <div className="text-xs font-bold text-foreground">{pol.type}</div>
+                <div className="font-mono text-xs text-slate-400">{pol.retention}</div>
+                <div className="flex justify-between items-center text-[10px] font-mono mt-2 pt-1 border-t border-border/30">
                   <span>Basis: {pol.basis}</span>
                   <span className="text-emerald-600 font-bold">{pol.status}</span>
                 </div>
@@ -1276,13 +1276,13 @@ function AIBrainModule() {
         </Card>
 
         {/* Breach response simulation */}
-        <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-[#D85A30]/5 text-[#D85A30] space-y-4">
-          <div className="border-b border-[#D85A30]/20 pb-2"><h4 className="font-bold text-xs uppercase tracking-wider font-display">Interactive Breach Response Playbook</h4></div>
-          <div className="space-y-3 font-semibold text-xs text-[#D85A30]">
-            <p className="text-[11px] leading-relaxed font-sans font-medium text-slate-600">
+        <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-red-600/5 text-red-600 space-y-4">
+          <div className="border-b border-red-600/20 pb-2"><h4 className="font-bold text-xs uppercase tracking-wider font-display">Interactive Breach Response Playbook</h4></div>
+          <div className="space-y-3 font-semibold text-xs text-red-600">
+            <p className="text-xs leading-relaxed font-sans font-medium text-slate-600">
               In case of a detected security data breach, DPDP 2023 mandates containment actions and DPA notification within 72 hours.
             </p>
-            <div className="p-3 bg-[#D85A30]/10 rounded-xl border border-[#D85A30]/20 font-mono text-[9.5px] space-y-1.5">
+            <div className="p-3 bg-red-600/10 rounded-xl border border-red-600/20 font-mono text-xs space-y-1.5">
               <div className="flex justify-between"><span>Current Step:</span><span>Step {breachStep + 1} of 4</span></div>
               <div className="text-foreground font-bold mt-1.5">
                 {breachStep === 0 && "Step 1: Containerize & Revoke Access keys"}
@@ -1319,11 +1319,11 @@ function AIBrainModule() {
         <Card className="col-span-12 lg:col-span-7 p-0 border border-border bg-card overflow-hidden">
           <div className="p-3 bg-secondary/35 border-b border-border flex justify-between items-center">
             <span className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Command Center Neural Modules</span>
-            <span className="text-[9px] font-mono text-slate-400">Target: 99.5% Uptime</span>
+            <span className="text-xs font-mono text-slate-400">Target: 99.5% Uptime</span>
           </div>
           <div className="overflow-x-auto scrollbar-none max-h-96">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display sticky top-0 z-10">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display sticky top-0 z-10">
                 <tr>
                   <th className="px-3.5 py-2.5">Module Name</th>
                   <th className="px-3.5 py-2.5 font-mono">Uptime (30d)</th>
@@ -1340,7 +1340,7 @@ function AIBrainModule() {
                     <td className="px-3.5 py-2.5 font-mono text-slate-400">{m.speed}</td>
                     <td className="px-3.5 py-2.5 font-mono text-slate-400">{m.incident}</td>
                     <td className="px-3.5 py-2.5">
-                      <span className={`text-[9px] font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadgeStyle(m.status)}`}>{m.status}</span>
+                      <span className={`text-xs font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadgeStyle(m.status)}`}>{m.status}</span>
                     </td>
                   </tr>
                 ))}
@@ -1357,11 +1357,11 @@ function AIBrainModule() {
               {externalApisHealth.map((api, i) => (
                 <div key={i} className="flex justify-between items-center border-b border-border/30 pb-2 last:border-0 last:pb-0">
                   <div>
-                    <div className="text-foreground text-[11px] font-bold">{api.name}</div>
-                    <div className="text-[9.5px] text-slate-400 font-normal">Type: {api.type} · Delay: {api.delay} · Uptime: {api.uptime}</div>
+                    <div className="text-foreground text-xs font-bold">{api.name}</div>
+                    <div className="text-xs text-slate-400 font-normal">Type: {api.type} · Delay: {api.delay} · Uptime: {api.uptime}</div>
                   </div>
                   <div className="text-right shrink-0">
-                    <span className={`text-[8.5px] font-extrabold px-1.5 py-0.2 rounded font-mono ${statusBadgeStyle(api.status)}`}>{api.status}</span>
+                    <span className={`text-[10px] font-extrabold px-1.5 py-0.2 rounded font-mono ${statusBadgeStyle(api.status)}`}>{api.status}</span>
                   </div>
                 </div>
               ))}
@@ -1370,12 +1370,12 @@ function AIBrainModule() {
 
           <Card className="p-4 border border-border bg-card space-y-4">
             <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Live System Workflow Queues</h4></div>
-            <div className="space-y-3 font-mono text-[9.5px] text-slate-500">
+            <div className="space-y-3 font-mono text-xs text-slate-500">
               {liveSystemWorkflows.map((flow, i) => (
                 <div key={i} className="flex justify-between items-center border-b border-border/20 pb-2 last:border-0 last:pb-0">
                   <div>
                     <div className="text-foreground font-sans font-bold text-xs">{flow.name}</div>
-                    <div className="text-[9px] text-slate-400 font-normal mt-0.5">Frequency: {flow.type} · Success: {flow.success}</div>
+                    <div className="text-xs text-slate-400 font-normal mt-0.5">Frequency: {flow.type} · Success: {flow.success}</div>
                   </div>
                   <span className={`px-1.5 py-0.2 rounded font-bold ${flow.queue > 0 ? "bg-amber-100 text-amber-700" : "bg-slate-100 text-slate-400"}`}>
                     Queue: {flow.queue}
@@ -1398,18 +1398,18 @@ function AIBrainModule() {
               <Card
                 key={mod.id}
                 onClick={() => setActiveTab(mod.id as TabType)}
-                className="submodule-card p-5 cursor-pointer flex flex-col justify-between group h-44"
+                className="bg-card border shadow-sm rounded-xl p-5 cursor-pointer flex flex-col justify-between group h-44"
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full border font-mono text-emerald-700 bg-emerald-50 border-emerald-100">
+                    <span className="inline-flex items-center gap-1 text-xs font-bold px-2 py-0.5 rounded-full border font-mono text-emerald-700 bg-emerald-50 border-emerald-100">
                       <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> {mod.status}
                     </span>
                   </div>
                   <h3 className="text-sm font-bold text-foreground group-hover:text-ink transition-colors mt-1 font-display">{mod.name}</h3>
                   <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed line-clamp-2 font-medium">{mod.desc}</p>
                 </div>
-                <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-[11px] font-bold text-muted-foreground group-hover:text-foreground">
+                <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
                   <span className="font-mono font-bold text-foreground">{mod.stats}</span>
                   <span className="flex items-center gap-0.5 text-ink group-hover:underline font-mono">Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
                 </div>
@@ -1433,10 +1433,10 @@ function AIBrainModule() {
 function StatBox({ label, value, desc, color }: { label: string; value: string; desc: string; color: string }) {
   return (
     <Card className="p-4 flex flex-col justify-between relative min-h-24 border border-border bg-card">
-      <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-display">{label}</div>
+      <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display">{label}</div>
       <div className="mt-2 flex items-baseline justify-between">
         <div className={`font-display text-2xl font-bold tracking-tight font-mono ${color}`}>{value}</div>
-        <span className="text-[9px] font-semibold text-muted-foreground">{desc}</span>
+        <span className="text-xs font-semibold text-muted-foreground">{desc}</span>
       </div>
     </Card>
   );

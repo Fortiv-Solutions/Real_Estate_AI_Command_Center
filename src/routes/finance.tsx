@@ -155,7 +155,7 @@ const statusBadgeStyle = (status: string) => {
   if (["In Progress", "In Transit", "PO Sent", "Scheduled", "Applied", "Under Review", "Pending payout", "Watch", "Auto-compile pending", "Active"].some(s => status.includes(s)))
     return "bg-amber-50 text-amber-700 border border-amber-100";
   if (["Action Required", "Not Initiated", "Not Applied", "Pending Snags", "Blocked", "Payment Pending", "Snag Pending", "At Risk", "Delayed", "Overrun", "Critical Overrun", "Escalated", "Overdue", "Approval pending", "Failed"].some(s => status.includes(s)))
-    return "bg-red-50 text-[#D85A30] border border-red-100";
+    return "bg-red-50 text-red-600 border border-red-100";
   return "bg-slate-50 text-slate-600 border border-slate-200";
 };
 
@@ -218,31 +218,31 @@ function FinanceManager() {
     <div className="space-y-6 animate-in fade-in duration-300">
       {/* 5 KPI Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-        <StatBox label="Total Billed" value="₹24.6 Cr" desc="Demand notes raised" color="text-[#1A3C5E]" />
-        <StatBox label="Total Collected" value="₹18.2 Cr" desc="Receipts logged to date" color="text-[#1D9E75]" />
-        <StatBox label="Collection Rate" value="74%" desc="Target threshold: 85%" color="text-[#2E86AB]" />
-        <StatBox label="Total Outstanding" value="₹6.4 Cr" desc="Receivables balance" color="text-[#E8A838]" />
-        <StatBox label="90+ Day Overdue" value="₹1.5 Cr" desc="Escalated collections" color="text-[#D85A30] animate-pulse" />
+        <StatBox label="Total Billed" value="₹24.6 Cr" desc="Demand notes raised" color="text-slate-800" />
+        <StatBox label="Total Collected" value="₹18.2 Cr" desc="Receipts logged to date" color="text-emerald-600" />
+        <StatBox label="Collection Rate" value="74%" desc="Target threshold: 85%" color="text-blue-700" />
+        <StatBox label="Total Outstanding" value="₹6.4 Cr" desc="Receivables balance" color="text-amber-500" />
+        <StatBox label="90+ Day Overdue" value="₹1.5 Cr" desc="Escalated collections" color="text-red-600 animate-pulse" />
       </div>
 
       <div className="grid grid-cols-12 gap-5">
         {/* Left: Collections Bar Chart */}
         <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card">
           <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
-            <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+            <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
               <TrendingUp className="h-3.5 w-3.5 text-primary" /> Monthly Collections (Oct 2024 – Mar 2025)
             </div>
-            <span className="text-[10px] font-mono text-slate-400">Target: ₹3.0 Cr/month</span>
+            <span className="text-xs font-mono text-slate-400">Target: ₹3.0 Cr/month</span>
           </div>
           <div className="h-44 flex items-end gap-3.5 pt-2">
             {monthlyCollectionsTrend.map((t, idx) => (
               <div key={idx} className="flex-1 flex flex-col justify-end items-center h-full group relative">
-                <span className="absolute -top-6 text-[10px] font-mono font-bold text-foreground opacity-0 group-hover:opacity-100 transition-opacity">₹{(t.v/100).toFixed(2)}Cr</span>
+                <span className="absolute -top-6 text-xs font-mono font-bold text-foreground opacity-0 group-hover:opacity-100 transition-opacity">₹{(t.v/100).toFixed(2)}Cr</span>
                 <div
-                  className={`w-full rounded-t transition-all duration-300 ${t.status === "Above" ? "bg-emerald-500/80 hover:bg-emerald-500" : "bg-[#2E86AB]/80 hover:bg-[#2E86AB]"}`}
+                  className={`w-full rounded-t transition-all duration-300 ${t.status === "Above" ? "bg-emerald-500/80 hover:bg-emerald-500" : "bg-blue-700/80 hover:bg-blue-700"}`}
                   style={{ height: `${(t.v / 400) * 100}%` }}
                 />
-                <span className="text-[9px] font-mono text-slate-500 mt-1.5 truncate max-w-full">{t.m}</span>
+                <span className="text-xs font-mono text-slate-500 mt-1.5 truncate max-w-full">{t.m}</span>
               </div>
             ))}
           </div>
@@ -251,7 +251,7 @@ function FinanceManager() {
         {/* Right: Project-wise P&L Snapshot */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card flex flex-col justify-between">
           <div>
-            <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5 border-b border-border/40 pb-2 mb-3">
+            <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5 border-b border-border/40 pb-2 mb-3">
               <Building className="h-3.5 w-3.5 text-primary" /> Project P&L Summary Snapshot
             </div>
             <div className="space-y-3.5 text-xs font-semibold">
@@ -259,11 +259,11 @@ function FinanceManager() {
                 <div key={i} className="flex justify-between items-center border-b border-border/30 pb-2 last:border-0 last:pb-0">
                   <div>
                     <div className="text-foreground">{p.name}</div>
-                    <div className="text-[9.5px] text-slate-400 font-normal">Cost: ₹{(p.cost/10000000).toFixed(1)}Cr · Revenue: ₹{(p.recognized/10000000).toFixed(1)}Cr</div>
+                    <div className="text-xs text-slate-400 font-normal">Cost: ₹{(p.cost/10000000).toFixed(1)}Cr · Revenue: ₹{(p.recognized/10000000).toFixed(1)}Cr</div>
                   </div>
                   <div className="text-right shrink-0">
                     <span className="font-mono font-bold text-foreground">₹{(p.margin/10000000).toFixed(1)}Cr</span>
-                    <div className={`text-[9.5px] font-bold ${p.status === "Action Required" ? "text-red-500" : "text-slate-400"}`}>{p.pctMargin}% Margin</div>
+                    <div className={`text-xs font-bold ${p.status === "Action Required" ? "text-red-500" : "text-slate-400"}`}>{p.pctMargin}% Margin</div>
                   </div>
                 </div>
               ))}
@@ -274,7 +274,7 @@ function FinanceManager() {
 
       {/* Bottom section: Pending Actions */}
       <Card className="p-4 border border-border bg-card">
-        <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5 border-b border-border/40 pb-2 mb-3">
+        <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5 border-b border-border/40 pb-2 mb-3">
           <AlertCircle className="h-3.5 w-3.5 text-red-500 animate-pulse" /> Pending Finance Actionable Queue
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3.5 text-xs font-semibold">
@@ -291,7 +291,7 @@ function FinanceManager() {
               className={`p-3 rounded-xl border flex flex-col justify-between cursor-pointer hover:shadow-sm transition-all h-24 ${act.c}`}
             >
               <div className="line-clamp-2">{act.a}</div>
-              <div className="flex justify-between items-center text-[9px] font-mono font-bold mt-1.5 pt-1.5 border-t border-current/25">
+              <div className="flex justify-between items-center text-xs font-mono font-bold mt-1.5 pt-1.5 border-t border-current/25">
                 <span>{act.tag}</span>
                 <span className="underline">Resolve →</span>
               </div>
@@ -313,14 +313,14 @@ function FinanceManager() {
   const renderCollections = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatBox label="Total Outstanding" value="₹6.4 Cr" desc="Billed but unpaid" color="text-[#1A3C5E]" />
-        <StatBox label="Current (Not Yet Due)" value="₹1.6 Cr" desc="Due within 30 days" color="text-[#2E86AB]" />
-        <StatBox label="Overdue (1–60 Days)" value="₹4.9 Cr" desc="Active aging tracking" color="text-[#E8A838]" />
-        <StatBox label="Critical (90+ Days)" value="₹1.5 Cr" desc="23.4% of total outstanding" color="text-[#D85A30]" />
+        <StatBox label="Total Outstanding" value="₹6.4 Cr" desc="Billed but unpaid" color="text-slate-800" />
+        <StatBox label="Current (Not Yet Due)" value="₹1.6 Cr" desc="Due within 30 days" color="text-blue-700" />
+        <StatBox label="Overdue (1–60 Days)" value="₹4.9 Cr" desc="Active aging tracking" color="text-amber-500" />
+        <StatBox label="Critical (90+ Days)" value="₹1.5 Cr" desc="23.4% of total outstanding" color="text-red-600" />
       </div>
 
       {/* Critical overdue alert */}
-      <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs flex items-center gap-3 font-semibold text-[#D85A30] animate-pulse">
+      <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs flex items-center gap-3 font-semibold text-red-600 animate-pulse">
         <AlertTriangle className="h-5 w-5 shrink-0 text-red-500 animate-bounce" />
         <div>
           <span className="font-bold">Finance Alert:</span> 90+ Day Overdue bucket is at <strong>23.4% of outstanding</strong>, exceeding the 10% policy threshold. Legal notice sequence has been auto-queued.
@@ -332,7 +332,7 @@ function FinanceManager() {
         <Card className="col-span-12 lg:col-span-4 p-4 border border-border bg-card space-y-3.5">
           <div className="border-b border-border/40 pb-2 flex justify-between items-center">
             <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Aging Analysis Buckets</h4>
-            <span className="text-[9px] font-mono bg-red-100 text-red-700 px-2 py-0.5 rounded border border-red-200">Alert Threshold Exceeded</span>
+            <span className="text-xs font-mono bg-red-100 text-red-700 px-2 py-0.5 rounded border border-red-200">Alert Threshold Exceeded</span>
           </div>
           <div className="space-y-2.5 text-xs font-semibold">
             {[
@@ -345,11 +345,11 @@ function FinanceManager() {
               <div key={i} className="flex justify-between items-center border-b border-border/30 pb-2 last:border-0 last:pb-0">
                 <div>
                   <div className="text-foreground">{row.b}</div>
-                  <div className="text-[9.5px] text-slate-400 font-normal">{row.buyers}</div>
+                  <div className="text-xs text-slate-400 font-normal">{row.buyers}</div>
                 </div>
                 <div className="text-right shrink-0">
                   <span className="font-mono font-bold text-foreground">{row.val}</span>
-                  <div className="text-[9.5px] text-slate-400 font-mono font-normal">{row.pct}% of total</div>
+                  <div className="text-xs text-slate-400 font-mono font-normal">{row.pct}% of total</div>
                 </div>
               </div>
             ))}
@@ -365,7 +365,7 @@ function FinanceManager() {
                 <button
                   key={f}
                   onClick={() => setAgingFilter(f)}
-                  className={`h-6 px-2 rounded text-[9px] font-bold uppercase border transition-all ${agingFilter === f ? "bg-ink text-cream border-ink" : "border-border text-slate-500 hover:bg-secondary"}`}
+                  className={`h-6 px-2 rounded text-xs font-bold uppercase border transition-all ${agingFilter === f ? "bg-ink text-cream border-ink" : "border-border text-slate-500 hover:bg-secondary"}`}
                 >
                   {f === "90+" ? "90+ Days Overdue" : "Show All"}
                 </button>
@@ -374,7 +374,7 @@ function FinanceManager() {
           </div>
           <div className="overflow-x-auto scrollbar-none">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3.5 py-2.5">Buyer</th>
                   <th className="px-3.5 py-2.5 font-mono">Unit / Project</th>
@@ -390,7 +390,7 @@ function FinanceManager() {
                     <td className="px-3.5 py-3 font-bold">{b.name}</td>
                     <td className="px-3.5 py-3">
                       <div className="font-bold text-foreground font-mono">{b.unit}</div>
-                      <div className="text-[9.5px] text-slate-400 font-normal">{b.project}</div>
+                      <div className="text-xs text-slate-400 font-normal">{b.project}</div>
                     </td>
                     <td className="px-3.5 py-3 font-mono font-bold text-foreground">₹{(b.amount/100000).toFixed(1)}L</td>
                     <td className="px-3.5 py-3 font-mono font-bold">{b.days} d</td>
@@ -398,7 +398,7 @@ function FinanceManager() {
                     <td className="px-3.5 py-3">
                       <button
                         onClick={() => alert(`Outreach sequence [${b.action}] triggered for ${b.name} via WhatsApp.`)}
-                        className={`h-6 px-2.5 rounded text-[9px] font-mono uppercase ${b.days >= 90 ? "bg-red-600 hover:bg-red-700 text-white" : "bg-ink text-cream hover:bg-ink/90"}`}
+                        className={`h-6 px-2.5 rounded text-xs font-mono uppercase ${b.days >= 90 ? "bg-red-600 hover:bg-red-700 text-white" : "bg-ink text-cream hover:bg-ink/90"}`}
                       >
                         {b.days >= 90 ? "Legal notice" : "Remind"}
                       </button>
@@ -436,18 +436,18 @@ function FinanceManager() {
           <div className="space-y-3 font-semibold text-xs text-slate-600">
             {milestones.map((m, idx) => (
               <div key={m.id} className="p-3 bg-secondary/35 rounded-xl border border-border/50 space-y-2">
-                <div className="flex justify-between font-mono text-[9px]">
+                <div className="flex justify-between font-mono text-xs">
                   <span className="text-slate-400">{m.date} · {m.project}</span>
-                  <span className={`text-[8.5px] px-1.5 py-0.2 rounded font-mono ${statusBadgeStyle(m.status)}`}>{m.status}</span>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded font-mono ${statusBadgeStyle(m.status)}`}>{m.status}</span>
                 </div>
                 <div>
                   <div className="text-foreground text-sm font-bold">{m.milestone} ({m.tower})</div>
-                  <p className="text-[10px] text-slate-400 font-normal mt-0.5">Affects {m.units} units · Est batch value: ₹{(m.units * 4.6).toFixed(1)} Lakhs</p>
+                  <p className="text-xs text-slate-400 font-normal mt-0.5">Affects {m.units} units · Est batch value: ₹{(m.units * 4.6).toFixed(1)} Lakhs</p>
                 </div>
                 {m.status.includes("pending") && (
                   <button
                     onClick={() => simulateDemandGeneration(m.id, m.milestone)}
-                    className="h-7 w-full rounded bg-ink hover:bg-ink/90 text-cream text-[10px] font-mono uppercase tracking-wider transition-all"
+                    className="h-7 w-full rounded bg-ink hover:bg-ink/90 text-cream text-xs font-mono uppercase tracking-wider transition-all"
                   >
                     Generate & Send Batch Notes
                   </button>
@@ -460,12 +460,12 @@ function FinanceManager() {
         {/* PDF template preview */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
           <div className="border-b border-border/40 pb-2 flex justify-between items-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Demand Document Preview</span>
-            <button onClick={() => alert("Downloading PDF template...")} className="text-[9px] font-bold text-primary underline font-mono">Download Sample PDF</button>
+            <span className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Demand Document Preview</span>
+            <button onClick={() => alert("Downloading PDF template...")} className="text-xs font-bold text-primary underline font-mono">Download Sample PDF</button>
           </div>
-          <div className="p-4 bg-background border border-border/50 rounded-2xl font-mono text-[9px] leading-relaxed text-slate-600 space-y-3">
+          <div className="p-4 bg-background border border-border/50 rounded-2xl font-mono text-xs leading-relaxed text-slate-600 space-y-3">
             <div className="text-center font-bold text-foreground text-xs uppercase border-b border-border/40 pb-2">Fortiv Solutions Pvt Ltd · Demand Letter</div>
-            <div className="grid grid-cols-2 gap-2 text-[9.5px]">
+            <div className="grid grid-cols-2 gap-2 text-xs">
               <div><strong>Buyer:</strong> Rajesh Patel</div>
               <div className="text-right"><strong>Voucher ID:</strong> DN-GH-2025-0847</div>
               <div><strong>Unit:</strong> Tower A, Unit 804</div>
@@ -473,14 +473,14 @@ function FinanceManager() {
             </div>
             <div className="border-t border-b border-border/40 py-2 my-2 text-foreground font-semibold">
               <div className="flex justify-between"><span>Tranche Stage:</span><span>Floor Slab — 8th Floor</span></div>
-              <div className="flex justify-between mt-1 text-[10.5px]"><span>Amount Demanded:</span><span className="font-bold text-primary">₹4,60,000</span></div>
+              <div className="flex justify-between mt-1 text-xs"><span>Amount Demanded:</span><span className="font-bold text-primary">₹4,60,000</span></div>
             </div>
             <div className="space-y-1">
               <div className="flex justify-between"><span>Cumulative Paid:</span><span>₹18,40,000</span></div>
               <div className="flex justify-between"><span>Outstanding Balance:</span><span>₹39,10,000</span></div>
               <div className="flex justify-between"><span>Payment Due Date:</span><span className="font-bold text-red-500">15/02/2025</span></div>
             </div>
-            <div className="bg-secondary/40 p-2.5 rounded-xl text-[8.5px] border border-border/30">
+            <div className="bg-secondary/40 p-2.5 rounded-xl text-[10px] border border-border/30">
               <strong>Escrow Accounts:</strong> HDFC Bank · A/c No: 50200847214 · IFSC: HDFC0001234
             </div>
           </div>
@@ -505,19 +505,19 @@ function FinanceManager() {
   const renderCommissions = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatBox label="Total CP Commission (Q1)" value="₹28.4L" desc="Cumulative liability" color="text-[#1A3C5E]" />
-        <StatBox label="Commissions Settled" value="₹19.6L" desc="Transferred to brokers" color="text-[#1D9E75]" />
-        <StatBox label="Awaiting Approval" value="₹6.2L" desc="Accounts queue pending" color="text-[#E8A838]" />
-        <StatBox label="Overdue Settles" value="₹2.6L" desc="Auto-reconciles on hold" color="text-[#D85A30]" />
+        <StatBox label="Total CP Commission (Q1)" value="₹28.4L" desc="Cumulative liability" color="text-slate-800" />
+        <StatBox label="Commissions Settled" value="₹19.6L" desc="Transferred to brokers" color="text-emerald-600" />
+        <StatBox label="Awaiting Approval" value="₹6.2L" desc="Accounts queue pending" color="text-amber-500" />
+        <StatBox label="Overdue Settles" value="₹2.6L" desc="Auto-reconciles on hold" color="text-red-600" />
       </div>
 
       <div className="grid grid-cols-12 gap-5">
         {/* CP Leaderboard */}
         <Card className="col-span-12 lg:col-span-7 p-0 border border-border bg-card overflow-hidden">
-          <div className="p-3 bg-secondary/35 border-b border-border text-[10px] font-bold uppercase text-slate-500 font-display">Broker Payout Ledgers</div>
+          <div className="p-3 bg-secondary/35 border-b border-border text-xs font-bold uppercase text-slate-500 font-display">Broker Payout Ledgers</div>
           <div className="overflow-x-auto scrollbar-none">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3.5 py-2.5">Broker Name</th>
                   <th className="px-3.5 py-2.5 font-mono">Deals</th>
@@ -535,18 +535,18 @@ function FinanceManager() {
                     <td className="px-3.5 py-3 font-mono">₹{(c.earned/100000).toFixed(1)}L</td>
                     <td className="px-3.5 py-3 font-mono">₹{(c.paid/100000).toFixed(1)}L</td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[9px] font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadgeStyle(c.status)}`}>{c.status}</span>
+                      <span className={`text-xs font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadgeStyle(c.status)}`}>{c.status}</span>
                     </td>
                     <td className="px-3.5 py-3">
                       {c.status !== "Fully Settled" ? (
                         <button
                           onClick={() => releaseCommission(c.cp, c.earned)}
-                          className="h-6 px-2 rounded bg-ink hover:bg-ink/90 text-cream text-[9px] font-mono uppercase"
+                          className="h-6 px-2 rounded bg-ink hover:bg-ink/90 text-cream text-xs font-mono uppercase"
                         >
                           Release
                         </button>
                       ) : (
-                        <span className="text-emerald-600 font-bold text-[9px]">✓ Cleared</span>
+                        <span className="text-emerald-600 font-bold text-xs">✓ Cleared</span>
                       )}
                     </td>
                   </tr>
@@ -561,7 +561,7 @@ function FinanceManager() {
           <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Channel Partner Integration Sync</h4></div>
           <div className="space-y-3.5 text-xs font-semibold text-slate-600 leading-relaxed">
             <p>Commission calculations synchronize automatically with the broker portal (M12.4). Net commissions are generated subtracting TDS @10% and adding GST @18%.</p>
-            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-[9.5px] space-y-1.5 text-slate-700">
+            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs space-y-1.5 text-slate-700">
               <div className="flex justify-between"><span>Commission Rate:</span><span className="text-foreground">2.0% on booking tranche</span></div>
               <div className="flex justify-between"><span>Gross commission:</span><span className="text-foreground">₹1,15,000</span></div>
               <div className="flex justify-between"><span>GST @18% added:</span><span className="text-foreground">+₹20,700</span></div>
@@ -605,7 +605,7 @@ function FinanceManager() {
         <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card space-y-4">
           <div className="border-b border-border/40 pb-2 flex justify-between items-center">
             <h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Revenue Recognition & Cost Waterfall</h3>
-            <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadgeStyle(currentPl.status)}`}>{currentPl.status}</span>
+            <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${statusBadgeStyle(currentPl.status)}`}>{currentPl.status}</span>
           </div>
 
           <div className="space-y-3.5 text-xs font-semibold text-slate-600">
@@ -641,7 +641,7 @@ function FinanceManager() {
           <div className="space-y-3.5">
             <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Baseline target variances</h4></div>
             <div className="text-xs font-semibold space-y-3">
-              <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-[10px] space-y-1.5 text-slate-700">
+              <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs space-y-1.5 text-slate-700">
                 <div className="flex justify-between"><span>Current Margin %:</span><span className="text-foreground font-bold">{currentPl.pctMargin}%</span></div>
                 <div className="flex justify-between"><span>Budgeted Pro-forma:</span><span className="text-foreground">{currentPl.proforma}%</span></div>
                 <div className="flex justify-between border-t border-border/40 pt-1.5 mt-1.5">
@@ -653,7 +653,7 @@ function FinanceManager() {
               </div>
 
               {currentPl.status === "Action Required" && (
-                <div className="p-2.5 rounded-xl border border-red-200 bg-red-50/20 text-red-700 text-[10px] animate-pulse">
+                <div className="p-2.5 rounded-xl border border-red-200 bg-red-50/20 text-red-700 text-xs animate-pulse">
                   ⚠️ <strong>Margin Warning Alert:</strong> Cost overrun is tracking 3.8% below pro-forma target threshold. Project cost-to-complete audit recommended.
                 </div>
               )}
@@ -684,15 +684,15 @@ function FinanceManager() {
   const renderForecaster = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatBox label="Opening Balance" value="₹2.84 Cr" desc="Remittance accounts" color="text-[#1A3C5E]" />
-        <StatBox label="Projected Inflows (90d)" value={`₹ ${(inflowsProjected/10000000).toFixed(2)} Cr`} desc="Milestone billing tranches" color="text-[#1D9E75]" />
-        <StatBox label="Projected Outflows" value="₹6.87 Cr" desc="Subcontractor + procurement" color="text-[#2E86AB]" />
-        <StatBox label="Funding Gap Alert" value="₹0.61 Cr" desc="Required by 1st April 2025" color="text-[#D85A30]" />
+        <StatBox label="Opening Balance" value="₹2.84 Cr" desc="Remittance accounts" color="text-slate-800" />
+        <StatBox label="Projected Inflows (90d)" value={`₹ ${(inflowsProjected/10000000).toFixed(2)} Cr`} desc="Milestone billing tranches" color="text-emerald-600" />
+        <StatBox label="Projected Outflows" value="₹6.87 Cr" desc="Subcontractor + procurement" color="text-blue-700" />
+        <StatBox label="Funding Gap Alert" value="₹0.61 Cr" desc="Required by 1st April 2025" color="text-red-600" />
       </div>
 
       {/* Scenario buttons */}
       <Card className="p-4 border border-border bg-card space-y-3">
-        <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Scenario Sensitivity Cash modeller</span>
+        <span className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Scenario Sensitivity Cash modeller</span>
         <div className="flex flex-wrap gap-2">
           {[
             { id: "baseline", name: "Baseline Forecast" },
@@ -720,11 +720,11 @@ function FinanceManager() {
               <div key={i} className="flex justify-between items-center border-b border-border/30 pb-2 last:border-0 last:pb-0">
                 <div>
                   <div className="text-foreground">{o.cat}</div>
-                  <div className="text-[9.5px] text-slate-400 font-normal">Source: {o.source}</div>
+                  <div className="text-xs text-slate-400 font-normal">Source: {o.source}</div>
                 </div>
                 <div className="text-right shrink-0">
                   <span className="font-mono font-bold text-foreground">₹{((o.feb + o.mar + o.apr)/10000000).toFixed(2)}Cr</span>
-                  <div className="text-[9px] text-slate-400 font-mono font-normal">3-Month Sum</div>
+                  <div className="text-xs text-slate-400 font-mono font-normal">3-Month Sum</div>
                 </div>
               </div>
             ))}
@@ -732,9 +732,9 @@ function FinanceManager() {
         </Card>
 
         {/* Gap Alert brief card */}
-        <Card className="col-span-12 lg:col-span-4 p-4 border border-[#D85A30] bg-red-50/15 space-y-4 flex flex-col justify-between">
+        <Card className="col-span-12 lg:col-span-4 p-4 border border-red-600 bg-red-50/15 space-y-4 flex flex-col justify-between">
           <div className="space-y-3">
-            <h4 className="font-bold text-xs uppercase text-[#D85A30] tracking-wider font-display border-b border-red-200 pb-2">CFO Funding Gap Briefing</h4>
+            <h4 className="font-bold text-xs uppercase text-red-600 tracking-wider font-display border-b border-red-200 pb-2">CFO Funding Gap Briefing</h4>
             <p className="text-xs text-slate-600 leading-relaxed font-semibold">
               Projected cash balance falls below the minimum ₹0.75 Cr threshold in April Week 1. Bridge funding of ₹0.61 Cr required to cover subcontractor dues.
             </p>
@@ -761,19 +761,19 @@ function FinanceManager() {
   const renderTallySync = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatBox label="Sync Success Rate" value="99.1%" desc="Last 30 days" color="text-[#1D9E75]" />
-        <StatBox label="Transactions Pushed" value="1,842" desc="Cumulative invoices" color="text-[#1A3C5E]" />
-        <StatBox label="Exceptions in Queue" value={`${syncQueue.length}`} desc="Awaiting correction" color="text-[#E8A838]" />
-        <StatBox label="Last Successful Sync" value="10 Min ago" desc="Tally Gateway active" color="text-[#2E86AB]" />
+        <StatBox label="Sync Success Rate" value="99.1%" desc="Last 30 days" color="text-emerald-600" />
+        <StatBox label="Transactions Pushed" value="1,842" desc="Cumulative invoices" color="text-slate-800" />
+        <StatBox label="Exceptions in Queue" value={`${syncQueue.length}`} desc="Awaiting correction" color="text-amber-500" />
+        <StatBox label="Last Successful Sync" value="10 Min ago" desc="Tally Gateway active" color="text-blue-700" />
       </div>
 
       <div className="grid grid-cols-12 gap-5">
         {/* Sync Log Feed */}
         <Card className="col-span-12 lg:col-span-7 p-0 border border-border bg-card overflow-hidden">
-          <div className="p-3 bg-secondary/35 border-b border-border text-[10px] font-bold uppercase text-slate-500 font-display">Tally Gateway Sync Logs</div>
+          <div className="p-3 bg-secondary/35 border-b border-border text-xs font-bold uppercase text-slate-500 font-display">Tally Gateway Sync Logs</div>
           <div className="overflow-x-auto scrollbar-none">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3.5 py-2.5">Sync ID</th>
                   <th className="px-3.5 py-2.5">Transaction Type</th>
@@ -788,15 +788,15 @@ function FinanceManager() {
                     <td className="px-3.5 py-3 font-mono font-bold text-slate-400">{log.id}</td>
                     <td className="px-3.5 py-3">
                       <div className="font-bold text-foreground">{log.type}</div>
-                      <div className="text-[9px] text-slate-400 font-mono font-normal">Ref: {log.ref} · {log.time}</div>
+                      <div className="text-xs text-slate-400 font-mono font-normal">Ref: {log.ref} · {log.time}</div>
                     </td>
                     <td className="px-3.5 py-3 font-mono font-bold">₹{(log.val/100000).toFixed(1)}L</td>
                     <td className="px-3.5 py-3">
-                      <div className="text-[9.5px] text-slate-500 font-mono truncate max-w-[120px]">{log.debit}</div>
-                      <div className="text-[9px] text-slate-400 font-mono truncate max-w-[120px]">{log.credit}</div>
+                      <div className="text-xs text-slate-500 font-mono truncate max-w-[120px]">{log.debit}</div>
+                      <div className="text-xs text-slate-400 font-mono truncate max-w-[120px]">{log.credit}</div>
                     </td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[9px] font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadgeStyle(log.status)}`}>{log.status}</span>
+                      <span className={`text-xs font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadgeStyle(log.status)}`}>{log.status}</span>
                     </td>
                   </tr>
                 ))}
@@ -814,17 +814,17 @@ function FinanceManager() {
             ) : (
               syncQueue.map(e => (
                 <div key={e.id} className="p-3 bg-red-50/10 rounded-xl border border-red-200/50 space-y-2 text-red-600">
-                  <div className="flex justify-between font-mono text-[9px]">
+                  <div className="flex justify-between font-mono text-xs">
                     <span>{e.id}</span>
                     <span>Value: ₹{(e.val/100000).toFixed(1)}L</span>
                   </div>
                   <div>
                     <div className="text-foreground font-bold">{e.type} — {e.cp}</div>
-                    <p className="text-[9.5px] text-slate-500 font-normal mt-0.5">Error: {e.error}</p>
+                    <p className="text-xs text-slate-500 font-normal mt-0.5">Error: {e.error}</p>
                   </div>
                   <button
                     onClick={() => clearSyncQueueItem(e.id, e.cp)}
-                    className="h-6 w-full rounded bg-ink hover:bg-ink/90 text-cream text-[9px] font-mono uppercase tracking-wider"
+                    className="h-6 w-full rounded bg-ink hover:bg-ink/90 text-cream text-xs font-mono uppercase tracking-wider"
                   >
                     Resolve & Sync Ledger: {e.action}
                   </button>
@@ -849,11 +849,11 @@ function FinanceManager() {
               <div key={i} className="p-3 bg-secondary/35 rounded-xl border border-border/50 flex justify-between items-center">
                 <div>
                   <div className="text-foreground text-sm font-bold">{r.name}</div>
-                  <div className="text-[9.5px] text-slate-400 font-normal">Next scheduled run: {r.nextRun} · Audience: {r.audience}</div>
+                  <div className="text-xs text-slate-400 font-normal">Next scheduled run: {r.nextRun} · Audience: {r.audience}</div>
                 </div>
                 <div className="text-right shrink-0">
-                  <span className="text-[9.5px] font-mono font-bold bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded mr-2">{r.freq}</span>
-                  <span className={`text-[9px] font-extrabold px-1.5 py-0.2 rounded font-mono ${statusBadgeStyle(r.status)}`}>{r.status}</span>
+                  <span className="text-xs font-mono font-bold bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded mr-2">{r.freq}</span>
+                  <span className={`text-xs font-extrabold px-1.5 py-0.2 rounded font-mono ${statusBadgeStyle(r.status)}`}>{r.status}</span>
                 </div>
               </div>
             ))}
@@ -874,7 +874,7 @@ function FinanceManager() {
                   <option>Monthly GSTR-3B tax data extract sheet</option>
                 </select>
               </div>
-              <p className="text-[10px] text-slate-400 font-normal leading-relaxed">
+              <p className="text-xs text-slate-400 font-normal leading-relaxed">
                 Generates a multi-page styled PDF document pre-populated with live collections ledger values, cash flows projections, and RERA project summaries.
               </p>
             </div>
@@ -900,18 +900,18 @@ function FinanceManager() {
               <Card
                 key={mod.id}
                 onClick={() => setActiveTab(mod.id as TabType)}
-                className="submodule-card p-5 cursor-pointer flex flex-col justify-between group h-44"
+                className="bg-card border shadow-sm rounded-xl p-5 cursor-pointer flex flex-col justify-between group h-44"
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full border font-mono text-emerald-700 bg-emerald-50 border-emerald-100">
+                    <span className="inline-flex items-center gap-1 text-xs font-bold px-2 py-0.5 rounded-full border font-mono text-emerald-700 bg-emerald-50 border-emerald-100">
                       <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> {mod.status}
                     </span>
                   </div>
                   <h3 className="text-sm font-bold text-foreground group-hover:text-ink transition-colors mt-1 font-display">{mod.name}</h3>
                   <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed line-clamp-2 font-medium">{mod.desc}</p>
                 </div>
-                <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-[11px] font-bold text-muted-foreground group-hover:text-foreground">
+                <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
                   <span className="font-mono font-bold text-foreground">{mod.stats}</span>
                   <span className="flex items-center gap-0.5 text-ink group-hover:underline font-mono">Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
                 </div>
@@ -935,10 +935,10 @@ function FinanceManager() {
 function StatBox({ label, value, desc, color }: { label: string; value: string; desc: string; color: string }) {
   return (
     <Card className="p-4 flex flex-col justify-between relative min-h-24 border border-border bg-card">
-      <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-display">{label}</div>
+      <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display">{label}</div>
       <div className="mt-2 flex items-baseline justify-between">
         <div className={`font-display text-2xl font-bold tracking-tight font-mono ${color}`}>{value}</div>
-        <span className="text-[9px] font-semibold text-muted-foreground">{desc}</span>
+        <span className="text-xs font-semibold text-muted-foreground">{desc}</span>
       </div>
     </Card>
   );

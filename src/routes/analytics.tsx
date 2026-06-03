@@ -115,12 +115,12 @@ const demoProjects = [
 ];
 
 const inventorySummary = [
-  { id: "inv-1", project: "Fortiv Greenview Heights", config: "2BHK", tower: "Tower A, Fl 1–5", available: 4, velocity: "Normal", avgDays: 38, action: "Monitor", color: "text-[#E8A838]" },
-  { id: "inv-2", project: "Fortiv Greenview Heights", config: "2BHK", tower: "Tower A, Fl 11–14", available: 7, velocity: "Fast", avgDays: 22, action: "—", color: "text-[#1D9E75]" },
-  { id: "inv-3", project: "Fortiv Greenview Heights", config: "3BHK", tower: "Tower B", available: 11, velocity: "Slow", avgDays: 67, action: "Scheme active", color: "text-[#D85A30]" },
-  { id: "inv-4", project: "Fortiv Skyline Residences", config: "3BHK", tower: "Tower 1", available: 18, velocity: "Normal", avgDays: 44, action: "Monitor", color: "text-[#E8A838]" },
-  { id: "inv-5", project: "Fortiv Skyline Residences", config: "4BHK", tower: "Tower 2", available: 6, velocity: "Stalled", avgDays: 94, action: "Escalate", color: "text-[#D85A30] animate-pulse" },
-  { id: "inv-6", project: "Fortiv Business Park", config: "Commercial", tower: "Block C", available: 9, velocity: "Normal", avgDays: 52, action: "Monitor", color: "text-[#E8A838]" }
+  { id: "inv-1", project: "Fortiv Greenview Heights", config: "2BHK", tower: "Tower A, Fl 1–5", available: 4, velocity: "Normal", avgDays: 38, action: "Monitor", color: "text-amber-500" },
+  { id: "inv-2", project: "Fortiv Greenview Heights", config: "2BHK", tower: "Tower A, Fl 11–14", available: 7, velocity: "Fast", avgDays: 22, action: "—", color: "text-emerald-600" },
+  { id: "inv-3", project: "Fortiv Greenview Heights", config: "3BHK", tower: "Tower B", available: 11, velocity: "Slow", avgDays: 67, action: "Scheme active", color: "text-red-600" },
+  { id: "inv-4", project: "Fortiv Skyline Residences", config: "3BHK", tower: "Tower 1", available: 18, velocity: "Normal", avgDays: 44, action: "Monitor", color: "text-amber-500" },
+  { id: "inv-5", project: "Fortiv Skyline Residences", config: "4BHK", tower: "Tower 2", available: 6, velocity: "Stalled", avgDays: 94, action: "Escalate", color: "text-red-600 animate-pulse" },
+  { id: "inv-6", project: "Fortiv Business Park", config: "Commercial", tower: "Block C", available: 9, velocity: "Normal", avgDays: 52, action: "Monitor", color: "text-amber-500" }
 ];
 
 const schemeEffectiveness = [
@@ -310,23 +310,23 @@ function AnalyticsManager() {
       <div className="space-y-6 animate-in fade-in duration-300">
         {/* Top KPIs */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatBox label="Reports Delivered (Month)" value="47" desc="Total dispatches" color="text-[#2E86AB]" />
-          <StatBox label="Forecast Accuracy" value="84%" desc="Trailing 30-day actuals" color="text-[#1D9E75]" />
-          <StatBox label="Channels Tracked" value="10" desc="Ad platforms + portals" color="text-[#1A3C5E]" />
-          <StatBox label="Forecasted Revenue (30D)" value="₹1.84 Cr" desc="Weighted projections" color="text-[#1D9E75]" />
+          <StatBox label="Reports Delivered (Month)" value="47" desc="Total dispatches" color="text-blue-700" />
+          <StatBox label="Forecast Accuracy" value="84%" desc="Trailing 30-day actuals" color="text-emerald-600" />
+          <StatBox label="Channels Tracked" value="10" desc="Ad platforms + portals" color="text-slate-800" />
+          <StatBox label="Forecasted Revenue (30D)" value="₹1.84 Cr" desc="Weighted projections" color="text-emerald-600" />
         </div>
 
         <div className="grid grid-cols-12 gap-5">
           {/* Report Delivery Log */}
           <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card">
             <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+              <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                 <Clock className="h-3.5 w-3.5 text-primary" /> Automated Report Delivery Log (7 Days)
               </div>
             </div>
             <div className="overflow-x-auto scrollbar-none h-[280px]">
               <table className="w-full text-left text-xs divide-y divide-border/60">
-                <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                   <tr>
                     <th className="px-3 py-2">Report</th>
                     <th className="px-3 py-2">Delivered To</th>
@@ -340,10 +340,10 @@ function AnalyticsManager() {
                     <tr key={log.id} className="hover:bg-secondary/15">
                       <td className="px-3 py-2.5 font-bold">{log.report}</td>
                       <td className="px-3 py-2.5 text-slate-500 font-semibold">{log.recipient}</td>
-                      <td className="px-3 py-2.5 font-mono text-[10px]">{log.channel}</td>
+                      <td className="px-3 py-2.5 font-mono text-xs">{log.channel}</td>
                       <td className="px-3 py-2.5 font-mono text-slate-400">{log.time}</td>
                       <td className="px-3 py-2.5">
-                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100 font-mono">
+                        <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100 font-mono">
                           <Check className="h-3 w-3" /> {log.status}
                         </span>
                       </td>
@@ -357,7 +357,7 @@ function AnalyticsManager() {
           {/* Source Data Health panel */}
           <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card">
             <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+              <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                 <Activity className="h-3.5 w-3.5 text-emerald-600 animate-pulse" /> Data Source Health Panel
               </div>
             </div>
@@ -366,16 +366,16 @@ function AnalyticsManager() {
                 <div key={mod.id} className="p-2.5 rounded-xl border border-border/60 bg-background flex items-center justify-between text-xs transition-colors hover:bg-secondary/15">
                   <div className="space-y-0.5">
                     <div className="font-bold text-foreground">{mod.name}</div>
-                    <div className="text-[10px] text-muted-foreground font-semibold">{mod.type}</div>
+                    <div className="text-xs text-muted-foreground font-semibold">{mod.type}</div>
                   </div>
                   <div className="text-right">
-                    <span className={`inline-flex items-center gap-1 text-[9px] font-extrabold font-mono px-2 py-0.5 rounded ${
+                    <span className={`inline-flex items-center gap-1 text-xs font-extrabold font-mono px-2 py-0.5 rounded ${
                       mod.status === "Live" ? "bg-emerald-50 text-emerald-600 border border-emerald-100" : "bg-amber-50 text-amber-600 border border-amber-100"
                     }`}>
                       <span className={`h-1 w-1 rounded-full ${mod.status === "Live" ? "bg-emerald-500" : "bg-amber-500 animate-pulse"}`} />
                       {mod.status}
                     </span>
-                    <div className="text-[8.5px] font-mono text-slate-400 mt-1">Sync: {mod.sync.split(" ")[1]}</div>
+                    <div className="text-[10px] font-mono text-slate-400 mt-1">Sync: {mod.sync.split(" ")[1]}</div>
                   </div>
                 </div>
               ))}
@@ -408,24 +408,24 @@ function AnalyticsManager() {
         {/* Team Funnel Strip */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4 border border-border bg-card p-4 rounded-2xl">
           <div className="text-center border-r border-border/40 last:border-0">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">Leads Received</div>
-            <div className="text-base font-bold text-foreground font-mono mt-1">{teamSummary.leads} <span className="text-emerald-500 text-[10px]">{teamSummary.leadsDelta}</span></div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Leads Received</div>
+            <div className="text-base font-bold text-foreground font-mono mt-1">{teamSummary.leads} <span className="text-emerald-500 text-xs">{teamSummary.leadsDelta}</span></div>
           </div>
           <div className="text-center md:border-r border-border/40 last:border-0">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">Leads Contacted</div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Leads Contacted</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">{teamSummary.contacts}</div>
           </div>
           <div className="text-center md:border-r border-border/40 last:border-0">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">Contact Rate</div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Contact Rate</div>
             <div className="text-base font-bold text-emerald-600 font-mono mt-1">{teamSummary.contactRate}</div>
           </div>
           <div className="text-center md:border-r border-border/40 last:border-0">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">Site Visits Done</div>
-            <div className="text-base font-bold text-foreground font-mono mt-1">{teamSummary.visits} <span className="text-emerald-500 text-[10px]">{teamSummary.visitsDelta}</span></div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Site Visits Done</div>
+            <div className="text-base font-bold text-foreground font-mono mt-1">{teamSummary.visits} <span className="text-emerald-500 text-xs">{teamSummary.visitsDelta}</span></div>
           </div>
           <div className="text-center last:border-0">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">Daily Bookings</div>
-            <div className="text-base font-bold text-[#1D9E75] font-mono mt-1">{teamSummary.bookings} <span className="text-[11px] font-semibold">({teamSummary.bookingsValue})</span></div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Daily Bookings</div>
+            <div className="text-base font-bold text-emerald-600 font-mono mt-1">{teamSummary.bookings} <span className="text-xs font-semibold">({teamSummary.bookingsValue})</span></div>
           </div>
         </div>
 
@@ -434,7 +434,7 @@ function AnalyticsManager() {
           <div className="col-span-12 lg:col-span-8 space-y-3">
             <div className="flex items-center justify-between px-1">
               <h3 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Sales Agent Scorecards</h3>
-              <span className="text-[10px] font-bold text-slate-400 font-mono">Last updated today at 6:45 PM</span>
+              <span className="text-xs font-bold text-slate-400 font-mono">Last updated today at 6:45 PM</span>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -445,7 +445,7 @@ function AnalyticsManager() {
                     item.isStar 
                       ? "border-amber-400/80 shadow-[0_4px_16px_rgba(232,168,56,0.06)]" 
                       : item.hasAlert 
-                        ? "border-[#D85A30]/60" 
+                        ? "border-red-600/60" 
                         : "border-border/60 hover:border-slate-400"
                   }`}
                 >
@@ -453,25 +453,25 @@ function AnalyticsManager() {
                     <div className="flex items-start justify-between">
                       <div className="flex items-center gap-2">
                         <span className="font-bold text-sm text-foreground font-display">{item.agent}</span>
-                        {item.isStar && <span className="text-[9px] bg-amber-50 text-amber-700 font-extrabold px-1.5 py-0.5 rounded-full border border-amber-100 flex items-center gap-0.5">⭐ STAR</span>}
-                        {item.hasAlert && <span className="text-[9px] bg-red-50 text-[#D85A30] font-extrabold px-1.5 py-0.5 rounded-full border border-red-100 flex items-center gap-0.5">⚠️ ALERT</span>}
+                        {item.isStar && <span className="text-xs bg-amber-50 text-amber-700 font-extrabold px-1.5 py-0.5 rounded-full border border-amber-100 flex items-center gap-0.5">⭐ STAR</span>}
+                        {item.hasAlert && <span className="text-xs bg-red-50 text-red-600 font-extrabold px-1.5 py-0.5 rounded-full border border-red-100 flex items-center gap-0.5">⚠️ ALERT</span>}
                       </div>
-                      <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded ${item.isStar ? "bg-amber-100 text-amber-800" : "bg-secondary text-slate-600"}`}>
+                      <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded ${item.isStar ? "bg-amber-100 text-amber-800" : "bg-secondary text-slate-600"}`}>
                         {item.rank}
                       </span>
                     </div>
 
                     <div className="grid grid-cols-3 gap-2 text-xs font-mono py-1 border-y border-border/40">
                       <div>
-                        <div className="text-[8px] text-muted-foreground uppercase font-sans font-bold">Leads</div>
+                        <div className="text-[10px] text-muted-foreground uppercase font-sans font-bold">Leads</div>
                         <div className="font-bold text-foreground mt-0.5">{item.leads}</div>
                       </div>
                       <div>
-                        <div className="text-[8px] text-muted-foreground uppercase font-sans font-bold">Calls (C/A)</div>
+                        <div className="text-[10px] text-muted-foreground uppercase font-sans font-bold">Calls (C/A)</div>
                         <div className="font-bold text-foreground mt-0.5">{item.callsConn}/{item.callsAtt}</div>
                       </div>
                       <div>
-                        <div className="text-[8px] text-muted-foreground uppercase font-sans font-bold">Visits</div>
+                        <div className="text-[10px] text-muted-foreground uppercase font-sans font-bold">Visits</div>
                         <div className="font-bold text-foreground mt-0.5">{item.visits}</div>
                       </div>
                     </div>
@@ -479,7 +479,7 @@ function AnalyticsManager() {
 
                   <div className="flex items-center justify-between pt-3">
                     <div>
-                      <div className="text-[8.5px] text-muted-foreground font-bold uppercase">Revenue Generated</div>
+                      <div className="text-[10px] text-muted-foreground font-bold uppercase">Revenue Generated</div>
                       <div className="text-xs font-mono font-bold text-foreground">
                         {item.revenue > 0 ? formatInr(item.revenue, "L") : "—"}
                       </div>
@@ -488,14 +488,14 @@ function AnalyticsManager() {
                     <div className="flex gap-1.5">
                       <button 
                         onClick={() => setSelectedAgentMsg(item.agent)}
-                        className="h-6 px-2 rounded bg-secondary hover:bg-ink hover:text-cream text-[9px] font-bold transition-all border border-border/50 uppercase tracking-widest"
+                        className="h-6 px-2 rounded bg-secondary hover:bg-ink hover:text-cream text-xs font-bold transition-all border border-border/50 uppercase tracking-widest"
                       >
                         Preview WA
                       </button>
                       {item.hasAlert && (
                         <button 
                           onClick={() => setSelectedAgentAlert(item.agent)}
-                          className="h-6 px-2 rounded bg-red-50 hover:bg-[#D85A30] hover:text-white text-[#D85A30] text-[9px] font-bold transition-all border border-red-200 uppercase tracking-widest animate-pulse"
+                          className="h-6 px-2 rounded bg-red-50 hover:bg-red-600 hover:text-white text-red-600 text-xs font-bold transition-all border border-red-200 uppercase tracking-widest animate-pulse"
                         >
                           Alert Detail
                         </button>
@@ -510,7 +510,7 @@ function AnalyticsManager() {
           {/* Sparklines & Conf Panel */}
           <div className="col-span-12 lg:col-span-4 space-y-4">
             <Card className="p-4 border border-border bg-card">
-              <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-500 font-display mb-3 border-b border-border/40 pb-2">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-display mb-3 border-b border-border/40 pb-2">
                 Team Funnel Conversion Trend (7 Days)
               </h4>
               <div className="space-y-3.5">
@@ -522,7 +522,7 @@ function AnalyticsManager() {
                   <div key={spark.label} className="flex items-center justify-between text-xs">
                     <div className="space-y-0.5">
                       <span className="font-bold text-foreground">{spark.label}</span>
-                      <div className="text-[10.5px] font-mono text-slate-400 font-bold">{spark.current} today</div>
+                      <div className="text-xs font-mono text-slate-400 font-bold">{spark.current} today</div>
                     </div>
                     {/* Tiny inline SVG Sparkline */}
                     <div className="w-24 h-8">
@@ -550,25 +550,25 @@ function AnalyticsManager() {
             </Card>
 
             <Card className="p-4 border border-border bg-card space-y-3">
-              <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-500 font-display border-b border-border/40 pb-2">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-display border-b border-border/40 pb-2">
                 Report Transmission Logs
               </h4>
               <div className="space-y-2 text-xs font-semibold">
                 <div className="flex items-center justify-between text-slate-500 border-b border-border/30 pb-2">
                   <span>WhatsApp Broadcast Group</span>
-                  <span className="text-emerald-600 font-mono text-[10.5px] font-extrabold flex items-center gap-1">
+                  <span className="text-emerald-600 font-mono text-xs font-extrabold flex items-center gap-1">
                     ✅ Sent 7:00 PM
                   </span>
                 </div>
                 <div className="flex items-center justify-between text-slate-500 border-b border-border/30 pb-2">
                   <span>Management Email Queue</span>
-                  <span className="text-emerald-600 font-mono text-[10.5px] font-extrabold flex items-center gap-1">
+                  <span className="text-emerald-600 font-mono text-xs font-extrabold flex items-center gap-1">
                     ✅ Sent 7:01 PM
                   </span>
                 </div>
                 <div className="flex items-center justify-between text-slate-500 pb-1">
                   <span>PDF Document Compiled</span>
-                  <span className="text-emerald-600 font-mono text-[10.5px] font-extrabold flex items-center gap-1">
+                  <span className="text-emerald-600 font-mono text-xs font-extrabold flex items-center gap-1">
                     ✅ Saved (4.2MB)
                   </span>
                 </div>
@@ -587,7 +587,7 @@ function AnalyticsManager() {
                 </h4>
                 <button onClick={() => setSelectedAgentMsg(null)} className="text-xs font-bold text-slate-400 hover:text-slate-600">Close</button>
               </div>
-              <div className="p-3.5 bg-secondary/35 rounded-xl border border-border/60 font-mono text-[10.5px] text-foreground leading-relaxed whitespace-pre-wrap">
+              <div className="p-3.5 bg-secondary/35 rounded-xl border border-border/60 font-mono text-xs text-foreground leading-relaxed whitespace-pre-wrap">
                 {`📊 *Fortiv Solutions — Daily Performance Report*
 📅 Monday, 20 January 2025 | 7:00 PM
 
@@ -622,7 +622,7 @@ Bookings:             1  ✅ ₹56 Lakhs
 
 Powered by Fortiv AI Command Center`}
               </div>
-              <div className="text-[10px] text-slate-400 font-semibold text-center uppercase tracking-widest">
+              <div className="text-xs text-slate-400 font-semibold text-center uppercase tracking-widest">
                 Dispatched via WhatsApp Business Cloud API
               </div>
             </Card>
@@ -632,13 +632,13 @@ Powered by Fortiv AI Command Center`}
         {selectedAgentAlert && (
           <div className="fixed inset-0 z-50 bg-ink/40 backdrop-blur-sm flex items-center justify-center p-4">
             <Card className="w-full max-w-md p-5 border border-border bg-card shadow-2xl space-y-4">
-              <div className="flex justify-between items-center border-b border-[#D85A30]/40 pb-2">
-                <h4 className="font-bold text-xs uppercase text-[#D85A30] tracking-wider font-display flex items-center gap-1">
+              <div className="flex justify-between items-center border-b border-red-600/40 pb-2">
+                <h4 className="font-bold text-xs uppercase text-red-600 tracking-wider font-display flex items-center gap-1">
                   <AlertTriangle className="h-4 w-4" /> Manager Alert Detail
                 </h4>
                 <button onClick={() => setSelectedAgentAlert(null)} className="text-xs font-bold text-slate-400 hover:text-slate-600">Close</button>
               </div>
-              <div className="p-3.5 bg-red-50/40 rounded-xl border border-red-200 font-mono text-[10.5px] text-[#D85A30] leading-relaxed whitespace-pre-wrap">
+              <div className="p-3.5 bg-red-50/40 rounded-xl border border-red-200 font-mono text-xs text-red-600 leading-relaxed whitespace-pre-wrap">
                 {`⚠️ *Manager Alert — 20 January 2025*
 
 Kiran Desai contacted only 1 of 3 assigned leads today.
@@ -653,13 +653,13 @@ Recommend: Check in before tomorrow morning.`}
                     alert("WhatsApp notification dispatched to Kiran Desai: 'Please update your call logs for today.'");
                     setSelectedAgentAlert(null);
                   }}
-                  className="flex-1 h-8 rounded bg-ink hover:bg-ink/90 text-cream text-[10px] font-bold uppercase tracking-widest"
+                  className="flex-1 h-8 rounded bg-ink hover:bg-ink/90 text-cream text-xs font-bold uppercase tracking-widest"
                 >
                   Nudge Agent
                 </button>
                 <button 
                   onClick={() => setSelectedAgentAlert(null)}
-                  className="h-8 px-4 rounded border border-border hover:bg-secondary text-slate-500 text-[10px] font-bold uppercase tracking-widest"
+                  className="h-8 px-4 rounded border border-border hover:bg-secondary text-slate-500 text-xs font-bold uppercase tracking-widest"
                 >
                   Dismiss Alert
                 </button>
@@ -726,21 +726,21 @@ Recommend: Check in before tomorrow morning.`}
         
         {/* Shortfall warning banner */}
         {hasShortfallRisk && (
-          <div className="p-3 bg-[#D85A30]/10 border border-[#D85A30]/30 rounded-xl text-[#D85A30] flex items-center justify-between text-xs font-semibold animate-bounce">
+          <div className="p-3 bg-red-600/10 border border-red-600/30 rounded-xl text-red-600 flex items-center justify-between text-xs font-semibold animate-bounce">
             <span className="flex items-center gap-2">
               <AlertTriangle className="h-4 w-4" />
               <strong>Shortfall Risk Alert:</strong> 30-day forecasted revenue ({formatInr(forecastMetrics.r30, "Cr")}) has fallen below the targets threshold.
             </span>
-            <span className="text-[10px] font-bold font-mono">CRITICAL STAGE</span>
+            <span className="text-xs font-bold font-mono">CRITICAL STAGE</span>
           </div>
         )}
 
         {/* Forecast KPIs */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatBox label="30-day Revenue Forecast" value={formatInr(forecastMetrics.r30, "Cr")} desc={`${forecastMetrics.b30} bookings`} color="text-[#1A3C5E]" />
-          <StatBox label="60-day Revenue Forecast" value={formatInr(forecastMetrics.r60, "Cr")} desc={`${forecastMetrics.b60} bookings`} color="text-[#1A3C5E]" />
-          <StatBox label="90-day Revenue Forecast" value={formatInr(forecastMetrics.r90, "Cr")} desc={`${forecastMetrics.b90} bookings`} color="text-[#1A3C5E]" />
-          <StatBox label="ML Forecast Accuracy" value="84%" desc="Trailing 6M Average" color="text-[#1D9E75]" />
+          <StatBox label="30-day Revenue Forecast" value={formatInr(forecastMetrics.r30, "Cr")} desc={`${forecastMetrics.b30} bookings`} color="text-slate-800" />
+          <StatBox label="60-day Revenue Forecast" value={formatInr(forecastMetrics.r60, "Cr")} desc={`${forecastMetrics.b60} bookings`} color="text-slate-800" />
+          <StatBox label="90-day Revenue Forecast" value={formatInr(forecastMetrics.r90, "Cr")} desc={`${forecastMetrics.b90} bookings`} color="text-slate-800" />
+          <StatBox label="ML Forecast Accuracy" value="84%" desc="Trailing 6M Average" color="text-emerald-600" />
         </div>
 
         <div className="grid grid-cols-12 gap-5">
@@ -750,7 +750,7 @@ Recommend: Check in before tomorrow morning.`}
               <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">
                 Forecasted Projections with Confidence Bands
               </h4>
-              <div className="flex gap-3 text-[9px] font-bold uppercase tracking-widest text-slate-400 font-display">
+              <div className="flex gap-3 text-xs font-bold uppercase tracking-widest text-slate-400 font-display">
                 <span className="flex items-center gap-1"><span className="h-2 w-2 rounded bg-sky-100 border border-sky-300" /> Range</span>
                 <span className="flex items-center gap-1"><span className="h-2 w-2 rounded bg-primary" /> Forecast Value</span>
               </div>
@@ -765,7 +765,7 @@ Recommend: Check in before tomorrow morning.`}
                   return (
                     <g key={idx}>
                       <line x1="50" y1={y} x2="480" y2={y} stroke="rgba(148, 163, 184, 0.1)" strokeWidth="1" />
-                      <text x="35" y={y + 3} textAnchor="end" className="text-[8.5px] font-mono fill-slate-400 font-bold">{grid} Cr</text>
+                      <text x="35" y={y + 3} textAnchor="end" className="text-[10px] font-mono fill-slate-400 font-bold">{grid} Cr</text>
                     </g>
                   );
                 })}
@@ -815,10 +815,10 @@ Recommend: Check in before tomorrow morning.`}
                       <line x1={x + barW/2} y1={highY} x2={x + barW/2} y2={lowY} stroke="#0E86E9" strokeWidth="1" strokeDasharray="2 2" />
 
                       {/* Month Text */}
-                      <text x={x + barW/2} y="190" textAnchor="middle" className="text-[10px] font-bold fill-foreground">{bar.label}</text>
+                      <text x={x + barW/2} y="190" textAnchor="middle" className="text-xs font-bold fill-foreground">{bar.label}</text>
                       
                       {/* Values overlay on hover */}
-                      <text x={x + barW/2} y={valY - 12} textAnchor="middle" className="text-[9.5px] font-mono font-bold fill-primary opacity-0 group-hover/bar:opacity-100 transition-opacity">
+                      <text x={x + barW/2} y={valY - 12} textAnchor="middle" className="text-xs font-mono font-bold fill-primary opacity-0 group-hover/bar:opacity-100 transition-opacity">
                         ₹{bar.val.toFixed(2)}Cr
                       </text>
                       <text x={x + barW/2} y={highY - 4} textAnchor="middle" className="text-[7.5px] font-mono fill-cyan-700 opacity-0 group-hover/bar:opacity-100 transition-opacity font-bold">
@@ -839,7 +839,7 @@ Recommend: Check in before tomorrow morning.`}
               <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border/40 pb-2">
                 Scenario Modelling Simulation
               </h4>
-              <p className="text-[10.5px] text-slate-400 font-semibold leading-relaxed mt-2">
+              <p className="text-xs text-slate-400 font-semibold leading-relaxed mt-2">
                 Toggle macroeconomic properties and sales variables to test forecast impacts in real time.
               </p>
             </div>
@@ -882,7 +882,7 @@ Recommend: Check in before tomorrow morning.`}
               <div className="flex items-center justify-between py-1 border-t border-border/40 mt-2">
                 <div className="text-xs font-semibold">
                   <div className="text-slate-600 font-bold">Diwali 3% Discount Scheme</div>
-                  <div className="text-[9.5px] text-slate-400 font-semibold">Uplifts volume +28%, margin drops -3%</div>
+                  <div className="text-xs text-slate-400 font-semibold">Uplifts volume +28%, margin drops -3%</div>
                 </div>
                 <input 
                   type="checkbox"
@@ -896,7 +896,7 @@ Recommend: Check in before tomorrow morning.`}
               <div className="flex items-center justify-between py-1 border-t border-border/40">
                 <div className="text-xs font-semibold">
                   <div className="text-slate-600 font-bold">Project RERA Extension Delay</div>
-                  <div className="text-[9.5px] text-slate-400 font-semibold">Deflates quarterly bookings by -22%</div>
+                  <div className="text-xs text-slate-400 font-semibold">Deflates quarterly bookings by -22%</div>
                 </div>
                 <input 
                   type="checkbox"
@@ -910,7 +910,7 @@ Recommend: Check in before tomorrow morning.`}
               <div className="flex items-center justify-between py-1 border-t border-border/40">
                 <div className="text-xs font-semibold">
                   <div className="text-slate-600 font-bold">SBI Home Loan Interest Rate +50bps</div>
-                  <div className="text-[9.5px] text-slate-400 font-semibold">Contracts price-sensitive buyers (-8% impact)</div>
+                  <div className="text-xs text-slate-400 font-semibold">Contracts price-sensitive buyers (-8% impact)</div>
                 </div>
                 <input 
                   type="checkbox"
@@ -922,7 +922,7 @@ Recommend: Check in before tomorrow morning.`}
             </div>
 
             <div className="pt-2 border-t border-border/40 text-center">
-              <span className="text-[10px] font-mono font-extrabold text-slate-400 uppercase tracking-widest">
+              <span className="text-xs font-mono font-extrabold text-slate-400 uppercase tracking-widest">
                 Net Forecast Adjustment: {forecastMetrics.modifierPercent >= 0 ? `+${forecastMetrics.modifierPercent}` : forecastMetrics.modifierPercent}%
               </span>
             </div>
@@ -938,7 +938,7 @@ Recommend: Check in before tomorrow morning.`}
             </h3>
             <div className="overflow-x-auto scrollbar-none max-h-[220px]">
               <table className="w-full text-left text-xs divide-y divide-border/60">
-                <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                   <tr>
                     <th className="px-3 py-2">Pipeline Stage</th>
                     <th className="px-3 py-2">Conversion Probability</th>
@@ -965,7 +965,7 @@ Recommend: Check in before tomorrow morning.`}
             </h3>
             <div className="overflow-x-auto scrollbar-none max-h-[220px]">
               <table className="w-full text-left text-xs divide-y divide-border/60">
-                <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                   <tr>
                     <th className="px-3 py-2">Validation Period</th>
                     <th className="px-3 py-2">Predicted Bookings</th>
@@ -1071,10 +1071,10 @@ Recommend: Check in before tomorrow morning.`}
         {!orphanReassigned && selectedProject === "proj-1" && (
           <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-foreground flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs leading-relaxed font-semibold">
             <div className="space-y-0.5">
-              <span className="text-[#D85A30] font-bold flex items-center gap-1.5">
+              <span className="text-red-600 font-bold flex items-center gap-1.5">
                 <AlertTriangle className="h-4 w-4 animate-pulse" /> Agent Orphan Alert — Ankit Shah Reassigned
               </span>
-              <p className="text-muted-foreground text-[10.5px] font-medium">
+              <p className="text-muted-foreground text-xs font-medium">
                 Unit 604 (2BHK, prospect: Amit Desai, score: 61) is currently unassigned in the Vesu territory.
               </p>
             </div>
@@ -1083,7 +1083,7 @@ Recommend: Check in before tomorrow morning.`}
                 setOrphanReassigned(true);
                 alert("Orphaned unit successfully reassigned to Priya Rana.");
               }}
-              className="h-7 px-3 bg-ink hover:bg-ink/90 text-cream text-[10px] font-bold uppercase tracking-widest rounded transition-all shrink-0 active:scale-95"
+              className="h-7 px-3 bg-ink hover:bg-ink/90 text-cream text-xs font-bold uppercase tracking-widest rounded transition-all shrink-0 active:scale-95"
             >
               Reassign to Priya Rana
             </button>
@@ -1098,10 +1098,10 @@ Recommend: Check in before tomorrow morning.`}
                 <h3 className="font-bold text-xs text-foreground font-display flex items-center gap-1.5">
                   <Building className="h-4 w-4 text-primary" /> Tower Absorption Heatmap (Click unit cells)
                 </h3>
-                <div className="flex gap-2.5 text-[9px] font-bold font-mono">
+                <div className="flex gap-2.5 text-xs font-bold font-mono">
                   <span className="flex items-center gap-1"><span className="h-2 w-2 rounded bg-emerald-600" /> Sold ({heatmapStats.sold})</span>
                   <span className="flex items-center gap-1"><span className="h-2 w-2 rounded bg-amber-500 animate-pulse" /> Negotiation ({heatmapStats.negotiation})</span>
-                  <span className="flex items-center gap-1"><span className="h-2 w-2 rounded bg-[#D85A30]" /> Available ({heatmapStats.available})</span>
+                  <span className="flex items-center gap-1"><span className="h-2 w-2 rounded bg-red-600" /> Available ({heatmapStats.available})</span>
                   <span className="flex items-center gap-1"><span className="h-2 w-2 rounded bg-slate-400" /> Held ({heatmapStats.held})</span>
                 </div>
               </div>
@@ -1117,13 +1117,13 @@ Recommend: Check in before tomorrow morning.`}
                         ? "bg-amber-500 text-white animate-pulse" 
                         : unit.status === "held" 
                           ? "bg-slate-400 text-white" 
-                          : "bg-red-50 text-[#D85A30] border border-red-200 hover:bg-red-100/50";
+                          : "bg-red-50 text-red-600 border border-red-200 hover:bg-red-100/50";
                   
                   return (
                     <div 
                       key={unit.id}
                       onClick={() => handleCellClick(unit.id)}
-                      className={`h-9 rounded-lg flex flex-col justify-center items-center cursor-pointer transition-all duration-300 text-[10px] font-mono font-bold select-none ${bg} ${
+                      className={`h-9 rounded-lg flex flex-col justify-center items-center cursor-pointer transition-all duration-300 text-xs font-mono font-bold select-none ${bg} ${
                         isSelected ? "ring-2 ring-primary ring-offset-2 scale-95" : ""
                       }`}
                     >
@@ -1135,7 +1135,7 @@ Recommend: Check in before tomorrow morning.`}
               </div>
             </div>
 
-            <div className="text-[8.5px] font-mono text-slate-400 text-center border-t border-border/40 pt-3">
+            <div className="text-[10px] font-mono text-slate-400 text-center border-t border-border/40 pt-3">
               *Tower grid represents G+14 structural layout snapshot. Delayed updates sync every 24 hours.
             </div>
           </Card>
@@ -1144,7 +1144,7 @@ Recommend: Check in before tomorrow morning.`}
           <div className="col-span-12 lg:col-span-5 space-y-4">
             <Card className="p-4 border border-border bg-card min-h-[220px] flex flex-col justify-between">
               <div>
-                <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-500 font-display border-b border-border/40 pb-2 mb-3">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-display border-b border-border/40 pb-2 mb-3">
                   Unit Properties Panel
                 </h4>
                 {activeUnitDetail ? (
@@ -1171,13 +1171,13 @@ Recommend: Check in before tomorrow morning.`}
                     </div>
 
                     {activeUnitDetail.daysOnMarket >= 45 && (
-                      <div className="p-2 bg-amber-50 border border-amber-200 rounded-lg text-slate-700 text-[10.5px]">
+                      <div className="p-2 bg-amber-50 border border-amber-200 rounded-lg text-slate-700 text-xs">
                         <div className="font-bold flex items-center gap-1 text-amber-800">
                           💡 Price Sensitivity Warning
                         </div>
                         <div className="mt-1 font-medium">
                           Unsold for {activeUnitDetail.daysOnMarket} days. Nearby sold comps: ₹4,820/sq ft. 
-                          Recommended pricing adjustment: <strong className="font-mono text-[#D85A30]">₹4,750–₹4,900/sq ft</strong>.
+                          Recommended pricing adjustment: <strong className="font-mono text-red-600">₹4,750–₹4,900/sq ft</strong>.
                         </div>
                       </div>
                     )}
@@ -1185,7 +1185,7 @@ Recommend: Check in before tomorrow morning.`}
                 ) : (
                   <div className="text-center py-12 text-slate-400 space-y-2">
                     <Building className="h-8 w-8 mx-auto stroke-[1.5]" />
-                    <p className="text-[11px] font-medium max-w-[200px] mx-auto">Select any unit grid box to inspect its sales metrics and velocity alerts.</p>
+                    <p className="text-xs font-medium max-w-[200px] mx-auto">Select any unit grid box to inspect its sales metrics and velocity alerts.</p>
                   </div>
                 )}
               </div>
@@ -1202,12 +1202,12 @@ Recommend: Check in before tomorrow morning.`}
 
             {/* Scheme Effectiveness */}
             <Card className="p-4 border border-border bg-card">
-              <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-500 font-display border-b border-border/40 pb-2 mb-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-display border-b border-border/40 pb-2 mb-3">
                 Incentive Schemes Effectiveness
               </h4>
               <div className="overflow-x-auto scrollbar-none max-h-[160px]">
                 <table className="w-full text-left text-xs divide-y divide-border/60">
-                  <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                  <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                     <tr>
                       <th className="px-2 py-1.5">Scheme</th>
                       <th className="px-2 py-1.5 font-mono">Uplift</th>
@@ -1248,12 +1248,12 @@ Recommend: Check in before tomorrow morning.`}
                   const barL = (bar.days / bar.max) * 160;
                   return (
                     <g key={bar.label}>
-                      <text x="75" y={y + 11} textAnchor="end" className="text-[9px] font-bold fill-foreground">{bar.label}</text>
+                      <text x="75" y={y + 11} textAnchor="end" className="text-xs font-bold fill-foreground">{bar.label}</text>
                       
                       <rect x="85" y={y} width="160" height="15" fill="rgba(148, 163, 184, 0.12)" rx="2" />
                       <rect x="85" y={y} width={barL} height="15" fill={bar.fill} rx="2" />
                       
-                      <text x={85 + barL + 8} y={y + 11} className="text-[9px] font-mono font-extrabold fill-slate-700">{bar.days}d</text>
+                      <text x={85 + barL + 8} y={y + 11} className="text-xs font-mono font-extrabold fill-slate-700">{bar.days}d</text>
                     </g>
                   );
                 })}
@@ -1269,7 +1269,7 @@ Recommend: Check in before tomorrow morning.`}
             </h3>
             <div className="overflow-x-auto scrollbar-none max-h-[160px]">
               <table className="w-full text-left text-xs divide-y divide-border/60">
-                <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                   <tr>
                     <th className="px-3 py-2">Tower / Config</th>
                     <th className="px-3 py-2 font-mono">Available</th>
@@ -1343,10 +1343,10 @@ Recommend: Check in before tomorrow morning.`}
         
         {/* Top KPIs */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatBox label="Reports Generated (Q1)" value="4 reports" desc="Automatic dispatches" color="text-[#2E86AB]" />
-          <StatBox label="Next Scheduled Run" value="01/03 09:00" desc="Monthly recurring" color="text-[#1A3C5E]" />
-          <StatBox label="Active Distribution Pool" value="24 LPs" desc="Syncing portals" color="text-[#1A3C5E]" />
-          <StatBox label="LP Email Open Rate" value="87.5%" desc="Trailing 3 runs" color="text-[#1D9E75]" />
+          <StatBox label="Reports Generated (Q1)" value="4 reports" desc="Automatic dispatches" color="text-blue-700" />
+          <StatBox label="Next Scheduled Run" value="01/03 09:00" desc="Monthly recurring" color="text-slate-800" />
+          <StatBox label="Active Distribution Pool" value="24 LPs" desc="Syncing portals" color="text-slate-800" />
+          <StatBox label="LP Email Open Rate" value="87.5%" desc="Trailing 3 runs" color="text-emerald-600" />
         </div>
 
         <div className="grid grid-cols-12 gap-5">
@@ -1357,7 +1357,7 @@ Recommend: Check in before tomorrow morning.`}
                 <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-border/40 pb-2">
                   Dossier Compilation Settings
                 </h4>
-                <p className="text-[10.5px] text-slate-400 font-semibold leading-relaxed mt-2">
+                <p className="text-xs text-slate-400 font-semibold leading-relaxed mt-2">
                   Select parameters to extract real-time pipeline records and compile investor documents.
                 </p>
               </div>
@@ -1423,7 +1423,7 @@ Recommend: Check in before tomorrow morning.`}
                 <div className="flex items-center justify-between py-2 border-t border-border/40 mt-3">
                   <div>
                     <div className="text-slate-600 font-bold">Auto-Release to LP Portals</div>
-                    <div className="text-[9.5px] text-slate-400 font-semibold">Distribute instantly upon compile, skipping approvals</div>
+                    <div className="text-xs text-slate-400 font-semibold">Distribute instantly upon compile, skipping approvals</div>
                   </div>
                   <input 
                     type="checkbox"
@@ -1464,7 +1464,7 @@ Recommend: Check in before tomorrow morning.`}
                 <div>
                   <h4 className="font-bold text-xs text-foreground uppercase tracking-widest font-display">Compiling Investor PDF</h4>
                   <div className="text-base font-bold font-mono text-primary font-bold mt-1">{generationProgress}% Completed</div>
-                  <p className="text-[9.5px] font-mono text-slate-400 uppercase tracking-wider mt-3 font-semibold">{generationStep}</p>
+                  <p className="text-xs font-mono text-slate-400 uppercase tracking-wider mt-3 font-semibold">{generationStep}</p>
                 </div>
               </div>
             )}
@@ -1483,7 +1483,7 @@ Recommend: Check in before tomorrow morning.`}
                     <button
                       key={tab.id}
                       onClick={() => setActivePdfTab(tab.id)}
-                      className={`h-7 px-2.5 rounded-lg text-[10.5px] font-bold border transition-all ${
+                      className={`h-7 px-2.5 rounded-lg text-xs font-bold border transition-all ${
                         activePdfTab === tab.id
                           ? "bg-ink border-ink text-cream"
                           : "bg-background border-border text-slate-500 hover:bg-muted"
@@ -1504,8 +1504,8 @@ Recommend: Check in before tomorrow morning.`}
                       <h2 className="font-display text-xl font-extrabold text-foreground tracking-tight">
                         {reportType.toUpperCase()} — {reportPeriod.toUpperCase()}
                       </h2>
-                      <p className="text-[10px] font-mono text-slate-400">Project: {demoProjects.find(p => p.id === reportProject)?.name.split(",")[0]}</p>
-                      <p className="text-[10px] text-slate-400 mt-6">
+                      <p className="text-xs font-mono text-slate-400">Project: {demoProjects.find(p => p.id === reportProject)?.name.split(",")[0]}</p>
+                      <p className="text-xs text-slate-400 mt-6">
                         Confidential · Generated at: 20/01/2025 09:00 AM<br />
                         Data Sources: M1, M4.2, M5.3, M11 · Compliance: DPDP Act 2023
                       </p>
@@ -1515,11 +1515,11 @@ Recommend: Check in before tomorrow morning.`}
                   {activePdfTab === "exec" && (
                     <div className="space-y-3">
                       <h4 className="font-bold text-foreground text-sm border-b border-border/40 pb-1 uppercase font-display">Executive Summary</h4>
-                      <p className="text-[11px] leading-relaxed">
+                      <p className="text-xs leading-relaxed">
                         During the period of {reportPeriod}, project development has proceeded on target. Sales volumes have maintained velocity across core towers, specifically driven by promotional scheme impacts. Net construction progress has crossed the 42% threshold, with key compliance registrations lodged at Gujarat RERA.
                       </p>
-                      <h5 className="font-bold text-[#1A3C5E] mt-2">Key Highlights:</h5>
-                      <ul className="list-disc pl-4 space-y-1 text-[10.5px]">
+                      <h5 className="font-bold text-slate-800 mt-2">Key Highlights:</h5>
+                      <ul className="list-disc pl-4 space-y-1 text-xs">
                         <li>Total revenue bookings captured: ₹1.84 Cr (weighted targets achieved)</li>
                         <li>Occupancy velocity: G+14 towers sold inventory reached 108 / 156 units</li>
                         <li>Next scheduled milestone: Tower A 12th-slab casting due in February</li>
@@ -1530,17 +1530,17 @@ Recommend: Check in before tomorrow morning.`}
                   {activePdfTab === "sales" && (
                     <div className="space-y-3">
                       <h4 className="font-bold text-foreground text-sm border-b border-border/40 pb-1 uppercase font-display">Sales & Absorption Status</h4>
-                      <p className="text-[11px] leading-relaxed">
+                      <p className="text-xs leading-relaxed">
                         Inventory velocity analysis highlights normal sales runs in the 2BHK family layouts, whereas 3BHK premium inventories show a minor seasonal slowdown, currently mitigated by parking promotion schemes.
                       </p>
                       <div className="grid grid-cols-2 gap-4 pt-2">
                         <div className="p-2 border border-border bg-background rounded-lg text-center">
-                          <span className="text-[9px] text-muted-foreground block uppercase font-bold">Total Sold Units</span>
-                          <span className="text-sm font-bold font-mono text-[#1D9E75]">108 Units (69.2%)</span>
+                          <span className="text-xs text-muted-foreground block uppercase font-bold">Total Sold Units</span>
+                          <span className="text-sm font-bold font-mono text-emerald-600">108 Units (69.2%)</span>
                         </div>
                         <div className="p-2 border border-border bg-background rounded-lg text-center">
-                          <span className="text-[9px] text-muted-foreground block uppercase font-bold">Remaining Available</span>
-                          <span className="text-sm font-bold font-mono text-[#D85A30]">48 Units (30.8%)</span>
+                          <span className="text-xs text-muted-foreground block uppercase font-bold">Remaining Available</span>
+                          <span className="text-sm font-bold font-mono text-red-600">48 Units (30.8%)</span>
                         </div>
                       </div>
                     </div>
@@ -1549,10 +1549,10 @@ Recommend: Check in before tomorrow morning.`}
                   {activePdfTab === "financials" && (
                     <div className="space-y-3">
                       <h4 className="font-bold text-foreground text-sm border-b border-border/40 pb-1 uppercase font-display">Financial Metrics Overview</h4>
-                      <p className="text-[11px]">
+                      <p className="text-xs">
                         Project cash reserves are stable, with collections tracking ahead of the construction billing schedule. Escrow accounts have been audited in compliance with regulatory RERA standards.
                       </p>
-                      <div className="space-y-1.5 text-[10.5px] border-t border-border/30 pt-2 font-mono">
+                      <div className="space-y-1.5 text-xs border-t border-border/30 pt-2 font-mono">
                         <div className="flex justify-between">
                           <span>Total Collections (Month)</span>
                           <span className="font-bold text-foreground">₹3.80 Cr</span>
@@ -1561,7 +1561,7 @@ Recommend: Check in before tomorrow morning.`}
                           <span>Outstanding Receivables</span>
                           <span className="font-bold text-foreground">₹12.40 L</span>
                         </div>
-                        <div className="flex justify-between text-[#1D9E75] font-extrabold">
+                        <div className="flex justify-between text-emerald-600 font-extrabold">
                           <span>IRR Target Projection</span>
                           <span>14.8% MTD</span>
                         </div>
@@ -1612,7 +1612,7 @@ Recommend: Check in before tomorrow morning.`}
           
           <div className="overflow-x-auto scrollbar-none bg-card">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3.5 py-2.5">Report Type</th>
                   <th className="px-3.5 py-2.5">Project</th>
@@ -1631,9 +1631,9 @@ Recommend: Check in before tomorrow morning.`}
                     <td className="px-3.5 py-3 font-mono">{log.period}</td>
                     <td className="px-3.5 py-3 font-mono text-slate-400">{log.generated}</td>
                     <td className="px-3.5 py-3 font-mono">{log.recipients} LPs</td>
-                    <td className="px-3.5 py-3 font-mono font-bold text-[#0E86E9]">{log.opened}</td>
+                    <td className="px-3.5 py-3 font-mono font-bold text-blue-600">{log.opened}</td>
                     <td className="px-3.5 py-3">
-                      <span className="text-emerald-600 font-mono text-[10px] font-extrabold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">
+                      <span className="text-emerald-600 font-mono text-xs font-extrabold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">
                         ✅ Synced M10
                       </span>
                     </td>
@@ -1738,12 +1738,12 @@ Recommend: Check in before tomorrow morning.`}
             <div>
               <div className="p-3.5 bg-secondary/30 border-b border-border flex justify-between items-center">
                 <h3 className="font-bold text-xs text-foreground font-display">Channel Marketing Performance Table</h3>
-                <span className="text-[9px] text-slate-400 font-mono font-bold">Sorted by Cost-per-booking (CPB)</span>
+                <span className="text-xs text-slate-400 font-mono font-bold">Sorted by Cost-per-booking (CPB)</span>
               </div>
               
               <div className="overflow-x-auto scrollbar-none">
                 <table className="w-full text-left text-xs divide-y divide-border/60">
-                  <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                  <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                     <tr>
                       <th className="px-3.5 py-2">Channel</th>
                       <th className="px-3.5 py-2 font-mono">Spend</th>
@@ -1765,10 +1765,10 @@ Recommend: Check in before tomorrow morning.`}
                         ch.roi === Infinity 
                           ? "bg-emerald-100 text-emerald-800" 
                           : ch.roi >= 5.0 
-                            ? "bg-emerald-50 text-[#1D9E75] border border-emerald-100" 
+                            ? "bg-emerald-50 text-emerald-600 border border-emerald-100" 
                             : ch.roi >= 1.5 
                               ? "bg-amber-50 text-amber-700 border border-amber-100" 
-                              : "bg-red-50 text-[#D85A30] border border-red-100";
+                              : "bg-red-50 text-red-600 border border-red-100";
                       
                       return (
                         <>
@@ -1779,18 +1779,18 @@ Recommend: Check in before tomorrow morning.`}
                           >
                             <td className="px-3.5 py-3 font-bold flex items-center gap-1.5">
                               <span className="text-primary hover:underline">{ch.channel}</span>
-                              <span className="text-[8px] text-slate-400">▶</span>
+                              <span className="text-[10px] text-slate-400">▶</span>
                             </td>
-                            <td className="px-3.5 py-3 font-mono text-[11px]">{ch.spend > 0 ? formatInr(ch.spend) : "₹0"}</td>
-                            <td className="px-3.5 py-3 font-mono text-[11px]">{ch.leads}</td>
+                            <td className="px-3.5 py-3 font-mono text-xs">{ch.spend > 0 ? formatInr(ch.spend) : "₹0"}</td>
+                            <td className="px-3.5 py-3 font-mono text-xs">{ch.leads}</td>
                             <td className="px-3.5 py-3 font-mono font-bold">{ch.score}</td>
                             <td className="px-3.5 py-3 font-mono">{ch.visits}</td>
-                            <td className="px-3.5 py-3 font-mono text-[#1D9E75] font-extrabold">{ch.bookings}</td>
-                            <td className="px-3.5 py-3 font-mono text-[11px] font-bold">
+                            <td className="px-3.5 py-3 font-mono text-emerald-600 font-extrabold">{ch.bookings}</td>
+                            <td className="px-3.5 py-3 font-mono text-xs font-bold">
                               {ch.spend > 0 && hasBookings ? formatInr(ch.cpb) : "—"}
                             </td>
                             <td className="px-3.5 py-3">
-                              <span className={`px-2 py-0.5 rounded text-[10px] font-extrabold font-mono ${roiClass}`}>
+                              <span className={`px-2 py-0.5 rounded text-xs font-extrabold font-mono ${roiClass}`}>
                                 {ch.roi === Infinity ? "∞" : `${ch.roi}x`}
                               </span>
                             </td>
@@ -1801,11 +1801,11 @@ Recommend: Check in before tomorrow morning.`}
                             <tr>
                               <td colSpan={8} className="px-4 py-3 bg-secondary/15 border-b border-border/40">
                                 <div className="space-y-2 animate-in fade-in duration-300">
-                                  <div className="text-[9px] font-bold uppercase tracking-wider text-slate-500">
+                                  <div className="text-xs font-bold uppercase tracking-wider text-slate-500">
                                     Campaign Level Drill-down
                                   </div>
-                                  <table className="w-full text-left text-[11px] border border-border/60 bg-background rounded-lg overflow-hidden">
-                                    <thead className="bg-secondary/20 text-muted-foreground text-[8px] uppercase font-mono">
+                                  <table className="w-full text-left text-xs border border-border/60 bg-background rounded-lg overflow-hidden">
+                                    <thead className="bg-secondary/20 text-muted-foreground text-[10px] uppercase font-mono">
                                       <tr>
                                         <th className="px-3 py-1.5">Campaign Name</th>
                                         <th className="px-3 py-1.5">Spend</th>
@@ -1840,7 +1840,7 @@ Recommend: Check in before tomorrow morning.`}
               </div>
             </div>
 
-            <div className="text-[8.5px] font-mono text-slate-400 text-center py-2.5 border-t border-border/40 bg-secondary/10">
+            <div className="text-[10px] font-mono text-slate-400 text-center py-2.5 border-t border-border/40 bg-secondary/10">
               *Campaign tracking integrations pull spend values from Facebook Ads Manager API and Google Ads API daily.
             </div>
           </Card>
@@ -1848,7 +1848,7 @@ Recommend: Check in before tomorrow morning.`}
           {/* AI budget recommendations panel */}
           <div className="col-span-12 lg:col-span-4 space-y-4">
             <Card className="p-4 border border-border bg-card">
-              <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-500 font-display border-b border-border/40 pb-2 mb-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-display border-b border-border/40 pb-2 mb-3">
                 AI Budget Recommendations
               </h4>
               <div className="p-3 bg-sky-50/50 border border-sky-200 rounded-xl text-xs space-y-3 leading-relaxed font-semibold">
@@ -1867,12 +1867,12 @@ Recommend: Check in before tomorrow morning.`}
                     • Facebook Ads: High leads volumes but lower scores — maintain budget; improve creatives targeting.
                   </div>
                   <div>
-                    <span className="text-[#D85A30] font-bold block">🔴 REVIEW / DOWNGRADE:</span>
+                    <span className="text-red-600 font-bold block">🔴 REVIEW / DOWNGRADE:</span>
                     • Housing.com: ₹90K spend, 0 bookings. Downsize subscription tier or pause allocation for 30 days.
                   </div>
                 </div>
                 
-                <div className="border-t border-sky-300/40 pt-2 font-bold text-primary text-[10.5px]">
+                <div className="border-t border-sky-300/40 pt-2 font-bold text-primary text-xs">
                   Total potential reallocation: Reallocate ₹90K from Housing.com to Referrals. Est: +2.8 bookings/month.
                 </div>
               </div>
@@ -1880,7 +1880,7 @@ Recommend: Check in before tomorrow morning.`}
 
             {/* Reallocation Calculator Simulator */}
             <Card className="p-4 border border-border bg-card space-y-3">
-              <h4 className="text-[10px] font-bold uppercase tracking-wider text-slate-500 font-display border-b border-border/40 pb-2">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 font-display border-b border-border/40 pb-2">
                 Spend Allocation Simulator
               </h4>
               
@@ -1908,9 +1908,9 @@ Recommend: Check in before tomorrow morning.`}
                 </div>
 
                 <div className="p-2.5 bg-secondary/40 border border-border/60 rounded-xl space-y-1 text-center font-mono mt-3">
-                  <div className="text-[9px] uppercase tracking-wider text-slate-400 font-sans font-bold">Projected Results</div>
+                  <div className="text-xs uppercase tracking-wider text-slate-400 font-sans font-bold">Projected Results</div>
                   <div className="text-sm font-extrabold text-foreground">{calculatedAllocations.totalBookings} Bookings</div>
-                  <div className="text-[10px] text-slate-500">Blended CPB: ₹{Math.round(calculatedAllocations.blendedCpb).toLocaleString("en-IN")}</div>
+                  <div className="text-xs text-slate-500">Blended CPB: ₹{Math.round(calculatedAllocations.blendedCpb).toLocaleString("en-IN")}</div>
                 </div>
               </div>
             </Card>
@@ -1948,10 +1948,10 @@ Recommend: Check in before tomorrow morning.`}
         
         {/* Top KPIs */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatBox label="Briefings Delivered (YTD)" value="22" desc="Monday dispatches" color="text-[#2E86AB]" />
-          <StatBox label="Last brief compiled" value="20 Jan 07:22" desc="Monday W03" color="text-[#1A3C5E]" />
-          <StatBox label="Next Compilation Run" value="5 days 16 hrs" desc="Scheduled 27 Jan" color="text-[#1A3C5E]" />
-          <StatBox label="Executive Open Rate" value="100%" desc="All directors checked" color="text-[#1D9E75]" />
+          <StatBox label="Briefings Delivered (YTD)" value="22" desc="Monday dispatches" color="text-blue-700" />
+          <StatBox label="Last brief compiled" value="20 Jan 07:22" desc="Monday W03" color="text-slate-800" />
+          <StatBox label="Next Compilation Run" value="5 days 16 hrs" desc="Scheduled 27 Jan" color="text-slate-800" />
+          <StatBox label="Executive Open Rate" value="100%" desc="All directors checked" color="text-emerald-600" />
         </div>
 
         <div className="grid grid-cols-12 gap-5">
@@ -1974,7 +1974,7 @@ Recommend: Check in before tomorrow morning.`}
                   <button
                     key={sec.id}
                     onClick={() => setBriefSection(sec.id)}
-                    className={`h-6 px-2.5 rounded-lg text-[10px] font-bold border transition-all ${
+                    className={`h-6 px-2.5 rounded-lg text-xs font-bold border transition-all ${
                       briefSection === sec.id
                         ? "bg-ink border-ink text-cream"
                         : "bg-background border-border text-slate-500 hover:bg-muted"
@@ -1990,9 +1990,9 @@ Recommend: Check in before tomorrow morning.`}
                 
                 {briefSection === "numbers" && (
                   <div className="space-y-3">
-                    <h5 className="font-bold text-foreground uppercase text-[10.5px] font-display border-b border-border/20 pb-0.5">Week in Numbers (13–19 Jan 2025)</h5>
-                    <table className="w-full text-left text-[11px] border border-border/30 bg-background rounded overflow-hidden">
-                      <thead className="bg-secondary/20 text-muted-foreground text-[8px] font-mono">
+                    <h5 className="font-bold text-foreground uppercase text-xs font-display border-b border-border/20 pb-0.5">Week in Numbers (13–19 Jan 2025)</h5>
+                    <table className="w-full text-left text-xs border border-border/30 bg-background rounded overflow-hidden">
+                      <thead className="bg-secondary/20 text-muted-foreground text-[10px] font-mono">
                         <tr>
                           <th className="px-2 py-1">KPI</th>
                           <th className="px-2 py-1 font-mono">This Week</th>
@@ -2032,14 +2032,14 @@ Recommend: Check in before tomorrow morning.`}
 
                 {briefSection === "deals" && (
                   <div className="space-y-2">
-                    <h5 className="font-bold text-foreground uppercase text-[10.5px] font-display border-b border-border/20 pb-0.5">Deal Highlights</h5>
-                    <p className="text-[10.5px]">
+                    <h5 className="font-bold text-foreground uppercase text-xs font-display border-b border-border/20 pb-0.5">Deal Highlights</h5>
+                    <p className="text-xs">
                       <strong>Top Booking closed:</strong> Rajesh Patel block booking at Greenview Heights (2BHK, ₹56L booking value, Priya Rana).
                     </p>
-                    <p className="text-[10.5px]">
+                    <p className="text-xs">
                       <strong>At-Risk Deals:</strong> Deepak Trivedi has been stuck in the negotiation stage for 19 days. Priya Rana reports pricing disputes. Suggested personal director check-in callback.
                     </p>
-                    <p className="text-[10.5px]">
+                    <p className="text-xs">
                       <strong>Team Performance:</strong> Priya Rana was the star agent of the week, conducting 3 visits and booking ₹56L revenue.
                     </p>
                   </div>
@@ -2047,11 +2047,11 @@ Recommend: Check in before tomorrow morning.`}
 
                 {briefSection === "finance" && (
                   <div className="space-y-2">
-                    <h5 className="font-bold text-foreground uppercase text-[10.5px] font-display border-b border-border/20 pb-0.5">Finance Snapshot</h5>
-                    <p className="text-[10.5px]">
+                    <h5 className="font-bold text-foreground uppercase text-xs font-display border-b border-border/20 pb-0.5">Finance Snapshot</h5>
+                    <p className="text-xs">
                       <strong>Finance Performance:</strong> Blended cost-per-booking remains around ₹70,000. MagicBricks subscription renewal due next week. Escalated escrow balance meets reserve ratio targets.
                     </p>
-                    <p className="text-[10.5px]">
+                    <p className="text-xs">
                       <strong>Cash Flow:</strong> Net operational collections this week touched ₹1.12 Cr, tracking aligned with pipeline development schedules.
                     </p>
                   </div>
@@ -2084,12 +2084,12 @@ Recommend: Check in before tomorrow morning.`}
                   <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">
                     Weekly Priority Actions
                   </h4>
-                  <span className="text-[10px] font-mono font-extrabold text-[#1D9E75]">MTD TRACKING</span>
+                  <span className="text-xs font-mono font-extrabold text-emerald-600">MTD TRACKING</span>
                 </div>
                 
                 {/* Completion rate progress bar */}
                 <div className="space-y-1 py-1">
-                  <div className="flex justify-between text-[10.5px] font-semibold text-slate-500">
+                  <div className="flex justify-between text-xs font-semibold text-slate-500">
                     <span>Actions Completed</span>
                     <span className="font-mono text-foreground font-bold">{actionCompletionCount} of {priorityActionsList.length} ({actionCompletionRate}%)</span>
                   </div>
@@ -2107,7 +2107,7 @@ Recommend: Check in before tomorrow morning.`}
                     <div 
                       key={idx} 
                       onClick={() => handleActionToggle(idx)}
-                      className={`p-2 rounded-lg border border-border/60 bg-background text-[11px] font-semibold cursor-pointer transition-all hover:bg-secondary/15 flex items-start gap-2.5 ${action.severity} ${
+                      className={`p-2 rounded-lg border border-border/60 bg-background text-xs font-semibold cursor-pointer transition-all hover:bg-secondary/15 flex items-start gap-2.5 ${action.severity} ${
                         isChecked ? "opacity-60 line-through decoration-slate-400" : ""
                       }`}
                     >
@@ -2120,7 +2120,7 @@ Recommend: Check in before tomorrow morning.`}
                       </button>
                       <div className="space-y-0.5 leading-snug">
                         <span className="text-foreground">{action.text}</span>
-                        <div className="text-[8.5px] font-mono text-slate-400 font-extrabold uppercase">{action.reason}</div>
+                        <div className="text-[10px] font-mono text-slate-400 font-extrabold uppercase">{action.reason}</div>
                       </div>
                     </div>
                   );
@@ -2128,7 +2128,7 @@ Recommend: Check in before tomorrow morning.`}
               </div>
             </div>
 
-            <div className="border-t border-border/40 pt-3 flex justify-between items-center text-[10px] font-mono text-slate-400">
+            <div className="border-t border-border/40 pt-3 flex justify-between items-center text-xs font-mono text-slate-400">
               <span>Freshness: as of 20/01 07:22 AM</span>
               <span>Compliant with GDPR / DPDP</span>
             </div>
@@ -2143,7 +2143,7 @@ Recommend: Check in before tomorrow morning.`}
           
           <div className="overflow-x-auto scrollbar-none bg-card">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3.5 py-2.5">ISO Week</th>
                   <th className="px-3.5 py-2.5">Date Range</th>
@@ -2180,11 +2180,11 @@ Recommend: Check in before tomorrow morning.`}
             <Card
               key={mod.id}
               onClick={() => setActiveTab(mod.id as TabType)}
-              className="submodule-card p-5 cursor-pointer flex flex-col justify-between group h-48"
+              className="bg-card border shadow-sm rounded-xl p-5 cursor-pointer flex flex-col justify-between group h-48"
             >
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100 font-mono">
+                  <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100 font-mono">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> {mod.status}
                   </span>
                 </div>
@@ -2195,7 +2195,7 @@ Recommend: Check in before tomorrow morning.`}
                   {mod.desc}
                 </p>
               </div>
-              <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-[11px] font-bold text-muted-foreground group-hover:text-foreground">
+              <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
                 <span className="font-mono font-bold text-foreground">{mod.stats}</span>
                 <span className="flex items-center gap-0.5 text-ink group-hover:underline font-mono">
                   Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -2241,12 +2241,12 @@ function StatBox({
 }) {
   return (
     <Card className="p-4 flex flex-col justify-between relative min-h-24 border border-border bg-card">
-      <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-display">
+      <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display">
         {label}
       </div>
       <div className="mt-2 flex items-baseline justify-between">
         <div className={`font-display text-2xl font-bold tracking-tight font-mono ${color}`}>{value}</div>
-        <span className="text-[9px] font-semibold text-muted-foreground">{desc}</span>
+        <span className="text-xs font-semibold text-muted-foreground">{desc}</span>
       </div>
     </Card>
   );

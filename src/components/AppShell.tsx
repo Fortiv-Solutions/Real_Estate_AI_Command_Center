@@ -240,7 +240,7 @@ export function AppShell({
             />
           </div>
           {!isCollapsed && (
-            <div className="text-[10px] text-[#89C4F8] font-bold tracking-widest uppercase font-display text-center opacity-80 animate-fade-in">
+            <div className="text-xs text-blue-400 font-bold tracking-widest uppercase font-display text-center opacity-80 animate-fade-in">
               Real Estate AI Command Center
             </div>
           )}
@@ -252,7 +252,7 @@ export function AppShell({
               {isCollapsed ? (
                 <div className="h-px bg-slate-800/60 my-4 mx-2" />
               ) : (
-                <div className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-500/80 px-3 mb-2 font-display">
+                <div className="text-xs font-bold uppercase tracking-[0.15em] text-slate-500/80 px-3 mb-2 font-display">
                   {group.label}
                 </div>
               )}
@@ -265,23 +265,23 @@ export function AppShell({
                       to={item.to}
                       className={`group relative flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-300 border ${
                         active
-                          ? "bg-[#0E86E9]/10 text-[#0E86E9] border-[#0E86E9]/20 shadow-[inset_0_1px_0_rgba(14,134,233,0.05),0_2px_8px_-2px_rgba(14,134,233,0.15)]"
+                          ? "bg-primary/10 text-primary border-primary/20 shadow-sm"
                           : "text-slate-400 border-transparent hover:bg-slate-800/40 hover:text-white"
                       } ${isCollapsed ? "justify-center px-0 w-10 h-10 mx-auto" : ""}`}
                     >
-                      <Icon className={`transition-all duration-300 ${isCollapsed ? "h-[22px] w-[22px] group-hover:scale-110" : "h-3.5 w-3.5 group-hover:translate-x-0.5"} ${active ? "opacity-100 scale-110 glow-pulse rounded-full" : "opacity-70 group-hover:opacity-100"}`} />
+                      <Icon className={`transition-all duration-300 ${isCollapsed ? "h-[22px] w-[22px] group-hover:scale-110" : "h-3.5 w-3.5 group-hover:translate-x-0.5"} ${active ? "opacity-100 scale-110" : "opacity-70 group-hover:opacity-100"}`} />
                       {!isCollapsed && <span className="flex-1">{item.label}</span>}
                       {!isCollapsed && "badge" in item && item.badge && (
                         <span
-                          className={`text-[9px] px-1.5 py-0.5 rounded-md font-bold transition-all duration-300 ${
-                            active ? "bg-[#0E86E9] text-white" : "bg-slate-800 text-slate-300"
-                          } ${!active ? "animate-pulse" : ""}`}
+                          className={`text-xs px-1.5 py-0.5 rounded-md font-bold transition-all duration-300 ${
+                            active ? "bg-primary text-primary-foreground" : "bg-slate-800 text-slate-300"
+                          }`}
                         >
                           {item.badge}
                         </span>
                       )}
                       {isCollapsed && "badge" in item && item.badge && (
-                        <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-[#0E86E9] rounded-full animate-pulse shadow-[0_0_6px_#0E86E9]" />
+                        <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-primary rounded-full shadow-sm" />
                       )}
                     </Link>
                   );
@@ -324,12 +324,12 @@ export function AppShell({
               </TooltipContent>
             </Tooltip>
           ) : (
-            <Link
+              <Link
               to="/settings"
               aria-label="Settings"
               className={`group flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-300 border border-transparent ${
                 pathname.startsWith("/settings")
-                  ? "bg-[#0E86E9]/10 text-[#0E86E9] border-[#0E86E9]/20"
+                  ? "bg-primary/10 text-primary border-primary/20"
                   : "text-slate-400 hover:bg-slate-800/40 hover:text-white"
               }`}
             >
@@ -387,7 +387,7 @@ export function AppShell({
                   placeholder="Search Anything... (⌘K)"
                   className="w-full h-8 pl-8 pr-12 rounded-lg bg-slate-200/40 dark:bg-slate-950/40 border border-slate-200/80 dark:border-slate-800 text-xs placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-all cursor-pointer text-foreground hover:bg-slate-200/60 dark:hover:bg-slate-900/40 hover:border-slate-300/80 dark:hover:border-slate-700/80 shadow-sm"
                 />
-                <kbd className="absolute right-2 top-1/2 -translate-y-1/2 text-[9px] text-slate-400 dark:text-slate-500 font-medium bg-card border border-border rounded px-1.5 py-0.5 shadow-sm pointer-events-none">
+                <kbd className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-slate-400 dark:text-slate-500 font-medium bg-card border border-border rounded px-1.5 py-0.5 shadow-sm pointer-events-none">
                   ⌘K
                 </kbd>
               </div>
@@ -406,7 +406,7 @@ export function AppShell({
                 aria-label="User profile"
                 role="button"
                 tabIndex={0}
-                className="h-7 w-7 ml-1 rounded-full bg-secondary border border-border grid place-items-center text-[11px] font-semibold text-secondary-foreground cursor-pointer hover:ring-2 hover:ring-ring hover:ring-offset-2 transition-all active:scale-95"
+                className="h-7 w-7 ml-1 rounded-full bg-secondary border border-border grid place-items-center text-xs font-semibold text-secondary-foreground cursor-pointer hover:ring-2 hover:ring-ring hover:ring-offset-2 transition-all active:scale-95"
               >
                 RP
               </div>
@@ -429,9 +429,7 @@ export function AppShell({
             </div>
           )}
           
-          {/* Ambient glassmorphism blobs behind content */}
-          <div className="absolute top-[20%] left-[20%] w-[380px] h-[380px] rounded-full bg-[#0E86E9]/6 dark:bg-[#0E86E9]/9 blur-[100px] pointer-events-none" />
-          <div className="absolute bottom-[20%] right-[20%] w-[420px] h-[420px] rounded-full bg-[#89C4F8]/5 dark:bg-[#89C4F8]/8 blur-[110px] pointer-events-none" />
+
 
           <div className="flex-1 p-5 max-w-[1920px] w-full mx-auto relative z-10">{children}</div>
         </main>
@@ -522,7 +520,7 @@ export function AppShell({
                     <Icon className="mr-2.5 h-4 w-4 text-muted-foreground shrink-0" />
                     <div className="flex flex-col min-w-0">
                       <span className="font-semibold text-xs text-foreground truncate">{sub.label}</span>
-                      <span className="text-[10px] text-slate-500 font-medium tracking-wide truncate">
+                      <span className="text-xs text-slate-500 font-medium tracking-wide truncate">
                         {sub.parent} &bull; {sub.label}
                       </span>
                     </div>
@@ -542,7 +540,7 @@ export function Card({ className = "", children, onClick }: { className?: string
   return (
     <div 
       onClick={onClick}
-      className={`glass text-card-foreground rounded-[14px] ${className}`}
+      className={`bg-card border shadow-sm text-card-foreground rounded-xl ${className}`}
     >
       {children}
     </div>
@@ -568,14 +566,14 @@ export function Stat({
         : "text-slate-600 bg-slate-50 border-slate-200";
         
   return (
-    <Card className="p-4 flex flex-col justify-between">
-      <div className="text-[11px] font-semibold text-muted-foreground uppercase tracking-widest font-display">
+    <Card className="p-5 flex flex-col justify-between">
+      <div className="text-xs font-semibold text-muted-foreground uppercase tracking-widest font-display">
         {label}
       </div>
       <div className="mt-2.5 flex items-baseline gap-2">
         <div className="font-display text-2xl font-bold tracking-tight">{value}</div>
         {delta && (
-          <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border ${toneCls}`}>
+          <span className={`text-xs font-bold px-1.5 py-0.5 rounded border ${toneCls}`}>
             {delta}
           </span>
         )}
@@ -597,7 +595,7 @@ export function Pill({ children, tone = "neutral" }: { children: ReactNode; tone
   
   return (
     <span
-      className={`inline-flex items-center gap-1.5 text-[11px] font-semibold px-2 py-0.5 rounded-md border ${map[tone]}`}
+      className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2 py-0.5 rounded-md border ${map[tone]}`}
     >
       {children}
     </span>

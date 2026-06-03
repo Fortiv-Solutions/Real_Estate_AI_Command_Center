@@ -333,7 +333,7 @@ function PropertiesManager() {
                   x={paddingLeft - 8}
                   y={y + 3}
                   textAnchor="end"
-                  className="text-[9px] font-mono fill-muted-foreground font-semibold"
+                  className="text-xs font-mono fill-muted-foreground font-semibold"
                 >
                   ₹{val}
                 </text>
@@ -366,7 +366,7 @@ function PropertiesManager() {
                   x={x}
                   y={y - 8}
                   textAnchor="middle"
-                  className="text-[9px] font-bold fill-foreground font-mono bg-card px-1"
+                  className="text-xs font-bold fill-foreground font-mono bg-card px-1"
                 >
                   ₹{d.y}
                 </text>
@@ -374,7 +374,7 @@ function PropertiesManager() {
                   x={x}
                   y={height - paddingBottom + 16}
                   textAnchor="middle"
-                  className="text-[9px] font-bold fill-muted-foreground"
+                  className="text-xs font-bold fill-muted-foreground"
                 >
                   {d.x.split(" ")[0]}
                 </text>
@@ -423,7 +423,7 @@ function PropertiesManager() {
                   x={paddingLeft - 8}
                   y={y + 3}
                   textAnchor="end"
-                  className="text-[9px] font-mono fill-muted-foreground font-semibold"
+                  className="text-xs font-mono fill-muted-foreground font-semibold"
                 >
                   ₹{val}L
                 </text>
@@ -453,7 +453,7 @@ function PropertiesManager() {
                   x={x + barWidth / 2}
                   y={y - 6}
                   textAnchor="middle"
-                  className="text-[9px] font-bold fill-foreground font-mono"
+                  className="text-xs font-bold fill-foreground font-mono"
                 >
                   ₹{d.value}L
                 </text>
@@ -461,7 +461,7 @@ function PropertiesManager() {
                   x={x + barWidth / 2}
                   y={height - paddingBottom + 16}
                   textAnchor="middle"
-                  className="text-[8px] font-bold fill-muted-foreground max-w-[50px] truncate"
+                  className="text-[10px] font-bold fill-muted-foreground max-w-[50px] truncate"
                 >
                   {d.label}
                 </text>
@@ -479,11 +479,11 @@ function PropertiesManager() {
       <div className="space-y-6 animate-in fade-in duration-300">
         {/* KPI Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-          <StatBox label="AVMs Run Today" value="14" desc="Valuations created" color="text-[#2E86AB]" />
-          <StatBox label="CMA Reports Created" value="6" desc="Generated this week" color="text-[#1A3C5E]" />
-          <StatBox label="Active Buyer Alerts" value="48" desc="Monitoring listings" color="text-[#E8A838]" />
-          <StatBox label="Alerts Sent Today" value="9" desc="WhatsApp/Email matches" color="text-[#1D9E75]" />
-          <StatBox label="Competitor Updates" value="5" desc="Price adjustments" color="text-[#D85A30]" />
+          <StatBox label="AVMs Run Today" value="14" desc="Valuations created" color="text-blue-700" />
+          <StatBox label="CMA Reports Created" value="6" desc="Generated this week" color="text-slate-800" />
+          <StatBox label="Active Buyer Alerts" value="48" desc="Monitoring listings" color="text-amber-500" />
+          <StatBox label="Alerts Sent Today" value="9" desc="WhatsApp/Email matches" color="text-emerald-600" />
+          <StatBox label="Competitor Updates" value="5" desc="Price adjustments" color="text-red-600" />
         </div>
 
         <div className="grid grid-cols-12 gap-5">
@@ -491,21 +491,21 @@ function PropertiesManager() {
           <Card className="col-span-12 lg:col-span-6 p-4 flex flex-col justify-between border border-border bg-card">
             <div>
               <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
-                <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
-                  <Activity className="h-3.5 w-3.5 text-[#2E86AB]" /> Market Pulse Signals
+                <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+                  <Activity className="h-3.5 w-3.5 text-blue-700" /> Market Pulse Signals
                 </div>
-                <span className="text-[9px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono font-bold">Surat micro-market</span>
+                <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono font-bold">Surat micro-market</span>
               </div>
               
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-3 rounded-xl bg-background border border-border">
                   <div>
-                    <div className="text-[10px] text-muted-foreground font-bold font-display uppercase tracking-wider">Average Price / Sq Ft</div>
+                    <div className="text-xs text-muted-foreground font-bold font-display uppercase tracking-wider">Average Price / Sq Ft</div>
                     <div className="text-sm font-bold text-foreground mt-1">Vesu, Surat</div>
                   </div>
                   <div className="text-right">
                     <div className="text-base font-extrabold font-mono text-foreground">₹4,850/sq ft</div>
-                    <div className="text-[10px] font-bold text-emerald-600 flex items-center gap-0.5 justify-end mt-0.5">
+                    <div className="text-xs font-bold text-emerald-600 flex items-center gap-0.5 justify-end mt-0.5">
                       <TrendingUp className="h-3 w-3" /> +3.2% MoM
                     </div>
                   </div>
@@ -513,12 +513,12 @@ function PropertiesManager() {
 
                 <div className="flex items-center justify-between p-3 rounded-xl bg-background border border-border">
                   <div>
-                    <div className="text-[10px] text-muted-foreground font-bold font-display uppercase tracking-wider">Absorption Rate</div>
+                    <div className="text-xs text-muted-foreground font-bold font-display uppercase tracking-wider">Absorption Rate</div>
                     <div className="text-sm font-bold text-foreground mt-1">Adajan, Surat</div>
                   </div>
                   <div className="text-right">
                     <div className="text-base font-extrabold font-mono text-foreground">4.8 months</div>
-                    <div className="text-[10px] font-bold text-emerald-600 flex items-center gap-0.5 justify-end mt-0.5">
+                    <div className="text-xs font-bold text-emerald-600 flex items-center gap-0.5 justify-end mt-0.5">
                       <TrendingDown className="h-3 w-3" /> Tightening
                     </div>
                   </div>
@@ -526,12 +526,12 @@ function PropertiesManager() {
 
                 <div className="flex items-center justify-between p-3 rounded-xl bg-background border border-border">
                   <div>
-                    <div className="text-[10px] text-muted-foreground font-bold font-display uppercase tracking-wider">Average Days on Market</div>
+                    <div className="text-xs text-muted-foreground font-bold font-display uppercase tracking-wider">Average Days on Market</div>
                     <div className="text-sm font-bold text-foreground mt-1">Pal, Surat</div>
                   </div>
                   <div className="text-right">
                     <div className="text-base font-extrabold font-mono text-foreground">38 days</div>
-                    <div className="text-[10px] font-bold text-emerald-600 flex items-center gap-0.5 justify-end mt-0.5">
+                    <div className="text-xs font-bold text-emerald-600 flex items-center gap-0.5 justify-end mt-0.5">
                       <TrendingDown className="h-3 w-3" /> Faster sales
                     </div>
                   </div>
@@ -544,10 +544,10 @@ function PropertiesManager() {
           <Card className="col-span-12 lg:col-span-6 p-4 flex flex-col justify-between border border-border bg-card">
             <div>
               <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
-                <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
-                  <Bell className="h-3.5 w-3.5 text-[#E8A838]" /> Active Price Alerts (48 saved searches)
+                <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+                  <Bell className="h-3.5 w-3.5 text-amber-500" /> Active Price Alerts (48 saved searches)
                 </div>
-                <span className="text-[10px] text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">
+                <span className="text-xs text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">
                   9 Matches Sent Today
                 </span>
               </div>
@@ -559,17 +559,17 @@ function PropertiesManager() {
                     <div>
                       <div className="font-bold text-foreground text-xs flex items-center gap-1.5">
                         {log.buyer_name}
-                        <span className="text-[9px] font-mono text-slate-400">({log.phone})</span>
+                        <span className="text-xs font-mono text-slate-400">({log.phone})</span>
                       </div>
-                      <div className="text-[10px] text-muted-foreground mt-0.5 font-medium">
+                      <div className="text-xs text-muted-foreground mt-0.5 font-medium">
                         Matched: <strong>{log.property_matched}</strong> ({log.source})
                       </div>
                     </div>
                     <div className="text-right">
-                      <span className="text-[9px] px-2 py-0.5 font-bold rounded bg-emerald-50 text-emerald-600 border border-emerald-100 uppercase">
+                      <span className="text-xs px-2 py-0.5 font-bold rounded bg-emerald-50 text-emerald-600 border border-emerald-100 uppercase">
                         {log.action}
                       </span>
-                      <div className="text-[8px] font-mono text-slate-400 mt-1">{log.time.split(" ")[1]}</div>
+                      <div className="text-[10px] font-mono text-slate-400 mt-1">{log.time.split(" ")[1]}</div>
                     </div>
                   </div>
                 ))}
@@ -837,14 +837,14 @@ function PropertiesManager() {
                 {/* Header info */}
                 <div className="border-b border-border/40 pb-2.5 flex justify-between items-start">
                   <div>
-                    <span className="text-[10px] font-bold font-mono px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded border border-emerald-100">
+                    <span className="text-xs font-bold font-mono px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded border border-emerald-100">
                       Report #AVM-2025-0147
                     </span>
                     <h3 className="font-display text-base font-bold text-foreground mt-1.5">
                       {avmForm.configuration} {avmForm.property_type} · {avmForm.carpet_area_sqft} sq ft · Floor {avmForm.floor_number} · {avmForm.locality}, {avmForm.city}
                     </h3>
                   </div>
-                  <div className="text-right text-[10px] text-muted-foreground font-semibold">
+                  <div className="text-right text-xs text-muted-foreground font-semibold">
                     <div>Valued: 15/01/2025</div>
                     <div className="mt-0.5 font-mono">by Priya Rana</div>
                   </div>
@@ -854,18 +854,18 @@ function PropertiesManager() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-3.5">
                     <div>
-                      <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Estimated Market Value</div>
+                      <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Estimated Market Value</div>
                       <div className="flex items-baseline gap-1 mt-1">
                         <span className="text-3xl font-black font-display text-foreground tracking-tight">₹{estimatedValue}</span>
                         <span className="text-base font-bold text-muted-foreground font-display">Lakhs</span>
                       </div>
-                      <div className="text-[10px] font-semibold text-muted-foreground font-mono mt-0.5">
+                      <div className="text-xs font-semibold text-muted-foreground font-mono mt-0.5">
                         Range: ₹{lowRange}L — ₹{highRange}L
                       </div>
                     </div>
 
                     <div className="space-y-1">
-                      <div className="flex justify-between text-[10px] font-bold text-muted-foreground uppercase tracking-widest font-display">
+                      <div className="flex justify-between text-xs font-bold text-muted-foreground uppercase tracking-widest font-display">
                         <span>Confidence Score</span>
                         <span className="text-emerald-600 font-mono">82% (High)</span>
                       </div>
@@ -874,7 +874,7 @@ function PropertiesManager() {
                       </div>
                     </div>
 
-                    <div className="text-[11px] font-medium text-slate-500 space-y-1 pt-1">
+                    <div className="text-xs font-medium text-slate-500 space-y-1 pt-1">
                       <div>Derived Rate: <strong className="text-foreground font-mono">₹{pricePerSqft}/sq ft</strong></div>
                       <div>Locality Avg: <strong className="text-foreground font-mono">₹{localityAvg}/sq ft</strong> ({diffPct >= 0 ? "+" : ""}{diffPct}% vs avg)</div>
                     </div>
@@ -883,7 +883,7 @@ function PropertiesManager() {
                   {/* Comparision / Pricing Verdict Card */}
                   <div className="p-4 rounded-2xl bg-secondary/35 border border-border flex flex-col justify-between">
                     <div>
-                      <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Listing comparison</div>
+                      <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Listing comparison</div>
                       <div className="mt-2 text-xs font-semibold space-y-1 text-slate-600">
                         <div>Listed asking price: <strong className="text-foreground font-mono">₹{avmForm.listed_price} Lakhs</strong></div>
                         <div>Estimated value: <strong className="text-foreground font-mono">₹{estimatedValue} Lakhs</strong></div>
@@ -892,16 +892,16 @@ function PropertiesManager() {
 
                     <div className="mt-4 pt-3 border-t border-border/40">
                       {isOverpriced ? (
-                        <div className="flex items-start gap-2 text-amber-700 bg-amber-50 border border-amber-200 p-2.5 rounded-xl text-[10px] font-semibold">
-                          <AlertTriangle className="h-4 w-4 shrink-0 text-[#E8A838]" />
+                        <div className="flex items-start gap-2 text-amber-700 bg-amber-50 border border-amber-200 p-2.5 rounded-xl text-xs font-semibold">
+                          <AlertTriangle className="h-4 w-4 shrink-0 text-amber-500" />
                           <div>
                             <div className="font-extrabold uppercase tracking-wide">Slightly Overpriced</div>
                             <div className="mt-0.5 font-medium leading-relaxed">Listed price exceeds AVM estimate by ₹{priceDiff}L (Slightly overpriced).</div>
                           </div>
                         </div>
                       ) : (
-                        <div className="flex items-start gap-2 text-emerald-700 bg-emerald-50 border border-emerald-200 p-2.5 rounded-xl text-[10px] font-semibold">
-                          <Check className="h-4 w-4 shrink-0 text-[#1D9E75]" />
+                        <div className="flex items-start gap-2 text-emerald-700 bg-emerald-50 border border-emerald-200 p-2.5 rounded-xl text-xs font-semibold">
+                          <Check className="h-4 w-4 shrink-0 text-emerald-600" />
                           <div>
                             <div className="font-extrabold uppercase tracking-wide font-display">Fair Value / Underpriced</div>
                             <div className="mt-0.5 font-medium leading-relaxed">Good value listing. Listed price is within AVM limits.</div>
@@ -914,7 +914,7 @@ function PropertiesManager() {
 
                 {/* Pricing Trend Graph */}
                 <div className="border-t border-border/40 pt-4">
-                  <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display mb-3">6-Month Price Trend — Vesu, Surat</div>
+                  <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display mb-3">6-Month Price Trend — Vesu, Surat</div>
                   {renderLineChart(avmVesuTrend, 130)}
                 </div>
 
@@ -928,7 +928,7 @@ function PropertiesManager() {
                   </button>
                   <button
                     onClick={() => alert("WhatsApp valuation sharing code triggered.")}
-                    className="flex-1 h-8 rounded-lg bg-[#25d366] hover:bg-[#25d366]/90 text-white text-xs font-bold transition-all flex items-center justify-center gap-1 border border-[#25d366]/20"
+                    className="flex-1 h-8 rounded-lg bg-emerald-500 hover:bg-emerald-500/90 text-white text-xs font-bold transition-all flex items-center justify-center gap-1 border border-emerald-500/20"
                   >
                     <Share2 className="h-3.5 w-3.5" /> Share via WhatsApp
                   </button>
@@ -1088,7 +1088,7 @@ function PropertiesManager() {
                     onChange={(e) => setCmaForm({ ...cmaForm, radius: parseFloat(e.target.value) || 1.5 })}
                     className="w-full"
                   />
-                  <div className="text-right text-[10px] font-bold text-primary font-mono">{cmaForm.radius} km</div>
+                  <div className="text-right text-xs font-bold text-primary font-mono">{cmaForm.radius} km</div>
                 </div>
                 <div className="space-y-1">
                   <label className="font-semibold text-muted-foreground">Lookback Period</label>
@@ -1131,7 +1131,7 @@ function PropertiesManager() {
                 {/* Header */}
                 <div className="border-b border-border/40 pb-3 flex justify-between items-start">
                   <div>
-                    <span className="text-[10px] font-bold font-mono px-2 py-0.5 bg-primary text-primary-foreground rounded">
+                    <span className="text-xs font-bold font-mono px-2 py-0.5 bg-primary text-primary-foreground rounded">
                       Report #CMA-2025-0042
                     </span>
                     <h3 className="font-display text-base font-bold text-foreground mt-2">
@@ -1141,7 +1141,7 @@ function PropertiesManager() {
                       Subject: {cmaForm.subject_address} · {cmaForm.configuration} · {cmaForm.carpet_sqft} sq ft
                     </p>
                   </div>
-                  <div className="text-right text-[10px] text-muted-foreground font-mono">
+                  <div className="text-right text-xs text-muted-foreground font-mono">
                     <div>Date: 15/01/2025</div>
                     <div className="mt-0.5">Prepared by Priya Rana</div>
                   </div>
@@ -1150,37 +1150,37 @@ function PropertiesManager() {
                 {/* Recommended Pricing Summary */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   <div className="p-3.5 rounded-2xl bg-secondary/30 border border-border text-center">
-                    <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">Recommended Low Price</div>
+                    <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Recommended Low Price</div>
                     <div className="text-lg font-extrabold text-foreground font-mono mt-1">₹54.0 Lakhs</div>
                   </div>
                   <div className="p-3.5 rounded-2xl bg-primary/10 border border-primary/20 text-center ring-2 ring-primary/10">
-                    <div className="text-[10px] text-primary font-bold uppercase tracking-wider font-display">Recommended Mid Price</div>
+                    <div className="text-xs text-primary font-bold uppercase tracking-wider font-display">Recommended Mid Price</div>
                     <div className="text-lg font-extrabold text-primary font-mono mt-1">₹56.5 Lakhs</div>
                   </div>
                   <div className="p-3.5 rounded-2xl bg-secondary/30 border border-border text-center">
-                    <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">Recommended High Price</div>
+                    <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Recommended High Price</div>
                     <div className="text-lg font-extrabold text-foreground font-mono mt-1">₹59.0 Lakhs</div>
                   </div>
                 </div>
 
                 {/* Comps Summary details */}
-                <div className="p-3 bg-secondary/20 rounded-xl border border-border/80 text-[11px] font-medium leading-relaxed text-slate-600">
+                <div className="p-3 bg-secondary/20 rounded-xl border border-border/80 text-xs font-medium leading-relaxed text-slate-600">
                   Comps Average Rate: <strong className="text-foreground font-mono">₹5,090/sq ft</strong> · 
                   Subject Implied Price: <strong className="text-foreground font-mono">₹53.4L</strong> · 
                   Sold Comps used: <strong className="text-foreground">7</strong> · 
                   Active competing listings: <strong className="text-foreground">4</strong> · 
                   Avg Days on Market: <strong className="text-foreground font-mono">38 days</strong>
-                  <div className="mt-1.5 text-[10.5px]">
+                  <div className="mt-1.5 text-xs">
                     <strong>Market Verdict:</strong> {cmaForm.locality} prices up 4.2% in last 6 months. Active competition summary: 4 similar units listed in Vesu (₹53L–₹62L). Recommendation: list at ₹57L — competitive, above average, sells in 30 days.
                   </div>
                 </div>
 
                 {/* Comps list */}
                 <div className="space-y-2">
-                  <div className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-display">7 Recent Sold Comparables (Last 6 Months)</div>
+                  <div className="text-xs font-bold text-slate-500 uppercase tracking-widest font-display">7 Recent Sold Comparables (Last 6 Months)</div>
                   <div className="overflow-x-auto border border-border/60 rounded-xl max-h-[220px] scrollbar-none">
-                    <table className="w-full text-left text-[11px] font-semibold divide-y divide-border/60">
-                      <thead className="bg-secondary/30 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                    <table className="w-full text-left text-xs font-semibold divide-y divide-border/60">
+                      <thead className="bg-secondary/30 text-muted-foreground text-xs uppercase tracking-wider font-display">
                         <tr>
                           <th className="px-3 py-2">Comp ID</th>
                           <th className="px-3 py-2">Address</th>
@@ -1205,7 +1205,7 @@ function PropertiesManager() {
                             <td className="px-3 py-2 font-mono">{comp.date}</td>
                             <td className="px-3 py-2 font-mono">{comp.dom}d</td>
                             <td className="px-3 py-2">
-                              <span className={`px-1.5 py-0.5 rounded font-mono font-bold text-[10px] ${
+                              <span className={`px-1.5 py-0.5 rounded font-mono font-bold text-xs ${
                                 comp.similarity >= 90 
                                   ? "bg-emerald-50 text-emerald-600 border border-emerald-100" 
                                   : "bg-blue-50 text-blue-600 border border-blue-100"
@@ -1222,10 +1222,10 @@ function PropertiesManager() {
 
                 {/* Comp list Active */}
                 <div className="space-y-2">
-                  <div className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-display">4 Active Competing Listings</div>
+                  <div className="text-xs font-bold text-slate-500 uppercase tracking-widest font-display">4 Active Competing Listings</div>
                   <div className="overflow-x-auto border border-border/60 rounded-xl scrollbar-none">
-                    <table className="w-full text-left text-[11px] font-semibold divide-y divide-border/60">
-                      <thead className="bg-secondary/30 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                    <table className="w-full text-left text-xs font-semibold divide-y divide-border/60">
+                      <thead className="bg-secondary/30 text-muted-foreground text-xs uppercase tracking-wider font-display">
                         <tr>
                           <th className="px-3 py-2">Address</th>
                           <th className="px-3 py-2">Config</th>
@@ -1246,7 +1246,7 @@ function PropertiesManager() {
                             <td className="px-3 py-2 font-mono text-slate-500">₹{list.rate}</td>
                             <td className="px-3 py-2 font-mono">{list.dom} days</td>
                             <td className="px-3 py-2">
-                              <span className="bg-secondary text-slate-600 border border-border font-bold px-2 py-0.5 rounded text-[10px]">
+                              <span className="bg-secondary text-slate-600 border border-border font-bold px-2 py-0.5 rounded text-xs">
                                 {list.portal}
                               </span>
                             </td>
@@ -1259,13 +1259,13 @@ function PropertiesManager() {
 
                 {/* Graph */}
                 <div className="border-t border-border/40 pt-4">
-                  <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display mb-3">Price Comparison (Sold Comps vs Subject Recommendation)</div>
+                  <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display mb-3">Price Comparison (Sold Comps vs Subject Recommendation)</div>
                   {renderBarChart(cmaGraphData, 140)}
                 </div>
 
                 {/* Agent personalised message */}
                 <div className="space-y-1.5">
-                  <label className="text-[11px] font-bold text-slate-500 uppercase tracking-widest font-display">Personalised Advisory Message</label>
+                  <label className="text-xs font-bold text-slate-500 uppercase tracking-widest font-display">Personalised Advisory Message</label>
                   <textarea
                     value={cmaPersonalNote}
                     onChange={(e) => setCmaPersonalNote(e.target.value)}
@@ -1283,7 +1283,7 @@ function PropertiesManager() {
                   </button>
                   <button
                     onClick={() => alert("CMA report sent to " + cmaForm.seller_name + " via WhatsApp.")}
-                    className="flex-1 h-8 rounded-lg bg-[#25d366] hover:bg-[#25d366]/90 text-white text-xs font-bold transition-all flex items-center justify-center gap-1 border border-[#25d366]/20"
+                    className="flex-1 h-8 rounded-lg bg-emerald-500 hover:bg-emerald-500/90 text-white text-xs font-bold transition-all flex items-center justify-center gap-1 border border-emerald-500/20"
                   >
                     <Share2 className="h-3.5 w-3.5" /> Share Report
                   </button>
@@ -1431,7 +1431,7 @@ function PropertiesManager() {
             <div className="space-y-4">
               <div className="border-b border-border/40 pb-2 flex justify-between items-center">
                 <h3 className="font-bold text-xs text-foreground font-display">Buyer vector profile</h3>
-                <span className="text-[10px] font-bold text-slate-400 font-mono">Last synced: 2h ago</span>
+                <span className="text-xs font-bold text-slate-400 font-mono">Last synced: 2h ago</span>
               </div>
 
               <div className="flex items-center gap-3">
@@ -1440,7 +1440,7 @@ function PropertiesManager() {
                 </div>
                 <div>
                   <h4 className="font-extrabold text-sm text-foreground">{currentBuyer.name}</h4>
-                  <div className="text-[10px] font-semibold text-muted-foreground flex items-center gap-2 mt-0.5 font-mono">
+                  <div className="text-xs font-semibold text-muted-foreground flex items-center gap-2 mt-0.5 font-mono">
                     <span>{currentBuyer.phone}</span>
                     <span>·</span>
                     <span>Score: {currentBuyer.score}</span>
@@ -1459,7 +1459,7 @@ function PropertiesManager() {
                 </div>
                 <div className="flex justify-between">
                   <span className="font-semibold text-muted-foreground">Configuration</span>
-                  <span className="font-bold text-[#0E86E9] font-mono">{currentBuyer.config}</span>
+                  <span className="font-bold text-blue-600 font-mono">{currentBuyer.config}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="font-semibold text-muted-foreground">Possession target</span>
@@ -1472,25 +1472,25 @@ function PropertiesManager() {
               </div>
 
               <div>
-                <div className="text-[10px] font-bold uppercase tracking-wider text-slate-500 font-display mb-2">Detected Browsing Signals</div>
+                <div className="text-xs font-bold uppercase tracking-wider text-slate-500 font-display mb-2">Detected Browsing Signals</div>
                 <div className="space-y-1.5">
                   <div className="flex items-center gap-2 text-xs font-semibold text-slate-600 bg-secondary/30 p-2 rounded-xl">
-                    <Flame className="h-4 w-4 text-[#D85A30]" />
+                    <Flame className="h-4 w-4 text-red-600" />
                     <span>Visited 8 property detail pages (heavy inquiry)</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs font-semibold text-slate-600 bg-secondary/30 p-2 rounded-xl">
-                    <Clock className="h-4 w-4 text-[#2E86AB]" />
+                    <Clock className="h-4 w-4 text-blue-700" />
                     <span>Spent cumulative 34 minutes analyzing projects</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs font-semibold text-slate-600 bg-secondary/30 p-2 rounded-xl">
-                    <CheckCheck className="h-4 w-4 text-[#1D9E75]" />
+                    <CheckCheck className="h-4 w-4 text-emerald-600" />
                     <span>Shortlisted 2 unit layout variants</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="border-t border-border/40 pt-3 mt-4 text-[10.5px] font-bold text-slate-500 font-sans uppercase text-center leading-relaxed">
+            <div className="border-t border-border/40 pt-3 mt-4 text-xs font-bold text-slate-500 font-sans uppercase text-center leading-relaxed">
               Auto WhatsApp alert sent for new matched listings ✓
             </div>
           </Card>
@@ -1514,14 +1514,14 @@ function PropertiesManager() {
                         <circle cx="18" cy="18" r="14" fill="transparent" stroke="rgba(255,255,255,0.15)" strokeWidth="2.5" />
                         <circle cx="18" cy="18" r="14" fill="transparent" stroke={match.color} strokeWidth="2.5" strokeDasharray="88" strokeDashoffset={88 - (match.score / 100) * 88} />
                       </svg>
-                      <span className="absolute text-[9px] font-black text-white font-mono">{match.score}</span>
+                      <span className="absolute text-xs font-black text-white font-mono">{match.score}</span>
                     </div>
 
                     <div className="absolute bottom-2 left-2 flex gap-1.5 items-center">
-                      <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-[#efe5dd] text-slate-700 font-mono">
+                      <span className="px-2 py-0.5 rounded text-xs font-bold bg-[#efe5dd] text-slate-700 font-mono">
                         {match.configuration}
                       </span>
-                      <span className="text-white text-[9.5px] font-bold flex items-center gap-0.5">
+                      <span className="text-white text-xs font-bold flex items-center gap-0.5">
                         <MapPin className="h-3 w-3 shrink-0" /> {match.locality}
                       </span>
                     </div>
@@ -1533,30 +1533,30 @@ function PropertiesManager() {
                         <h4 className="font-extrabold text-xs text-foreground group-hover:text-primary transition-colors">{match.project_name}</h4>
                         <span className="font-bold text-foreground text-xs font-mono">₹{match.price_lakhs}L</span>
                       </div>
-                      <div className="text-[10px] font-semibold text-muted-foreground mt-0.5">{match.carpet_sqft} sq ft · Floor {match.floor_number} · {match.facing} facing</div>
+                      <div className="text-xs font-semibold text-muted-foreground mt-0.5">{match.carpet_sqft} sq ft · Floor {match.floor_number} · {match.facing} facing</div>
 
                       {/* Why this match? */}
                       <div className="mt-3 space-y-1">
                         {match.reasons.map((reason, idx) => (
-                          <div key={idx} className="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
-                            <Check className="h-3 w-3 shrink-0 text-[#1D9E75]" /> <span>{reason}</span>
+                          <div key={idx} className="text-xs text-emerald-600 font-semibold flex items-center gap-1">
+                            <Check className="h-3 w-3 shrink-0 text-emerald-600" /> <span>{reason}</span>
                           </div>
                         ))}
                         {match.gaps.map((gap, idx) => (
-                          <div key={idx} className="text-[10px] text-[#D85A30] font-semibold flex items-center gap-1">
-                            <Info className="h-3 w-3 shrink-0 text-[#D85A30]" /> <span>{gap}</span>
+                          <div key={idx} className="text-xs text-red-600 font-semibold flex items-center gap-1">
+                            <Info className="h-3 w-3 shrink-0 text-red-600" /> <span>{gap}</span>
                           </div>
                         ))}
                       </div>
                     </div>
 
                     <div className="border-t border-border/40 mt-3 pt-2.5 flex items-center justify-between">
-                      <span className={`px-2 py-0.5 rounded text-[9px] font-bold border`} style={{ backgroundColor: match.color + "15", color: match.color, borderColor: match.color + "30" }}>
+                      <span className={`px-2 py-0.5 rounded text-xs font-bold border`} style={{ backgroundColor: match.color + "15", color: match.color, borderColor: match.color + "30" }}>
                         {match.label}
                       </span>
                       <button
                         onClick={() => alert("Book visit message prepared for " + match.project_name)}
-                        className="text-[10px] text-primary font-bold hover:underline flex items-center gap-0.5 font-display"
+                        className="text-xs text-primary font-bold hover:underline flex items-center gap-0.5 font-display"
                       >
                         Qualify Alert <ArrowRight className="h-3 w-3" />
                       </button>
@@ -1589,27 +1589,27 @@ function PropertiesManager() {
         {/* Performance metrics stats */}
         <div className="grid grid-cols-2 lg:grid-cols-6 gap-3">
           <div className="p-3 rounded-2xl bg-card border border-border text-center">
-            <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400 font-display">Active Searches</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400 font-display">Active Searches</div>
             <div className="text-lg font-bold mt-1 text-foreground font-mono">48</div>
           </div>
           <div className="p-3 rounded-2xl bg-card border border-border text-center">
-            <div className="text-[9px] font-bold uppercase tracking-wider text-primary font-display">Alerts Sent Today</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-primary font-display">Alerts Sent Today</div>
             <div className="text-lg font-bold mt-1 text-primary font-mono">9</div>
           </div>
           <div className="p-3 rounded-2xl bg-card border border-border text-center">
-            <div className="text-[9px] font-bold uppercase tracking-wider text-emerald-600 font-display">Alert Open Rate</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-emerald-600 font-display">Alert Open Rate</div>
             <div className="text-lg font-bold mt-1 text-emerald-600 font-mono">77.8%</div>
           </div>
           <div className="p-3 rounded-2xl bg-card border border-border text-center">
-            <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400 font-display">Click Rate</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400 font-display">Click Rate</div>
             <div className="text-lg font-bold mt-1 text-foreground font-mono">55.6%</div>
           </div>
           <div className="p-3 rounded-2xl bg-card border border-border text-center">
-            <div className="text-[9px] font-bold uppercase tracking-wider text-emerald-600 font-display">Visits Booked</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-emerald-600 font-display">Visits Booked</div>
             <div className="text-lg font-bold mt-1 text-emerald-600 font-mono">2</div>
           </div>
           <div className="p-3 rounded-2xl bg-card border border-border text-center">
-            <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400 font-display">Avg Dispatch Speed</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400 font-display">Avg Dispatch Speed</div>
             <div className="text-lg font-bold mt-1 text-foreground font-mono">4m 12s</div>
           </div>
         </div>
@@ -1626,7 +1626,7 @@ function PropertiesManager() {
                   placeholder="Filter searches..."
                   value={alertSearchText}
                   onChange={(e) => setAlertSearchText(e.target.value)}
-                  className="h-6 w-36 pl-7 pr-2 rounded bg-background border border-border text-[10px] outline-none placeholder:text-slate-400"
+                  className="h-6 w-36 pl-7 pr-2 rounded bg-background border border-border text-xs outline-none placeholder:text-slate-400"
                 />
               </div>
             </div>
@@ -1637,13 +1637,13 @@ function PropertiesManager() {
                   <div>
                     <div className="font-bold text-foreground flex items-center gap-1.5">
                       {search.name}
-                      <span className="text-[8px] font-mono bg-secondary px-1 py-0.5 rounded text-slate-400">{search.phone}</span>
+                      <span className="text-[10px] font-mono bg-secondary px-1 py-0.5 rounded text-slate-400">{search.phone}</span>
                     </div>
-                    <div className="text-[10px] text-muted-foreground mt-0.5">Localities: {search.localities} · Config: {search.config}</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">Localities: {search.localities} · Config: {search.config}</div>
                   </div>
                   <div className="text-right">
                     <div className="font-bold text-foreground font-mono">₹{search.budgetMin}L–₹{search.budgetMax}L</div>
-                    <div className="text-[9px] text-slate-400 mt-0.5">Sent: {search.alertsSent} alerts</div>
+                    <div className="text-xs text-slate-400 mt-0.5">Sent: {search.alertsSent} alerts</div>
                   </div>
                 </div>
               ))}
@@ -1660,7 +1660,7 @@ function PropertiesManager() {
               </div>
               <div className="flex-1 overflow-y-auto scrollbar-none bg-card">
                 <table className="w-full text-left text-xs divide-y divide-border/60">
-                  <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                  <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                     <tr>
                       <th className="px-3 py-2">Buyer</th>
                       <th className="px-3 py-2">Trigger</th>
@@ -1685,11 +1685,11 @@ function PropertiesManager() {
                           <td className="px-3 py-2 font-bold">{log.buyer_name}</td>
                           <td className="px-3 py-2 text-primary">{log.trigger_type}</td>
                           <td className="px-3 py-2 font-semibold">{log.property_matched.split(" — ")[0]}</td>
-                          <td className="px-3 py-2 font-mono text-[10px] text-slate-500">{log.source}</td>
+                          <td className="px-3 py-2 font-mono text-xs text-slate-500">{log.source}</td>
                           <td className="px-3 py-2 font-mono">{log.fit_score}</td>
                           <td className="px-3 py-2 font-mono text-slate-400">{log.time.split(" ")[1]}</td>
                           <td className="px-3 py-2">
-                            <span className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
+                            <span className={`px-1.5 py-0.5 rounded text-xs font-bold ${
                               log.opened === "Yes" ? "bg-emerald-50 text-emerald-600 border border-emerald-100" : "bg-slate-100 text-slate-400"
                             }`}>
                               {log.action}
@@ -1705,32 +1705,32 @@ function PropertiesManager() {
 
             {/* WhatsApp notification mockup */}
             <Card className="p-4 flex-1 border border-border bg-card">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display mb-2.5">WhatsApp alert layout mockup</div>
+              <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display mb-2.5">WhatsApp alert layout mockup</div>
               
               <div className="flex gap-4">
                 {/* Phone screen */}
                 <div className="flex-1 bg-[#efeae2] border border-slate-300 rounded-xl p-3 max-w-[320px] shadow-inner relative overflow-hidden text-[#111b21]">
-                  <div className="bg-[#075e54] text-white text-[10px] font-bold p-1.5 rounded-t-lg -mx-3 -mt-3 flex justify-between">
+                  <div className="bg-emerald-800 text-white text-xs font-bold p-1.5 rounded-t-lg -mx-3 -mt-3 flex justify-between">
                     <span>Fortiv AI Alert Service</span>
-                    <span className="font-mono text-[9px]">online</span>
+                    <span className="font-mono text-xs">online</span>
                   </div>
 
-                  <div className="bg-white rounded-xl p-3 shadow-sm border border-black/5 mt-4 space-y-2 relative rounded-tl-none max-w-[85%] text-[10.5px]">
-                    <div className="font-bold text-foreground flex items-center gap-1 text-[11px] border-b border-slate-100 pb-1">
+                  <div className="bg-white rounded-xl p-3 shadow-sm border border-black/5 mt-4 space-y-2 relative rounded-tl-none max-w-[85%] text-xs">
+                    <div className="font-bold text-foreground flex items-center gap-1 text-xs border-b border-slate-100 pb-1">
                       🏠 NEW MATCH FOUND — Fortiv AI Alert
                     </div>
                     <div>
                       <strong>{activeAlert?.property_matched}</strong>
-                      <div className="text-slate-500 text-[10px] mt-0.5 font-medium">📐 1,180 sq ft (Carpet) · ₹4,872/sq ft</div>
-                      <div className="text-slate-500 text-[10px] font-medium">🏗️ Under Construction · RERA Registered</div>
-                      <div className="text-slate-500 text-[10px] font-medium">📅 Possession: Dec 2026</div>
+                      <div className="text-slate-500 text-xs mt-0.5 font-medium">📐 1,180 sq ft (Carpet) · ₹4,872/sq ft</div>
+                      <div className="text-slate-500 text-xs font-medium">🏗️ Under Construction · RERA Registered</div>
+                      <div className="text-slate-500 text-xs font-medium">📅 Possession: Dec 2026</div>
                     </div>
                     
-                    <div className="p-1.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100 font-bold text-[9.5px]">
+                    <div className="p-1.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100 font-bold text-xs">
                       📊 Fit Score: {activeAlert?.fit_score} match for your saved search
                     </div>
 
-                    <div className="grid grid-cols-3 gap-1 pt-1.5 text-center font-bold text-[9px] text-[#00a884] border-t border-slate-100 mt-2">
+                    <div className="grid grid-cols-3 gap-1 pt-1.5 text-center font-bold text-xs text-[#00a884] border-t border-slate-100 mt-2">
                       <div className="p-1 hover:bg-slate-50 rounded cursor-pointer border border-[#00a884]/20 bg-emerald-50/20">🔍 Details</div>
                       <div className="p-1 hover:bg-slate-50 rounded cursor-pointer border border-[#00a884]/20 bg-emerald-50/20">📅 Site Visit</div>
                       <div className="p-1 hover:bg-slate-50 rounded cursor-pointer border border-[#00a884]/20 bg-emerald-50/20">❌ Stop</div>
@@ -1742,7 +1742,7 @@ function PropertiesManager() {
                 <div className="flex-1 space-y-3 font-semibold text-xs text-slate-500 leading-relaxed self-center">
                   <div>Buyer name: <strong className="text-foreground">{activeAlert?.buyer_name}</strong></div>
                   <div>Alert time: <strong className="text-foreground font-mono">{activeAlert?.time}</strong></div>
-                  <div>Channel route: <strong className="text-[#0E86E9]">{activeAlert?.channel}</strong></div>
+                  <div>Channel route: <strong className="text-blue-600">{activeAlert?.channel}</strong></div>
                   <div>Engagement Result: <strong className="text-emerald-600">{activeAlert?.outcome}</strong></div>
                   
                   <div className="pt-2 border-t border-border/40">
@@ -1819,7 +1819,7 @@ function PropertiesManager() {
           <Card className="col-span-12 lg:col-span-6 p-4 border border-border bg-card space-y-4">
             <div className="flex items-center justify-between border-b border-border/40 pb-2">
               <h3 className="font-bold text-xs text-foreground font-display">Locality Price Trend Timeline</h3>
-              <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100 font-mono">
+              <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100 font-mono">
                 {activeMarketLocalityData.change} 6M Change
               </span>
             </div>
@@ -1829,7 +1829,7 @@ function PropertiesManager() {
 
               <div className="overflow-x-auto border border-border/60 rounded-xl scrollbar-none">
                 <table className="w-full text-left text-xs divide-y divide-border/60">
-                  <thead className="bg-secondary/30 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                  <thead className="bg-secondary/30 text-muted-foreground text-xs uppercase tracking-wider font-display">
                     <tr>
                       <th className="px-3 py-2">Locality</th>
                       <th className="px-3 py-2">Aug 2024</th>
@@ -1864,13 +1864,13 @@ function PropertiesManager() {
           <Card className="col-span-12 lg:col-span-6 p-4 border border-border bg-card space-y-4">
             <div className="flex items-center justify-between border-b border-border/40 pb-2">
               <h3 className="font-bold text-xs text-foreground font-display">Demand Inquiry Density map</h3>
-              <span className="text-[10px] font-bold text-slate-400 font-mono">Real-time tracker</span>
+              <span className="text-xs font-bold text-slate-400 font-mono">Real-time tracker</span>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               {/* Map list */}
               <div className="space-y-2">
-                <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Locality Density (Weekly)</div>
+                <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Locality Density (Weekly)</div>
                 <div className="space-y-1.5">
                   {demandHeatmap.map((item) => (
                     <div
@@ -1897,7 +1897,7 @@ function PropertiesManager() {
                 <div className="p-3.5 bg-[#f8fafc] border border-border/80 rounded-2xl space-y-3.5">
                   <div>
                     <h4 className="font-extrabold text-xs text-foreground font-display">{selectedMarketLocality} Micro-Market summary</h4>
-                    <p className="text-[10px] text-slate-500 font-semibold mt-0.5">Surat locality parameters</p>
+                    <p className="text-xs text-slate-500 font-semibold mt-0.5">Surat locality parameters</p>
                   </div>
 
                   <div className="space-y-2 text-xs font-semibold text-slate-600">
@@ -1907,7 +1907,7 @@ function PropertiesManager() {
                     </div>
                     <div className="flex justify-between border-b border-slate-200/50 pb-1.5">
                       <span>Market Condition:</span>
-                      <span className="text-[#0E86E9]">{activeMarketAbsorption.status}</span>
+                      <span className="text-blue-600">{activeMarketAbsorption.status}</span>
                     </div>
                     <div className="flex justify-between border-b border-slate-200/50 pb-1.5">
                       <span>2BHK Average Rent:</span>
@@ -1922,14 +1922,14 @@ function PropertiesManager() {
 
                 {/* Days on market */}
                 <div className="space-y-2">
-                  <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Days on Market (Vesu config average)</div>
+                  <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Days on Market (Vesu config average)</div>
                   <div className="space-y-1 bg-[#f8fafc] border border-border/80 rounded-2xl p-2.5 max-h-[140px] overflow-y-auto scrollbar-none">
                     {daysOnMarketVesu.map((item) => (
                       <div key={item.config} className="flex justify-between text-xs py-1 border-b border-slate-200/40 last:border-0 font-semibold">
                         <span className="text-slate-500">{item.config}</span>
                         <div className="text-right">
                           <span className="font-mono font-bold text-foreground">{item.dom} days</span>
-                          <span className="text-[8.5px] text-slate-400 font-mono ml-1.5">({item.change.split(" ")[0]})</span>
+                          <span className="text-[10px] text-slate-400 font-mono ml-1.5">({item.change.split(" ")[0]})</span>
                         </div>
                       </div>
                     ))}
@@ -1949,7 +1949,7 @@ function PropertiesManager() {
             </div>
             <div className="overflow-x-auto scrollbar-none bg-card">
               <table className="w-full text-left text-xs divide-y divide-border/60">
-                <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                   <tr>
                     <th className="px-3 py-2.5">Locality</th>
                     <th className="px-3 py-2.5">Total Active Listings</th>
@@ -1984,11 +1984,11 @@ function PropertiesManager() {
                 <div key={idx} className="p-2.5 rounded-xl border border-border bg-background flex justify-between items-center hover:bg-secondary/40 transition-colors">
                   <div>
                     <h4 className="font-bold text-xs text-foreground">{item.project}</h4>
-                    <p className="text-[10px] text-muted-foreground mt-0.5">{item.developer} · {item.locality} · {item.config}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{item.developer} · {item.locality} · {item.config}</p>
                   </div>
                   <div className="text-right">
-                    <span className="text-[10px] font-mono font-bold text-foreground">{item.price}</span>
-                    <div className="text-[9.5px] font-bold text-emerald-600 mt-1 font-mono">{item.booking}</div>
+                    <span className="text-xs font-mono font-bold text-foreground">{item.price}</span>
+                    <div className="text-xs font-bold text-emerald-600 mt-1 font-mono">{item.booking}</div>
                   </div>
                 </div>
               ))}
@@ -2011,7 +2011,7 @@ function PropertiesManager() {
             </div>
             <div className="overflow-y-auto flex-1 scrollbar-none bg-card">
               <table className="w-full text-left text-xs divide-y divide-border/60">
-                <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                   <tr>
                     <th className="px-3 py-2">Developer Name</th>
                     <th className="px-3 py-2">Type</th>
@@ -2037,12 +2037,12 @@ function PropertiesManager() {
           <Card className="col-span-12 lg:col-span-8 p-0 overflow-hidden h-[450px] flex flex-col border border-border bg-card">
             <div className="p-3 bg-secondary/35 border-b border-border flex items-center justify-between">
               <h3 className="font-bold text-xs text-foreground font-display">Competitive Positioning Matrix (Vesu 2BHK)</h3>
-              <span className="text-[10px] font-mono text-slate-400">As of Jan 2025</span>
+              <span className="text-xs font-mono text-slate-400">As of Jan 2025</span>
             </div>
             
             <div className="overflow-y-auto flex-1 scrollbar-none bg-card">
               <table className="w-full text-left text-xs divide-y divide-border/60">
-                <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                   <tr>
                     <th className="px-3.5 py-2.5">Developer / Project</th>
                     <th className="px-3.5 py-2.5 font-mono">Carpet Size</th>
@@ -2068,7 +2068,7 @@ function PropertiesManager() {
                       <td className="px-3.5 py-3 font-mono text-foreground font-bold">₹{item.price}L</td>
                       <td className="px-3.5 py-3 font-mono text-slate-500">₹{item.rate}</td>
                       <td className="px-3.5 py-3">
-                        <span className={`px-1 rounded text-[10px] font-bold ${item.rera === "✓" ? "text-emerald-600 bg-emerald-50 border border-emerald-100" : "text-red-600 bg-red-50 border border-red-100"}`}>
+                        <span className={`px-1 rounded text-xs font-bold ${item.rera === "✓" ? "text-emerald-600 bg-emerald-50 border border-emerald-100" : "text-red-600 bg-red-50 border border-red-100"}`}>
                           {item.rera}
                         </span>
                       </td>
@@ -2087,7 +2087,7 @@ function PropertiesManager() {
                 </tbody>
               </table>
             </div>
-            <div className="p-3.5 border-t border-border bg-muted/10 text-[10.5px] font-semibold text-muted-foreground flex justify-between items-center">
+            <div className="p-3.5 border-t border-border bg-muted/10 text-xs font-semibold text-muted-foreground flex justify-between items-center">
               <span>Fortiv Solutions Brand Premium Margin: <strong className="text-foreground font-mono">+6.1% average</strong></span>
               <span>Differentiators: RERA compliance, premium corners, developer brand value</span>
             </div>
@@ -2104,7 +2104,7 @@ function PropertiesManager() {
             
             <div className="overflow-x-auto scrollbar-none bg-card">
               <table className="w-full text-left text-xs divide-y divide-border/60">
-                <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+                <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                   <tr>
                     <th className="px-3 py-2.5">Competitor</th>
                     <th className="px-3 py-2.5">Project</th>
@@ -2136,13 +2136,13 @@ function PropertiesManager() {
                           )}
                         </td>
                         <td className="px-3 py-3">
-                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold border ${ringColor}`}>
+                          <span className={`px-2 py-0.5 rounded text-xs font-bold border ${ringColor}`}>
                             {item.type}
                           </span>
                         </td>
                         <td className="px-3 py-3 font-mono text-slate-400">{item.detected}</td>
                         <td className="px-3 py-3">
-                          <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50/40 px-2 py-0.5 rounded">
+                          <span className="text-xs font-semibold text-emerald-600 bg-emerald-50/40 px-2 py-0.5 rounded">
                             {item.alertSent}
                           </span>
                         </td>
@@ -2157,10 +2157,10 @@ function PropertiesManager() {
           {/* Pricing Alert WhatsApp mockup */}
           <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-3 flex flex-col justify-between">
             <div>
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display mb-2.5">Management notification alert preview</div>
+              <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display mb-2.5">Management notification alert preview</div>
               
-              <div className="bg-[#17212b] border border-[#1c2937] rounded-xl p-3 shadow-inner text-[#f5f6f7] font-mono text-[10px] leading-relaxed">
-                <div className="text-[#3090cd] font-bold text-[10.5px] border-b border-[#1c2937] pb-1.5 flex justify-between">
+              <div className="bg-[#17212b] border border-[#1c2937] rounded-xl p-3 shadow-inner text-[#f5f6f7] font-mono text-xs leading-relaxed">
+                <div className="text-[#3090cd] font-bold text-xs border-b border-[#1c2937] pb-1.5 flex justify-between">
                   <span>⚡ COMPETITOR PRICE ALERT</span>
                   <span>15/01/2025</span>
                 </div>
@@ -2176,7 +2176,7 @@ function PropertiesManager() {
                     <div>Fortiv Greenview (same config): ₹56.5L</div>
                     <div>Gap vs Shreenath: <strong className="text-amber-400 font-bold">+₹2.3L (+4.2%)</strong></div>
                   </div>
-                  <div className="text-[#708499] text-[9.5px] font-sans pt-1">
+                  <div className="text-[#708499] text-xs font-sans pt-1">
                     Recommended action: Review Fortiv pricing strategy for Vesu 2BHK.
                   </div>
                 </div>
@@ -2284,18 +2284,18 @@ function PropertiesManager() {
             <Card
               key={mod.id}
               onClick={() => setActiveTab(mod.id as TabType)}
-              className="submodule-card p-5 cursor-pointer flex flex-col justify-between group h-48"
+              className="bg-card border shadow-sm rounded-xl p-5 cursor-pointer flex flex-col justify-between group h-48"
             >
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <span className={`text-[10px] font-bold font-mono px-2 py-0.5 rounded-full uppercase border ${
+                  <span className={`text-xs font-bold font-mono px-2 py-0.5 rounded-full uppercase border ${
                     mod.id === "overview"
                       ? "bg-slate-100 text-slate-600 border-slate-200"
                       : "bg-ink/5 text-ink border-ink/10"
                   }`}>
                     {mod.type}
                   </span>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
+                  <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> {mod.status}
                   </span>
                 </div>
@@ -2306,7 +2306,7 @@ function PropertiesManager() {
                   {mod.desc}
                 </p>
               </div>
-              <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-[11px] font-bold text-muted-foreground group-hover:text-foreground">
+              <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
                 <span className="font-mono font-bold text-foreground">{mod.stats}</span>
                 <span className="flex items-center gap-0.5 text-ink group-hover:underline">
                   Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -2352,12 +2352,12 @@ function StatBox({
 }) {
   return (
     <Card className="p-4 flex flex-col justify-between relative min-h-24 border border-border bg-card">
-      <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-display">
+      <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display">
         {label}
       </div>
       <div className="mt-2 flex items-baseline justify-between">
         <div className={`font-display text-2xl font-bold tracking-tight ${color}`}>{value}</div>
-        <span className="text-[9px] font-semibold text-muted-foreground">{desc}</span>
+        <span className="text-xs font-semibold text-muted-foreground">{desc}</span>
       </div>
     </Card>
   );

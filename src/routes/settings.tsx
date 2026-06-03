@@ -48,7 +48,7 @@ function Settings() {
               { l: "Support email", v: "ops@fortivsolutions.in" },
             ].map((f) => (
               <label key={f.l} className="block">
-                <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground font-display mb-1.5">
+                <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground font-display mb-1.5">
                   {f.l}
                 </div>
                 <input
@@ -60,7 +60,7 @@ function Settings() {
           </div>
 
           <div className="mt-6">
-            <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground font-display mb-2">
+            <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground font-display mb-2">
               Brand
             </div>
             <div className="flex items-center gap-4">

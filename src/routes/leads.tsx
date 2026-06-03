@@ -764,7 +764,7 @@ function LeadsManager() {
     } as const;
 
     const cls = maps[platform as keyof typeof maps] || "bg-slate-100 text-slate-600 border-slate-200";
-    return <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${cls}`}>{platform}</span>;
+    return <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full border ${cls}`}>{platform}</span>;
   };
 
   // Filter computations for FSBO & Maps
@@ -818,18 +818,18 @@ function LeadsManager() {
             <Card 
               key={agent.id}
               onClick={() => setActiveTab(agent.id as TabType)}
-              className="submodule-card p-5 cursor-pointer flex flex-col justify-between group h-48"
+              className="bg-card border shadow-sm rounded-xl p-5 cursor-pointer flex flex-col justify-between group h-48"
             >
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <span className={`text-[10px] font-bold font-mono px-2 py-0.5 rounded-full uppercase border ${
+                  <span className={`text-xs font-bold font-mono px-2 py-0.5 rounded-full uppercase border ${
                     agent.id === "overview" 
                       ? "bg-slate-100 text-slate-600 border-slate-200" 
                       : "bg-ink/5 text-ink border-ink/10"
                   }`}>
                     {agent.type}
                   </span>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
+                  <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> {agent.status}
                   </span>
                 </div>
@@ -840,7 +840,7 @@ function LeadsManager() {
                   {agent.desc}
                 </p>
               </div>
-              <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-[11px] font-bold text-muted-foreground group-hover:text-foreground">
+              <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
                 <span className="font-mono font-bold text-foreground">{agent.stats}</span>
                 <span className="flex items-center gap-0.5 text-ink group-hover:underline">
                   Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -887,7 +887,7 @@ function LeadsManager() {
           <Card className="col-span-12 lg:col-span-7 p-4 flex flex-col h-[400px] border border-border bg-card">
             <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
               <div>
-                <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+                <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> Live Lead Feed
                 </div>
                 <h3 className="text-sm font-bold text-foreground">Leads Arriving Now</h3>
@@ -912,9 +912,9 @@ function LeadsManager() {
                     <div className="min-w-0">
                       <div className="font-semibold text-xs text-foreground flex items-center gap-1.5">
                         {lead.name}
-                        {lead.isNew && <span className="text-[9px] bg-emerald-600 text-white px-1.5 rounded font-black tracking-wider uppercase animate-pulse">NEW</span>}
+                        {lead.isNew && <span className="text-xs bg-emerald-600 text-white px-1.5 rounded font-black tracking-wider uppercase animate-pulse">NEW</span>}
                       </div>
-                      <div className="text-[10px] text-muted-foreground flex items-center gap-1 mt-0.5">
+                      <div className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
                         <MapPin className="h-2.5 w-2.5 text-slate-400" /> {lead.area}
                       </div>
                     </div>
@@ -923,10 +923,10 @@ function LeadsManager() {
                     {renderPlatformBadge(lead.source)}
                     <div className="text-right">
                       <div className="text-xs font-bold font-display flex items-center gap-1">
-                        <span className="text-[10px] text-muted-foreground font-medium">Score:</span> 
+                        <span className="text-xs text-muted-foreground font-medium">Score:</span> 
                         <span className={lead.score >= 75 ? "text-red-500 font-black" : lead.score >= 40 ? "text-amber-500" : "text-primary"}>{lead.score}</span>
                       </div>
-                      <div className="text-[9px] text-muted-foreground font-mono mt-0.5">{lead.mins}</div>
+                      <div className="text-xs text-muted-foreground font-mono mt-0.5">{lead.mins}</div>
                     </div>
                   </div>
                 </div>
@@ -937,7 +937,7 @@ function LeadsManager() {
           {/* Sources Donut Chart */}
           <Card className="col-span-12 lg:col-span-5 p-4 flex flex-col h-[400px] border border-border bg-card">
             <div className="mb-3 border-b border-border/40 pb-2">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Source distribution</div>
+              <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Source distribution</div>
               <h3 className="text-sm font-bold text-foreground">Traffic Channel Breakdown</h3>
             </div>
             <div className="flex-1 flex flex-col justify-between">
@@ -954,14 +954,14 @@ function LeadsManager() {
                 </svg>
                 <div className="absolute inset-0 flex flex-col justify-center items-center">
                   <div className="text-2xl font-black font-display text-foreground">312</div>
-                  <div className="text-[10px] text-muted-foreground font-semibold">Leads MTD</div>
+                  <div className="text-xs text-muted-foreground font-semibold">Leads MTD</div>
                 </div>
               </div>
 
               {/* Horizontal Color bar list */}
               <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 border-t border-border/40 pt-3">
                 {categories.map((c) => (
-                  <div key={c.source} className="flex items-center justify-between text-[11px] font-medium">
+                  <div key={c.source} className="flex items-center justify-between text-xs font-medium">
                     <span className="flex items-center gap-1.5 text-muted-foreground truncate">
                       <span className={`h-2.5 w-2.5 rounded-sm shrink-0 ${c.color}`} />
                       {c.source}
@@ -985,7 +985,7 @@ function LeadsManager() {
         <div className="flex flex-wrap items-center justify-between gap-3 p-3 bg-card border border-border/80 rounded-2xl">
           <div className="flex flex-wrap gap-2">
             <div>
-              <label className="block text-[9px] font-bold text-muted-foreground uppercase tracking-widest mb-1">Locality</label>
+              <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1">Locality</label>
               <select 
                 aria-label="Locality Search"
                 value={fsboLocality} 
@@ -999,7 +999,7 @@ function LeadsManager() {
               </select>
             </div>
             <div>
-              <label className="block text-[9px] font-bold text-muted-foreground uppercase tracking-widest mb-1">Property Type</label>
+              <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1">Property Type</label>
               <select 
                 aria-label="Property Type Search"
                 value={fsboType} 
@@ -1040,7 +1040,7 @@ function LeadsManager() {
                     <div>
                       <div className="flex items-center gap-2">
                         <h4 className="text-sm font-bold text-foreground">{l.propertyType} in {l.locality}</h4>
-                        {l.isOffMarket && <span className="text-[9px] bg-red-50 text-red-600 font-bold px-2 py-0.5 rounded-md border border-red-200">Off-Market</span>}
+                        {l.isOffMarket && <span className="text-xs bg-red-50 text-red-600 font-bold px-2 py-0.5 rounded-md border border-red-200">Off-Market</span>}
                       </div>
                       <p className="text-xs text-muted-foreground mt-1 font-medium">
                         {l.areaSqft} sq ft · Listed on {l.listingDate} via <span className="font-bold text-foreground">{l.sourcePlatform}</span>
@@ -1048,18 +1048,18 @@ function LeadsManager() {
                     </div>
                     <div className="text-right font-display">
                       <div className="text-base font-black text-foreground">₹{l.askingPrice}L</div>
-                      <div className="text-[9px] text-muted-foreground">₹{l.pricePerSqft}/sq ft</div>
+                      <div className="text-xs text-muted-foreground">₹{l.pricePerSqft}/sq ft</div>
                     </div>
                   </div>
                   
                   <div className="border-t border-border mt-4 pt-3 flex items-center justify-between">
                     <div className="flex items-center gap-2 text-xs">
-                      <div className="h-6 w-6 rounded-full bg-secondary flex items-center justify-center font-bold text-[10px] text-foreground border border-border">
+                      <div className="h-6 w-6 rounded-full bg-secondary flex items-center justify-center font-bold text-xs text-foreground border border-border">
                         {l.ownerName[0]}
                       </div>
                       <span className="font-bold text-foreground text-xs">{l.ownerName}</span>
                       <span className="text-muted-foreground">·</span>
-                      <span className="text-muted-foreground text-[10px]">{l.phone}</span>
+                      <span className="text-muted-foreground text-xs">{l.phone}</span>
                     </div>
 
                     <div className="flex gap-2">
@@ -1088,7 +1088,7 @@ function LeadsManager() {
           {/* Interactive Map Panel */}
           <Card className="col-span-12 lg:col-span-4 p-4 flex flex-col h-[550px] border border-border bg-card">
             <div className="mb-3 border-b border-border/40 pb-2">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1">
+              <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1">
                 <Globe className="h-3.5 w-3.5" /> GPS Geolocation
               </div>
               <h3 className="text-sm font-bold text-foreground">Interactive Micro-market Map</h3>
@@ -1142,15 +1142,15 @@ function LeadsManager() {
 
               {/* Map Info Box */}
               <div className="absolute bottom-3 inset-x-3 bg-card border border-border p-3 rounded-xl flex flex-col gap-1 shadow-lg">
-                <div className="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-mono">Discovered Listing Details</div>
+                <div className="text-xs font-bold text-slate-500 uppercase tracking-wider font-mono">Discovered Listing Details</div>
                 <div className="font-bold text-xs text-foreground flex items-center justify-between">
                   <span>{selectedFsboListing?.propertyType}</span>
                   <span className="text-[#ef4444] font-black font-mono">₹{selectedFsboListing?.askingPrice}L</span>
                 </div>
-                <div className="text-[10px] text-muted-foreground flex items-center gap-1">
+                <div className="text-xs text-muted-foreground flex items-center gap-1">
                   <MapPin className="h-3 w-3 text-slate-400" /> {selectedFsboListing?.locality} · {selectedFsboListing?.ownerName}
                 </div>
-                <div className="text-[10px] text-emerald-600 flex items-center gap-1 font-bold mt-1">
+                <div className="text-xs text-emerald-600 flex items-center gap-1 font-bold mt-1">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> {selectedFsboListing?.discoveredAgo}
                 </div>
               </div>
@@ -1169,7 +1169,7 @@ function LeadsManager() {
         <div className="flex flex-wrap items-center justify-between gap-3 p-3 bg-card border border-border/80 rounded-2xl">
           <div className="flex flex-wrap gap-2">
             <div>
-              <label className="block text-[9px] font-bold text-muted-foreground uppercase tracking-widest mb-1">Locality</label>
+              <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1">Locality</label>
               <select 
                 aria-label="Locality Select"
                 value={mapsLocality} 
@@ -1186,7 +1186,7 @@ function LeadsManager() {
               </select>
             </div>
             <div>
-              <label className="block text-[9px] font-bold text-muted-foreground uppercase tracking-widest mb-1">Segment Type</label>
+              <label className="block text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1">Segment Type</label>
               <select 
                 aria-label="Segment Type Select"
                 value={mapsType} 
@@ -1202,7 +1202,7 @@ function LeadsManager() {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-[10px] text-slate-400 font-bold">Target Market: Surat, Gujarat</span>
+            <span className="text-xs text-slate-400 font-bold">Target Market: Surat, Gujarat</span>
             <button className="h-8 px-3 rounded-lg border border-border bg-card text-foreground hover:bg-muted text-xs font-bold flex items-center gap-1.5 transition-colors shadow-sm">
               <RefreshCw className="h-3.5 w-3.5" /> Scan Google Maps
             </button>
@@ -1217,7 +1217,7 @@ function LeadsManager() {
                 <thead>
                   <tr className="bg-secondary/40 border-b border-border">
                     {["Business Details", "Segment", "Locality", "Rating", "Enrichment", "CRM Status"].map((h, idx) => (
-                      <th key={idx} className="px-4 py-2.5 font-bold text-[9px] uppercase tracking-widest text-muted-foreground font-display">
+                      <th key={idx} className="px-4 py-2.5 font-bold text-xs uppercase tracking-widest text-muted-foreground font-display">
                         {h}
                       </th>
                     ))}
@@ -1234,10 +1234,10 @@ function LeadsManager() {
                       >
                         <td className="px-4 py-3">
                           <div className="font-bold text-foreground text-xs">{b.name}</div>
-                          <div className="text-[10px] text-muted-foreground truncate max-w-xs mt-0.5">{b.address}</div>
+                          <div className="text-xs text-muted-foreground truncate max-w-xs mt-0.5">{b.address}</div>
                         </td>
                         <td className="px-4 py-3">
-                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                          <span className={`px-2 py-0.5 rounded text-xs font-bold ${
                             b.type === "Developer" 
                               ? "bg-blue-50 text-blue-600 border border-blue-100" 
                               : b.type === "Broker" 
@@ -1252,28 +1252,28 @@ function LeadsManager() {
                         <td className="px-4 py-3 text-foreground font-semibold">{b.locality}</td>
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-1 font-bold text-amber-500">
-                            ★ <span className="text-foreground text-[11px] font-mono">{b.rating}</span>
-                            <span className="text-muted-foreground text-[9px] font-mono">({b.reviews})</span>
+                            ★ <span className="text-foreground text-xs font-mono">{b.rating}</span>
+                            <span className="text-muted-foreground text-xs font-mono">({b.reviews})</span>
                           </div>
                         </td>
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-1.5">
-                            {b.enriched.linkedin && <span className="text-[9px] bg-secondary text-slate-600 border border-border font-bold px-1.5 py-0.5 rounded">LinkedIn</span>}
-                            {b.enriched.website && <span className="text-[9px] bg-secondary text-slate-600 border border-border font-bold px-1.5 py-0.5 rounded">Web</span>}
-                            {b.enriched.phone && <span className="text-[9px] bg-emerald-50 text-emerald-600 font-bold px-1.5 py-0.5 rounded border border-emerald-100">Active</span>}
+                            {b.enriched.linkedin && <span className="text-xs bg-secondary text-slate-600 border border-border font-bold px-1.5 py-0.5 rounded">LinkedIn</span>}
+                            {b.enriched.website && <span className="text-xs bg-secondary text-slate-600 border border-border font-bold px-1.5 py-0.5 rounded">Web</span>}
+                            {b.enriched.phone && <span className="text-xs bg-emerald-50 text-emerald-600 font-bold px-1.5 py-0.5 rounded border border-emerald-100">Active</span>}
                           </div>
                         </td>
                         <td className="px-4 py-3">
                           {b.crmStatus === "Pushed to CRM" ? (
-                            <span className="text-emerald-600 font-bold text-[11px] flex items-center gap-1">
+                            <span className="text-emerald-600 font-bold text-xs flex items-center gap-1">
                               ✓ Pushed
                             </span>
                           ) : b.crmStatus === "Pushing..." ? (
-                            <span className="text-slate-500 font-bold text-[11px] flex items-center gap-1 animate-pulse">
+                            <span className="text-slate-500 font-bold text-xs flex items-center gap-1 animate-pulse">
                               Pushing...
                             </span>
                           ) : b.crmStatus === "Not Relevant" ? (
-                            <span className="text-slate-400 font-bold text-[11px]">
+                            <span className="text-slate-400 font-bold text-xs">
                               Skipped
                             </span>
                           ) : (
@@ -1285,7 +1285,7 @@ function LeadsManager() {
                                   setMapsBusinesses(prev => prev.map(item => item.id === b.id ? { ...item, crmStatus: "Pushed to CRM" } : item));
                                 }, 1000);
                               }}
-                              className="h-6 px-2 rounded bg-ink hover:bg-ink/90 text-cream text-[10px] font-bold transition-all shadow-sm"
+                              className="h-6 px-2 rounded bg-ink hover:bg-ink/90 text-cream text-xs font-bold transition-all shadow-sm"
                             >
                               Push
                             </button>
@@ -1302,7 +1302,7 @@ function LeadsManager() {
           {/* Interactive geo map side panel */}
           <Card className="col-span-12 lg:col-span-4 p-4 flex flex-col h-[550px] border border-border bg-card">
             <div className="mb-3 border-b border-border/40 pb-2">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1">
+              <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1">
                 <MapPin className="h-3.5 w-3.5" /> Micro-market Radar
               </div>
               <h3 className="text-sm font-bold text-foreground">Surat Stakeholder Blueprint</h3>
@@ -1345,17 +1345,17 @@ function LeadsManager() {
 
               {/* Stakeholder Details popover */}
               <div className="absolute bottom-3 inset-x-3 bg-card border border-border p-3 rounded-xl flex flex-col gap-1 shadow-lg">
-                <div className="text-[9px] font-bold text-slate-500 uppercase tracking-wider font-mono">Google Maps Node</div>
+                <div className="text-xs font-bold text-slate-500 uppercase tracking-wider font-mono">Google Maps Node</div>
                 <div className="font-bold text-xs text-foreground flex items-center justify-between">
                   <span>{selectedBusiness?.name}</span>
-                  <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-secondary text-slate-600 border border-border">{selectedBusiness?.type}</span>
+                  <span className="text-xs font-bold px-1.5 py-0.5 rounded bg-secondary text-slate-600 border border-border">{selectedBusiness?.type}</span>
                 </div>
-                <div className="text-[10px] text-muted-foreground flex items-center gap-1 truncate font-medium">
+                <div className="text-xs text-muted-foreground flex items-center gap-1 truncate font-medium">
                   <MapPin className="h-3 w-3 text-slate-400" /> {selectedBusiness?.address}
                 </div>
                 <div className="flex items-center justify-between mt-2 pt-2 border-t border-border">
-                  <span className="text-[10px] text-amber-500 font-bold">★ {selectedBusiness?.rating} ({selectedBusiness?.reviews} Google Reviews)</span>
-                  <a href={selectedBusiness?.website} target="_blank" rel="noopener noreferrer" className="text-[10px] text-primary hover:underline flex items-center gap-0.5 font-bold">
+                  <span className="text-xs text-amber-500 font-bold">★ {selectedBusiness?.rating} ({selectedBusiness?.reviews} Google Reviews)</span>
+                  <a href={selectedBusiness?.website} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline flex items-center gap-0.5 font-bold">
                     <Globe className="h-2.5 w-2.5" /> Website
                   </a>
                 </div>
@@ -1375,7 +1375,7 @@ function LeadsManager() {
         <Card className="p-4 relative overflow-hidden border border-border bg-card">
           <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
             <div>
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Real-time Webhook</div>
+              <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Real-time Webhook</div>
               <h3 className="text-sm font-bold text-foreground">API Campaign Lead Sync Tunnel</h3>
             </div>
             <button 
@@ -1425,8 +1425,8 @@ function LeadsManager() {
                   >
                     {node.step}
                   </div>
-                  <div className="text-[10px] font-bold mt-2 text-foreground">{node.label}</div>
-                  <div className="text-[9px] text-muted-foreground mt-0.5 font-mono">{node.text}</div>
+                  <div className="text-xs font-bold mt-2 text-foreground">{node.label}</div>
+                  <div className="text-xs text-muted-foreground mt-0.5 font-mono">{node.text}</div>
                 </div>
               );
             })}
@@ -1439,10 +1439,10 @@ function LeadsManager() {
           <Card className="col-span-12 lg:col-span-7 p-4 h-[400px] flex flex-col border border-border bg-card">
             <div className="mb-3 border-b border-border/40 pb-2 flex justify-between items-center">
               <div>
-                <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Sync Output</div>
+                <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Sync Output</div>
                 <h3 className="text-sm font-bold text-foreground">Webhook Synced Inbound Feed</h3>
               </div>
-              <span className="text-[10px] font-bold text-slate-600 bg-secondary px-2.5 py-0.5 rounded-full border border-border">
+              <span className="text-xs font-bold text-slate-600 bg-secondary px-2.5 py-0.5 rounded-full border border-border">
                 Avg Capture: 28 seconds
               </span>
             </div>
@@ -1454,15 +1454,15 @@ function LeadsManager() {
                     <div>
                       <div className="font-bold text-xs text-foreground flex items-center gap-1.5">
                         {l.name}
-                        <span className="text-[9px] font-semibold text-slate-400 font-mono">({l.syncDurationSec}s sync duration)</span>
+                        <span className="text-xs font-semibold text-slate-400 font-mono">({l.syncDurationSec}s sync duration)</span>
                       </div>
-                      <div className="text-[10px] text-muted-foreground mt-0.5">
+                      <div className="text-xs text-muted-foreground mt-0.5">
                         {l.interest} · {l.locality} · {l.campaign}
                       </div>
                     </div>
                     {renderPlatformBadge(l.platform)}
                   </div>
-                  <div className="flex items-center justify-between mt-3 border-t border-border pt-2 text-[10px]">
+                  <div className="flex items-center justify-between mt-3 border-t border-border pt-2 text-xs">
                     <span className="text-slate-400 font-mono">{l.timestamp}</span>
                     <div className="flex gap-2">
                       <span className="text-emerald-600 font-bold flex items-center gap-0.5">
@@ -1481,12 +1481,12 @@ function LeadsManager() {
           {/* Campaign stats */}
           <Card className="col-span-12 lg:col-span-5 p-4 h-[400px] flex flex-col border border-border bg-card">
             <div className="mb-3 border-b border-border/40 pb-2">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display font-bold">MTD Analytics</div>
+              <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display font-bold">MTD Analytics</div>
               <h3 className="text-sm font-bold text-foreground">Campaign Performance & Spend ROI</h3>
             </div>
             
             <div className="flex-1 overflow-y-auto space-y-3 scrollbar-none text-xs">
-              <div className="grid grid-cols-12 font-bold text-[9px] uppercase tracking-widest text-muted-foreground border-b border-border/30 pb-1">
+              <div className="grid grid-cols-12 font-bold text-xs uppercase tracking-widest text-muted-foreground border-b border-border/30 pb-1">
                 <div className="col-span-5">Campaign</div>
                 <div className="col-span-2 text-right">Leads</div>
                 <div className="col-span-2 text-right">CPL</div>
@@ -1495,12 +1495,12 @@ function LeadsManager() {
               {mockCampaigns.map((c) => (
                 <div key={c.campaign} className="grid grid-cols-12 items-center text-foreground font-medium py-0.5">
                   <div className="col-span-5 min-w-0">
-                    <div className="font-bold truncate text-[11px]">{c.campaign}</div>
-                    <div className="text-[9px] text-muted-foreground font-mono">{c.platform}</div>
+                    <div className="font-bold truncate text-xs">{c.campaign}</div>
+                    <div className="text-xs text-muted-foreground font-mono">{c.platform}</div>
                   </div>
-                  <div className="col-span-2 text-right font-mono font-bold text-[11px]">{c.leads}</div>
-                  <div className="col-span-2 text-right font-mono text-[11px]">₹{c.cpl}</div>
-                  <div className="col-span-3 text-right font-mono font-bold text-[11px] text-primary">₹{c.budget.toLocaleString("en-IN")}</div>
+                  <div className="col-span-2 text-right font-mono font-bold text-xs">{c.leads}</div>
+                  <div className="col-span-2 text-right font-mono text-xs">₹{c.cpl}</div>
+                  <div className="col-span-3 text-right font-mono font-bold text-xs text-primary">₹{c.budget.toLocaleString("en-IN")}</div>
                 </div>
               ))}
             </div>
@@ -1522,7 +1522,7 @@ function LeadsManager() {
               <strong>Deduplication Warning:</strong> 3 potential duplicate inquiries were detected and merged today.
             </span>
           </div>
-          <span className="text-[10px] font-bold uppercase tracking-widest bg-amber-100 text-amber-700 border border-amber-200 px-2 py-0.5 rounded">
+          <span className="text-xs font-bold uppercase tracking-widest bg-amber-100 text-amber-700 border border-amber-200 px-2 py-0.5 rounded">
             3 Merged
           </span>
         </div>
@@ -1532,29 +1532,29 @@ function LeadsManager() {
           <Card className="col-span-12 lg:col-span-8 p-0 overflow-hidden h-[500px] flex flex-col border border-border bg-card">
             <div className="p-3 bg-secondary/20 border-b border-border flex items-center justify-between">
               <h4 className="font-bold text-xs text-foreground">Unified Portal Lead Inbox</h4>
-              <span className="text-[10px] text-slate-400 font-bold">20 leads in feed</span>
+              <span className="text-xs text-slate-400 font-bold">20 leads in feed</span>
             </div>
             
             <div className="flex-1 overflow-y-auto divide-y divide-border/60 scrollbar-none">
               {portalLeads.map((l) => (
                 <div key={l.id} className="p-3 hover:bg-secondary/15 transition-colors flex items-start justify-between gap-4">
                   <div className="flex items-start gap-3 min-w-0">
-                    <div className="h-7 w-7 rounded-full bg-secondary border border-border flex items-center justify-center font-bold text-[10px] text-slate-600 shrink-0">
+                    <div className="h-7 w-7 rounded-full bg-secondary border border-border flex items-center justify-center font-bold text-xs text-slate-600 shrink-0">
                       {l.name[0]}
                     </div>
                     <div className="min-w-0">
                       <div className="font-bold text-xs text-foreground flex items-center gap-1.5 flex-wrap">
                         {l.name}
                         {l.isDuplicate && (
-                          <span className="text-[9px] bg-amber-50 text-amber-700 border border-amber-200 px-1.5 py-0.5 rounded font-bold tracking-wider uppercase flex items-center gap-0.5">
+                          <span className="text-xs bg-amber-50 text-amber-700 border border-amber-200 px-1.5 py-0.5 rounded font-bold tracking-wider uppercase flex items-center gap-0.5">
                             Merged ({l.mergedWith})
                           </span>
                         )}
                       </div>
-                      <div className="text-[10px] text-muted-foreground mt-0.5 font-medium">
+                      <div className="text-xs text-muted-foreground mt-0.5 font-medium">
                         {l.interest} · {l.locality} · Budget: <strong className="text-foreground">{l.budget}</strong>
                       </div>
-                      <div className="text-[10px] text-slate-500 bg-secondary/40 p-2 rounded-lg mt-2 border border-border max-w-md font-medium">
+                      <div className="text-xs text-slate-500 bg-secondary/40 p-2 rounded-lg mt-2 border border-border max-w-md font-medium">
                         "{l.message}"
                       </div>
                     </div>
@@ -1562,8 +1562,8 @@ function LeadsManager() {
 
                   <div className="text-right shrink-0 flex flex-col items-end gap-1.5">
                     {renderPlatformBadge(l.portal)}
-                    <span className="text-[9px] text-slate-400 font-mono">{l.timestamp}</span>
-                    <span className="text-[10px] font-bold text-slate-500 font-mono">Agent: {l.assignedAgent}</span>
+                    <span className="text-xs text-slate-400 font-mono">{l.timestamp}</span>
+                    <span className="text-xs font-bold text-slate-500 font-mono">Agent: {l.assignedAgent}</span>
                   </div>
                 </div>
               ))}
@@ -1573,9 +1573,9 @@ function LeadsManager() {
           {/* Response rate tracker */}
           <Card className="col-span-12 lg:col-span-4 p-4 h-[500px] flex flex-col border border-border bg-card">
             <div className="mb-3 border-b border-border/40 pb-2">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display font-bold">Algorithms Metric</div>
+              <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display font-bold">Algorithms Metric</div>
               <h3 className="text-sm font-bold text-foreground">Portal Response Rate Tracker</h3>
-              <p className="text-[10px] text-muted-foreground mt-1">If response rates drop below targets, listings get demoted in search results.</p>
+              <p className="text-xs text-muted-foreground mt-1">If response rates drop below targets, listings get demoted in search results.</p>
             </div>
 
             <div className="flex-1 space-y-4 pt-2">
@@ -1584,9 +1584,9 @@ function LeadsManager() {
                   <div className="flex items-center justify-between text-xs">
                     <span className="font-bold text-foreground flex items-center gap-1">
                       {p.portal}
-                      <span className="text-[10px] text-muted-foreground font-mono">({p.leads} leads)</span>
+                      <span className="text-xs text-muted-foreground font-mono">({p.leads} leads)</span>
                     </span>
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${
+                    <span className={`text-xs font-bold px-2 py-0.5 rounded ${
                       p.status === "On Track" ? "bg-emerald-50 text-emerald-600 border border-emerald-100" : "bg-red-50 text-red-600 border border-red-100"
                     }`}>
                       {p.rate}%
@@ -1656,7 +1656,7 @@ function LeadsManager() {
                   >
                     <div className="min-w-0">
                       <div className="font-bold text-xs text-foreground truncate">{l.name}</div>
-                      <div className="text-[10px] text-slate-500 font-mono mt-0.5">{l.phone}</div>
+                      <div className="text-xs text-slate-500 font-mono mt-0.5">{l.phone}</div>
                     </div>
 
                     <div className="flex items-center gap-2 shrink-0">
@@ -1668,7 +1668,7 @@ function LeadsManager() {
                           style={{ width: `${l.completeness}%` }}
                         />
                       </div>
-                      <span className="text-[10px] font-bold font-mono text-foreground w-8 text-right">{l.completeness}%</span>
+                      <span className="text-xs font-bold font-mono text-foreground w-8 text-right">{l.completeness}%</span>
                     </div>
                   </div>
                 );
@@ -1679,7 +1679,7 @@ function LeadsManager() {
           {/* Before/After panel */}
           <Card className="col-span-12 lg:col-span-8 p-4 h-[500px] flex flex-col border border-border bg-card">
             <div className="mb-3 border-b border-border/40 pb-2">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Expansion View</div>
+              <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Expansion View</div>
               <h3 className="text-sm font-bold text-foreground">{selectedEnrichmentLead.name} Profile Profiling</h3>
             </div>
 
@@ -1698,23 +1698,23 @@ function LeadsManager() {
                 {/* BEFORE */}
                 <div className="bg-secondary/15 border border-border/80 p-4 rounded-xl flex flex-col justify-between">
                   <div>
-                    <div className="text-[9px] font-black tracking-widest uppercase text-slate-400 mb-2 font-mono">Raw Lead (Before Enrichment)</div>
+                    <div className="text-xs font-black tracking-widest uppercase text-slate-400 mb-2 font-mono">Raw Lead (Before Enrichment)</div>
                     <div className="space-y-2 text-xs">
                       <div>
-                        <div className="text-muted-foreground text-[10px] font-semibold">Name</div>
+                        <div className="text-muted-foreground text-xs font-semibold">Name</div>
                         <div className="font-bold text-foreground">{selectedEnrichmentLead.name}</div>
                       </div>
                       <div>
-                        <div className="text-muted-foreground text-[10px] font-semibold">Phone</div>
+                        <div className="text-muted-foreground text-xs font-semibold">Phone</div>
                         <div className="font-bold text-foreground font-mono">{selectedEnrichmentLead.phone}</div>
                       </div>
                       <div>
-                        <div className="text-muted-foreground text-[10px] font-semibold">Source</div>
+                        <div className="text-muted-foreground text-xs font-semibold">Source</div>
                         <div className="font-bold text-foreground">{selectedEnrichmentLead.source}</div>
                       </div>
                     </div>
                   </div>
-                  <div className="bg-secondary/40 p-2.5 border border-border rounded-lg text-[10px] text-slate-500 font-bold text-center">
+                  <div className="bg-secondary/40 p-2.5 border border-border rounded-lg text-xs text-slate-500 font-bold text-center">
                     Completeness: {selectedEnrichmentLead.id === "enr-4" ? "22%" : selectedEnrichmentLead.id === "enr-5" ? "10%" : "12%"}
                   </div>
                 </div>
@@ -1724,44 +1724,44 @@ function LeadsManager() {
                   {selectedEnrichmentLead.enriched ? (
                     <>
                       <div>
-                        <div className="text-[9px] font-black tracking-widest uppercase text-slate-500 mb-2 font-mono flex items-center justify-between">
+                        <div className="text-xs font-black tracking-widest uppercase text-slate-500 mb-2 font-mono flex items-center justify-between">
                           <span>AI Enriched Record</span>
                           <span className="text-emerald-600">✓ Enriched in {selectedEnrichmentLead.durationSec}s</span>
                         </div>
                         <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 text-xs">
                           <div>
-                            <div className="text-muted-foreground text-[9px] font-semibold">WhatsApp status</div>
+                            <div className="text-muted-foreground text-xs font-semibold">WhatsApp status</div>
                             <div className="font-bold text-emerald-600 flex items-center gap-0.5">
                               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> Active WhatsApp
                             </div>
                           </div>
                           <div>
-                            <div className="text-muted-foreground text-[9px] font-semibold">Carrier / Operator</div>
+                            <div className="text-muted-foreground text-xs font-semibold">Carrier / Operator</div>
                             <div className="font-bold text-foreground">{selectedEnrichmentLead.operator}</div>
                           </div>
                           <div className="col-span-2">
-                            <div className="text-muted-foreground text-[9px] font-semibold">LinkedIn Profile</div>
+                            <div className="text-muted-foreground text-xs font-semibold">LinkedIn Profile</div>
                             <div className="font-bold text-ink hover:underline font-mono truncate">{selectedEnrichmentLead.linkedin}</div>
                           </div>
                           <div>
-                            <div className="text-muted-foreground text-[9px] font-semibold">Designation</div>
+                            <div className="text-muted-foreground text-xs font-semibold">Designation</div>
                             <div className="font-bold text-foreground">{selectedEnrichmentLead.designation}</div>
                           </div>
                           <div>
-                            <div className="text-muted-foreground text-[9px] font-semibold">Company</div>
+                            <div className="text-muted-foreground text-xs font-semibold">Company</div>
                             <div className="font-bold text-foreground">{selectedEnrichmentLead.company}</div>
                           </div>
                           <div>
-                            <div className="text-muted-foreground text-[9px] font-semibold">Estimated Income</div>
+                            <div className="text-muted-foreground text-xs font-semibold">Estimated Income</div>
                             <div className="font-bold text-foreground font-mono">{selectedEnrichmentLead.income}</div>
                           </div>
                           <div>
-                            <div className="text-muted-foreground text-[9px] font-semibold">Property Intent</div>
+                            <div className="text-muted-foreground text-xs font-semibold">Property Intent</div>
                             <div className="font-bold text-foreground truncate font-medium">{selectedEnrichmentLead.recentSearches}</div>
                           </div>
                         </div>
                       </div>
-                      <div className="bg-emerald-50 text-emerald-700 p-2.5 border border-emerald-100 rounded-lg text-[10px] font-bold text-center">
+                      <div className="bg-emerald-50 text-emerald-700 p-2.5 border border-emerald-100 rounded-lg text-xs font-bold text-center">
                         Total Completeness: {selectedEnrichmentLead.completeness}%
                       </div>
                     </>
@@ -1769,7 +1769,7 @@ function LeadsManager() {
                     <div className="flex-1 flex flex-col justify-center items-center text-center p-4">
                       <Zap className="h-8 w-8 text-primary opacity-65 mb-2 animate-bounce" />
                       <h4 className="font-bold text-xs text-foreground">Outreach Profile Missing</h4>
-                      <p className="text-[10px] text-slate-500 mt-1 max-w-[200px] font-semibold">Click the button above to run the AI crawler and enrich fields.</p>
+                      <p className="text-xs text-slate-500 mt-1 max-w-[200px] font-semibold">Click the button above to run the AI crawler and enrich fields.</p>
                     </div>
                   )}
                 </div>
@@ -1788,23 +1788,23 @@ function LeadsManager() {
         {/* KPI Score summary bar */}
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
           <div className="p-3 rounded-2xl bg-card border border-border text-center">
-            <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400 font-display">Active Leads</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400 font-display">Active Leads</div>
             <div className="text-lg font-bold mt-1 text-foreground font-mono">47</div>
           </div>
           <div className="p-3 rounded-2xl bg-card border border-border text-center">
-            <div className="text-[9px] font-bold uppercase tracking-wider text-red-500 font-display">Hot (75–100)</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-red-500 font-display">Hot (75–100)</div>
             <div className="text-lg font-bold mt-1 text-red-500 font-mono">12</div>
           </div>
           <div className="p-3 rounded-2xl bg-card border border-border text-center">
-            <div className="text-[9px] font-bold uppercase tracking-wider text-amber-500 font-display">Warm (40–74)</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-amber-500 font-display">Warm (40–74)</div>
             <div className="text-lg font-bold mt-1 text-amber-500 font-mono">23</div>
           </div>
           <div className="p-3 rounded-2xl bg-card border border-border text-center">
-            <div className="text-[9px] font-bold uppercase tracking-wider text-primary font-display">Cold (0–39)</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-primary font-display">Cold (0–39)</div>
             <div className="text-lg font-bold mt-1 text-primary font-mono">12</div>
           </div>
           <div className="p-3 rounded-2xl bg-card border border-border text-center">
-            <div className="text-[9px] font-bold uppercase tracking-wider text-indigo-600 font-display">Avg Score</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-indigo-600 font-display">Avg Score</div>
             <div className="text-lg font-bold mt-1 text-indigo-500 font-mono">68</div>
           </div>
         </div>
@@ -1817,7 +1817,7 @@ function LeadsManager() {
                 <thead>
                   <tr className="bg-secondary/40 border-b border-border">
                     {["Lead Name", "Source", "Score", "Intent", "Property & Budget", "Agent", "Last Signal"].map((h, idx) => (
-                      <th key={idx} className="px-4 py-2.5 font-bold text-[9px] uppercase tracking-widest text-muted-foreground font-display">
+                      <th key={idx} className="px-4 py-2.5 font-bold text-xs uppercase tracking-widest text-muted-foreground font-display">
                         {h}
                       </th>
                     ))}
@@ -1838,7 +1838,7 @@ function LeadsManager() {
                         <td className="px-4 py-2.5">{renderPlatformBadge(l.source)}</td>
                         <td className="px-4 py-2.5">
                           <div className="flex items-center gap-2">
-                            <span className="font-bold font-mono text-[11px] w-5 text-right text-foreground">{l.score}</span>
+                            <span className="font-bold font-mono text-xs w-5 text-right text-foreground">{l.score}</span>
                             <div className="w-12 h-1 bg-secondary rounded-full overflow-hidden border border-border/40">
                               <div 
                                 className={`h-full rounded-full transition-all ${
@@ -1850,7 +1850,7 @@ function LeadsManager() {
                           </div>
                         </td>
                         <td className="px-4 py-2.5">
-                          <span className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${
+                          <span className={`px-2 py-0.5 rounded text-xs font-bold uppercase tracking-wider ${
                             l.intent === "hot" ? "bg-red-50 text-red-600 border border-red-100" : l.intent === "warm" ? "bg-amber-50 text-amber-600" : "bg-sky-50 text-sky-600"
                           }`}>
                             {l.intent}
@@ -1858,10 +1858,10 @@ function LeadsManager() {
                         </td>
                         <td className="px-4 py-2.5 font-semibold">
                           <div>{l.property}</div>
-                          <div className="text-[10px] text-muted-foreground font-medium">{l.budget}</div>
+                          <div className="text-xs text-muted-foreground font-medium">{l.budget}</div>
                         </td>
                         <td className="px-4 py-2.5 text-foreground font-bold">{l.agent}</td>
-                        <td className="px-4 py-2.5 text-muted-foreground text-[10px] max-w-[150px] truncate font-medium">{l.lastActivity}</td>
+                        <td className="px-4 py-2.5 text-muted-foreground text-xs max-w-[150px] truncate font-medium">{l.lastActivity}</td>
                       </tr>
                     );
                   })}
@@ -1874,7 +1874,7 @@ function LeadsManager() {
           <Card className="col-span-12 lg:col-span-4 p-4 h-[450px] flex flex-col justify-between border border-border bg-card">
             <div>
               <div className="mb-3 border-b border-border/40 pb-2">
-                <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Score Breakdown</div>
+                <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Score Breakdown</div>
                 <h3 className="text-sm font-bold text-foreground">{selectedScoringLead?.name} Model</h3>
               </div>
 
@@ -1882,7 +1882,7 @@ function LeadsManager() {
                 {selectedScoringLead?.reasons.map((r, idx) => (
                   <div key={idx} className="flex justify-between items-start gap-3 text-xs bg-secondary/30 p-2 border border-border rounded-xl">
                     <span className="text-slate-600 font-semibold">{r.text}</span>
-                    <span className={`font-mono font-bold shrink-0 text-[10px] ${r.positive ? "text-emerald-600" : "text-red-500"}`}>
+                    <span className={`font-mono font-bold shrink-0 text-xs ${r.positive ? "text-emerald-600" : "text-red-500"}`}>
                       {r.positive ? "+" : ""}{r.value}
                     </span>
                   </div>
@@ -1914,7 +1914,7 @@ function LeadsManager() {
         {/* Source quality bar chart */}
         <Card className="p-4 flex flex-col h-[280px] border border-border bg-card">
           <div className="mb-3 border-b border-border/40 pb-2">
-            <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Model Calibration</div>
+            <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Model Calibration</div>
             <h3 className="text-sm font-bold text-foreground">Average Lead Quality Score by Channel</h3>
           </div>
 
@@ -1931,14 +1931,14 @@ function LeadsManager() {
               { source: "NoBroker", score: 38, color: "bg-emerald-600" },
             ].map((item, idx) => (
               <div key={idx} className="flex-1 flex flex-col items-center gap-2 group h-full justify-end">
-                <div className="text-[10px] font-bold text-foreground font-mono opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="text-xs font-bold text-foreground font-mono opacity-0 group-hover:opacity-100 transition-opacity">
                   {item.score}
                 </div>
                 <div 
                   className={`w-full rounded-t transition-all duration-300 relative ${item.color} opacity-80 group-hover:opacity-100 hover:shadow-[0_0_15px_rgba(0,0,0,0.05)]`}
                   style={{ height: `${item.score}%` }}
                 />
-                <div className="text-[9px] font-bold text-muted-foreground truncate w-full text-center tracking-tight mt-1 select-none">
+                <div className="text-xs font-bold text-muted-foreground truncate w-full text-center tracking-tight mt-1 select-none">
                   {item.source}
                 </div>
               </div>
@@ -2055,12 +2055,12 @@ function StatBox({
   return (
     <Card className="p-4 flex flex-col justify-between relative min-h-24 border border-border bg-card">
       {customElement}
-      <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-display">
+      <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display">
         {label}
       </div>
       <div className="mt-2 flex items-baseline justify-between">
         <div className={`font-display text-2xl font-bold tracking-tight ${color}`}>{value}</div>
-        <span className="text-[9px] font-semibold text-muted-foreground">{desc}</span>
+        <span className="text-xs font-semibold text-muted-foreground">{desc}</span>
       </div>
     </Card>
   );

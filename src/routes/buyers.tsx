@@ -134,7 +134,7 @@ const statusBadge = (status: string) => {
   if (["In Progress", "In Transit", "PO Sent", "Scheduled", "Applied", "Under Review", "Tenant Screening", "Visits in Progress", "Offer in Negotiation", "Listed", "Planned"].some(s => status.includes(s)))
     return "bg-amber-50 text-amber-700 border border-amber-100";
   if (["Action Required", "Not Initiated", "Not Applied", "Pending Snags", "Blocked", "Payment Pending", "Snag Pending", "At Risk", "Delayed", "Overrun", "Critical Overrun", "Escalated", "18 Days Overdue", "34 Days Overdue"].some(s => status.includes(s)))
-    return "bg-red-50 text-[#D85A30] border border-red-100";
+    return "bg-red-50 text-red-600 border border-red-100";
   return "bg-slate-50 text-slate-600 border border-slate-200";
 };
 
@@ -196,21 +196,21 @@ function BuyerManager() {
   const renderOverview = () => (
     <div className="space-y-6 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-        <StatBox label="Active Buyers" value="186" desc="Total registered" color="text-[#1A3C5E]" />
-        <StatBox label="Portal Active (7d)" value="74" desc="40% weekly logins" color="text-[#2E86AB]" />
-        <StatBox label="Payments Overdue" value="18" desc="Missed installments" color="text-[#D85A30]" />
-        <StatBox label="Open Snags" value="9" desc="Unresolved tickets" color="text-[#E8A838]" />
-        <StatBox label="Rolling NPS Score" value="+62" desc="Excellent index" color="text-[#1D9E75]" />
+        <StatBox label="Active Buyers" value="186" desc="Total registered" color="text-slate-800" />
+        <StatBox label="Portal Active (7d)" value="74" desc="40% weekly logins" color="text-blue-700" />
+        <StatBox label="Payments Overdue" value="18" desc="Missed installments" color="text-red-600" />
+        <StatBox label="Open Snags" value="9" desc="Unresolved tickets" color="text-amber-500" />
+        <StatBox label="Rolling NPS Score" value="+62" desc="Excellent index" color="text-emerald-600" />
       </div>
 
       <div className="grid grid-cols-12 gap-5">
         {/* Left panel: Payment health */}
         <Card className="col-span-12 lg:col-span-7 p-4 border border-border bg-card">
           <div className="flex items-center justify-between mb-4 border-b border-border/40 pb-2">
-            <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+            <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
               <DollarSign className="h-3.5 w-3.5 text-emerald-600" /> Buyer Payment Health Summary
             </div>
-            <button onClick={() => setActiveTab("payments")} className="text-[9px] font-bold text-primary hover:underline font-mono">Receipt Manager →</button>
+            <button onClick={() => setActiveTab("payments")} className="text-xs font-bold text-primary hover:underline font-mono">Receipt Manager →</button>
           </div>
           <div className="space-y-4 font-semibold text-xs text-foreground">
             {[
@@ -237,10 +237,10 @@ function BuyerManager() {
         <div className="col-span-12 lg:col-span-5 space-y-5">
           <Card className="p-4 border border-border bg-card">
             <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+              <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                 <Smile className="h-3.5 w-3.5 text-emerald-600" /> Rolling NPS index
               </div>
-              <button onClick={() => setActiveTab("nps")} className="text-[9px] font-bold text-primary hover:underline font-mono">Survey Bot →</button>
+              <button onClick={() => setActiveTab("nps")} className="text-xs font-bold text-primary hover:underline font-mono">Survey Bot →</button>
             </div>
             <div className="flex items-center gap-4 text-xs font-semibold">
               <div className="relative h-16 w-16 shrink-0">
@@ -252,10 +252,10 @@ function BuyerManager() {
               </div>
               <div>
                 <div className="text-foreground">Rolling NPS Score (+62)</div>
-                <p className="text-[10px] text-slate-400 font-normal mt-0.5">
+                <p className="text-xs text-slate-400 font-normal mt-0.5">
                   74 Promoters (62%) · 29 Passives (24%) · 17 Detractors (14%)
                 </p>
-                <p className="text-[9.5px] font-mono text-emerald-600 mt-1">
+                <p className="text-xs font-mono text-emerald-600 mt-1">
                   Trend: +54 → +58 → +62 (Improving)
                 </p>
               </div>
@@ -264,15 +264,15 @@ function BuyerManager() {
 
           <Card className="p-4 border border-border bg-card">
             <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
-                <Users className="h-3.5 w-3.5 text-[#2E86AB]" /> Portal Engagement logins
+              <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+                <Users className="h-3.5 w-3.5 text-blue-700" /> Portal Engagement logins
               </div>
             </div>
             <div className="h-20 flex items-end gap-1.5 pt-2">
               {[41, 38, 52, 47, 61, 58, 74, 69].map((v, i) => (
                 <div key={i} className="flex-1 flex flex-col justify-end items-center h-full group">
-                  <div className="w-full bg-[#2E86AB]/80 rounded-t hover:bg-[#2E86AB] transition-colors" style={{ height: `${v}%` }} />
-                  <span className="text-[8px] font-mono text-slate-400 mt-1">W{i+1}</span>
+                  <div className="w-full bg-blue-700/80 rounded-t hover:bg-blue-700 transition-colors" style={{ height: `${v}%` }} />
+                  <span className="text-[10px] font-mono text-slate-400 mt-1">W{i+1}</span>
                 </div>
               ))}
             </div>
@@ -303,7 +303,7 @@ function BuyerManager() {
             ))}
           </select>
         </div>
-        <span className="text-[10px] font-mono font-bold text-slate-400 bg-secondary px-2.5 py-1 rounded border border-border/60">
+        <span className="text-xs font-mono font-bold text-slate-400 bg-secondary px-2.5 py-1 rounded border border-border/60">
           Aadhaar & WhatsApp OTP Authenticated
         </span>
       </div>
@@ -316,34 +316,34 @@ function BuyerManager() {
               <h3 className="font-bold text-sm text-foreground font-display flex items-center gap-1.5">
                 <Home className="h-4 w-4 text-primary" /> Property Overview — Unit {selectedBuyer.unit}
               </h3>
-              <span className="text-[8px] font-mono bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-200">RERA Registered</span>
+              <span className="text-[10px] font-mono bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-200">RERA Registered</span>
             </div>
 
             <div className="grid grid-cols-2 gap-4 text-xs font-semibold">
               <div className="p-3 bg-secondary/30 rounded-xl space-y-1">
-                <div className="text-[9px] text-slate-400 uppercase font-mono">Owner Name</div>
+                <div className="text-xs text-slate-400 uppercase font-mono">Owner Name</div>
                 <div className="text-foreground text-sm">{selectedBuyer.name}</div>
               </div>
               <div className="p-3 bg-secondary/30 rounded-xl space-y-1">
-                <div className="text-[9px] text-slate-400 uppercase font-mono">Total Consideration</div>
+                <div className="text-xs text-slate-400 uppercase font-mono">Total Consideration</div>
                 <div className="text-foreground text-sm">₹{(selectedBuyer.value/100000).toFixed(1)} Lakhs</div>
               </div>
               <div className="p-3 bg-secondary/30 rounded-xl space-y-1">
-                <div className="text-[9px] text-slate-400 uppercase font-mono">Registered Area</div>
+                <div className="text-xs text-slate-400 uppercase font-mono">Registered Area</div>
                 <div className="text-foreground">{selectedBuyer.config === "2BHK" ? "788 sq ft" : "1,142 sq ft"} (Carpet)</div>
               </div>
               <div className="p-3 bg-secondary/30 rounded-xl space-y-1">
-                <div className="text-[9px] text-slate-400 uppercase font-mono">Target RERA Possession</div>
+                <div className="text-xs text-slate-400 uppercase font-mono">Target RERA Possession</div>
                 <div className="text-foreground">December 2026</div>
               </div>
               <div className="p-3 bg-secondary/30 rounded-xl space-y-1">
-                <div className="text-[9px] text-slate-400 uppercase font-mono">Relationship Manager</div>
+                <div className="text-xs text-slate-400 uppercase font-mono">Relationship Manager</div>
                 <div className="text-foreground flex items-center gap-1.5">
                   <User className="h-3 w-3 text-slate-400" /> {selectedBuyer.rm}
                 </div>
               </div>
               <div className="p-3 bg-secondary/30 rounded-xl space-y-1">
-                <div className="text-[9px] text-slate-400 uppercase font-mono">Construction Stage</div>
+                <div className="text-xs text-slate-400 uppercase font-mono">Construction Stage</div>
                 <div className="text-foreground flex items-center gap-1">
                   <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse inline-block" /> Floors 9–14 Structural
                 </div>
@@ -358,7 +358,7 @@ function BuyerManager() {
               <div className="h-3 w-full bg-secondary rounded-full overflow-hidden">
                 <div className="h-full bg-emerald-500 rounded-full" style={{ width: `${(selectedBuyer.paid/selectedBuyer.value)*100}%` }} />
               </div>
-              <div className="flex justify-between text-[10px] text-slate-400 font-mono">
+              <div className="flex justify-between text-xs text-slate-400 font-mono">
                 <span>Paid: ₹{(selectedBuyer.paid/100000).toFixed(1)}L</span>
                 <span>Remaining: ₹{((selectedBuyer.value - selectedBuyer.paid)/100000).toFixed(1)}L</span>
               </div>
@@ -378,7 +378,7 @@ function BuyerManager() {
                 <div key={idx} className="flex justify-between items-center p-2 rounded-xl bg-background border border-border/40">
                   <div className="min-w-0">
                     <div className="font-bold truncate text-foreground">{doc.name}</div>
-                    <div className="text-[9.5px] text-slate-400 font-mono mt-0.5">Date: {doc.date}</div>
+                    <div className="text-xs text-slate-400 font-mono mt-0.5">Date: {doc.date}</div>
                   </div>
                   <button
                     onClick={() => alert(`Downloading ${doc.name} PDF...`)}
@@ -405,11 +405,11 @@ function BuyerManager() {
                   { sender: "System Notification", msg: "Registered Sale Agreement document copy uploaded to portal", time: "25/04/2023" }
                 ].map((log, idx) => (
                   <div key={idx} className="border-b border-border/20 pb-2.5 last:border-0 last:pb-0">
-                    <div className="flex justify-between font-mono text-[9px] text-slate-400 mb-0.5">
+                    <div className="flex justify-between font-mono text-xs text-slate-400 mb-0.5">
                       <span>{log.sender}</span>
                       <span>{log.time}</span>
                     </div>
-                    <p className="text-foreground font-sans text-[11px] leading-relaxed">{log.msg}</p>
+                    <p className="text-foreground font-sans text-xs leading-relaxed">{log.msg}</p>
                   </div>
                 ))}
               </div>
@@ -452,10 +452,10 @@ function BuyerManager() {
   const renderPayments = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatBox label="Installments Received" value="₹16.3Cr" desc="All-time bookings collections" color="text-[#1A3C5E]" />
-        <StatBox label="Total Receivables" value="₹1.61Cr" desc="18 buyers overdue" color="text-[#D85A30]" />
-        <StatBox label="Next Milestone Demands" value="₹6.4Cr" desc="Floor 12 Slab milestone" color="text-[#2E86AB]" />
-        <StatBox label="Tax Receipts Dispatched" value="100%" desc="Auto GST invoices" color="text-[#1D9E75]" />
+        <StatBox label="Installments Received" value="₹16.3Cr" desc="All-time bookings collections" color="text-slate-800" />
+        <StatBox label="Total Receivables" value="₹1.61Cr" desc="18 buyers overdue" color="text-red-600" />
+        <StatBox label="Next Milestone Demands" value="₹6.4Cr" desc="Floor 12 Slab milestone" color="text-blue-700" />
+        <StatBox label="Tax Receipts Dispatched" value="100%" desc="Auto GST invoices" color="text-emerald-600" />
       </div>
 
       <div className="grid grid-cols-12 gap-5">
@@ -465,18 +465,18 @@ function BuyerManager() {
           <div className="space-y-3 font-semibold text-xs text-slate-600">
             {demandNotes.map((d, i) => (
               <div key={i} className="p-3 bg-secondary/35 rounded-xl border border-border/50 space-y-2">
-                <div className="flex justify-between font-mono text-[9.5px]">
+                <div className="flex justify-between font-mono text-xs">
                   <span className="text-slate-400">{d.date}</span>
                   <span className={statusBadge(d.status)}>{d.status}</span>
                 </div>
                 <div>
                   <div className="text-foreground text-sm font-bold">{d.milestone}</div>
-                  <p className="text-[10px] text-slate-400 font-normal mt-0.5">{d.buyers} buyers affected · Value: ₹{(d.val/10000000).toFixed(2)}Cr</p>
+                  <p className="text-xs text-slate-400 font-normal mt-0.5">{d.buyers} buyers affected · Value: ₹{(d.val/10000000).toFixed(2)}Cr</p>
                 </div>
                 {d.status === "Auto-compile pending" && (
                   <button
                     onClick={() => compileDemandNotes(d.milestone)}
-                    className="w-full h-7 rounded bg-ink hover:bg-ink/90 text-cream text-[10px] font-bold uppercase tracking-wider transition-all"
+                    className="w-full h-7 rounded bg-ink hover:bg-ink/90 text-cream text-xs font-bold uppercase tracking-wider transition-all"
                   >
                     Compile & Dispatch Demand Notes
                   </button>
@@ -495,7 +495,7 @@ function BuyerManager() {
                 <button
                   key={f}
                   onClick={() => setPaymentFilter(f)}
-                  className={`h-6 px-2.5 rounded text-[9px] font-bold uppercase tracking-wider border transition-all ${paymentFilter === f ? "bg-ink text-cream border-ink" : "border-border text-slate-500 hover:bg-secondary"}`}
+                  className={`h-6 px-2.5 rounded text-xs font-bold uppercase tracking-wider border transition-all ${paymentFilter === f ? "bg-ink text-cream border-ink" : "border-border text-slate-500 hover:bg-secondary"}`}
                 >
                   {f}
                 </button>
@@ -504,7 +504,7 @@ function BuyerManager() {
           </div>
           <div className="overflow-x-auto scrollbar-none">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3.5 py-2.5">Buyer</th>
                   <th className="px-3.5 py-2.5 font-mono">Unit</th>
@@ -522,20 +522,20 @@ function BuyerManager() {
                     <td className="px-3.5 py-3 font-mono">₹{(b.value/100000).toFixed(1)}L</td>
                     <td className="px-3.5 py-3 font-mono">₹{(b.paid/100000).toFixed(1)}L</td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[9px] font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadge(b.status)}`}>{b.status}</span>
+                      <span className={`text-xs font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadge(b.status)}`}>{b.status}</span>
                     </td>
                     <td className="px-3.5 py-3">
                       {b.status.includes("Overdue") ? (
                         <button
                           onClick={() => alert(`WhatsApp payment reminder sequence triggered for ${b.name}.`)}
-                          className="h-6 px-2 rounded bg-red-600 hover:bg-red-700 text-white text-[9px] font-mono uppercase shrink-0"
+                          className="h-6 px-2 rounded bg-red-600 hover:bg-red-700 text-white text-xs font-mono uppercase shrink-0"
                         >
                           Remind
                         </button>
                       ) : (
                         <button
                           onClick={() => alert(`Receipt PDF REC/GVH/2025/00${b.id} re-dispatched to email.`)}
-                          className="h-6 px-2 rounded border border-border text-[9px] font-mono hover:bg-secondary"
+                          className="h-6 px-2 rounded border border-border text-xs font-mono hover:bg-secondary"
                         >
                           Receipt
                         </button>
@@ -578,19 +578,19 @@ function BuyerManager() {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-3 border border-dashed border-border rounded-2xl flex flex-col items-center justify-center font-mono text-slate-400 text-[10px] h-28 relative">
+              <div className="p-3 border border-dashed border-border rounded-2xl flex flex-col items-center justify-center font-mono text-slate-400 text-xs h-28 relative">
                 <Camera className="h-6 w-6 stroke-[1.5] mb-1" />
                 <span>Concrete casting photo (Tower A)</span>
-                <span className="text-[8px] bg-slate-100 text-slate-500 px-1.5 rounded mt-1">AI selected from site logs</span>
+                <span className="text-[10px] bg-slate-100 text-slate-500 px-1.5 rounded mt-1">AI selected from site logs</span>
               </div>
-              <div className="p-3 border border-dashed border-border rounded-2xl flex flex-col items-center justify-center font-mono text-slate-400 text-[10px] h-28 relative">
+              <div className="p-3 border border-dashed border-border rounded-2xl flex flex-col items-center justify-center font-mono text-slate-400 text-xs h-28 relative">
                 <Camera className="h-6 w-6 stroke-[1.5] mb-1" />
                 <span>Waterproofing photo (Podium)</span>
-                <span className="text-[8px] bg-slate-100 text-slate-500 px-1.5 rounded mt-1">AI selected from site logs</span>
+                <span className="text-[10px] bg-slate-100 text-slate-500 px-1.5 rounded mt-1">AI selected from site logs</span>
               </div>
             </div>
 
-            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-[10px] text-slate-600 space-y-1">
+            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs text-slate-600 space-y-1">
               <strong className="text-slate-800">Dynamic Personalization Rules Active:</strong>
               <p>• Tower A buyers receive Tower A-specific photos & slab completion stats first.</p>
               <p>• Promoters (NPS 9-10) receive a Referral promotion footer badge.</p>
@@ -612,19 +612,19 @@ function BuyerManager() {
           <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">WhatsApp Message Preview</h4></div>
           <div className="p-3 bg-[#ECF3EE] rounded-2xl border border-emerald-100 font-sans text-xs leading-relaxed text-slate-700 font-medium">
             <div className="font-bold text-slate-800 mb-1">Fortiv Greenview Heights ·</div>
-            <div className="h-28 bg-emerald-950/10 rounded-xl mb-2 flex items-center justify-center text-slate-400 font-mono text-[9px] border border-emerald-200">
+            <div className="h-28 bg-emerald-950/10 rounded-xl mb-2 flex items-center justify-center text-slate-400 font-mono text-xs border border-emerald-200">
               [Embedded Hero Construction Photo]
             </div>
             <p><strong>Hi Rajesh!</strong> Here is your construction update #18 for Fortiv Greenview Heights:</p>
             <p className="mt-1">{composingMsg}</p>
-            <div className="bg-white/80 border border-slate-200 rounded-xl p-2 mt-2 font-mono text-[9.5px] text-slate-600">
+            <div className="bg-white/80 border border-slate-200 rounded-xl p-2 mt-2 font-mono text-xs text-slate-600">
               <strong>Progress Dashboard Overview:</strong><br />
               • Overall structural progress: 67% complete<br />
               • Tower A slabs: 84% completed<br />
               • Tower B slabs: 31% completed
             </div>
-            <p className="mt-2 text-slate-400 font-mono text-[9.5px]">Warm regards, Priya Rana (Relationship Manager)</p>
-            <div className="text-right text-[8px] text-slate-400 mt-1">11:42 AM ✓✓</div>
+            <p className="mt-2 text-slate-400 font-mono text-xs">Warm regards, Priya Rana (Relationship Manager)</p>
+            <div className="text-right text-[10px] text-slate-400 mt-1">11:42 AM ✓✓</div>
           </div>
         </Card>
       </div>
@@ -654,19 +654,19 @@ function BuyerManager() {
   const renderSnag = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatBox label="Total Snags Logged" value="49" desc="Post-possession handovers" color="text-[#1A3C5E]" />
-        <StatBox label="Tickets Resolved" value="40" desc="81.6% resolution rate" color="text-[#1D9E75]" />
-        <StatBox label="Active Open Tickets" value="9" desc="Awaiting fix" color="text-[#E8A838]" />
-        <StatBox label="Average Resolution" value="4.2 days" desc="Turnaround SLA speed" color="text-[#2E86AB]" />
+        <StatBox label="Total Snags Logged" value="49" desc="Post-possession handovers" color="text-slate-800" />
+        <StatBox label="Tickets Resolved" value="40" desc="81.6% resolution rate" color="text-emerald-600" />
+        <StatBox label="Active Open Tickets" value="9" desc="Awaiting fix" color="text-amber-500" />
+        <StatBox label="Average Resolution" value="4.2 days" desc="Turnaround SLA speed" color="text-blue-700" />
       </div>
 
       <div className="grid grid-cols-12 gap-5">
         {/* Snags list */}
         <Card className="col-span-12 lg:col-span-7 p-0 border border-border bg-card overflow-hidden">
-          <div className="p-3 bg-secondary/35 border-b border-border text-[10px] font-bold uppercase text-slate-500 font-display">Snag Defect Registry</div>
+          <div className="p-3 bg-secondary/35 border-b border-border text-xs font-bold uppercase text-slate-500 font-display">Snag Defect Registry</div>
           <div className="overflow-x-auto scrollbar-none">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3.5 py-2.5">Ticket</th>
                   <th className="px-3.5 py-2.5">Buyer / Unit</th>
@@ -685,16 +685,16 @@ function BuyerManager() {
                     <td className="px-3.5 py-3 font-mono font-bold text-slate-400">{s.id}</td>
                     <td className="px-3.5 py-3">
                       <div className="font-bold text-foreground">{s.buyer}</div>
-                      <div className="text-[9px] text-slate-400 font-mono font-normal">Unit {s.unit}</div>
+                      <div className="text-xs text-slate-400 font-mono font-normal">Unit {s.unit}</div>
                     </td>
                     <td className="px-3.5 py-3 text-slate-500 font-mono">{s.category}</td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[8.5px] px-2 py-0.5 rounded font-mono font-bold uppercase ${s.severity === "Functional" ? "bg-amber-100 text-amber-700" : s.severity === "Structural" ? "bg-red-100 text-red-700 border border-red-200" : "bg-slate-100 text-slate-500"}`}>
+                      <span className={`text-[10px] px-2 py-0.5 rounded font-mono font-bold uppercase ${s.severity === "Functional" ? "bg-amber-100 text-amber-700" : s.severity === "Structural" ? "bg-red-100 text-red-700 border border-red-200" : "bg-slate-100 text-slate-500"}`}>
                         {s.severity}
                       </span>
                     </td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(s.status)}`}>{s.status}</span>
+                      <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(s.status)}`}>{s.status}</span>
                     </td>
                   </tr>
                 ))}
@@ -706,17 +706,17 @@ function BuyerManager() {
         {/* Selected ticket details */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
           <div className="border-b border-border/40 pb-2 flex justify-between items-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">AI Triage Case File</span>
-            <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(selectedSnag.status)}`}>{selectedSnag.status}</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">AI Triage Case File</span>
+            <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(selectedSnag.status)}`}>{selectedSnag.status}</span>
           </div>
 
           <div className="space-y-3.5 text-xs font-semibold">
             <div>
               <h4 className="font-display font-bold text-foreground text-sm">Ticket {selectedSnag.id} ({selectedSnag.category})</h4>
-              <p className="text-[10px] text-slate-400 font-normal">Buyer: {selectedSnag.buyer} · {selectedSnag.phone}</p>
+              <p className="text-xs text-slate-400 font-normal">Buyer: {selectedSnag.buyer} · {selectedSnag.phone}</p>
             </div>
 
-            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-[9.5px] space-y-1.5 text-slate-600">
+            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs space-y-1.5 text-slate-600">
               <div className="flex justify-between"><span>Date Opened:</span><span className="text-foreground">{selectedSnag.opened}</span></div>
               <div className="flex justify-between"><span>Date Resolved:</span><span className="text-foreground">{selectedSnag.resolved}</span></div>
               <div className="flex justify-between"><span>Severity Tier:</span><span className="text-foreground font-bold">{selectedSnag.severity}</span></div>
@@ -724,11 +724,11 @@ function BuyerManager() {
             </div>
 
             <div className="p-3 bg-background border border-border/50 rounded-xl">
-              <span className="text-[9px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Issue Description & Note:</span>
-              <p className="text-foreground text-[11px] leading-relaxed font-sans">{selectedSnag.note}</p>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">Issue Description & Note:</span>
+              <p className="text-foreground text-xs leading-relaxed font-sans">{selectedSnag.note}</p>
             </div>
 
-            <div className="p-2.5 rounded-xl border border-emerald-200 bg-emerald-50/10 text-emerald-700 text-[10px] font-mono leading-relaxed">
+            <div className="p-2.5 rounded-xl border border-emerald-200 bg-emerald-50/10 text-emerald-700 text-xs font-mono leading-relaxed">
               ⚡ <strong>AI Triage Rule:</strong> Within 12-month post-handover warranty coverage period. Work order dispatch pre-approved.
             </div>
 
@@ -784,7 +784,7 @@ function BuyerManager() {
         <Card className="col-span-12 lg:col-span-7 p-0 border border-border bg-card overflow-hidden">
           <div className="overflow-x-auto scrollbar-none">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3.5 py-2.5">Listing ID</th>
                   <th className="px-3.5 py-2.5">Type</th>
@@ -803,13 +803,13 @@ function BuyerManager() {
                   >
                     <td className="px-3.5 py-3 font-mono font-bold text-slate-400">{r.id}</td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[8.5px] px-2 py-0.5 rounded font-mono font-bold uppercase ${r.type === "Rental" ? "bg-blue-50 text-blue-700" : "bg-purple-50 text-purple-700"}`}>{r.type}</span>
+                      <span className={`text-[10px] px-2 py-0.5 rounded font-mono font-bold uppercase ${r.type === "Rental" ? "bg-blue-50 text-blue-700" : "bg-purple-50 text-purple-700"}`}>{r.type}</span>
                     </td>
                     <td className="px-3.5 py-3 font-mono font-bold text-slate-700">{r.unit}</td>
                     <td className="px-3.5 py-3 text-slate-500">{r.owner}</td>
                     <td className="px-3.5 py-3 font-mono font-bold">{r.type === "Rental" ? `₹${(r.asking/1000).toFixed(0)}k/mo` : `₹${(r.asking/100000).toFixed(1)}L`}</td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(r.status)}`}>{r.status}</span>
+                      <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(r.status)}`}>{r.status}</span>
                     </td>
                   </tr>
                 ))}
@@ -825,17 +825,17 @@ function BuyerManager() {
           <div className="space-y-3.5 text-xs font-semibold">
             <div>
               <h4 className="font-display font-bold text-foreground text-sm">Unit {selectedListing.unit} ({selectedListing.type})</h4>
-              <p className="text-[10px] text-slate-400 font-normal">Assigned In-House Broker: {selectedListing.agent}</p>
+              <p className="text-xs text-slate-400 font-normal">Assigned In-House Broker: {selectedListing.agent}</p>
             </div>
 
-            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-[9.5px] space-y-1 text-slate-600">
+            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs space-y-1 text-slate-600">
               <div className="flex justify-between"><span>Owner Name:</span><span className="text-foreground">{selectedListing.owner}</span></div>
               <div className="flex justify-between"><span>Asking Quote:</span><span className="text-foreground font-bold">{selectedListing.type === "Rental" ? `₹${selectedListing.asking.toLocaleString()}/mo` : `₹${(selectedListing.asking/100000).toFixed(1)} Lakhs`}</span></div>
               <div className="flex justify-between"><span>AI valuation (AVM):</span><span className="text-emerald-600 font-bold">{selectedListing.type === "Rental" ? `₹${selectedListing.avm.toLocaleString()}/mo` : `₹${(selectedListing.avm/100000).toFixed(1)} Lakhs`}</span></div>
               <div className="flex justify-between"><span>Inquiries Received:</span><span className="text-foreground font-bold">{selectedListing.inquiries}</span></div>
             </div>
 
-            <div className="p-2.5 rounded-xl border border-purple-200 bg-purple-50/10 text-purple-700 text-[10px] font-mono leading-relaxed">
+            <div className="p-2.5 rounded-xl border border-purple-200 bg-purple-50/10 text-purple-700 text-xs font-mono leading-relaxed">
               ⭐ <strong>Fortiv Brokerage Fee (1.5%):</strong> Estimated revenue: ₹{selectedListing.type === "Rental" ? "₹320" : `${(selectedListing.asking * 0.015 / 100000).toFixed(2)} Lakhs`} upon close.
             </div>
 
@@ -881,7 +881,7 @@ function BuyerManager() {
       <div className="grid grid-cols-12 gap-5">
         {/* Step checklist */}
         <Card className="col-span-12 lg:col-span-7 p-0 border border-border bg-card overflow-hidden">
-          <div className="p-3 bg-secondary/35 border-b border-border text-[10px] font-bold uppercase text-slate-500 font-display">Legal Transfer Steps</div>
+          <div className="p-3 bg-secondary/35 border-b border-border text-xs font-bold uppercase text-slate-500 font-display">Legal Transfer Steps</div>
           <div className="overflow-x-auto scrollbar-none">
             <table className="w-full text-left text-xs divide-y divide-border/60">
               <tbody className="divide-y divide-border/40 bg-background font-medium text-foreground">
@@ -889,15 +889,15 @@ function BuyerManager() {
                   <tr key={s.id} className="hover:bg-secondary/15">
                     <td className="px-3.5 py-3 font-mono font-bold text-slate-400 w-8">{s.id}</td>
                     <td className="px-3.5 py-3 text-foreground">{s.step}</td>
-                    <td className="px-3.5 py-3 text-slate-400 font-mono text-[10px]">{s.owner}</td>
+                    <td className="px-3.5 py-3 text-slate-400 font-mono text-xs">{s.owner}</td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(s.status)}`}>{s.status}</span>
+                      <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(s.status)}`}>{s.status}</span>
                     </td>
                     <td className="px-3.5 py-3 text-right">
                       {s.status !== "Completed" && (
                         <button
                           onClick={() => markStepComplete(s.id)}
-                          className="h-6 px-2 rounded bg-ink hover:bg-ink/90 text-cream text-[9px] font-mono uppercase"
+                          className="h-6 px-2 rounded bg-ink hover:bg-ink/90 text-cream text-xs font-mono uppercase"
                         >
                           Complete
                         </button>
@@ -919,9 +919,9 @@ function BuyerManager() {
               <div key={i} className="flex justify-between items-center border-b border-border/30 pb-2 last:border-0 last:pb-0">
                 <div>
                   <div className="text-foreground">{a.name}</div>
-                  <div className="text-[9.5px] text-slate-400 font-normal">Vendor: {a.vendor} · Exp: {a.expiry}</div>
+                  <div className="text-xs text-slate-400 font-normal">Vendor: {a.vendor} · Exp: {a.expiry}</div>
                 </div>
-                <span className="text-[9.5px] font-mono font-bold bg-amber-50 text-amber-700 px-1.5 py-0.5 rounded shrink-0">{a.status}</span>
+                <span className="text-xs font-mono font-bold bg-amber-50 text-amber-700 px-1.5 py-0.5 rounded shrink-0">{a.status}</span>
               </div>
             ))}
             <button
@@ -945,22 +945,22 @@ function BuyerManager() {
   const renderNps = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatBox label="NPS Survey responses" value="68%" desc="119 of 175 surveyed" color="text-[#1A3C5E]" />
-        <StatBox label="Attributed Bookings" value="4" desc="From referrals" color="text-[#1D9E75]" />
-        <StatBox label="Referral Revenue" value="₹2.24Cr" desc="Active pipeline value" color="text-[#2E86AB]" />
-        <StatBox label="Detractor Cases Pending" value="3" desc="Awaiting RM callbacks" color="text-[#D85A30]" />
+        <StatBox label="NPS Survey responses" value="68%" desc="119 of 175 surveyed" color="text-slate-800" />
+        <StatBox label="Attributed Bookings" value="4" desc="From referrals" color="text-emerald-600" />
+        <StatBox label="Referral Revenue" value="₹2.24Cr" desc="Active pipeline value" color="text-blue-700" />
+        <StatBox label="Detractor Cases Pending" value="3" desc="Awaiting RM callbacks" color="text-red-600" />
       </div>
 
       <div className="grid grid-cols-12 gap-5">
         {/* Promoters leaderboard */}
         <Card className="col-span-12 lg:col-span-7 p-0 border border-border bg-card overflow-hidden">
-          <div className="p-3 bg-secondary/35 border-b border-border text-[10px] font-bold uppercase text-slate-500 font-display flex items-center justify-between">
+          <div className="p-3 bg-secondary/35 border-b border-border text-xs font-bold uppercase text-slate-500 font-display flex items-center justify-between">
             <span>Promoter Loyalty Leaderboard</span>
-            <span className="text-[9px] text-emerald-600 font-mono">Disbursing ₹10,000 per booking</span>
+            <span className="text-xs text-emerald-600 font-mono">Disbursing ₹10,000 per booking</span>
           </div>
           <div className="overflow-x-auto scrollbar-none">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3.5 py-2.5">Promoter</th>
                   <th className="px-3.5 py-2.5 font-mono">Unit</th>
@@ -981,7 +981,7 @@ function BuyerManager() {
                     <td className="px-3.5 py-3">
                       <button
                         onClick={() => alert(`Unique referral tracking link: fortiv.in/loyalty/ref-00${p.id} re-dispatched.`)}
-                        className="h-6 px-2 rounded bg-ink hover:bg-ink/90 text-cream text-[9px] font-mono uppercase"
+                        className="h-6 px-2 rounded bg-ink hover:bg-ink/90 text-cream text-xs font-mono uppercase"
                       >
                         Referral Link
                       </button>
@@ -998,18 +998,18 @@ function BuyerManager() {
           <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Detractor Followup Intervention Queue</h4></div>
           <div className="space-y-3 font-semibold text-xs">
             {detractors.map((d, i) => (
-              <div key={i} className="p-3 rounded-xl border border-red-200 bg-red-50/15 space-y-2 text-[#D85A30]">
-                <div className="flex justify-between font-mono text-[9px]">
+              <div key={i} className="p-3 rounded-xl border border-red-200 bg-red-50/15 space-y-2 text-red-600">
+                <div className="flex justify-between font-mono text-xs">
                   <span>Score: ★ {d.nps} ({d.class})</span>
                   <span>Unit {d.unit}</span>
                 </div>
                 <div>
                   <div className="font-bold text-foreground">{d.name}</div>
-                  <p className="text-[10px] font-normal text-slate-500 mt-0.5">Assigned Liaison Manager: {d.rm}</p>
+                  <p className="text-xs font-normal text-slate-500 mt-0.5">Assigned Liaison Manager: {d.rm}</p>
                 </div>
                 <button
                   onClick={() => alert(`Urgent RM scheduling task dispatched to ${d.rm} for detractor call.`)}
-                  className="w-full h-7 rounded bg-ink text-cream hover:bg-ink/90 text-[9.5px] font-bold uppercase tracking-wider font-mono transition-all"
+                  className="w-full h-7 rounded bg-ink text-cream hover:bg-ink/90 text-xs font-bold uppercase tracking-wider font-mono transition-all"
                 >
                   Schedule Priority Callback
                 </button>
@@ -1030,18 +1030,18 @@ function BuyerManager() {
               <Card
                 key={mod.id}
                 onClick={() => setActiveTab(mod.id as TabType)}
-                className="submodule-card p-5 cursor-pointer flex flex-col justify-between group h-44"
+                className="bg-card border shadow-sm rounded-xl p-5 cursor-pointer flex flex-col justify-between group h-44"
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full border font-mono text-emerald-700 bg-emerald-50 border-emerald-100">
+                    <span className="inline-flex items-center gap-1 text-xs font-bold px-2 py-0.5 rounded-full border font-mono text-emerald-700 bg-emerald-50 border-emerald-100">
                       <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> {mod.status}
                     </span>
                   </div>
                   <h3 className="text-sm font-bold text-foreground group-hover:text-ink transition-colors mt-1 font-display">{mod.name}</h3>
                   <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed line-clamp-2 font-medium">{mod.desc}</p>
                 </div>
-                <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-[11px] font-bold text-muted-foreground group-hover:text-foreground">
+                <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
                   <span className="font-mono font-bold text-foreground">{mod.stats}</span>
                   <span className="flex items-center gap-0.5 text-ink group-hover:underline font-mono">Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
                 </div>
@@ -1065,10 +1065,10 @@ function BuyerManager() {
 function StatBox({ label, value, desc, color }: { label: string; value: string; desc: string; color: string }) {
   return (
     <Card className="p-4 flex flex-col justify-between relative min-h-24 border border-border bg-card">
-      <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-display">{label}</div>
+      <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display">{label}</div>
       <div className="mt-2 flex items-baseline justify-between">
         <div className={`font-display text-2xl font-bold tracking-tight font-mono ${color}`}>{value}</div>
-        <span className="text-[9px] font-semibold text-muted-foreground">{desc}</span>
+        <span className="text-xs font-semibold text-muted-foreground">{desc}</span>
       </div>
     </Card>
   );

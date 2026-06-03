@@ -240,7 +240,7 @@ function ConversationsManager() {
     } as const;
 
     const cls = maps[channel as keyof typeof maps] || "bg-slate-100 text-slate-600 border-slate-200";
-    return <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${cls}`}>{channel}</span>;
+    return <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full border ${cls}`}>{channel}</span>;
   };
 
   // --- Sub-navigation Items ---
@@ -826,18 +826,18 @@ function ConversationsManager() {
             <Card 
               key={agent.id}
               onClick={() => setActiveTab(agent.id as TabType)}
-              className="submodule-card p-5 cursor-pointer flex flex-col justify-between group h-48"
+              className="bg-card border shadow-sm rounded-xl p-5 cursor-pointer flex flex-col justify-between group h-48"
             >
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <span className={`text-[10px] font-bold font-mono px-2 py-0.5 rounded-full uppercase border ${
+                  <span className={`text-xs font-bold font-mono px-2 py-0.5 rounded-full uppercase border ${
                     agent.id === "overview" 
                       ? "bg-slate-100 text-slate-600 border-slate-200" 
                       : "bg-ink/5 text-ink border-ink/10"
                   }`}>
                     {agent.type}
                   </span>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
+                  <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> {agent.status}
                   </span>
                 </div>
@@ -848,7 +848,7 @@ function ConversationsManager() {
                   {agent.desc}
                 </p>
               </div>
-              <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-[11px] font-bold text-muted-foreground group-hover:text-foreground">
+              <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
                 <span className="font-mono font-bold text-foreground">{agent.stats}</span>
                 <span className="flex items-center gap-0.5 text-ink group-hover:underline">
                   Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -866,7 +866,7 @@ function ConversationsManager() {
     return (
       <div className="space-y-4 animate-in fade-in duration-300">
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-          <StatBox label="Conversations Today" value="84" desc="Across all channels" color="text-[#0E86E9]" />
+          <StatBox label="Conversations Today" value="84" desc="Across all channels" color="text-blue-600" />
           <StatBox label="Avg Response Time" value="12s" desc="Mean first response" color="text-emerald-600" />
           <StatBox label="Site Visits Booked" value="7" desc="AI booked today" color="text-primary" />
           <StatBox label="Leads Qualified" value="31" desc="Passed AI profiling" color="text-emerald-600" />
@@ -878,7 +878,7 @@ function ConversationsManager() {
           <Card className="col-span-12 lg:col-span-7 p-4 flex flex-col h-[400px] border border-border bg-card">
             <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
               <div>
-                <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+                <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> Live Conversation Feed
                 </div>
                 <h3 className="text-sm font-bold text-foreground">AI Operations Tracker</h3>
@@ -897,7 +897,7 @@ function ConversationsManager() {
                       <div className="font-semibold text-xs text-foreground flex items-center gap-1.5">
                         {c.name}
                       </div>
-                      <div className="text-[10px] text-muted-foreground truncate max-w-xs mt-0.5 font-medium">
+                      <div className="text-xs text-muted-foreground truncate max-w-xs mt-0.5 font-medium">
                         "{c.msg}"
                       </div>
                     </div>
@@ -906,7 +906,7 @@ function ConversationsManager() {
                     {renderPlatformBadge(c.channel)}
                     <div className="text-right">
                       <div className="text-xs font-bold text-emerald-600 font-display">{c.outcome}</div>
-                      <div className="text-[9px] text-muted-foreground font-mono mt-0.5">{c.mins}</div>
+                      <div className="text-xs text-muted-foreground font-mono mt-0.5">{c.mins}</div>
                     </div>
                   </div>
                 </div>
@@ -917,7 +917,7 @@ function ConversationsManager() {
           {/* SVG Donut Chart */}
           <Card className="col-span-12 lg:col-span-5 p-4 flex flex-col h-[400px] border border-border bg-card">
             <div className="mb-3 border-b border-border/40 pb-2">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Channel Split</div>
+              <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Channel Split</div>
               <h3 className="text-sm font-bold text-foreground">Channel Engagement Share</h3>
             </div>
             <div className="flex-1 flex flex-col justify-between">
@@ -936,19 +936,19 @@ function ConversationsManager() {
                 </svg>
                 <div className="absolute inset-0 flex flex-col justify-center items-center">
                   <div className="text-2xl font-black font-display text-foreground">84</div>
-                  <div className="text-[10px] text-muted-foreground font-semibold">Chats Today</div>
+                  <div className="text-xs text-muted-foreground font-semibold">Chats Today</div>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 border-t border-border/40 pt-3">
                 {[
-                  { channel: "WhatsApp Chatbot", val: "42%", color: "bg-[#25D366]" },
-                  { channel: "Website Widget", val: "21%", color: "bg-[#2E86AB]" },
-                  { channel: "Voice IVR", val: "18%", color: "bg-[#1A3C5E]" },
-                  { channel: "Email AI Responder", val: "12%", color: "bg-[#E8A838]" },
+                  { channel: "WhatsApp Chatbot", val: "42%", color: "bg-emerald-500" },
+                  { channel: "Website Widget", val: "21%", color: "bg-blue-700" },
+                  { channel: "Voice IVR", val: "18%", color: "bg-slate-800" },
+                  { channel: "Email AI Responder", val: "12%", color: "bg-amber-500" },
                   { channel: "Telegram Bot", val: "7%", color: "bg-[#29B6F6]" }
                 ].map((c) => (
-                  <div key={c.channel} className="flex items-center justify-between text-[11px] font-medium">
+                  <div key={c.channel} className="flex items-center justify-between text-xs font-medium">
                     <span className="flex items-center gap-1.5 text-muted-foreground truncate">
                       <span className={`h-2.5 w-2.5 rounded-sm shrink-0 ${c.color}`} />
                       {c.channel}
@@ -974,7 +974,7 @@ function ConversationsManager() {
           <Card className="col-span-12 md:col-span-4 lg:col-span-3 border border-border p-0 overflow-hidden flex flex-col h-[540px] bg-[#f0f2f5] dark:bg-[#111b21] shrink-0">
             <div className="p-3 bg-white dark:bg-[#202c33] border-b border-border flex items-center justify-between">
               <span className="text-xs font-bold text-foreground">Fortiv AI WhatsApp</span>
-              <span className="text-[9px] bg-emerald-500 text-white px-2 py-0.5 rounded font-bold uppercase">Active</span>
+              <span className="text-xs bg-emerald-500 text-white px-2 py-0.5 rounded font-bold uppercase">Active</span>
             </div>
             <div className="flex-1 overflow-y-auto divide-y divide-border/20 bg-white">
               {(Object.keys(whatsappThreads) as WaThreadId[]).map((threadKey) => {
@@ -990,15 +990,15 @@ function ConversationsManager() {
                       active ? "bg-slate-100" : "hover:bg-slate-50"
                     }`}
                   >
-                    <div className="h-9 w-9 rounded-full bg-[#25d366]/10 text-[#25d366] border border-[#25d366]/20 font-bold text-xs flex items-center justify-center shrink-0">
+                    <div className="h-9 w-9 rounded-full bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 font-bold text-xs flex items-center justify-center shrink-0">
                       {thread.avatar}
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="flex justify-between items-center">
                         <span className="text-xs font-bold text-foreground truncate">{thread.name}</span>
-                        <span className="text-[8px] text-slate-400 font-mono">online</span>
+                        <span className="text-[10px] text-slate-400 font-mono">online</span>
                       </div>
-                      <div className="text-[10px] text-slate-500 truncate mt-0.5 font-medium">"{thread.lastMsg}"</div>
+                      <div className="text-xs text-slate-500 truncate mt-0.5 font-medium">"{thread.lastMsg}"</div>
                     </div>
                   </div>
                 );
@@ -1010,14 +1010,14 @@ function ConversationsManager() {
           <div className="col-span-12 md:col-span-8 lg:col-span-5 flex flex-col bg-[#efeae2] dark:bg-[#0b141a] border border-border/60 rounded-2xl overflow-hidden h-[540px] shadow-sm relative">
             
             {/* Header */}
-            <div className="px-4 py-3 bg-[#25d366] text-white flex items-center justify-between shrink-0">
+            <div className="px-4 py-3 bg-emerald-500 text-white flex items-center justify-between shrink-0">
               <div className="flex items-center gap-3">
                 <div className="h-9 w-9 rounded-full bg-white/15 grid place-items-center text-white shrink-0">
                   <Sparkles className="h-5 w-5" />
                 </div>
                 <div>
                   <div className="text-sm font-bold">Fortiv AI Assistant</div>
-                  <div className="text-[10px] text-white/90 font-medium flex items-center gap-1.5">
+                  <div className="text-xs text-white/90 font-medium flex items-center gap-1.5">
                     {waTyping ? (
                       <span>typing...</span>
                     ) : (
@@ -1041,7 +1041,7 @@ function ConversationsManager() {
               className="flex-1 overflow-y-auto p-4 space-y-3 bg-[url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')] bg-repeat"
             >
               <div className="flex justify-center mb-4">
-                <div className="bg-[#e1f3fb] text-[#54656f] text-[9px] px-2.5 py-0.5 rounded uppercase tracking-widest font-bold shadow-sm font-display">
+                <div className="bg-[#e1f3fb] text-[#54656f] text-xs px-2.5 py-0.5 rounded uppercase tracking-widest font-bold shadow-sm font-display">
                   Autoplay Session (Fortiv AI Assistant)
                 </div>
               </div>
@@ -1056,7 +1056,7 @@ function ConversationsManager() {
                         : "bg-white text-[#111b21] rounded-tl-none border border-black/5"
                     }`}>
                       <div className="pb-4 whitespace-pre-wrap">{m.text}</div>
-                      <div className="absolute right-2 bottom-0.5 flex items-center gap-0.5 text-[8px] text-slate-500 font-mono">
+                      <div className="absolute right-2 bottom-0.5 flex items-center gap-0.5 text-[10px] text-slate-500 font-mono">
                         {m.time}
                         {isUser && <CheckCheck className="h-3 w-3 text-[#53bdeb]" />}
                       </div>
@@ -1082,7 +1082,7 @@ function ConversationsManager() {
               <div className="flex-1 bg-white dark:bg-[#2a3942] rounded-lg px-3 py-2 text-xs text-slate-400 font-medium select-none shadow-inner">
                 {waPlaying ? "AI Chatbot is handling inquiry autonomously..." : "Press Replay Demo to play conversation simulator"}
               </div>
-              <button aria-label="Send message" className="h-9 w-9 bg-[#25d366] rounded-full grid place-items-center text-white hover:bg-[#128c7e] transition-colors shadow-sm">
+              <button aria-label="Send message" className="h-9 w-9 bg-emerald-500 rounded-full grid place-items-center text-white hover:bg-emerald-700 transition-colors shadow-sm">
                 <Send className="h-4 w-4 ml-0.5" />
               </button>
             </div>
@@ -1094,7 +1094,7 @@ function ConversationsManager() {
               <div>
                 <div className="flex items-center gap-1.5 mb-4 text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded border border-emerald-100 w-fit">
                   <Sparkles className="h-3.5 w-3.5" />
-                  <span className="text-[10px] font-bold uppercase tracking-widest font-display">AI Inbound Qualification</span>
+                  <span className="text-xs font-bold uppercase tracking-widest font-display">AI Inbound Qualification</span>
                 </div>
                 <h3 className="text-sm font-bold text-foreground mb-1">Live Qualification Profile</h3>
                 <p className="text-xs text-muted-foreground mb-5 font-semibold">Active thread: <strong>{activeWaThreadData.name}</strong></p>
@@ -1146,19 +1146,19 @@ function ConversationsManager() {
         {/* WhatsApp Metrics */}
         <Card className="p-4 grid grid-cols-2 md:grid-cols-4 gap-4 border border-border bg-card">
           <div className="text-center md:border-r border-border/40">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">Conversations Today</div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Conversations Today</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">42</div>
           </div>
           <div className="text-center md:border-r border-border/40">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">Visits Booked MTD</div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Visits Booked MTD</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">14</div>
           </div>
           <div className="text-center md:border-r border-border/40">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">Escalation Handoffs</div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Escalation Handoffs</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">4</div>
           </div>
           <div className="text-center">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">Languages Used</div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Languages Used</div>
             <div className="text-xs font-bold text-foreground font-mono mt-1">EN: 28 · HI: 9 · GU: 5</div>
           </div>
         </Card>
@@ -1175,23 +1175,23 @@ function ConversationsManager() {
         {/* Recovery stats bar */}
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
           <div className="p-3 rounded-2xl bg-card border border-border text-center">
-            <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400 font-display">Missed Calls Today</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400 font-display">Missed Calls Today</div>
             <div className="text-lg font-bold mt-1 text-foreground font-mono">{recoveryRateStats.missedCallsToday}</div>
           </div>
           <div className="p-3 rounded-2xl bg-card border border-border text-center">
-            <div className="text-[9px] font-bold uppercase tracking-wider text-emerald-600 font-display">WhatsApp Recovered</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-emerald-600 font-display">WhatsApp Recovered</div>
             <div className="text-lg font-bold mt-1 text-emerald-600 font-mono">{recoveryRateStats.recoveredWa}</div>
           </div>
           <div className="p-3 rounded-2xl bg-card border border-border text-center">
-            <div className="text-[9px] font-bold uppercase tracking-wider text-[#0E86E9] font-display">Recovery Rate</div>
-            <div className="text-lg font-bold mt-1 text-[#0E86E9] font-mono">{recoveryRateStats.recoveryRate}</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-blue-600 font-display">Recovery Rate</div>
+            <div className="text-lg font-bold mt-1 text-blue-600 font-mono">{recoveryRateStats.recoveryRate}</div>
           </div>
           <div className="p-3 rounded-2xl bg-card border border-border text-center">
-            <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400 font-display">SMS Fallbacks</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400 font-display">SMS Fallbacks</div>
             <div className="text-lg font-bold mt-1 text-foreground font-mono">{recoveryRateStats.smsSent}</div>
           </div>
           <div className="p-3 rounded-2xl bg-card border border-border text-center">
-            <div className="text-[9px] font-bold uppercase tracking-wider text-emerald-600 font-display">Overall Recovery</div>
+            <div className="text-xs font-bold uppercase tracking-wider text-emerald-600 font-display">Overall Recovery</div>
             <div className="text-lg font-bold mt-1 text-emerald-600 font-mono">{recoveryRateStats.overallRecoveryRate}</div>
           </div>
         </div>
@@ -1202,19 +1202,19 @@ function ConversationsManager() {
           <Card className="col-span-12 lg:col-span-8 p-0 overflow-hidden h-[450px] flex flex-col border border-border bg-card">
             <div className="p-3.5 bg-secondary/30 border-b border-border flex justify-between items-center">
               <h3 className="font-bold text-xs text-foreground font-display">Unified Missed Call Recovery Log</h3>
-              <span className="text-[10px] text-muted-foreground font-bold">Telephony webhook status: 🟢 LISTENING</span>
+              <span className="text-xs text-muted-foreground font-bold">Telephony webhook status: 🟢 LISTENING</span>
             </div>
             <div className="overflow-x-auto flex-1 scrollbar-none">
               <table className="w-full text-xs text-left">
                 <thead>
                   <tr className="bg-secondary/20 border-b border-border/80 text-muted-foreground">
-                    <th className="px-4 py-2.5 font-bold text-[9px] uppercase tracking-widest font-display">Time</th>
-                    <th className="px-4 py-2.5 font-bold text-[9px] uppercase tracking-widest font-display">Caller</th>
-                    <th className="px-4 py-2.5 font-bold text-[9px] uppercase tracking-widest font-display">Auto WA Sent</th>
-                    <th className="px-4 py-2.5 font-bold text-[9px] uppercase tracking-widest font-display">Delay</th>
-                    <th className="px-4 py-2.5 font-bold text-[9px] uppercase tracking-widest font-display">WA Response</th>
-                    <th className="px-4 py-2.5 font-bold text-[9px] uppercase tracking-widest font-display">Outcome</th>
-                    <th className="px-4 py-2.5 font-bold text-[9px] uppercase tracking-widest font-display">Status</th>
+                    <th className="px-4 py-2.5 font-bold text-xs uppercase tracking-widest font-display">Time</th>
+                    <th className="px-4 py-2.5 font-bold text-xs uppercase tracking-widest font-display">Caller</th>
+                    <th className="px-4 py-2.5 font-bold text-xs uppercase tracking-widest font-display">Auto WA Sent</th>
+                    <th className="px-4 py-2.5 font-bold text-xs uppercase tracking-widest font-display">Delay</th>
+                    <th className="px-4 py-2.5 font-bold text-xs uppercase tracking-widest font-display">WA Response</th>
+                    <th className="px-4 py-2.5 font-bold text-xs uppercase tracking-widest font-display">Outcome</th>
+                    <th className="px-4 py-2.5 font-bold text-xs uppercase tracking-widest font-display">Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border/40">
@@ -1231,7 +1231,7 @@ function ConversationsManager() {
                         <td className="px-4 py-3 font-mono text-muted-foreground">{call.time}</td>
                         <td className="px-4 py-3 font-bold text-foreground">
                           <div>{call.caller}</div>
-                          <div className="text-[9px] text-muted-foreground font-medium font-sans">{call.name}</div>
+                          <div className="text-xs text-muted-foreground font-medium font-sans">{call.name}</div>
                         </td>
                         <td className="px-4 py-3 font-mono">{call.waSent}</td>
                         <td className="px-4 py-3 font-mono text-slate-500">{call.delay}</td>
@@ -1242,7 +1242,7 @@ function ConversationsManager() {
                         </td>
                         <td className="px-4 py-3 font-bold text-slate-700">{call.outcome}</td>
                         <td className="px-4 py-3">
-                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                          <span className={`px-2 py-0.5 rounded text-xs font-bold ${
                             call.status === "Recovered" 
                               ? "bg-emerald-50 text-emerald-600 border border-emerald-100" 
                               : call.status === "Pending"
@@ -1264,7 +1264,7 @@ function ConversationsManager() {
           <Card className="col-span-12 lg:col-span-4 p-4 flex flex-col justify-between h-[450px] border border-border bg-card">
             <div>
               <div className="mb-3 border-b border-border/40 pb-2">
-                <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Timeline Tracker</div>
+                <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Timeline Tracker</div>
                 <h3 className="text-sm font-bold text-foreground">Recovery Audit: {activeCall?.text}</h3>
               </div>
 
@@ -1282,8 +1282,8 @@ function ConversationsManager() {
                       <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                     </span>
                     <div className="text-xs font-bold text-foreground">{step.title}</div>
-                    <div className="text-[10px] text-muted-foreground font-semibold mt-0.5">{step.desc}</div>
-                    <div className="text-[9px] text-primary font-mono mt-0.5">{step.time}</div>
+                    <div className="text-xs text-muted-foreground font-semibold mt-0.5">{step.desc}</div>
+                    <div className="text-xs text-primary font-mono mt-0.5">{step.time}</div>
                   </div>
                 ))}
               </div>
@@ -1300,7 +1300,7 @@ function ConversationsManager() {
         <Card className="p-0 overflow-hidden border border-border bg-card">
           <div className="p-3.5 bg-secondary/30 border-b border-border flex justify-between items-center">
             <h3 className="font-bold text-xs text-foreground font-display">Callback Required Queue (Manual Fallback)</h3>
-            <span className="text-[10px] bg-red-50 text-red-600 border border-red-100 font-bold px-2 py-0.5 rounded-full">
+            <span className="text-xs bg-red-50 text-red-600 border border-red-100 font-bold px-2 py-0.5 rounded-full">
               Priority Flags: Active
             </span>
           </div>
@@ -1308,17 +1308,17 @@ function ConversationsManager() {
             <table className="w-full text-xs text-left">
               <thead>
                 <tr className="bg-secondary/15 border-b border-border/80 text-muted-foreground">
-                  <th className="px-4 py-2 font-bold text-[9px] uppercase tracking-widest font-display">Source</th>
-                  <th className="px-4 py-2 font-bold text-[9px] uppercase tracking-widest font-display">Phone</th>
-                  <th className="px-4 py-2 font-bold text-[9px] uppercase tracking-widest font-display">Call Time</th>
-                  <th className="px-4 py-2 font-bold text-[9px] uppercase tracking-widest font-display">WA Sent Time</th>
-                  <th className="px-4 py-2 font-bold text-[9px] uppercase tracking-widest font-display">WA Response</th>
-                  <th className="px-4 py-2 font-bold text-[9px] uppercase tracking-widest font-display">SMS Sent</th>
-                  <th className="px-4 py-2 font-bold text-[9px] uppercase tracking-widest font-display">SMS Response</th>
-                  <th className="px-4 py-2 font-bold text-[9px] uppercase tracking-widest font-display">CRM Status</th>
-                  <th className="px-4 py-2 font-bold text-[9px] uppercase tracking-widest font-display">Priority</th>
-                  <th className="px-4 py-2 font-bold text-[9px] uppercase tracking-widest font-display">Assigned Agent</th>
-                  <th className="px-4 py-2 font-bold text-[9px] uppercase tracking-widest font-display">Notes</th>
+                  <th className="px-4 py-2 font-bold text-xs uppercase tracking-widest font-display">Source</th>
+                  <th className="px-4 py-2 font-bold text-xs uppercase tracking-widest font-display">Phone</th>
+                  <th className="px-4 py-2 font-bold text-xs uppercase tracking-widest font-display">Call Time</th>
+                  <th className="px-4 py-2 font-bold text-xs uppercase tracking-widest font-display">WA Sent Time</th>
+                  <th className="px-4 py-2 font-bold text-xs uppercase tracking-widest font-display">WA Response</th>
+                  <th className="px-4 py-2 font-bold text-xs uppercase tracking-widest font-display">SMS Sent</th>
+                  <th className="px-4 py-2 font-bold text-xs uppercase tracking-widest font-display">SMS Response</th>
+                  <th className="px-4 py-2 font-bold text-xs uppercase tracking-widest font-display">CRM Status</th>
+                  <th className="px-4 py-2 font-bold text-xs uppercase tracking-widest font-display">Priority</th>
+                  <th className="px-4 py-2 font-bold text-xs uppercase tracking-widest font-display">Assigned Agent</th>
+                  <th className="px-4 py-2 font-bold text-xs uppercase tracking-widest font-display">Notes</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border/40 font-medium">
@@ -1332,17 +1332,17 @@ function ConversationsManager() {
                     <td className="px-4 py-2.5 text-slate-600">{lead.smsSent}</td>
                     <td className="px-4 py-2.5 text-red-500">{lead.smsResponse}</td>
                     <td className="px-4 py-2.5">
-                      <span className="text-[10px] bg-red-50 text-red-600 border border-red-200 px-2 py-0.5 rounded font-black">
+                      <span className="text-xs bg-red-50 text-red-600 border border-red-200 px-2 py-0.5 rounded font-black">
                         {lead.crmStatus}
                       </span>
                     </td>
                     <td className="px-4 py-2.5">
-                      <span className="text-[9px] bg-red-600 text-white px-1.5 py-0.5 rounded font-black tracking-wider uppercase">
+                      <span className="text-xs bg-red-600 text-white px-1.5 py-0.5 rounded font-black tracking-wider uppercase">
                         {lead.priority}
                       </span>
                     </td>
                     <td className="px-4 py-2.5 font-bold text-foreground">{lead.agent}</td>
-                    <td className="px-4 py-2.5 text-muted-foreground text-[10px] font-medium font-sans">"{lead.notes}"</td>
+                    <td className="px-4 py-2.5 text-muted-foreground text-xs font-medium font-sans">"{lead.notes}"</td>
                   </tr>
                 ))}
               </tbody>
@@ -1392,7 +1392,7 @@ function ConversationsManager() {
                 <span className="h-3 w-3 rounded-full bg-yellow-400" />
                 <span className="h-3 w-3 rounded-full bg-green-400" />
               </div>
-              <span className="text-[10px] text-slate-400 font-mono">fortivsolutions.in/greenview</span>
+              <span className="text-xs text-slate-400 font-mono">fortivsolutions.in/greenview</span>
               <span className="w-12" />
             </div>
 
@@ -1422,7 +1422,7 @@ function ConversationsManager() {
                 >
                   {widgetMessages.map((m, idx) => (
                     <div key={idx} className={`flex ${m.from === "user" ? "justify-end" : "justify-start"}`}>
-                      <div className={`max-w-[85%] rounded-xl px-2.5 py-1.5 text-[11px] font-semibold ${
+                      <div className={`max-w-[85%] rounded-xl px-2.5 py-1.5 text-xs font-semibold ${
                         m.from === "user" 
                           ? "bg-primary text-primary-foreground rounded-br-none" 
                           : "bg-white text-foreground border border-border rounded-tl-none"
@@ -1444,7 +1444,7 @@ function ConversationsManager() {
 
                 {/* Footer input */}
                 <div className="p-2 border-t border-border/80 flex items-center gap-1.5 bg-white">
-                  <input aria-label="Widget message input" disabled placeholder="Type a message..." className="flex-1 text-[11px] font-medium h-7 px-2.5 bg-secondary/50 border border-transparent rounded-lg outline-none cursor-not-allowed" />
+                  <input aria-label="Widget message input" disabled placeholder="Type a message..." className="flex-1 text-xs font-medium h-7 px-2.5 bg-secondary/50 border border-transparent rounded-lg outline-none cursor-not-allowed" />
                   <button aria-label="Send widget message" className="h-7 w-7 rounded-lg bg-primary text-primary-foreground grid place-items-center"><Send className="h-3.5 w-3.5" /></button>
                 </div>
               </div>
@@ -1462,16 +1462,16 @@ function ConversationsManager() {
                 <table className="w-full text-xs text-left">
                   <thead>
                     <tr className="bg-secondary/10 border-b border-border/50 text-muted-foreground">
-                      <th className="px-3 py-2 font-bold text-[9px] uppercase tracking-widest font-display">Visitor Question</th>
-                      <th className="px-3 py-2 font-bold text-[9px] uppercase tracking-widest font-display">Reference Source</th>
-                      <th className="px-3 py-2 font-bold text-[9px] uppercase tracking-widest font-display">Confidence</th>
+                      <th className="px-3 py-2 font-bold text-xs uppercase tracking-widest font-display">Visitor Question</th>
+                      <th className="px-3 py-2 font-bold text-xs uppercase tracking-widest font-display">Reference Source</th>
+                      <th className="px-3 py-2 font-bold text-xs uppercase tracking-widest font-display">Confidence</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border/40">
                     {ragQueryLog.map((r, idx) => (
                       <tr key={idx} className="hover:bg-secondary/15 transition-colors">
                         <td className="px-3 py-2.5 font-bold text-foreground">"{r.q}"</td>
-                        <td className="px-3 py-2.5 text-slate-500 font-mono text-[10px]">{r.src}</td>
+                        <td className="px-3 py-2.5 text-slate-500 font-mono text-xs">{r.src}</td>
                         <td className="px-3 py-2.5 font-mono text-emerald-600 font-bold">{r.confidence}</td>
                       </tr>
                     ))}
@@ -1489,10 +1489,10 @@ function ConversationsManager() {
                 <table className="w-full text-xs text-left">
                   <thead>
                     <tr className="bg-secondary/10 border-b border-border/50 text-muted-foreground">
-                      <th className="px-3 py-1.5 font-bold text-[9px] uppercase tracking-widest font-display">Name</th>
-                      <th className="px-3 py-1.5 font-bold text-[9px] uppercase tracking-widest font-display">Phone</th>
-                      <th className="px-3 py-1.5 font-bold text-[9px] uppercase tracking-widest font-display">Interest</th>
-                      <th className="px-3 py-1.5 font-bold text-[9px] uppercase tracking-widest font-display">Status</th>
+                      <th className="px-3 py-1.5 font-bold text-xs uppercase tracking-widest font-display">Name</th>
+                      <th className="px-3 py-1.5 font-bold text-xs uppercase tracking-widest font-display">Phone</th>
+                      <th className="px-3 py-1.5 font-bold text-xs uppercase tracking-widest font-display">Interest</th>
+                      <th className="px-3 py-1.5 font-bold text-xs uppercase tracking-widest font-display">Status</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border/40">
@@ -1502,7 +1502,7 @@ function ConversationsManager() {
                         <td className="px-3 py-2 font-mono text-slate-500">{l.phone}</td>
                         <td className="px-3 py-2 font-semibold">{l.interest}</td>
                         <td className="px-3 py-2">
-                          <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">{l.status}</span>
+                          <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">{l.status}</span>
                         </td>
                       </tr>
                     ))}
@@ -1533,7 +1533,7 @@ function ConversationsManager() {
                 </div>
                 <div>
                   <div className="text-sm font-bold text-[#fff]">Fortiv CRM Bot</div>
-                  <div className="text-[10px] text-[#708499] font-medium">
+                  <div className="text-xs text-[#708499] font-medium">
                     {tgTyping ? <span>bot is typing...</span> : "bot"}
                   </div>
                 </div>
@@ -1556,7 +1556,7 @@ function ConversationsManager() {
                         : "bg-[#2b5278] text-[#fff] rounded-tr-none"
                     }`}>
                       <div className="whitespace-pre-wrap font-mono tracking-tight leading-relaxed">{m.text}</div>
-                      <div className="text-right text-[8px] text-[#708499] mt-1 font-mono">
+                      <div className="text-right text-[10px] text-[#708499] mt-1 font-mono">
                         {m.time} {isBot ? "" : "✓✓"}
                       </div>
                     </div>
@@ -1580,43 +1580,43 @@ function ConversationsManager() {
               <div className="flex flex-wrap gap-2 justify-center mb-3">
                 <button 
                   onClick={() => runTelegramCommand(telegramCommands.comps.cmd, telegramCommands.comps.reply)}
-                  className="px-3 py-1 bg-[#24303f] hover:bg-[#2e3e52] text-[#3090cd] text-[10px] font-bold rounded-full border border-[#1c2937] transition-all"
+                  className="px-3 py-1 bg-[#24303f] hover:bg-[#2e3e52] text-[#3090cd] text-xs font-bold rounded-full border border-[#1c2937] transition-all"
                 >
                   /comps 2BHK Vesu
                 </button>
                 <button 
                   onClick={() => runTelegramCommand(telegramCommands.emi.cmd, telegramCommands.emi.reply)}
-                  className="px-3 py-1 bg-[#24303f] hover:bg-[#2e3e52] text-[#3090cd] text-[10px] font-bold rounded-full border border-[#1c2937] transition-all"
+                  className="px-3 py-1 bg-[#24303f] hover:bg-[#2e3e52] text-[#3090cd] text-xs font-bold rounded-full border border-[#1c2937] transition-all"
                 >
                   /emi 58L 20
                 </button>
                 <button 
                   onClick={() => runTelegramCommand(telegramCommands.pipeline.cmd, telegramCommands.pipeline.reply)}
-                  className="px-3 py-1 bg-[#24303f] hover:bg-[#2e3e52] text-[#3090cd] text-[10px] font-bold rounded-full border border-[#1c2937] transition-all"
+                  className="px-3 py-1 bg-[#24303f] hover:bg-[#2e3e52] text-[#3090cd] text-xs font-bold rounded-full border border-[#1c2937] transition-all"
                 >
                   /pipeline
                 </button>
                 <button 
                   onClick={() => runTelegramCommand(telegramCommands.hot.cmd, telegramCommands.hot.reply)}
-                  className="px-3 py-1 bg-[#24303f] hover:bg-[#2e3e52] text-[#3090cd] text-[10px] font-bold rounded-full border border-[#1c2937] transition-all"
+                  className="px-3 py-1 bg-[#24303f] hover:bg-[#2e3e52] text-[#3090cd] text-xs font-bold rounded-full border border-[#1c2937] transition-all"
                 >
                   /hot
                 </button>
                 <button 
                   onClick={() => runTelegramCommand(telegramCommands.rera.cmd, telegramCommands.rera.reply)}
-                  className="px-3 py-1 bg-[#24303f] hover:bg-[#2e3e52] text-[#3090cd] text-[10px] font-bold rounded-full border border-[#1c2937] transition-all"
+                  className="px-3 py-1 bg-[#24303f] hover:bg-[#2e3e52] text-[#3090cd] text-xs font-bold rounded-full border border-[#1c2937] transition-all"
                 >
                   /rera Greenview
                 </button>
                 <button 
                   onClick={() => runTelegramCommand(telegramCommands.inventory.cmd, telegramCommands.inventory.reply)}
-                  className="px-3 py-1 bg-[#24303f] hover:bg-[#2e3e52] text-[#3090cd] text-[10px] font-bold rounded-full border border-[#1c2937] transition-all"
+                  className="px-3 py-1 bg-[#24303f] hover:bg-[#2e3e52] text-[#3090cd] text-xs font-bold rounded-full border border-[#1c2937] transition-all"
                 >
                   /inventory 2BHK
                 </button>
                 <button 
                   onClick={() => runTelegramCommand(telegramCommands.book.cmd, telegramCommands.book.reply)}
-                  className="px-3 py-1 bg-[#24303f] hover:bg-[#2e3e52] text-[#3090cd] text-[10px] font-bold rounded-full border border-[#1c2937] transition-all font-sans font-bold"
+                  className="px-3 py-1 bg-[#24303f] hover:bg-[#2e3e52] text-[#3090cd] text-xs font-bold rounded-full border border-[#1c2937] transition-all font-sans font-bold"
                 >
                   /book visit
                 </button>
@@ -1637,10 +1637,10 @@ function ConversationsManager() {
               <table className="w-full text-xs text-left">
                 <thead>
                   <tr className="bg-secondary/15 border-b border-border/80 text-muted-foreground">
-                    <th className="px-4 py-2.5 font-bold text-[9px] uppercase tracking-widest font-display">Agent</th>
-                    <th className="px-4 py-2.5 font-bold text-[9px] uppercase tracking-widest font-display">Command Requested</th>
-                    <th className="px-4 py-2.5 font-bold text-[9px] uppercase tracking-widest font-display">Query Time</th>
-                    <th className="px-4 py-2.5 font-bold text-[9px] uppercase tracking-widest font-display">Outcome Status</th>
+                    <th className="px-4 py-2.5 font-bold text-xs uppercase tracking-widest font-display">Agent</th>
+                    <th className="px-4 py-2.5 font-bold text-xs uppercase tracking-widest font-display">Command Requested</th>
+                    <th className="px-4 py-2.5 font-bold text-xs uppercase tracking-widest font-display">Query Time</th>
+                    <th className="px-4 py-2.5 font-bold text-xs uppercase tracking-widest font-display">Outcome Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border/40">
@@ -1650,7 +1650,7 @@ function ConversationsManager() {
                       <td className="px-4 py-3 font-mono text-primary font-bold">{log.cmd}</td>
                       <td className="px-4 py-3 font-mono text-slate-500">{log.time}</td>
                       <td className="px-4 py-3">
-                        <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">{log.result}</span>
+                        <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">{log.result}</span>
                       </td>
                     </tr>
                   ))}
@@ -1675,19 +1675,19 @@ function ConversationsManager() {
         {/* Calls stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 border border-border bg-card p-4 rounded-2xl">
           <div className="text-center md:border-r border-border/40">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">Voice Calls Today</div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Voice Calls Today</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">24</div>
           </div>
           <div className="text-center md:border-r border-border/40">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">AI Fully Qualified</div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">AI Fully Qualified</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">18</div>
           </div>
           <div className="text-center md:border-r border-border/40">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">Transferred to Human</div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Transferred to Human</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">6</div>
           </div>
           <div className="text-center">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">Avg AI Handle Duration</div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Avg AI Handle Duration</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">2m 10s</div>
           </div>
         </div>
@@ -1703,13 +1703,13 @@ function ConversationsManager() {
               <table className="w-full text-xs text-left">
                 <thead>
                   <tr className="bg-secondary/15 border-b border-border/80 text-muted-foreground">
-                    <th className="px-4 py-2.5 font-bold text-[9px] uppercase tracking-widest font-display">Time</th>
-                    <th className="px-4 py-2.5 font-bold text-[9px] uppercase tracking-widest font-display">Caller</th>
-                    <th className="px-4 py-2.5 font-bold text-[9px] uppercase tracking-widest font-display">Language</th>
-                    <th className="px-4 py-2.5 font-bold text-[9px] uppercase tracking-widest font-display">Call Duration</th>
-                    <th className="px-4 py-2.5 font-bold text-[9px] uppercase tracking-widest font-display">AI Duration</th>
-                    <th className="px-4 py-2.5 font-bold text-[9px] uppercase tracking-widest font-display">Qualified</th>
-                    <th className="px-4 py-2.5 font-bold text-[9px] uppercase tracking-widest font-display">Outcome</th>
+                    <th className="px-4 py-2.5 font-bold text-xs uppercase tracking-widest font-display">Time</th>
+                    <th className="px-4 py-2.5 font-bold text-xs uppercase tracking-widest font-display">Caller</th>
+                    <th className="px-4 py-2.5 font-bold text-xs uppercase tracking-widest font-display">Language</th>
+                    <th className="px-4 py-2.5 font-bold text-xs uppercase tracking-widest font-display">Call Duration</th>
+                    <th className="px-4 py-2.5 font-bold text-xs uppercase tracking-widest font-display">AI Duration</th>
+                    <th className="px-4 py-2.5 font-bold text-xs uppercase tracking-widest font-display">Qualified</th>
+                    <th className="px-4 py-2.5 font-bold text-xs uppercase tracking-widest font-display">Outcome</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border/40">
@@ -1718,10 +1718,10 @@ function ConversationsManager() {
                       <td className="px-4 py-3 font-mono text-muted-foreground">{call.time}</td>
                       <td className="px-4 py-3 font-bold text-foreground">
                         <div>{call.caller}</div>
-                        <div className="text-[9px] text-muted-foreground font-medium font-sans">{call.name}</div>
+                        <div className="text-xs text-muted-foreground font-medium font-sans">{call.name}</div>
                       </td>
                       <td className="px-4 py-3">
-                        <span className="font-bold text-slate-600 bg-secondary px-2 py-0.5 rounded border border-border text-[10px]">
+                        <span className="font-bold text-slate-600 bg-secondary px-2 py-0.5 rounded border border-border text-xs">
                           {call.language}
                         </span>
                       </td>
@@ -1744,13 +1744,13 @@ function ConversationsManager() {
               <div className="flex-1 flex flex-col min-h-0">
                 <div className="mb-2.5 border-b border-border/40 pb-2 flex justify-between items-center shrink-0">
                   <div>
-                    <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Live Audio Transcript</div>
+                    <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Live Audio Transcript</div>
                     <h4 className="text-xs font-bold text-foreground">AI Voice IVR Call Simulator</h4>
                   </div>
                   <div className="flex gap-1">
                     <button 
                       onClick={() => setSelectedIvrFlow("inbound")}
-                      className={`px-2 py-0.5 rounded text-[9px] font-bold border transition-all ${
+                      className={`px-2 py-0.5 rounded text-xs font-bold border transition-all ${
                         selectedIvrFlow === "inbound" ? "bg-ink border-ink text-cream" : "bg-card border-border text-muted-foreground"
                       }`}
                     >
@@ -1758,7 +1758,7 @@ function ConversationsManager() {
                     </button>
                     <button 
                       onClick={() => setSelectedIvrFlow("after-hours")}
-                      className={`px-2 py-0.5 rounded text-[9px] font-bold border transition-all ${
+                      className={`px-2 py-0.5 rounded text-xs font-bold border transition-all ${
                         selectedIvrFlow === "after-hours" ? "bg-ink border-ink text-cream" : "bg-card border-border text-muted-foreground"
                       }`}
                     >
@@ -1773,7 +1773,7 @@ function ConversationsManager() {
                     const isAi = m.speaker === "ai";
                     return (
                       <div key={idx} className={`flex ${isAi ? "justify-start" : "justify-end"} animate-in fade-in duration-300`}>
-                        <div className={`max-w-[85%] rounded-xl px-2.5 py-1.5 text-[10px] font-semibold leading-relaxed shadow-sm ${
+                        <div className={`max-w-[85%] rounded-xl px-2.5 py-1.5 text-xs font-semibold leading-relaxed shadow-sm ${
                           isAi 
                             ? "bg-slate-100 text-slate-800 border border-border/60 rounded-tl-none" 
                             : "bg-primary text-primary-foreground rounded-br-none"
@@ -1796,7 +1796,7 @@ function ConversationsManager() {
               </div>
 
               <div className="border-t border-border/40 pt-3 mt-3 flex justify-between items-center shrink-0">
-                <span className="text-[10px] text-emerald-600 font-bold flex items-center gap-1">
+                <span className="text-xs text-emerald-600 font-bold flex items-center gap-1">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> Qualified
                 </span>
                 <button 
@@ -1805,7 +1805,7 @@ function ConversationsManager() {
                     setIvrIndex(-1);
                     setIvrPlaying(true);
                   }}
-                  className="h-7 px-3 bg-secondary hover:bg-secondary/70 border border-border rounded-lg text-[10px] font-bold transition-all flex items-center gap-1 active:scale-95"
+                  className="h-7 px-3 bg-secondary hover:bg-secondary/70 border border-border rounded-lg text-xs font-bold transition-all flex items-center gap-1 active:scale-95"
                 >
                   <RotateCcw className="h-3 w-3" /> Replay Call
                 </button>
@@ -1820,12 +1820,12 @@ function ConversationsManager() {
                 </div>
                 <div className="space-y-2 pt-1.5">
                   {[
-                    { label: "English", count: "14 calls", pct: "58.3%", w: "w-[58.3%]", color: "bg-[#0E86E9]" },
+                    { label: "English", count: "14 calls", pct: "58.3%", w: "w-[58.3%]", color: "bg-blue-600" },
                     { label: "Gujarati", count: "6 calls", pct: "25.0%", w: "w-[25.0%]", color: "bg-emerald-500" },
                     { label: "Hindi", count: "4 calls", pct: "16.7%", w: "w-[16.7%]", color: "bg-amber-500" }
                   ].map((lang) => (
                     <div key={lang.label} className="space-y-1">
-                      <div className="flex justify-between text-[10px] font-semibold text-slate-500">
+                      <div className="flex justify-between text-xs font-semibold text-slate-500">
                         <span>{lang.label} ({lang.count})</span>
                         <span className="font-bold text-foreground font-mono">{lang.pct}</span>
                       </div>
@@ -1852,19 +1852,19 @@ function ConversationsManager() {
         {/* Email top stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 border border-border bg-card p-4 rounded-2xl">
           <div className="text-center md:border-r border-border/40">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">Inbound Emails Today</div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Inbound Emails Today</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">34</div>
           </div>
           <div className="text-center md:border-r border-border/40">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">AI Automated Responses</div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">AI Automated Responses</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">28</div>
           </div>
           <div className="text-center md:border-r border-border/40">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">Mean Delivery Speed</div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">Mean Delivery Speed</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">2m 48s</div>
           </div>
           <div className="text-center">
-            <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider font-display">SLA Breaches (Target 3m)</div>
+            <div className="text-xs text-muted-foreground font-bold uppercase tracking-wider font-display">SLA Breaches (Target 3m)</div>
             <div className="text-base font-bold text-foreground font-mono mt-1">0</div>
           </div>
         </div>
@@ -1889,23 +1889,23 @@ function ConversationsManager() {
                     }`}
                   >
                     <div className="flex gap-3 min-w-0">
-                      <div className="h-8 w-8 rounded-full bg-secondary border border-border flex items-center justify-center font-bold text-[10px] text-slate-600 shrink-0">
+                      <div className="h-8 w-8 rounded-full bg-secondary border border-border flex items-center justify-center font-bold text-xs text-slate-600 shrink-0">
                         {email.from[0]}
                       </div>
                       <div className="min-w-0">
                         <div className="font-bold text-xs text-foreground flex items-center gap-2 flex-wrap">
                           {email.from}
-                          <span className="text-[9px] font-mono text-slate-400">({email.email})</span>
+                          <span className="text-xs font-mono text-slate-400">({email.email})</span>
                         </div>
-                        <div className="text-[11px] font-bold text-foreground mt-0.5">{email.subject}</div>
-                        <div className="text-[10px] text-muted-foreground mt-1 truncate max-w-sm font-medium">"{email.original}"</div>
+                        <div className="text-xs font-bold text-foreground mt-0.5">{email.subject}</div>
+                        <div className="text-xs text-muted-foreground mt-1 truncate max-w-sm font-medium">"{email.original}"</div>
                       </div>
                     </div>
 
                     <div className="text-right shrink-0 flex flex-col items-end gap-1.5">
-                      <span className="text-[9px] text-slate-400 font-mono">{email.received}</span>
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[#efe5dd] text-slate-700">{email.category}</span>
-                      <span className="text-[10px] text-emerald-600 font-bold font-mono">✓ {email.timeTaken}</span>
+                      <span className="text-xs text-slate-400 font-mono">{email.received}</span>
+                      <span className="px-2 py-0.5 rounded text-xs font-bold bg-[#efe5dd] text-slate-700">{email.category}</span>
+                      <span className="text-xs text-emerald-600 font-bold font-mono">✓ {email.timeTaken}</span>
                     </div>
                   </div>
                 );
@@ -1918,15 +1918,15 @@ function ConversationsManager() {
             <div className="flex-1 flex flex-col min-h-0">
               <div className="mb-3 border-b border-border/40 pb-2 flex justify-between items-center shrink-0">
                 <div>
-                  <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Auto-Responder Output</div>
+                  <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Auto-Responder Output</div>
                   <h3 className="text-xs font-bold text-foreground">AI Draft Response Preview</h3>
                 </div>
-                <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">
+                <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">
                   Approved & Dispatched
                 </span>
               </div>
 
-              <div className="flex-1 bg-secondary/30 rounded-xl p-3 border border-border/60 overflow-y-auto font-mono text-[10px] text-foreground leading-relaxed whitespace-pre-wrap">
+              <div className="flex-1 bg-secondary/30 rounded-xl p-3 border border-border/60 overflow-y-auto font-mono text-xs text-foreground leading-relaxed whitespace-pre-wrap">
                 {activeEmail?.reply}
               </div>
             </div>
@@ -1945,20 +1945,20 @@ function ConversationsManager() {
         {/* Hourly stats bar chart */}
         <Card className="p-4 flex flex-col h-[260px] border border-border bg-card">
           <div className="mb-3 border-b border-border/40 pb-2">
-            <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Hourly Analytics</div>
+            <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Hourly Analytics</div>
             <h3 className="text-sm font-bold text-foreground">Average Inbound Response Time by Hour</h3>
           </div>
           <div className="flex-1 flex items-end gap-5 px-3 pt-6">
             {emailHourlyStats.map((item, idx) => (
               <div key={idx} className="flex-1 flex flex-col items-center gap-2 group h-full justify-end">
-                <div className="text-[9px] font-bold text-foreground font-mono opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="text-xs font-bold text-foreground font-mono opacity-0 group-hover:opacity-100 transition-opacity">
                   {item.time} ({item.count} emails)
                 </div>
                 <div 
-                  className="w-full rounded-t bg-[#E8A838] transition-all duration-300 opacity-80 group-hover:opacity-100 shadow-sm"
+                  className="w-full rounded-t bg-amber-500 transition-all duration-300 opacity-80 group-hover:opacity-100 shadow-sm"
                   style={{ height: `${item.height}%` }}
                 />
-                <div className="text-[10px] font-bold text-muted-foreground font-mono mt-1">
+                <div className="text-xs font-bold text-muted-foreground font-mono mt-1">
                   {item.hour}
                 </div>
               </div>
@@ -2074,12 +2074,12 @@ function StatBox({
 }) {
   return (
     <Card className="p-4 flex flex-col justify-between relative min-h-24 border border-border bg-card">
-      <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-display">
+      <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display">
         {label}
       </div>
       <div className="mt-2 flex items-baseline justify-between">
         <div className={`font-display text-2xl font-bold tracking-tight ${color}`}>{value}</div>
-        <span className="text-[9px] font-semibold text-muted-foreground">{desc}</span>
+        <span className="text-xs font-semibold text-muted-foreground">{desc}</span>
       </div>
     </Card>
   );

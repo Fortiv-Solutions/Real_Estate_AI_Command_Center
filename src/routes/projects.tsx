@@ -168,7 +168,7 @@ const statusBadge = (status: string) => {
   if (["In Progress", "In Transit", "PO Sent", "Scheduled", "Applied", "Under Review", "Counter offer", "Negotiating", "Planned"].some(s => status.includes(s)))
     return "bg-amber-50 text-amber-700 border border-amber-100";
   if (["Action Required", "Not Initiated", "Not Applied", "Pending Snags", "Blocked", "Payment Pending", "Snag Pending", "At Risk", "Delayed", "Overrun", "Critical Overrun"].some(s => status.includes(s)))
-    return "bg-red-50 text-[#D85A30] border border-red-100";
+    return "bg-red-50 text-red-600 border border-red-100";
   return "bg-slate-50 text-slate-600 border border-slate-200";
 };
 
@@ -230,11 +230,11 @@ function ProjectManager() {
   const renderOverview = () => (
     <div className="space-y-6 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-        <StatBox label="Overall Progress" value="67%" desc="All phases complete" color="text-[#2E86AB]" />
-        <StatBox label="Budget Utilised" value="₹16.2Cr / ₹28.4Cr" desc="57% budget spent" color="text-[#1A3C5E]" />
-        <StatBox label="Active Contractors" value="14" desc="Trades with active WOs" color="text-[#1D9E75]" />
-        <StatBox label="Approvals Pending" value="3" desc="Statutory NOCs / Files" color="text-[#E8A838]" />
-        <StatBox label="Days to Possession" value="571" desc="Dec 2026 RERA date" color="text-[#D85A30]" />
+        <StatBox label="Overall Progress" value="67%" desc="All phases complete" color="text-blue-700" />
+        <StatBox label="Budget Utilised" value="₹16.2Cr / ₹28.4Cr" desc="57% budget spent" color="text-slate-800" />
+        <StatBox label="Active Contractors" value="14" desc="Trades with active WOs" color="text-emerald-600" />
+        <StatBox label="Approvals Pending" value="3" desc="Statutory NOCs / Files" color="text-amber-500" />
+        <StatBox label="Days to Possession" value="571" desc="Dec 2026 RERA date" color="text-red-600" />
       </div>
 
       <div className="grid grid-cols-12 gap-5">
@@ -242,10 +242,10 @@ function ProjectManager() {
         <div className="col-span-12 lg:col-span-7 space-y-5">
           <Card className="p-4 border border-border bg-card">
             <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+              <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                 <Layers3 className="h-3.5 w-3.5 text-primary" /> Active Milestone Progress Summary
               </div>
-              <button onClick={() => setActiveTab("timeline")} className="text-[9px] font-bold text-primary hover:underline font-mono">Milestone Tracker →</button>
+              <button onClick={() => setActiveTab("timeline")} className="text-xs font-bold text-primary hover:underline font-mono">Milestone Tracker →</button>
             </div>
             <div className="space-y-2">
               {[
@@ -263,7 +263,7 @@ function ProjectManager() {
                   </div>
                   <div className="text-right shrink-0 min-w-[100px]">
                     <span className="font-mono font-bold text-foreground">{m.pct}%</span>
-                    <div className={`text-[9.5px] font-semibold mt-0.5 ${m.status === "At Risk" ? "text-red-500" : "text-slate-400"}`}>{m.days}</div>
+                    <div className={`text-xs font-semibold mt-0.5 ${m.status === "At Risk" ? "text-red-500" : "text-slate-400"}`}>{m.days}</div>
                   </div>
                 </div>
               ))}
@@ -272,23 +272,23 @@ function ProjectManager() {
 
           <Card className="p-4 border border-border bg-card">
             <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
-                <AlertCircle className="h-3.5 w-3.5 text-[#D85A30]" /> Critical Construction Alerts
+              <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+                <AlertCircle className="h-3.5 w-3.5 text-red-600" /> Critical Construction Alerts
               </div>
               <span className="h-2 w-2 rounded-full bg-red-500 animate-pulse" />
             </div>
             <div className="space-y-2.5 text-xs font-semibold">
-              <div className="flex items-center justify-between p-2.5 rounded-xl border border-red-200 bg-red-50/20 text-[#D85A30]">
+              <div className="flex items-center justify-between p-2.5 rounded-xl border border-red-200 bg-red-50/20 text-red-600">
                 <span>🔴 Fire NOC — Application not submitted. Possession blocker.</span>
-                <button onClick={() => setActiveTab("approvals")} className="text-[9px] font-bold underline font-mono shrink-0 ml-2">Resolve →</button>
+                <button onClick={() => setActiveTab("approvals")} className="text-xs font-bold underline font-mono shrink-0 ml-2">Resolve →</button>
               </div>
               <div className="flex items-center justify-between p-2.5 rounded-xl border border-amber-200 bg-amber-50/20 text-amber-700">
                 <span>🟡 RERA Q1 Progress Report — Due in 8 days. Action required.</span>
-                <button onClick={() => setActiveTab("approvals")} className="text-[9px] font-bold underline font-mono shrink-0 ml-2">Review →</button>
+                <button onClick={() => setActiveTab("approvals")} className="text-xs font-bold underline font-mono shrink-0 ml-2">Review →</button>
               </div>
               <div className="flex items-center justify-between p-2.5 rounded-xl border border-amber-200 bg-amber-50/20 text-amber-700">
                 <span>🟡 Floors 9–14 Structure — 3 days behind schedule. Cascade: +12 days on MEP.</span>
-                <button onClick={() => setActiveTab("timeline")} className="text-[9px] font-bold underline font-mono shrink-0 ml-2">Impact Chart →</button>
+                <button onClick={() => setActiveTab("timeline")} className="text-xs font-bold underline font-mono shrink-0 ml-2">Impact Chart →</button>
               </div>
             </div>
           </Card>
@@ -298,10 +298,10 @@ function ProjectManager() {
         <div className="col-span-12 lg:col-span-5 space-y-5">
           <Card className="p-4 border border-border bg-card">
             <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
-                <DollarSign className="h-3.5 w-3.5 text-[#1D9E75]" /> Cost Budget Utilization
+              <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+                <DollarSign className="h-3.5 w-3.5 text-emerald-600" /> Cost Budget Utilization
               </div>
-              <button onClick={() => setActiveTab("cost")} className="text-[9px] font-bold text-primary hover:underline font-mono">Cost Forecaster →</button>
+              <button onClick={() => setActiveTab("cost")} className="text-xs font-bold text-primary hover:underline font-mono">Cost Forecaster →</button>
             </div>
             <div className="space-y-2.5 text-xs font-semibold">
               {[
@@ -312,9 +312,9 @@ function ProjectManager() {
                 <div key={i} className="flex justify-between items-center border-b border-border/30 pb-2 last:border-0 last:pb-0">
                   <div>
                     <div className="text-foreground">{c.cat}</div>
-                    <div className="text-[9.5px] text-slate-400 font-normal">Spent: {c.spent} / Budget: {c.budget}</div>
+                    <div className="text-xs text-slate-400 font-normal">Spent: {c.spent} / Budget: {c.budget}</div>
                   </div>
-                  <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold shrink-0 ${c.status === "Overrun" ? "bg-red-50 text-red-600 border border-red-100 animate-pulse" : "bg-slate-100 text-slate-500"}`}>
+                  <span className={`px-2 py-0.5 rounded text-xs font-mono font-bold shrink-0 ${c.status === "Overrun" ? "bg-red-50 text-red-600 border border-red-100 animate-pulse" : "bg-slate-100 text-slate-500"}`}>
                     {c.pct}% Used
                   </span>
                 </div>
@@ -324,10 +324,10 @@ function ProjectManager() {
 
           <Card className="p-4 border border-border bg-card">
             <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
+              <div className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display flex items-center gap-1.5">
                 <ShieldCheck className="h-3.5 w-3.5 text-emerald-600" /> Occupation Certificate (OC) Readiness
               </div>
-              <button onClick={() => setActiveTab("approvals")} className="text-[9px] font-bold text-primary hover:underline font-mono">Approvals Board →</button>
+              <button onClick={() => setActiveTab("approvals")} className="text-xs font-bold text-primary hover:underline font-mono">Approvals Board →</button>
             </div>
             <div className="flex items-center gap-4 text-xs font-semibold">
               <div className="relative h-14 w-14 shrink-0">
@@ -335,11 +335,11 @@ function ProjectManager() {
                   <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#e5e7eb" strokeWidth="3" />
                   <circle cx="18" cy="18" r="15.9155" fill="none" strokeWidth="3" stroke="#1D9E75" strokeDasharray="43 57" strokeLinecap="round" />
                 </svg>
-                <span className="absolute inset-0 flex items-center justify-center font-mono font-extrabold text-[11px] text-emerald-600">43%</span>
+                <span className="absolute inset-0 flex items-center justify-center font-mono font-extrabold text-xs text-emerald-600">43%</span>
               </div>
               <div>
                 <div className="text-foreground">OC Readiness Score</div>
-                <p className="text-[10px] text-slate-400 font-normal mt-0.5">38 of 240 units snagged · Water connections connecting · Substation pending NOC</p>
+                <p className="text-xs text-slate-400 font-normal mt-0.5">38 of 240 units snagged · Water connections connecting · Substation pending NOC</p>
               </div>
             </div>
           </Card>
@@ -349,13 +349,13 @@ function ProjectManager() {
       {/* Countdown banner */}
       <div className="p-4 border border-red-200 bg-red-50/10 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-3 text-xs font-semibold">
         <div className="flex items-center gap-3">
-          <Clock className="h-6 w-6 text-[#D85A30] animate-pulse" />
+          <Clock className="h-6 w-6 text-red-600 animate-pulse" />
           <div>
             <div className="font-bold text-foreground uppercase tracking-wider">Fortiv Greenview Heights · RERA Possession Countdown</div>
             <p className="text-slate-400 font-normal mt-0.5">240 Total Units · 38 Snag Inspected · 24 Cleared Snag-Free · RERA Due: 31 Dec 2026</p>
           </div>
         </div>
-        <div className="font-mono text-lg font-extrabold text-[#D85A30] px-4 py-1.5 rounded-xl bg-red-50 border border-red-200">
+        <div className="font-mono text-lg font-extrabold text-red-600 px-4 py-1.5 rounded-xl bg-red-50 border border-red-200">
           571 DAYS REMAINING
         </div>
       </div>
@@ -368,10 +368,10 @@ function ProjectManager() {
   const renderTimeline = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatBox label="Total Construction Phases" value="15" desc="Land to Handover" color="text-[#1A3C5E]" />
-        <StatBox label="Phases Completed" value="7" desc="Foundation + Structural 1-8" color="text-[#1D9E75]" />
-        <StatBox label="At Risk / Delayed" value="1" desc="Structural Floors 9-14" color="text-[#D85A30]" />
-        <StatBox label="Delay Downstream Cascade" value="+12 Days" desc="MEP start impact" color="text-[#E8A838]" />
+        <StatBox label="Total Construction Phases" value="15" desc="Land to Handover" color="text-slate-800" />
+        <StatBox label="Phases Completed" value="7" desc="Foundation + Structural 1-8" color="text-emerald-600" />
+        <StatBox label="At Risk / Delayed" value="1" desc="Structural Floors 9-14" color="text-red-600" />
+        <StatBox label="Delay Downstream Cascade" value="+12 Days" desc="MEP start impact" color="text-amber-500" />
       </div>
 
       <div className="grid grid-cols-12 gap-5">
@@ -379,7 +379,7 @@ function ProjectManager() {
         <Card className="col-span-12 lg:col-span-8 p-4 border border-border bg-card space-y-4">
           <div className="flex justify-between items-center border-b border-border/40 pb-2">
             <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">Gantt Milestone Schedule</h4>
-            <span className="text-[10px] font-mono text-slate-400 flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-amber-500" />Orange outline = Critical Path</span>
+            <span className="text-xs font-mono text-slate-400 flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-amber-500" />Orange outline = Critical Path</span>
           </div>
 
           <div className="space-y-3 max-h-[460px] overflow-y-auto pr-1 scrollbar-none">
@@ -391,9 +391,9 @@ function ProjectManager() {
               >
                 <div className="flex justify-between items-center text-xs font-semibold mb-1">
                   <div className="flex items-center gap-1.5">
-                    <span className="font-mono text-slate-400 text-[10px]">{phase.id}</span>
+                    <span className="font-mono text-slate-400 text-xs">{phase.id}</span>
                     <span className="text-foreground">{phase.name}</span>
-                    {phase.critical && <span className="text-[8px] font-bold bg-amber-100 text-amber-700 px-1 rounded font-mono">Critical</span>}
+                    {phase.critical && <span className="text-[10px] font-bold bg-amber-100 text-amber-700 px-1 rounded font-mono">Critical</span>}
                   </div>
                   <span className="font-mono font-bold text-foreground">{phase.pct}%</span>
                 </div>
@@ -401,9 +401,9 @@ function ProjectManager() {
                   <div className="flex-1 h-3 bg-secondary/50 rounded-full overflow-hidden">
                     <div className={`h-full rounded-full ${phase.status === "Completed" ? "bg-emerald-500" : phase.status === "At Risk" ? "bg-red-500 animate-pulse" : "bg-primary"}`} style={{ width: `${phase.pct}%` }} />
                   </div>
-                  <span className={`text-[9.5px] font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadge(phase.status)}`}>{phase.status}</span>
+                  <span className={`text-xs font-extrabold px-1.5 py-0.5 rounded font-mono ${statusBadge(phase.status)}`}>{phase.status}</span>
                 </div>
-                <div className="flex justify-between text-[9px] font-mono text-slate-400 mt-1 font-semibold">
+                <div className="flex justify-between text-xs font-mono text-slate-400 mt-1 font-semibold">
                   <span>Start: {phase.plannedStart}</span>
                   <span>End/Est: {phase.actualEnd}</span>
                   {phase.cascade > 0 && <span className="text-red-500 animate-pulse">Cascade: +{phase.cascade} days</span>}
@@ -417,17 +417,17 @@ function ProjectManager() {
         <Card className="col-span-12 lg:col-span-4 p-4 border border-border bg-card space-y-4 flex flex-col justify-between">
           <div className="space-y-3.5">
             <div className="border-b border-border/40 pb-2 flex justify-between items-center">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Phase Detail — {selectedPhase.id}</span>
-              <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(selectedPhase.status)}`}>{selectedPhase.status}</span>
+              <span className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Phase Detail — {selectedPhase.id}</span>
+              <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(selectedPhase.status)}`}>{selectedPhase.status}</span>
             </div>
 
             <div className="text-xs font-semibold space-y-2">
               <div>
                 <h4 className="font-display font-bold text-foreground text-sm">{selectedPhase.name}</h4>
-                <p className="text-[10px] text-slate-400 font-normal mt-0.5">Liaison lead: {selectedPhase.lead}</p>
+                <p className="text-xs text-slate-400 font-normal mt-0.5">Liaison lead: {selectedPhase.lead}</p>
               </div>
 
-              <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-[9.5px] space-y-1 text-slate-600">
+              <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs space-y-1 text-slate-600">
                 <div className="flex justify-between"><span>Baseline Start:</span><span className="text-foreground">{selectedPhase.plannedStart}</span></div>
                 <div className="flex justify-between"><span>Baseline Completion:</span><span className="text-foreground">{selectedPhase.plannedEnd}</span></div>
                 <div className="flex justify-between"><span>Revised/Actual End:</span><span className="text-foreground">{selectedPhase.actualEnd || selectedPhase.plannedEnd}</span></div>
@@ -437,10 +437,10 @@ function ProjectManager() {
               </div>
 
               <div className="space-y-1.5 pt-1">
-                <span className="text-[9.5px] font-bold uppercase tracking-wider text-slate-400">Sub-Phases / Floor Breakdown</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Sub-Phases / Floor Breakdown</span>
                 <div className="space-y-1">
                   {selectedPhase.subPhases.map((sb, idx) => (
-                    <div key={idx} className="p-2 rounded bg-background border border-border/50 font-mono text-[10px] flex justify-between">
+                    <div key={idx} className="p-2 rounded bg-background border border-border/50 font-mono text-xs flex justify-between">
                       <span>{sb}</span>
                       <span className="text-emerald-600 font-bold">✓ Complete</span>
                     </div>
@@ -484,19 +484,19 @@ function ProjectManager() {
   const renderSubcontractor = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatBox label="Empaneled Subcontractors" value="24" desc="Across 8 trades" color="text-[#1A3C5E]" />
-        <StatBox label="Active Work Orders" value="14" desc="Live on site" color="text-[#1D9E75]" />
-        <StatBox label="Milestone Payments Certified" value="₹44.1L" desc="This month" color="text-[#2E86AB]" />
-        <StatBox label="Subcontractor Expiry Alerts" value="1" desc="Patel Plumbing Co." color="text-[#E8A838]" />
+        <StatBox label="Empaneled Subcontractors" value="24" desc="Across 8 trades" color="text-slate-800" />
+        <StatBox label="Active Work Orders" value="14" desc="Live on site" color="text-emerald-600" />
+        <StatBox label="Milestone Payments Certified" value="₹44.1L" desc="This month" color="text-blue-700" />
+        <StatBox label="Subcontractor Expiry Alerts" value="1" desc="Patel Plumbing Co." color="text-amber-500" />
       </div>
 
       <div className="grid grid-cols-12 gap-5">
         {/* Contractor List */}
         <Card className="col-span-12 lg:col-span-7 p-0 overflow-hidden border border-border bg-card">
-          <div className="p-3 bg-secondary/35 border-b border-border text-[10px] font-bold uppercase text-slate-500 font-display">Contractor Registry</div>
+          <div className="p-3 bg-secondary/35 border-b border-border text-xs font-bold uppercase text-slate-500 font-display">Contractor Registry</div>
           <div className="overflow-x-auto scrollbar-none">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3.5 py-2.5">Contractor</th>
                   <th className="px-3.5 py-2.5">Trade Category</th>
@@ -514,7 +514,7 @@ function ProjectManager() {
                   >
                     <td className="px-3.5 py-3">
                       <div className="font-bold text-foreground">{c.name}</div>
-                      <div className="text-[9.5px] text-slate-400 font-mono">Lead: {c.lead}</div>
+                      <div className="text-xs text-slate-400 font-mono">Lead: {c.lead}</div>
                     </td>
                     <td className="px-3.5 py-3 text-slate-500">{c.trade}</td>
                     <td className="px-3.5 py-3 font-mono">{c.woCount}</td>
@@ -527,7 +527,7 @@ function ProjectManager() {
                       </div>
                     </td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(c.status)}`}>{c.status}</span>
+                      <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(c.status)}`}>{c.status}</span>
                     </td>
                   </tr>
                 ))}
@@ -539,45 +539,45 @@ function ProjectManager() {
         {/* Contractor Detail Panel */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
           <div className="flex items-center justify-between border-b border-border/40 pb-2">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Contractor Profile</span>
-            <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${selectedContractor.performance >= 80 ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"}`}>★ {selectedContractor.performance} Score</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Contractor Profile</span>
+            <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${selectedContractor.performance >= 80 ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"}`}>★ {selectedContractor.performance} Score</span>
           </div>
 
           <div className="space-y-3.5 text-xs font-semibold">
             <div>
               <h4 className="font-display font-bold text-foreground text-sm">{selectedContractor.name}</h4>
-              <p className="text-[10px] text-slate-400 font-normal">Trade Scope: {selectedContractor.trade}</p>
+              <p className="text-xs text-slate-400 font-normal">Trade Scope: {selectedContractor.trade}</p>
             </div>
 
-            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-[9.5px] space-y-1 text-slate-600">
+            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs space-y-1 text-slate-600">
               <div className="flex justify-between"><span>GSTIN:</span><span className="text-foreground">{selectedContractor.gst}</span></div>
               <div className="flex justify-between"><span>Registry Phone:</span><span className="text-foreground">{selectedContractor.phone}</span></div>
               <div className="flex justify-between"><span>Labour Licence Exp:</span><span className="text-foreground">{selectedContractor.expiry}</span></div>
             </div>
 
             {selectedContractor.name === "Patel Plumbing Co." && (
-              <div className="p-2.5 rounded-xl border border-amber-200 bg-amber-50/20 text-amber-700 text-[10px]">
+              <div className="p-2.5 rounded-xl border border-amber-200 bg-amber-50/20 text-amber-700 text-xs">
                 ⚠️ <strong>Liaison Alert:</strong> Contractor insurance expires in 22 days. Renew prior to certifying further WOs.
               </div>
             )}
 
             <div className="space-y-2">
-              <span className="text-[9.5px] font-bold uppercase tracking-wider text-slate-400 block border-b border-border/40 pb-1">Work Orders & Payments</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block border-b border-border/40 pb-1">Work Orders & Payments</span>
               {activeWos.map((wo, i) => (
                 <div key={i} className="p-2.5 rounded bg-background border border-border/50 space-y-1.5">
-                  <div className="flex justify-between font-mono text-[10px]">
+                  <div className="flex justify-between font-mono text-xs">
                     <span className="font-bold text-foreground">{wo.id}</span>
-                    <span className={`text-[9px] font-extrabold px-1.5 py-0.2 rounded ${statusBadge(wo.status)}`}>{wo.status}</span>
+                    <span className={`text-xs font-extrabold px-1.5 py-0.2 rounded ${statusBadge(wo.status)}`}>{wo.status}</span>
                   </div>
-                  <div className="text-[10px] text-slate-500">{wo.scope}</div>
-                  <div className="flex justify-between font-mono text-[9.5px] text-slate-400 font-semibold border-t border-border/30 pt-1.5">
+                  <div className="text-xs text-slate-500">{wo.scope}</div>
+                  <div className="flex justify-between font-mono text-xs text-slate-400 font-semibold border-t border-border/30 pt-1.5">
                     <span>Val: ₹{(wo.value/100000).toFixed(1)}L</span>
                     <span>Paid: ₹{(wo.paid/100000).toFixed(1)}L</span>
                   </div>
                   {wo.status !== "Completed" && (
                     <button
                       onClick={() => certifyMilestonePayment(wo.id, wo.value)}
-                      className="w-full h-6 rounded bg-ink hover:bg-ink/90 text-cream text-[9px] font-mono uppercase tracking-wider mt-1"
+                      className="w-full h-6 rounded bg-ink hover:bg-ink/90 text-cream text-xs font-mono uppercase tracking-wider mt-1"
                     >
                       Certify & Release Milestone Payment
                     </button>
@@ -613,15 +613,15 @@ function ProjectManager() {
   const renderProcurement = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatBox label="Indents Raised (Month)" value="42" desc="Slabs + blockwork indents" color="text-[#1A3C5E]" />
-        <StatBox label="POs Dispatched" value="38" desc="₹48.2L procurement value" color="text-[#1D9E75]" />
-        <StatBox label="Deliveries In Transit" value="1" desc="Plumbing CPVC pipes" color="text-[#2E86AB]" />
-        <StatBox label="Stock Shortage Alert" value="OPC 53" desc="Cement running low (~2.3d)" color="text-[#D85A30]" />
+        <StatBox label="Indents Raised (Month)" value="42" desc="Slabs + blockwork indents" color="text-slate-800" />
+        <StatBox label="POs Dispatched" value="38" desc="₹48.2L procurement value" color="text-emerald-600" />
+        <StatBox label="Deliveries In Transit" value="1" desc="Plumbing CPVC pipes" color="text-blue-700" />
+        <StatBox label="Stock Shortage Alert" value="OPC 53" desc="Cement running low (~2.3d)" color="text-red-600" />
       </div>
 
       {/* Shortage warning */}
       <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs flex items-center gap-3 font-semibold text-amber-700 animate-pulse">
-        <AlertTriangle className="h-5 w-5 text-[#E8A838]" />
+        <AlertTriangle className="h-5 w-5 text-amber-500" />
         <div>
           <span className="font-bold">Cement Shortage Alert:</span> OPC Cement (53 Grade) current stock is ~80 bags. Daily consumption is ~35 bags. Estimated days remaining: <strong>2.3 days</strong>. Immediate replenishment required.
         </div>
@@ -632,7 +632,7 @@ function ProjectManager() {
           <button
             key={f}
             onClick={() => setProcFilter(f)}
-            className={`h-7 px-3 rounded-lg text-[10px] font-bold uppercase tracking-widest border transition-all ${procFilter === f ? "bg-ink text-cream border-ink" : "border-border text-slate-500 hover:bg-secondary"}`}
+            className={`h-7 px-3 rounded-lg text-xs font-bold uppercase tracking-widest border transition-all ${procFilter === f ? "bg-ink text-cream border-ink" : "border-border text-slate-500 hover:bg-secondary"}`}
           >
             {f}
           </button>
@@ -647,7 +647,7 @@ function ProjectManager() {
           </div>
           <div className="overflow-x-auto scrollbar-none">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3.5 py-2.5">Indent #</th>
                   <th className="px-3.5 py-2.5">Material</th>
@@ -667,13 +667,13 @@ function ProjectManager() {
                     <td className="px-3.5 py-3 text-slate-500">{row.vendor}</td>
                     <td className="px-3.5 py-3 font-mono font-bold">₹{(row.val/100000).toFixed(1)}L</td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(row.status)}`}>{row.status}</span>
+                      <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(row.status)}`}>{row.status}</span>
                     </td>
                     <td className="px-3.5 py-3">
                       {row.status === "PO Sent" && (
                         <button
                           onClick={() => dispatchMaterialPO(row.id)}
-                          className="h-6 px-2 rounded bg-ink hover:bg-ink/90 text-cream text-[9px] font-mono uppercase"
+                          className="h-6 px-2 rounded bg-ink hover:bg-ink/90 text-cream text-xs font-mono uppercase"
                         >
                           Dispatch
                         </button>
@@ -698,15 +698,15 @@ function ProjectManager() {
               <div key={i} className={`p-2.5 rounded-xl border flex justify-between items-center ${i === 0 ? "border-emerald-200 bg-emerald-50/10" : "border-border bg-background"}`}>
                 <div>
                   <div className="font-bold text-foreground">{v.vendor}</div>
-                  <div className="text-[9.5px] text-slate-400 font-normal">Delivery: {v.lead} · rating: {v.rating}</div>
+                  <div className="text-xs text-slate-400 font-normal">Delivery: {v.lead} · rating: {v.rating}</div>
                 </div>
                 <div className="text-right shrink-0">
                   <span className="font-mono text-primary font-bold text-sm">{v.rate}</span>
-                  <div className={`text-[8.5px] font-bold uppercase tracking-wider ${i === 0 ? "text-emerald-600" : "text-slate-400"}`}>{v.status}</div>
+                  <div className={`text-[10px] font-bold uppercase tracking-wider ${i === 0 ? "text-emerald-600" : "text-slate-400"}`}>{v.status}</div>
                 </div>
               </div>
             ))}
-            <p className="text-[9.5px] font-mono text-slate-400">Comparing quotes automatically matches and highlights L1 according to Fortiv Solutions procurement policies.</p>
+            <p className="text-xs font-mono text-slate-400">Comparing quotes automatically matches and highlights L1 according to Fortiv Solutions procurement policies.</p>
           </div>
         </Card>
       </div>
@@ -723,10 +723,10 @@ function ProjectManager() {
   const renderApprovals = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatBox label="Total Required Approvals" value="14" desc="RERA to Occupancy" color="text-[#1A3C5E]" />
-        <StatBox label="Approvals Complete" value="9" desc="NOCs / Permits complete" color="text-[#1D9E75]" />
-        <StatBox label="Liaison Reviews Pending" value="2" desc="Action needed" color="text-[#E8A838]" />
-        <StatBox label="OC Readiness Score" value="43%" desc="Aggregated pre-conditions" color="text-[#2E86AB]" />
+        <StatBox label="Total Required Approvals" value="14" desc="RERA to Occupancy" color="text-slate-800" />
+        <StatBox label="Approvals Complete" value="9" desc="NOCs / Permits complete" color="text-emerald-600" />
+        <StatBox label="Liaison Reviews Pending" value="2" desc="Action needed" color="text-amber-500" />
+        <StatBox label="OC Readiness Score" value="43%" desc="Aggregated pre-conditions" color="text-blue-700" />
       </div>
 
       <div className="grid grid-cols-12 gap-5">
@@ -737,7 +737,7 @@ function ProjectManager() {
           </div>
           <div className="overflow-x-auto scrollbar-none">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3.5 py-2.5">Approval Description</th>
                   <th className="px-3.5 py-2.5">Authority</th>
@@ -751,15 +751,15 @@ function ProjectManager() {
                   <tr key={i} className="hover:bg-secondary/15">
                     <td className="px-3.5 py-3">
                       <div className="font-bold text-foreground">{row.name}</div>
-                      <div className="text-[9.5px] text-slate-400 font-mono">Stage: {row.stage}</div>
+                      <div className="text-xs text-slate-400 font-mono">Stage: {row.stage}</div>
                     </td>
                     <td className="px-3.5 py-3 text-slate-500">{row.authority}</td>
                     <td className="px-3.5 py-3 font-mono text-slate-400">{row.due}</td>
                     <td className="px-3.5 py-3 font-semibold text-slate-500">
-                      {row.blocksPossession ? <span className="text-[#D85A30]">Critical block</span> : "No"}
+                      {row.blocksPossession ? <span className="text-red-600">Critical block</span> : "No"}
                     </td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(row.status)}`}>{row.status}</span>
+                      <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(row.status)}`}>{row.status}</span>
                     </td>
                   </tr>
                 ))}
@@ -777,15 +777,15 @@ function ProjectManager() {
                 <div key={i} className="flex justify-between items-center border-b border-border/30 pb-2 last:border-0 last:pb-0">
                   <div>
                     <div className="text-foreground">{oc.item}</div>
-                    <div className="text-[9.5px] text-slate-400 font-normal">Category: {oc.category}</div>
+                    <div className="text-xs text-slate-400 font-normal">Category: {oc.category}</div>
                   </div>
-                  <span className="text-[10px] font-mono text-[#2E86AB]">{oc.status}</span>
+                  <span className="text-xs font-mono text-blue-700">{oc.status}</span>
                 </div>
               ))}
             </div>
           </Card>
 
-          <Card className="p-4 border border-[#E8A838] bg-amber-50/10 space-y-3">
+          <Card className="p-4 border border-amber-500 bg-amber-50/10 space-y-3">
             <h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display border-b border-amber-200 pb-2">RERA QPR Submission (Q1 2025)</h4>
             <p className="text-xs text-slate-600 leading-relaxed font-semibold">Submission is due in 8 days. Click compile to auto-gather construction progress percentages and cost models.</p>
             <button
@@ -843,10 +843,10 @@ function ProjectManager() {
                 onClick={() => setSelectedPhoto(photo)}
                 className={`p-3 rounded-2xl border cursor-pointer transition-all space-y-2 hover:shadow-md ${selectedPhoto.id === photo.id ? "border-primary bg-secondary/15" : "border-border bg-background"}`}
               >
-                <div className="h-28 bg-secondary/40 rounded-xl flex items-center justify-center font-mono text-[10px] text-slate-400 border border-border/40 relative overflow-hidden">
+                <div className="h-28 bg-secondary/40 rounded-xl flex items-center justify-center font-mono text-xs text-slate-400 border border-border/40 relative overflow-hidden">
                   <Camera className="h-6 w-6 stroke-[1.5]" />
-                  <span className="absolute bottom-2 left-2 bg-black/60 text-white px-2 py-0.5 rounded text-[8px]">{photo.id}</span>
-                  {photo.issue && <span className="absolute top-2 right-2 bg-red-600 text-white px-2 py-0.5 rounded text-[8px] animate-pulse">⚠️ Issue</span>}
+                  <span className="absolute bottom-2 left-2 bg-black/60 text-white px-2 py-0.5 rounded text-[10px]">{photo.id}</span>
+                  {photo.issue && <span className="absolute top-2 right-2 bg-red-600 text-white px-2 py-0.5 rounded text-[10px] animate-pulse">⚠️ Issue</span>}
                 </div>
                 <div className="space-y-1 text-xs">
                   <div className="font-bold text-foreground flex justify-between">
@@ -856,7 +856,7 @@ function ProjectManager() {
                   <div className="text-slate-500 font-semibold">{photo.activity}</div>
                   <div className="flex flex-wrap gap-1.5 pt-1">
                     {photo.tags.map((t, idx) => (
-                      <span key={idx} className="text-[8.5px] font-bold bg-slate-100 border border-slate-200 px-1.5 py-0.2 rounded text-slate-600 font-mono">{t}</span>
+                      <span key={idx} className="text-[10px] font-bold bg-slate-100 border border-slate-200 px-1.5 py-0.2 rounded text-slate-600 font-mono">{t}</span>
                     ))}
                   </div>
                 </div>
@@ -870,23 +870,23 @@ function ProjectManager() {
           <div className="border-b border-border/40 pb-2"><h4 className="font-bold text-xs uppercase text-slate-500 tracking-wider font-display">AI Visual Log Inspector</h4></div>
 
           <div className="space-y-3.5 text-xs font-semibold">
-            <div className="h-36 bg-secondary/30 border border-border/40 rounded-2xl flex items-center justify-center font-mono text-slate-400 text-[10px]">
+            <div className="h-36 bg-secondary/30 border border-border/40 rounded-2xl flex items-center justify-center font-mono text-slate-400 text-xs">
               Visual Media Render Box — {selectedPhoto.id}
             </div>
 
             <div className="space-y-2">
               <div>
                 <h4 className="font-display font-bold text-foreground text-sm">{selectedPhoto.location}</h4>
-                <p className="text-[9.5px] text-slate-400 font-mono">Uploaded on {selectedPhoto.date} via WhatsApp</p>
+                <p className="text-xs text-slate-400 font-mono">Uploaded on {selectedPhoto.date} via WhatsApp</p>
               </div>
 
-              <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-[9.5px] leading-relaxed text-slate-600">
-                <strong className="text-slate-700 block uppercase tracking-wider text-[8.5px] mb-1">AI Progress Assessment:</strong>
+              <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs leading-relaxed text-slate-600">
+                <strong className="text-slate-700 block uppercase tracking-wider text-[10px] mb-1">AI Progress Assessment:</strong>
                 {selectedPhoto.note}
               </div>
 
               {selectedPhoto.issue && (
-                <div className="p-2.5 rounded-xl border border-red-200 bg-red-50/20 text-red-700 text-[10px] animate-pulse">
+                <div className="p-2.5 rounded-xl border border-red-200 bg-red-50/20 text-red-700 text-xs animate-pulse">
                   ⚠️ <strong>AI Safety / Quality Violation:</strong> {selectedPhoto.issue}
                 </div>
               )}
@@ -950,16 +950,16 @@ function ProjectManager() {
     <div className="space-y-4 animate-in fade-in duration-300">
       {/* KPI Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-        <StatBox label="Total Project Budget" value={`₹${(calculatedCosts.totalBudget/10000000).toFixed(2)}Cr`} desc="Approved baseline" color="text-[#1A3C5E]" />
-        <StatBox label="Spent to Date" value={`₹${(calculatedCosts.totalSpent/10000000).toFixed(2)}Cr`} desc="Accounts invoices paid" color="text-[#2E86AB]" />
-        <StatBox label="Projected Final Cost" value={`₹${(calculatedCosts.totalProjected/10000000).toFixed(2)}Cr`} desc="Cost-to-complete forecast" color="text-[#E8A838]" />
-        <StatBox label="Projected Gross Margin" value={`${calculatedCosts.margin}%`} desc="Original: 45.6%" color="text-[#1D9E75]" />
-        <StatBox label="Budget Variance" value={`+₹${(calculatedCosts.totalVariance/100000).toFixed(1)}L`} desc="Projected overrun" color="text-[#D85A30]" />
+        <StatBox label="Total Project Budget" value={`₹${(calculatedCosts.totalBudget/10000000).toFixed(2)}Cr`} desc="Approved baseline" color="text-slate-800" />
+        <StatBox label="Spent to Date" value={`₹${(calculatedCosts.totalSpent/10000000).toFixed(2)}Cr`} desc="Accounts invoices paid" color="text-blue-700" />
+        <StatBox label="Projected Final Cost" value={`₹${(calculatedCosts.totalProjected/10000000).toFixed(2)}Cr`} desc="Cost-to-complete forecast" color="text-amber-500" />
+        <StatBox label="Projected Gross Margin" value={`${calculatedCosts.margin}%`} desc="Original: 45.6%" color="text-emerald-600" />
+        <StatBox label="Budget Variance" value={`+₹${(calculatedCosts.totalVariance/100000).toFixed(1)}L`} desc="Projected overrun" color="text-red-600" />
       </div>
 
       {/* Scenario buttons */}
       <Card className="p-4 border border-border bg-card space-y-3">
-        <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Scenario Sensitivity Analysis Modelling</span>
+        <span className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Scenario Sensitivity Analysis Modelling</span>
         <div className="flex flex-wrap gap-2">
           {[
             { id: "baseline", name: "Baseline Forecast" },
@@ -987,7 +987,7 @@ function ProjectManager() {
           </div>
           <div className="overflow-x-auto scrollbar-none">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3.5 py-2.5">Category</th>
                   <th className="px-3.5 py-2.5 font-mono">Budget</th>
@@ -1008,7 +1008,7 @@ function ProjectManager() {
                       {row.variance > 0 ? `+₹${(row.variance/100000).toFixed(1)}L` : `-₹${(Math.abs(row.variance)/100000).toFixed(1)}L`}
                     </td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(row.status)}`}>{row.status}</span>
+                      <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(row.status)}`}>{row.status}</span>
                     </td>
                   </tr>
                 ))}
@@ -1039,7 +1039,7 @@ function ProjectManager() {
               <span className={`font-mono font-extrabold text-sm ${parseFloat(calculatedCosts.margin) >= 42 ? "text-emerald-600" : "text-amber-600 animate-pulse"}`}>{calculatedCosts.margin}%</span>
             </div>
 
-            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-[9.5px] leading-relaxed text-slate-600">
+            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs leading-relaxed text-slate-600">
               <strong className="text-slate-800">AI Financial Forecaster Note:</strong>
               <p className="mt-1">Category "Project Overheads" is driving the primary variance (+₹1.80Cr). Bringing overheads back to baseline increases projected margin to 44.1%.</p>
             </div>
@@ -1095,14 +1095,14 @@ function ProjectManager() {
   const renderPossession = () => (
     <div className="space-y-4 animate-in fade-in duration-300">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatBox label="Total Units Handover" value="240" desc="Dec 2026 scheduling" color="text-[#1A3C5E]" />
-        <StatBox label="Snag Audited Units" value="38" desc="38 pre-possessions complete" color="text-[#1D9E75]" />
-        <StatBox label="Ready for Handover" value="24" desc="Snag-free + payment clear" color="text-[#2E86AB]" />
-        <StatBox label="Blocked handovers" value="12" desc="Payment/snag issues pending" color="text-[#D85A30]" />
+        <StatBox label="Total Units Handover" value="240" desc="Dec 2026 scheduling" color="text-slate-800" />
+        <StatBox label="Snag Audited Units" value="38" desc="38 pre-possessions complete" color="text-emerald-600" />
+        <StatBox label="Ready for Handover" value="24" desc="Snag-free + payment clear" color="text-blue-700" />
+        <StatBox label="Blocked handovers" value="12" desc="Payment/snag issues pending" color="text-red-600" />
       </div>
 
       {/* Warning banner */}
-      <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs flex items-center gap-3 font-semibold text-[#D85A30]">
+      <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs flex items-center gap-3 font-semibold text-red-600">
         <AlertTriangle className="h-5 w-5 animate-pulse shrink-0" />
         <div>
           <span>Possession Alert:</span> Sunita Mehta (Unit A-404) has outstanding dues of <strong>₹2.1 Lakhs</strong>. Automatic possession scheduling is blocked until payment clearance certificate is logged.
@@ -1117,7 +1117,7 @@ function ProjectManager() {
           </div>
           <div className="overflow-x-auto scrollbar-none">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-muted-foreground text-[9px] uppercase tracking-wider font-display">
+              <thead className="bg-secondary/15 text-muted-foreground text-xs uppercase tracking-wider font-display">
                 <tr>
                   <th className="px-3.5 py-2.5">Unit</th>
                   <th className="px-3.5 py-2.5">Buyer</th>
@@ -1137,17 +1137,17 @@ function ProjectManager() {
                     <td className="px-3.5 py-3 font-mono font-bold text-slate-700">{row.unit}</td>
                     <td className="px-3.5 py-3">
                       <div className="font-bold text-foreground">{row.buyer}</div>
-                      <div className="text-[9px] text-slate-400 font-mono font-normal">Slot: {row.date}</div>
+                      <div className="text-xs text-slate-400 font-mono font-normal">Slot: {row.date}</div>
                     </td>
                     <td className="px-3.5 py-3 font-mono">₹{(row.value/100000).toFixed(1)}L</td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[9.5px] font-extrabold px-1.5 py-0.2 rounded font-mono ${statusBadge(row.payment)}`}>{row.payment}</span>
+                      <span className={`text-xs font-extrabold px-1.5 py-0.2 rounded font-mono ${statusBadge(row.payment)}`}>{row.payment}</span>
                     </td>
                     <td className="px-3.5 py-3 font-mono font-bold">
                       {row.snagsResolved} / {row.snagsTotal}
                     </td>
                     <td className="px-3.5 py-3">
-                      <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(row.status)}`}>{row.status}</span>
+                      <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(row.status)}`}>{row.status}</span>
                     </td>
                   </tr>
                 ))}
@@ -1159,17 +1159,17 @@ function ProjectManager() {
         {/* Action Panel */}
         <Card className="col-span-12 lg:col-span-5 p-4 border border-border bg-card space-y-4">
           <div className="flex items-center justify-between border-b border-border/40 pb-2">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500 font-display">Unit Handover Card</span>
-            <span className={`text-[9.5px] font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(selectedPossession.status)}`}>{selectedPossession.status}</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-slate-500 font-display">Unit Handover Card</span>
+            <span className={`text-xs font-extrabold px-2 py-0.5 rounded font-mono ${statusBadge(selectedPossession.status)}`}>{selectedPossession.status}</span>
           </div>
 
           <div className="space-y-3.5 text-xs font-semibold">
             <div>
               <h4 className="font-display font-bold text-foreground text-sm">Unit {selectedPossession.unit} ({selectedPossession.config})</h4>
-              <p className="text-[10px] text-slate-400 font-normal">Buyer: {selectedPossession.buyer} · {selectedPossession.phone}</p>
+              <p className="text-xs text-slate-400 font-normal">Buyer: {selectedPossession.buyer} · {selectedPossession.phone}</p>
             </div>
 
-            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-[9.5px] space-y-1.5 text-slate-600">
+            <div className="p-3 bg-secondary/35 rounded-xl border border-border/40 font-mono text-xs space-y-1.5 text-slate-600">
               <div className="flex justify-between"><span>Agreement Value:</span><span className="text-foreground font-bold">₹{(selectedPossession.value/100000).toFixed(1)}L</span></div>
               <div className="flex justify-between"><span>Payment Clearance:</span><span className={`font-bold ${selectedPossession.payment === "Clear" ? "text-emerald-600" : "text-red-500"}`}>{selectedPossession.payment}</span></div>
               <div className="flex justify-between"><span>Snag Inspection:</span><span className={`font-bold ${selectedPossession.snagsTotal === selectedPossession.snagsResolved ? "text-emerald-600" : "text-amber-600"}`}>{selectedPossession.snagsResolved} of {selectedPossession.snagsTotal} resolved</span></div>
@@ -1178,9 +1178,9 @@ function ProjectManager() {
 
             {selectedPossession.unit === "A-403" && selectedPossession.snagsTotal > selectedPossession.snagsResolved && (
               <div className="space-y-2">
-                <span className="text-[9.5px] font-bold uppercase tracking-wider text-slate-400 block border-b border-border/40 pb-0.5">Snag Checklist (1 Open item)</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block border-b border-border/40 pb-0.5">Snag Checklist (1 Open item)</span>
                 {snagChecklist.map((sc, idx) => (
-                  <div key={idx} className="p-2 rounded bg-background border border-border/50 text-[10px] flex justify-between font-mono">
+                  <div key={idx} className="p-2 rounded bg-background border border-border/50 text-xs flex justify-between font-mono">
                     <span>{sc.item}</span>
                     <span className={sc.status.includes("Snag") ? "text-red-500 animate-pulse font-bold" : "text-emerald-600"}>{sc.status}</span>
                   </div>
@@ -1229,18 +1229,18 @@ function ProjectManager() {
               <Card
                 key={mod.id}
                 onClick={() => setActiveTab(mod.id as TabType)}
-                className="submodule-card p-5 cursor-pointer flex flex-col justify-between group h-44"
+                className="bg-card border shadow-sm rounded-xl p-5 cursor-pointer flex flex-col justify-between group h-44"
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full border font-mono text-emerald-700 bg-emerald-50 border-emerald-100">
+                    <span className="inline-flex items-center gap-1 text-xs font-bold px-2 py-0.5 rounded-full border font-mono text-emerald-700 bg-emerald-50 border-emerald-100">
                       <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" /> {mod.status}
                     </span>
                   </div>
                   <h3 className="text-sm font-bold text-foreground group-hover:text-ink transition-colors mt-1 font-display">{mod.name}</h3>
                   <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed line-clamp-2 font-medium">{mod.desc}</p>
                 </div>
-                <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-[11px] font-bold text-muted-foreground group-hover:text-foreground">
+                <div className="border-t border-border/40 mt-4 pt-3 flex items-center justify-between text-xs font-bold text-muted-foreground group-hover:text-foreground">
                   <span className="font-mono font-bold text-foreground">{mod.stats}</span>
                   <span className="flex items-center gap-0.5 text-ink group-hover:underline font-mono">Access <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
                 </div>
@@ -1264,10 +1264,10 @@ function ProjectManager() {
 function StatBox({ label, value, desc, color }: { label: string; value: string; desc: string; color: string }) {
   return (
     <Card className="p-4 flex flex-col justify-between relative min-h-24 border border-border bg-card">
-      <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-display">{label}</div>
+      <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display">{label}</div>
       <div className="mt-2 flex items-baseline justify-between">
         <div className={`font-display text-2xl font-bold tracking-tight font-mono ${color}`}>{value}</div>
-        <span className="text-[9px] font-semibold text-muted-foreground">{desc}</span>
+        <span className="text-xs font-semibold text-muted-foreground">{desc}</span>
       </div>
     </Card>
   );

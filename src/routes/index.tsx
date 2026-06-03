@@ -102,19 +102,19 @@ function AnimatedCounter({ value, duration = 1000 }: { value: number; duration?:
 function CustomTooltip({ active, payload, label }: any) {
   if (active && payload && payload.length) {
     return (
-      <div className="glass p-3 border border-border/55 rounded-xl text-xs font-semibold shadow-lg text-foreground backdrop-blur-md">
-        <p className="text-[9px] uppercase text-slate-400 font-bold mb-1">{label} Collection</p>
+      <div className="bg-card p-3 border border-border/55 rounded-xl text-xs font-semibold shadow-lg text-foreground">
+        <p className="text-xs uppercase text-slate-400 font-bold mb-1">{label} Collection</p>
         <div className="space-y-1">
           <div className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#0E86E9]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-blue-600" />
             <span className="text-slate-500">Collected:</span>
-            <span className="font-mono-jb text-[#0E86E9] font-bold text-xs">₹{payload[0].value} Cr</span>
+            <span className="font-mono-jb text-blue-600 font-bold text-xs">₹{payload[0].value} Cr</span>
           </div>
           {payload[0].payload && payload[0].payload.Target !== undefined && (
             <div className="flex items-center gap-1.5 border-t border-border/20 pt-1 mt-1">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#D85A30]" />
+              <span className="h-1.5 w-1.5 rounded-full bg-red-600" />
               <span className="text-slate-500">Target:</span>
-              <span className="font-mono-jb text-[#D85A30] font-bold text-xs">₹{payload[0].payload.Target} Cr</span>
+              <span className="font-mono-jb text-red-600 font-bold text-xs">₹{payload[0].payload.Target} Cr</span>
             </div>
           )}
         </div>
@@ -273,10 +273,10 @@ function Dashboard() {
   ];
 
   const primaryKPIs = [
-    { label: "Hot Leads Right Now", value: "12", sub: "↑ 3 since yesterday", color: "text-[#D85A30]", pulse: true },
-    { label: "Pipeline Value", value: "₹4.2 Cr", sub: "↑ ₹0.3 Cr this week", color: "text-[#1A3C5E] dark:text-[#89C4F8]", pulse: false },
-    { label: "Revenue This Month", value: "₹3.6 Cr", sub: "✅ Above ₹3.0 Cr target", color: "text-[#1D9E75]", pulse: false },
-    { label: "Collection Rate", value: "74%", sub: "₹6.4 Cr outstanding", color: "text-[#2E86AB]", pulse: false },
+    { label: "Hot Leads Right Now", value: "12", sub: "↑ 3 since yesterday", color: "text-red-600", pulse: true },
+    { label: "Pipeline Value", value: "₹4.2 Cr", sub: "↑ ₹0.3 Cr this week", color: "text-slate-800 dark:text-blue-400", pulse: false },
+    { label: "Revenue This Month", value: "₹3.6 Cr", sub: "✅ Above ₹3.0 Cr target", color: "text-emerald-600", pulse: false },
+    { label: "Collection Rate", value: "74%", sub: "₹6.4 Cr outstanding", color: "text-blue-700", pulse: false },
   ];
 
   const leadSources = [
@@ -315,11 +315,11 @@ function Dashboard() {
   ];
 
   const channelBreakdown = [
-    { name: "WhatsApp AI Chatbot", conv: 36, pct: 42, color: "bg-[#25D366]" },
-    { name: "Website Widget", conv: 18, pct: 21, color: "bg-[#2E86AB]" },
-    { name: "Voice IVR", conv: 15, pct: 18, color: "bg-[#1A3C5E]" },
-    { name: "Email AI", conv: 10, pct: 12, color: "bg-[#E8A838]" },
-    { name: "Telegram", conv: 5, pct: 7, color: "bg-[#89C4F8]" },
+    { name: "WhatsApp AI Chatbot", conv: 36, pct: 42, color: "bg-emerald-500" },
+    { name: "Website Widget", conv: 18, pct: 21, color: "bg-blue-700" },
+    { name: "Voice IVR", conv: 15, pct: 18, color: "bg-slate-800" },
+    { name: "Email AI", conv: 10, pct: 12, color: "bg-amber-500" },
+    { name: "Telegram", conv: 5, pct: 7, color: "bg-blue-400" },
   ];
 
   const marketPulse = [
@@ -382,8 +382,8 @@ function Dashboard() {
   ];
 
   const actionsQueue = [
-    { id: 2, priority: "Critical", text: "₹1.5 Cr 90+ day overdue — 5 buyers — escalate", module: "Finance & Revenue", owner: "Finance", deadline: "Immediate", pColor: "text-[#D85A30] bg-red-50 dark:bg-red-950/20 border-red-100 dark:border-red-900/50" },
-    { id: 3, priority: "Critical", text: "Deepak Trivedi deal stuck 19 days — director call", module: "Sales & CRM", owner: "Rahul Modi", deadline: "Today", pColor: "text-[#D85A30] bg-red-50 dark:bg-red-950/20 border-red-100 dark:border-red-900/50" },
+    { id: 2, priority: "Critical", text: "₹1.5 Cr 90+ day overdue — 5 buyers — escalate", module: "Finance & Revenue", owner: "Finance", deadline: "Immediate", pColor: "text-red-600 bg-red-50 dark:bg-red-950/20 border-red-100 dark:border-red-900/50" },
+    { id: 3, priority: "Critical", text: "Deepak Trivedi deal stuck 19 days — director call", module: "Sales & CRM", owner: "Rahul Modi", deadline: "Today", pColor: "text-red-600 bg-red-50 dark:bg-red-950/20 border-red-100 dark:border-red-900/50" },
     { id: 5, priority: "High", text: "18 buyers with overdue payments — reminder sequence", module: "Buyer Portal", owner: "Finance", deadline: "Today", pColor: "text-orange-700 bg-orange-50 dark:bg-orange-950/20 border-orange-100 dark:border-orange-900/50" },
     { id: 6, priority: "Medium", text: "6 leases expiring in 60 days — renewal outreach", module: "Tenant Management", owner: "Ops", deadline: "This week", pColor: "text-amber-700 bg-amber-50 dark:bg-amber-950/20 border-amber-100 dark:border-amber-900/50" },
     { id: 9, priority: "Medium", text: "Senior Agent vacancy 19 days open — shortlist review", module: "HR Pipeline", owner: "HR", deadline: "This week", pColor: "text-amber-700 bg-amber-50 dark:bg-amber-950/20 border-amber-100 dark:border-amber-900/50" },
@@ -411,7 +411,7 @@ function Dashboard() {
       actions={
         <div className="flex flex-wrap items-center gap-3">
           {/* LIVE ticker status bar */}
-          <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold text-emerald-700 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200/50 px-3 py-1.5 rounded-full shadow-sm">
+          <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-emerald-700 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200/50 px-3 py-1.5 rounded-full shadow-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
             <span>LIVE · {timeStr || "Loading..."}</span>
           </div>
@@ -421,15 +421,15 @@ function Dashboard() {
             onClick={() => setIsAlertsOpen(true)}
             className="h-9 px-3 rounded-lg border border-border bg-card hover:bg-muted text-[12px] font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5 shadow-sm transition-all active:scale-95 cursor-pointer relative"
           >
-            <Bell className="h-4 w-4 text-[#D85A30]" />
-            <span className="bg-[#D85A30] text-white px-1.5 py-0.5 rounded text-[9px] font-mono font-bold">
+            <Bell className="h-4 w-4 text-red-600" />
+            <span className="bg-red-600 text-white px-1.5 py-0.5 rounded text-xs font-mono font-bold">
               1 alert
             </span>
           </button>
 
           {/* User Profile display */}
           <div className="flex items-center gap-2 text-[12px] font-bold border border-border bg-card rounded-lg px-3 py-1.5 shadow-sm">
-            <div className="h-5 w-5 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-200 grid place-items-center text-[10px] font-bold font-mono">
+            <div className="h-5 w-5 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-200 grid place-items-center text-xs font-bold font-mono">
               RM
             </div>
             <span className="text-slate-600 dark:text-slate-300 truncate max-w-[150px]">
@@ -442,25 +442,25 @@ function Dashboard() {
       <div className="space-y-6 font-sans-dm relative z-10 animate-fade-in">
         {/* CONSOLIDATED KEY OPERATIONAL KPIs */}
         <div>
-          <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 font-display mb-2.5">
+          <div className="text-xs font-bold uppercase tracking-widest text-slate-400 font-display mb-2.5">
             Key Operational KPIs
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {consolidatedKPIs.map((kpi, i) => (
               <div
                 key={i}
-                className="submodule-card p-4 rounded-xl flex flex-col justify-between min-h-[108px] transition-all duration-300 relative overflow-hidden"
+                className="bg-card border shadow-sm rounded-xl p-4 rounded-xl flex flex-col justify-between min-h-[108px] transition-all duration-300 relative overflow-hidden"
                 style={{ borderTop: `3px solid ${kpi.color}` }}
               >
                 <div>
-                  <div className="text-[9.5px] font-bold uppercase tracking-wider text-slate-400 leading-snug">
+                  <div className="text-xs font-bold uppercase tracking-wider text-slate-400 leading-snug">
                     {kpi.label}
                   </div>
                   <div className="mt-2 text-2xl font-bold font-mono-jb text-foreground">
                     {kpi.isNum ? <AnimatedCounter value={kpi.value as number} /> : kpi.value}
                   </div>
                 </div>
-                <div className="mt-2 pt-2 border-t border-border/20 text-[9.5px] font-extrabold text-slate-500 flex justify-between items-center font-sans-dm">
+                <div className="mt-2 pt-2 border-t border-border/20 text-xs font-extrabold text-slate-500 flex justify-between items-center font-sans-dm">
                   <span>{kpi.sub}</span>
                 </div>
               </div>
@@ -482,7 +482,7 @@ function Dashboard() {
                 </div>
                 <button
                   onClick={() => navigate({ to: "/leads" })}
-                  className="text-[9.5px] font-bold text-[#0E86E9] hover:underline"
+                  className="text-xs font-bold text-blue-600 hover:underline"
                 >
                   View Details →
                 </button>
@@ -492,18 +492,18 @@ function Dashboard() {
                 {/* Funnel chart (left 7 cols) */}
                 <div className="col-span-7 space-y-2">
                   {[
-                    { label: "Captured", val: 47, pct: 100, color: "bg-[#1A3C5E]" },
-                    { label: "Enriched", val: 38, pct: 81, color: "bg-[#2E86AB]" },
-                    { label: "AI Scored", val: 38, pct: 100, color: "bg-[#1D9E75]" },
-                    { label: "Hot (75+)", val: 12, pct: 32, color: "bg-[#D85A30]" },
-                    { label: "Warm (40+)", val: 23, pct: 61, color: "bg-[#E8A838]" },
+                    { label: "Captured", val: 47, pct: 100, color: "bg-slate-800" },
+                    { label: "Enriched", val: 38, pct: 81, color: "bg-blue-700" },
+                    { label: "AI Scored", val: 38, pct: 100, color: "bg-emerald-600" },
+                    { label: "Hot (75+)", val: 12, pct: 32, color: "bg-red-600" },
+                    { label: "Warm (40+)", val: 23, pct: 61, color: "bg-amber-500" },
                     { label: "Cold (0-39)", val: 3, pct: 8, color: "bg-slate-400" },
                   ].map((row, idx) => (
-                    <div key={idx} className="space-y-0.5 text-[10.5px]">
+                    <div key={idx} className="space-y-0.5 text-xs">
                       <div className="flex justify-between font-semibold">
                         <span className="text-slate-500">{row.label}</span>
                         <span className="font-mono-jb">
-                          {row.val} <span className="text-[9px] font-normal text-slate-400">({row.pct}%)</span>
+                          {row.val} <span className="text-xs font-normal text-slate-400">({row.pct}%)</span>
                         </span>
                       </div>
                       <div className="h-2 bg-secondary/40 rounded-full overflow-hidden">
@@ -537,13 +537,13 @@ function Dashboard() {
                       </PieChart>
                     </ResponsiveContainer>
                   </div>
-                  <div className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1 text-center">
+                  <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1 text-center">
                     Lead Sources
                   </div>
                 </div>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-border/40 grid grid-cols-2 sm:grid-cols-4 gap-2 text-[10px] text-slate-500 font-medium">
+              <div className="mt-4 pt-3 border-t border-border/40 grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs text-slate-500 font-medium">
                 <div>
                   Enrichment Time <strong className="block text-foreground font-mono-jb">91s</strong>
                 </div>
@@ -569,7 +569,7 @@ function Dashboard() {
                 </div>
                 <button
                   onClick={() => navigate({ to: "/conversations" })}
-                  className="text-[9.5px] font-bold text-[#0E86E9] hover:underline"
+                  className="text-xs font-bold text-blue-600 hover:underline"
                 >
                   Configure AI →
                 </button>
@@ -577,15 +577,15 @@ function Dashboard() {
 
               <div className="grid grid-cols-2 gap-4 text-xs font-semibold text-slate-500">
                 <div className="p-3 bg-secondary/20 rounded-xl border border-border/30">
-                  <div className="text-[9px] uppercase tracking-wider text-slate-400">
+                  <div className="text-xs uppercase tracking-wider text-slate-400">
                     Active Convs Now
                   </div>
-                  <div className="text-xl font-bold font-mono-jb text-[#0E86E9] mt-1 animate-pulse">
+                  <div className="text-xl font-bold font-mono-jb text-blue-600 mt-1 animate-pulse">
                     6
                   </div>
                 </div>
                 <div className="p-3 bg-secondary/20 rounded-xl border border-border/30">
-                  <div className="text-[9px] uppercase tracking-wider text-slate-400">
+                  <div className="text-xs uppercase tracking-wider text-slate-400">
                     Today's Conversations
                   </div>
                   <div className="text-xl font-bold font-mono-jb text-foreground mt-1">
@@ -596,7 +596,7 @@ function Dashboard() {
 
               {/* Stacked bar breakdown */}
               <div className="mt-4 space-y-1.5">
-                <div className="flex justify-between text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-slate-400">
                   <span>Channel breakdown</span>
                   <span>WhatsApp: 42%</span>
                 </div>
@@ -610,7 +610,7 @@ function Dashboard() {
                     />
                   ))}
                 </div>
-                <div className="flex flex-wrap gap-x-3 gap-y-1 text-[9.5px] text-slate-400 font-bold mt-1">
+                <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-slate-400 font-bold mt-1">
                   {channelBreakdown.slice(0, 3).map((ch, i) => (
                     <span key={i} className="flex items-center gap-1.5">
                       <span className={`h-1.5 w-1.5 rounded-full ${ch.color}`} />
@@ -620,7 +620,7 @@ function Dashboard() {
                 </div>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-border/40 text-[10px] text-slate-500 flex justify-between font-medium">
+              <div className="mt-4 pt-3 border-t border-border/40 text-xs text-slate-500 flex justify-between font-medium">
                 <span>
                   Missed Call Recovery: <strong>18 → 14 recovered</strong>
                 </span>
@@ -630,7 +630,7 @@ function Dashboard() {
               </div>
               <button
                 onClick={() => setIsWhatsAppOpen(true)}
-                className="mt-3 w-full h-8 bg-[#25D366] hover:bg-[#20ba56] text-white rounded-lg text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 cursor-pointer shrink-0"
+                className="mt-3 w-full h-8 bg-emerald-500 hover:bg-[#20ba56] text-white rounded-lg text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-sm transition-all active:scale-95 cursor-pointer shrink-0"
               >
                 <MessageCircle className="h-4 w-4" /> Simulate WhatsApp Chat Bot
               </button>
@@ -649,7 +649,7 @@ function Dashboard() {
                 </div>
                 <button
                   onClick={() => navigate({ to: "/pipeline" })}
-                  className="text-[9.5px] font-bold text-[#0E86E9] hover:underline"
+                  className="text-xs font-bold text-blue-600 hover:underline"
                 >
                   CRM Board →
                 </button>
@@ -657,7 +657,7 @@ function Dashboard() {
 
               <div className="space-y-2 flex-1">
                 {pipelineStages.slice(2, 6).map((stage, idx) => (
-                  <div key={idx} className="flex items-center justify-between text-[11px] font-medium p-1.5 hover:bg-secondary/20 rounded-lg transition-colors">
+                  <div key={idx} className="flex items-center justify-between text-xs font-medium p-1.5 hover:bg-secondary/20 rounded-lg transition-colors">
                     <div className="flex items-center gap-2">
                       <span className={`h-2 w-2 rounded-full ${stage.color}`} />
                       <span className="text-slate-600 dark:text-slate-400 font-semibold">{stage.stage}</span>
@@ -671,14 +671,14 @@ function Dashboard() {
               </div>
 
               <div className="mt-4 bg-secondary/10 dark:bg-slate-950/20 border border-border/30 rounded-xl p-3">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 flex items-center justify-between">
+                <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5 flex items-center justify-between">
                   <span>Today's Pipeline Activity Feed</span>
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 </div>
                 <div className="space-y-1.5 max-h-28 overflow-y-auto scrollbar-none pr-1">
                   {livePipelineLogs.slice(0, 4).map((log) => (
-                    <div key={log.text + log.time} className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold leading-relaxed flex items-start gap-1 animate-fade-in py-0.5 border-b border-border/5 last:border-0">
-                      <span className="font-mono-jb text-[#0E86E9] shrink-0 font-bold">{log.time}</span>
+                    <div key={log.text + log.time} className="text-xs text-slate-500 dark:text-slate-400 font-semibold leading-relaxed flex items-start gap-1 animate-fade-in py-0.5 border-b border-border/5 last:border-0">
+                      <span className="font-mono-jb text-blue-600 shrink-0 font-bold">{log.time}</span>
                       <span className="truncate">{log.text}</span>
                     </div>
                   ))}
@@ -696,17 +696,17 @@ function Dashboard() {
                 </div>
                 <button
                   onClick={() => navigate({ to: "/properties" })}
-                  className="text-[9.5px] font-bold text-[#0E86E9] hover:underline"
+                  className="text-xs font-bold text-blue-600 hover:underline"
                 >
                   Market Data →
                 </button>
               </div>
 
               {/* Dynamic Market Pulse Ticker (cycles every 4 seconds) */}
-              <div className="p-3 bg-[#0E86E9]/5 dark:bg-[#0E86E9]/10 border border-[#0E86E9]/20 rounded-xl min-h-[76px] flex flex-col justify-between">
-                <div className="flex justify-between items-center text-[10.5px]">
-                  <span className="font-bold text-[#0E86E9]">{marketPulse[marketIndex].loc}</span>
-                  <span className="font-bold text-slate-400 uppercase tracking-wider text-[9px]">
+              <div className="p-3 bg-blue-600/5 dark:bg-blue-600/10 border border-blue-600/20 rounded-xl min-h-[76px] flex flex-col justify-between">
+                <div className="flex justify-between items-center text-xs">
+                  <span className="font-bold text-blue-600">{marketPulse[marketIndex].loc}</span>
+                  <span className="font-bold text-slate-400 uppercase tracking-wider text-xs">
                     {marketPulse[marketIndex].label}
                   </span>
                 </div>
@@ -714,7 +714,7 @@ function Dashboard() {
                   <div className="text-base font-bold font-mono-jb text-foreground">
                     {marketPulse[marketIndex].val}
                   </div>
-                  <span className={`text-[10px] font-bold ${marketPulse[marketIndex].color}`}>
+                  <span className={`text-xs font-bold ${marketPulse[marketIndex].color}`}>
                     {marketPulse[marketIndex].trend}
                   </span>
                 </div>
@@ -731,7 +731,7 @@ function Dashboard() {
                 </div>
                 <div className="flex justify-between pb-0.5">
                   <span>Matches Triggered Today</span>
-                  <span className="font-mono-jb text-[#0E86E9] font-bold">9 matches</span>
+                  <span className="font-mono-jb text-blue-600 font-bold">9 matches</span>
                 </div>
               </div>
             </Card>
@@ -749,7 +749,7 @@ function Dashboard() {
                 </div>
                 <button
                   onClick={() => navigate({ to: "/finance" })}
-                  className="text-[9.5px] font-bold text-[#0E86E9] hover:underline"
+                  className="text-xs font-bold text-blue-600 hover:underline"
                 >
                   Accounts →
                 </button>
@@ -760,9 +760,9 @@ function Dashboard() {
                   <div key={idx} className="p-2.5 bg-secondary/15 dark:bg-slate-900/10 rounded-xl border border-border/30 text-xs">
                     <div className="flex justify-between items-center font-bold">
                       <span className="text-foreground truncate">{proj.name}</span>
-                      <span className="font-mono-jb text-[#0E86E9]">{proj.margin}</span>
+                      <span className="font-mono-jb text-blue-600">{proj.margin}</span>
                     </div>
-                    <div className="flex items-center gap-1.5 mt-1.5 text-[10px] text-slate-500 font-semibold">
+                    <div className="flex items-center gap-1.5 mt-1.5 text-xs text-slate-500 font-semibold">
                       <span className={`h-1.5 w-1.5 rounded-full ${proj.color}`} />
                       {proj.status}
                     </div>
@@ -782,10 +782,10 @@ function Dashboard() {
                     </div>
                     <div className="flex justify-between items-center text-xs">
                       <span className="text-slate-500 font-semibold">Collected to Date</span>
-                      <span className="font-mono-jb text-[#1D9E75] font-bold">₹6.4 Cr</span>
+                      <span className="font-mono-jb text-emerald-600 font-bold">₹6.4 Cr</span>
                     </div>
                     <div className="w-full bg-secondary/40 rounded-full h-1.5 overflow-hidden">
-                      <div className="bg-[#1D9E75] h-1.5 rounded-full" style={{ width: "71%" }} />
+                      <div className="bg-emerald-600 h-1.5 rounded-full" style={{ width: "71%" }} />
                     </div>
                   </div>
                 </div>
@@ -800,14 +800,14 @@ function Dashboard() {
                         <span className="text-slate-500">Overdue (90+ Days)</span>
                         <span className="font-mono-jb text-red-600 dark:text-red-400 font-bold">₹1.5 Cr</span>
                       </div>
-                      <p className="text-[9.5px] text-slate-400 mt-1 font-medium">5 buyers unresponsive. Escalate notice workflow.</p>
+                      <p className="text-xs text-slate-400 mt-1 font-medium">5 buyers unresponsive. Escalate notice workflow.</p>
                     </div>
                     <div className="p-2.5 bg-amber-500/5 dark:bg-amber-950/10 border border-amber-500/20 rounded-xl">
                       <div className="flex justify-between text-xs font-semibold">
                         <span className="text-slate-500">Milestone Due (30 Days)</span>
                         <span className="font-mono-jb text-amber-600 dark:text-amber-400 font-bold">₹4.9 Cr</span>
                       </div>
-                      <p className="text-[9.5px] text-slate-400 mt-1 font-medium">18 buyers with pending construction triggers.</p>
+                      <p className="text-xs text-slate-400 mt-1 font-medium">18 buyers with pending construction triggers.</p>
                     </div>
                   </div>
                 </div>
@@ -828,7 +828,7 @@ function Dashboard() {
               </div>
               <button
                 onClick={() => navigate({ to: "/projects" })}
-                className="text-[9.5px] font-bold text-[#0E86E9] hover:underline"
+                className="text-xs font-bold text-blue-600 hover:underline"
               >
                 Uptime Dashboard →
               </button>
@@ -844,12 +844,12 @@ function Dashboard() {
             </div>
 
             <div className="space-y-3">
-              <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 border-b border-border/20 pb-1.5">
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-400 border-b border-border/20 pb-1.5">
                 Phase Milestone Progress (Tower Heights)
               </div>
               <div className="space-y-2 max-h-36 overflow-y-auto scrollbar-none pr-1">
                 {constructionMilestones.slice(5).map((mile, i) => (
-                  <div key={i} className="text-[10.5px]">
+                  <div key={i} className="text-xs">
                     <div className="flex justify-between font-semibold mb-1">
                       <span className="text-slate-500">{mile.phase}</span>
                       <span className="font-mono-jb">{mile.progress}% ({mile.status})</span>
@@ -882,7 +882,7 @@ function Dashboard() {
               </div>
               <button
                 onClick={() => navigate({ to: "/buyers" })}
-                className="text-[9.5px] font-bold text-[#0E86E9] hover:underline"
+                className="text-xs font-bold text-blue-600 hover:underline"
               >
                 Portal Data →
               </button>
@@ -890,18 +890,18 @@ function Dashboard() {
 
             <div className="grid grid-cols-2 gap-4 text-xs font-semibold text-slate-500 mb-4">
               <div className="p-3 bg-secondary/25 dark:bg-slate-950/20 border border-border/30 rounded-xl">
-                <div className="text-[9px] uppercase tracking-wider text-slate-400">
+                <div className="text-xs uppercase tracking-wider text-slate-400">
                   Portfolio NPS
                 </div>
-                <div className="text-xl font-bold font-mono-jb text-[#1D9E75] mt-1">
+                <div className="text-xl font-bold font-mono-jb text-emerald-600 mt-1">
                   74
                 </div>
               </div>
               <div className="p-3 bg-secondary/25 dark:bg-slate-950/20 border border-border/30 rounded-xl">
-                <div className="text-[9px] uppercase tracking-wider text-slate-400">
+                <div className="text-xs uppercase tracking-wider text-slate-400">
                   Buyer Portal Active
                 </div>
-                <div className="text-xl font-bold font-mono-jb text-[#2E86AB] mt-1">
+                <div className="text-xl font-bold font-mono-jb text-blue-700 mt-1">
                   40%
                 </div>
               </div>
@@ -910,11 +910,11 @@ function Dashboard() {
             <div className="space-y-2 text-xs font-semibold text-slate-500">
               <div className="flex justify-between border-b border-border/30 pb-1.5">
                 <span>Leases Expiring (60 days)</span>
-                <span className="font-mono-jb text-[#D85A30] font-bold">6 leases</span>
+                <span className="font-mono-jb text-red-600 font-bold">6 leases</span>
               </div>
               <div className="flex justify-between border-b border-border/30 pb-1.5">
                 <span>Payments Overdue</span>
-                <span className="font-mono-jb text-[#D85A30] font-bold">18 buyers</span>
+                <span className="font-mono-jb text-red-600 font-bold">18 buyers</span>
               </div>
               <div className="flex justify-between pb-0.5">
                 <span>Total Outstanding</span>
@@ -933,7 +933,7 @@ function Dashboard() {
               </div>
               <button
                 onClick={() => navigate({ to: "/hr" })}
-                className="text-[9.5px] font-bold text-[#0E86E9] hover:underline"
+                className="text-xs font-bold text-blue-600 hover:underline"
               >
                 Hiring Funnel →
               </button>
@@ -946,24 +946,24 @@ function Dashboard() {
                   className="flex items-center justify-between text-xs p-1.5 hover:bg-secondary/20 rounded-lg transition-colors border border-transparent hover:border-border/30"
                 >
                   <div className="flex items-center gap-2">
-                    <div className="h-6 w-6 rounded-full bg-slate-100 text-slate-700 grid place-items-center text-[9px] font-bold font-mono">
+                    <div className="h-6 w-6 rounded-full bg-slate-100 text-slate-700 grid place-items-center text-xs font-bold font-mono">
                       {agent.name.split(" ").map((n) => n[0]).join("")}
                     </div>
                     <div>
                       <div className="font-bold text-foreground flex items-center gap-1">
                         {agent.name}
                         {agent.isTop && (
-                          <span className="text-[8px] bg-emerald-50 text-emerald-700 border border-emerald-100 px-1 rounded animate-pulse">
+                          <span className="text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-100 px-1 rounded animate-pulse">
                             ⭐ Top
                           </span>
                         )}
                       </div>
-                      <div className="text-[9px] text-slate-400">{agent.role}</div>
+                      <div className="text-xs text-slate-400">{agent.role}</div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <span className="font-mono-jb font-bold text-[#0E86E9]">{agent.score}</span>
-                    <div className="text-[8.5px] text-slate-400 font-semibold">
+                    <span className="font-mono-jb font-bold text-blue-600">{agent.score}</span>
+                    <div className="text-[10px] text-slate-400 font-semibold">
                       {agent.conv}/{agent.leads} convs
                     </div>
                   </div>
@@ -983,7 +983,7 @@ function Dashboard() {
             </div>
             <button
               onClick={() => navigate({ to: "/analytics" })}
-              className="text-[10px] font-bold text-[#0E86E9] hover:underline"
+              className="text-xs font-bold text-blue-600 hover:underline"
             >
               Intelligence View →
             </button>
@@ -995,7 +995,7 @@ function Dashboard() {
               <div className="flex justify-between items-center text-xs font-semibold text-slate-500">
                 <div>
                   Predicted Revenue (Next 30D):{" "}
-                  <strong className="text-[#1D9E75] font-mono-jb text-base block sm:inline font-bold">
+                  <strong className="text-emerald-600 font-mono-jb text-base block sm:inline font-bold">
                     ₹1.84 Cr
                   </strong>
                 </div>
@@ -1027,12 +1027,12 @@ function Dashboard() {
 
             {/* 6.2 Marketing ROI Table (Right 5 cols) */}
             <div className="col-span-12 lg:col-span-5 flex flex-col justify-between">
-              <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2.5">
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5">
                 Channel ROI Performance
               </div>
               <div className="overflow-x-auto scrollbar-none flex-1 justify-center flex flex-col">
                 <table className="w-full text-left text-xs divide-y divide-border/60">
-                  <thead className="text-[9px] uppercase tracking-wider text-slate-400 font-semibold font-display">
+                  <thead className="text-xs uppercase tracking-wider text-slate-400 font-semibold font-display">
                     <tr>
                       <th className="py-1.5">Channel</th>
                       <th className="py-1.5 text-right">Leads</th>
@@ -1066,7 +1066,7 @@ function Dashboard() {
           <Card className="col-span-12 lg:col-span-4 p-5 flex flex-col justify-between min-h-[270px] relative overflow-hidden bg-card/45 border border-border/60 shadow-lg backdrop-blur-md transition-all duration-300">
             {/* Ambient Background Gradient for modern look */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/10 blur-[30px] pointer-events-none" />
+            <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/10  pointer-events-none" />
 
             <div className="flex justify-between items-center border-b border-border/20 pb-3 mb-3 relative z-10">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary">
@@ -1079,7 +1079,7 @@ function Dashboard() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                 </span>
-                <span className="text-[10px] font-mono font-bold text-muted-foreground">
+                <span className="text-xs font-mono font-bold text-muted-foreground">
                   {insightIndex + 1} / {aiInsights.length}
                 </span>
               </div>
@@ -1087,7 +1087,7 @@ function Dashboard() {
 
             <div className="flex-1 flex flex-col justify-center text-left py-2.5 relative z-10 animate-fade-in" key={insightIndex}>
               <div className="flex items-center">
-                <span className={`text-[9.5px] font-bold px-2.5 py-0.5 rounded-full border tracking-wide uppercase font-mono-jb ${getInsightCategoryStyle(aiInsights[insightIndex].cat)}`}>
+                <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full border tracking-wide uppercase font-mono-jb ${getInsightCategoryStyle(aiInsights[insightIndex].cat)}`}>
                   {aiInsights[insightIndex].cat}
                 </span>
               </div>
@@ -1113,7 +1113,7 @@ function Dashboard() {
               
               <button
                 onClick={() => alert(`Insight Action triggered: ${aiInsights[insightIndex].cat}`)}
-                className="h-8 px-3.5 rounded-xl bg-primary hover:bg-primary/95 text-primary-foreground text-[10.5px] font-bold uppercase tracking-wider transition-colors flex items-center gap-1.5 shrink-0 shadow-sm shadow-primary/10 cursor-pointer"
+                className="h-8 px-3.5 rounded-xl bg-primary hover:bg-primary/95 text-primary-foreground text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-1.5 shrink-0 shadow-sm shadow-primary/10 cursor-pointer"
               >
                 <span>{aiInsights[insightIndex].action}</span> 
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -1124,17 +1124,17 @@ function Dashboard() {
           {/* 7.2 Risk Intelligence Summary (Centre 35%) */}
           <Card className="col-span-12 lg:col-span-5 p-4 flex flex-col justify-between min-h-[260px]">
             <div className="flex justify-between items-center border-b border-border/40 pb-2 mb-3">
-              <div className="text-[9px] font-extrabold uppercase tracking-widest text-red-500 flex items-center gap-1">
+              <div className="text-xs font-extrabold uppercase tracking-widest text-red-500 flex items-center gap-1">
                 <AlertOctagon className="h-3 w-3 animate-pulse" /> Risk Intelligence Summary
               </div>
-              <span className="text-[9.5px] font-mono-jb font-bold text-red-600 bg-red-50 dark:bg-red-950/20 px-2 py-0.5 rounded border border-red-100 dark:border-red-900/30 animate-pulse">
+              <span className="text-xs font-mono-jb font-bold text-red-600 bg-red-50 dark:bg-red-950/20 px-2 py-0.5 rounded border border-red-100 dark:border-red-900/30 animate-pulse">
                 1 Critical Deal At Risk
               </span>
             </div>
 
             <div className="overflow-x-auto scrollbar-none flex-1 justify-center flex flex-col">
               <table className="w-full text-left text-xs divide-y divide-border/60">
-                <thead className="text-[9px] uppercase tracking-wider text-slate-400 font-semibold font-display">
+                <thead className="text-xs uppercase tracking-wider text-slate-400 font-semibold font-display">
                   <tr>
                     <th>Buyer</th>
                     <th className="text-right">Value</th>
@@ -1159,10 +1159,10 @@ function Dashboard() {
           {/* 7.3 System Health & Security (Right 30%) */}
           <Card className="col-span-12 lg:col-span-3 p-4 flex flex-col justify-between min-h-[260px]">
             <div className="flex justify-between items-center border-b border-border/40 pb-2 mb-3">
-              <div className="text-[9px] font-extrabold uppercase tracking-widest text-[#2E86AB] flex items-center gap-1">
+              <div className="text-xs font-extrabold uppercase tracking-widest text-blue-700 flex items-center gap-1">
                 <ShieldCheck className="h-3 w-3" /> Uptime & Security
               </div>
-              <span className="text-[9.5px] font-mono-jb font-bold text-emerald-600">
+              <span className="text-xs font-mono-jb font-bold text-emerald-600">
                 Scan Clean ✓
               </span>
             </div>
@@ -1186,7 +1186,7 @@ function Dashboard() {
               </div>
             </div>
 
-            <div className="mt-3 pt-2.5 border-t border-border/40 text-[9.5px] text-slate-400 font-bold flex justify-between uppercase font-display">
+            <div className="mt-3 pt-2.5 border-t border-border/40 text-xs text-slate-400 font-bold flex justify-between uppercase font-display">
               <span>DPDP Compliance</span>
               <span className="text-emerald-500 font-bold font-mono">Active ✅</span>
             </div>
@@ -1197,7 +1197,7 @@ function Dashboard() {
         <Card className="p-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-border/40 pb-3 mb-3 gap-2">
             <div>
-              <span className="text-[9.5px] font-extrabold uppercase tracking-widest text-slate-400">
+              <span className="text-xs font-extrabold uppercase tracking-widest text-slate-400">
                 Unified Workflow Action Queue
               </span>
               <h3 className="text-sm font-bold text-foreground font-display">
@@ -1210,7 +1210,7 @@ function Dashboard() {
                 <button
                   key={filter}
                   onClick={() => setActionFilter(filter)}
-                  className={`h-7 px-3 rounded-lg text-[10px] font-bold uppercase tracking-wider border transition-all cursor-pointer ${
+                  className={`h-7 px-3 rounded-lg text-xs font-bold uppercase tracking-wider border transition-all cursor-pointer ${
                     actionFilter === filter
                       ? "bg-slate-800 dark:bg-slate-200 text-cream dark:text-ink border-transparent"
                       : "border-border text-slate-500 hover:bg-secondary"
@@ -1224,7 +1224,7 @@ function Dashboard() {
 
           <div className="overflow-x-auto scrollbar-none">
             <table className="w-full text-left text-xs divide-y divide-border/60">
-              <thead className="bg-secondary/15 text-slate-400 text-[9px] uppercase tracking-wider font-display font-semibold">
+              <thead className="bg-secondary/15 text-slate-400 text-xs uppercase tracking-wider font-display font-semibold">
                 <tr>
                   <th className="px-3 py-2">Priority</th>
                   <th className="px-3 py-2">Action Required</th>
@@ -1238,7 +1238,7 @@ function Dashboard() {
                 {filteredActions.map((act) => (
                   <tr key={act.id} className="hover:bg-secondary/10">
                     <td className="px-3 py-2.5">
-                      <span className={`text-[9px] px-2 py-0.5 rounded-full font-mono font-bold uppercase border ${act.pColor}`}>
+                      <span className={`text-xs px-2 py-0.5 rounded-full font-mono font-bold uppercase border ${act.pColor}`}>
                         {act.priority}
                       </span>
                     </td>
@@ -1251,7 +1251,7 @@ function Dashboard() {
                     <td className="px-3 py-2.5 text-right">
                       <button
                         onClick={() => alert(`Navigating to handle action: ${act.text}`)}
-                        className="h-6 px-2.5 rounded bg-[#0E86E9]/10 hover:bg-[#0E86E9] text-[#0E86E9] hover:text-white border border-[#0E86E9]/20 text-[9.5px] font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                        className="h-6 px-2.5 rounded bg-blue-600/10 hover:bg-blue-600 text-blue-600 hover:text-white border border-blue-600/20 text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
                       >
                         Resolve
                       </button>
@@ -1277,7 +1277,7 @@ function Dashboard() {
                 <X className="h-4 w-4" />
               </button>
               <h3 className="text-base font-bold font-serif-display text-foreground mt-4 mb-4 flex items-center gap-2">
-                <Bell className="h-4 w-4 text-[#D85A30]" /> System Notifications
+                <Bell className="h-4 w-4 text-red-600" /> System Notifications
               </h3>
               <div className="space-y-3 overflow-y-auto max-h-[calc(100vh-140px)] pr-1 text-xs">
                 <div className="p-3 rounded-lg border border-red-200 bg-red-50/50 dark:bg-red-950/20">
@@ -1306,20 +1306,20 @@ function Dashboard() {
         <div className="fixed inset-0 z-50 flex justify-end bg-black/40 backdrop-blur-sm animate-in fade-in duration-300">
           <div className="w-96 h-full bg-card border-l border-border shadow-2xl relative animate-in slide-in-from-right duration-300 flex flex-col justify-between overflow-hidden">
             {/* WhatsApp Green Top Header */}
-            <div className="bg-[#075E54] text-white p-4 flex items-center justify-between shadow-md shrink-0">
+            <div className="bg-emerald-800 text-white p-4 flex items-center justify-between shadow-md shrink-0">
               <div className="flex items-center gap-3">
                 <div className="h-10 w-10 rounded-full bg-emerald-100/20 text-white flex items-center justify-center font-bold text-base relative">
                   💬
-                  <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-emerald-400 border border-[#075E54] animate-pulse" />
+                  <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-emerald-400 border border-emerald-800 animate-pulse" />
                 </div>
                 <div>
                   <h4 className="text-sm font-bold font-sans">Fortiv AI Agent</h4>
-                  <p className="text-[10px] text-emerald-200/80 font-medium">Online · Live Demo Simulator</p>
+                  <p className="text-xs text-emerald-200/80 font-medium">Online · Live Demo Simulator</p>
                 </div>
               </div>
               <button
                 onClick={() => setIsWhatsAppOpen(false)}
-                className="h-8 w-8 rounded-full hover:bg-[#128C7E] flex items-center justify-center text-white cursor-pointer transition-colors"
+                className="h-8 w-8 rounded-full hover:bg-emerald-700 flex items-center justify-center text-white cursor-pointer transition-colors"
                 aria-label="Close simulator"
               >
                 <X className="h-5 w-5" />
@@ -1332,7 +1332,7 @@ function Dashboard() {
                 if (msg.sender === "system") {
                   return (
                     <div key={i} className="flex justify-center my-2">
-                      <div className="bg-slate-500/10 dark:bg-slate-800/60 border border-slate-500/20 text-[10px] text-slate-500 dark:text-slate-400 font-bold py-1 px-3 rounded-full text-center max-w-[85%] uppercase tracking-wider font-mono">
+                      <div className="bg-slate-500/10 dark:bg-slate-800/60 border border-slate-500/20 text-xs text-slate-500 dark:text-slate-400 font-bold py-1 px-3 rounded-full text-center max-w-[85%] uppercase tracking-wider font-mono">
                         {msg.text}
                       </div>
                     </div>
@@ -1348,12 +1348,12 @@ function Dashboard() {
                     <div
                       className={`max-w-[75%] rounded-2xl px-3 py-2 text-xs shadow-sm border ${
                         isUser
-                          ? "bg-[#DCF8C6] dark:bg-emerald-950/60 text-slate-800 dark:text-slate-200 border-[#C7EDB1] dark:border-emerald-900/40 rounded-tr-none"
+                          ? "bg-emerald-100 dark:bg-emerald-950/60 text-slate-800 dark:text-slate-200 border-emerald-200 dark:border-emerald-900/40 rounded-tr-none"
                           : "bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-white/20 dark:border-slate-800 rounded-tl-none"
                       }`}
                     >
                       <div className="whitespace-pre-wrap">{msg.text}</div>
-                      <div className={`text-[8px] text-right mt-1 font-semibold ${isUser ? "text-emerald-700/60 dark:text-emerald-400/50" : "text-slate-400/80"}`}>
+                      <div className={`text-[10px] text-right mt-1 font-semibold ${isUser ? "text-emerald-700/60 dark:text-emerald-400/50" : "text-slate-400/80"}`}>
                         {msg.time}
                       </div>
                     </div>
@@ -1377,9 +1377,9 @@ function Dashboard() {
 
             {/* Simulated Interactions Options Bar */}
             <div className="bg-card border-t border-border p-4 shrink-0 space-y-3 shadow-lg">
-              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center justify-between">
+              <div className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center justify-between">
                 <span>Simulation Controller</span>
-                <span className="font-mono bg-secondary px-1.5 py-0.5 rounded text-[8.5px] text-slate-500 font-bold">Step {chatStep}/4</span>
+                <span className="font-mono bg-secondary px-1.5 py-0.5 rounded text-[10px] text-slate-500 font-bold">Step {chatStep}/4</span>
               </div>
 
               {/* Options selection based on step */}
@@ -1388,17 +1388,17 @@ function Dashboard() {
                   <>
                     <button
                       onClick={() => handleSendMessage("My budget is ₹40L to ₹60L", 1)}
-                      className="w-full text-left p-2.5 rounded-xl border border-[#0E86E9]/20 hover:border-[#0E86E9] hover:bg-[#0E86E9]/5 text-xs text-foreground font-semibold flex items-center justify-between transition-all"
+                      className="w-full text-left p-2.5 rounded-xl border border-blue-600/20 hover:border-blue-600 hover:bg-blue-600/5 text-xs text-foreground font-semibold flex items-center justify-between transition-all"
                     >
                       <span>Simulate: "My budget is ₹40L to ₹60L"</span>
-                      <ArrowRight className="h-3 w-3 text-[#0E86E9]" />
+                      <ArrowRight className="h-3 w-3 text-blue-600" />
                     </button>
                     <button
                       onClick={() => handleSendMessage("My budget is ₹60L to ₹90L", 1)}
-                      className="w-full text-left p-2.5 rounded-xl border border-[#0E86E9]/20 hover:border-[#0E86E9] hover:bg-[#0E86E9]/5 text-xs text-foreground font-semibold flex items-center justify-between transition-all"
+                      className="w-full text-left p-2.5 rounded-xl border border-blue-600/20 hover:border-blue-600 hover:bg-blue-600/5 text-xs text-foreground font-semibold flex items-center justify-between transition-all"
                     >
                       <span>Simulate: "My budget is ₹60L to ₹90L"</span>
-                      <ArrowRight className="h-3 w-3 text-[#0E86E9]" />
+                      <ArrowRight className="h-3 w-3 text-blue-600" />
                     </button>
                   </>
                 )}
@@ -1407,17 +1407,17 @@ function Dashboard() {
                   <>
                     <button
                       onClick={() => handleSendMessage("I prefer the Vesu area", 2)}
-                      className="w-full text-left p-2.5 rounded-xl border border-[#0E86E9]/20 hover:border-[#0E86E9] hover:bg-[#0E86E9]/5 text-xs text-foreground font-semibold flex items-center justify-between transition-all"
+                      className="w-full text-left p-2.5 rounded-xl border border-blue-600/20 hover:border-blue-600 hover:bg-blue-600/5 text-xs text-foreground font-semibold flex items-center justify-between transition-all"
                     >
                       <span>Simulate: "I prefer the Vesu area"</span>
-                      <ArrowRight className="h-3 w-3 text-[#0E86E9]" />
+                      <ArrowRight className="h-3 w-3 text-blue-600" />
                     </button>
                     <button
                       onClick={() => handleSendMessage("I prefer Adajan area", 2)}
-                      className="w-full text-left p-2.5 rounded-xl border border-[#0E86E9]/20 hover:border-[#0E86E9] hover:bg-[#0E86E9]/5 text-xs text-foreground font-semibold flex items-center justify-between transition-all"
+                      className="w-full text-left p-2.5 rounded-xl border border-blue-600/20 hover:border-blue-600 hover:bg-blue-600/5 text-xs text-foreground font-semibold flex items-center justify-between transition-all"
                     >
                       <span>Simulate: "I prefer Adajan area"</span>
-                      <ArrowRight className="h-3 w-3 text-[#0E86E9]" />
+                      <ArrowRight className="h-3 w-3 text-blue-600" />
                     </button>
                   </>
                 )}
@@ -1426,17 +1426,17 @@ function Dashboard() {
                   <>
                     <button
                       onClick={() => handleSendMessage("Looking for Under-construction", 3)}
-                      className="w-full text-left p-2.5 rounded-xl border border-[#0E86E9]/20 hover:border-[#0E86E9] hover:bg-[#0E86E9]/5 text-xs text-foreground font-semibold flex items-center justify-between transition-all"
+                      className="w-full text-left p-2.5 rounded-xl border border-blue-600/20 hover:border-blue-600 hover:bg-blue-600/5 text-xs text-foreground font-semibold flex items-center justify-between transition-all"
                     >
                       <span>Simulate: "Under-construction preferred"</span>
-                      <ArrowRight className="h-3 w-3 text-[#0E86E9]" />
+                      <ArrowRight className="h-3 w-3 text-blue-600" />
                     </button>
                     <button
                       onClick={() => handleSendMessage("Ready possession preferred", 3)}
-                      className="w-full text-left p-2.5 rounded-xl border border-[#0E86E9]/20 hover:border-[#0E86E9] hover:bg-[#0E86E9]/5 text-xs text-foreground font-semibold flex items-center justify-between transition-all"
+                      className="w-full text-left p-2.5 rounded-xl border border-blue-600/20 hover:border-blue-600 hover:bg-blue-600/5 text-xs text-foreground font-semibold flex items-center justify-between transition-all"
                     >
                       <span>Simulate: "Ready possession preferred"</span>
-                      <ArrowRight className="h-3 w-3 text-[#0E86E9]" />
+                      <ArrowRight className="h-3 w-3 text-blue-600" />
                     </button>
                   </>
                 )}
@@ -1445,17 +1445,17 @@ function Dashboard() {
                   <>
                     <button
                       onClick={() => handleSendMessage("Yes, please confirm site visit Saturday 11 AM", 4)}
-                      className="w-full text-left p-2.5 rounded-xl border border-[#0E86E9]/20 hover:border-[#0E86E9] hover:bg-[#0E86E9]/5 text-xs text-foreground font-semibold flex items-center justify-between transition-all"
+                      className="w-full text-left p-2.5 rounded-xl border border-blue-600/20 hover:border-blue-600 hover:bg-blue-600/5 text-xs text-foreground font-semibold flex items-center justify-between transition-all"
                     >
                       <span>Simulate: "Yes, confirm site visit Saturday 11 AM"</span>
-                      <ArrowRight className="h-3 w-3 text-[#0E86E9]" />
+                      <ArrowRight className="h-3 w-3 text-blue-600" />
                     </button>
                     <button
                       onClick={() => handleSendMessage("No, let me think about it", 4)}
-                      className="w-full text-left p-2.5 rounded-xl border border-[#0E86E9]/20 hover:border-[#0E86E9] hover:bg-[#0E86E9]/5 text-xs text-foreground font-semibold flex items-center justify-between transition-all"
+                      className="w-full text-left p-2.5 rounded-xl border border-blue-600/20 hover:border-blue-600 hover:bg-blue-600/5 text-xs text-foreground font-semibold flex items-center justify-between transition-all"
                     >
                       <span>Simulate: "No, let me think about it"</span>
-                      <ArrowRight className="h-3 w-3 text-[#0E86E9]" />
+                      <ArrowRight className="h-3 w-3 text-blue-600" />
                     </button>
                   </>
                 )}
